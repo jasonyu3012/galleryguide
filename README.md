@@ -6,24 +6,28 @@
 GalleryGuide allows users to find works of art and to learn more about their composers.
 
 ### APIs
-- Art Institute of Chicago Public API (artwork): https://www.artic.edu/open-access/public-api
+- Artwork: MET Museum API (https://metmuseum.github.io/)
+- Artists: Art Institute of Chicago Public API (https://www.artic.edu/open-access/public-api)
+- Gallery: Artsy (https://developers.artsy.net/v2/docs/partners)
 
 ### Models
 #### Artworks
-- Instances:
-- Sortable attributes: 1, 2, 3, 4, 5
-- Media: 1, 2
-- Connection to other models: 
+- Instances: about 484,000
+- Sortable attributes: artwork name (`title`), artist name (`artistDisplayName`), date artwork was started (`objectBeginDate`), country where artwork was found (`country`), term describing the artwork type (classification, eg. "Basketry", "Ceramics", "Paintings")
+- Media: image of artwork (`primaryImage`), Google Maps of where the artwork is held (using `repository` string as input)
+- Connection to other models: artworks are created by artists and often on display at galleries
+
 #### Artists
-- Instances:
-- Sortable attributes: 1, 2, 3, 4, 5
+- Instances: about 13,000
+- Sortable attributes: first name (`title`), last name (`sort_title`), date of birth (`birth_date`), date of death (`death_date`), unique identifier of the artist in Getty's ULAN3 (`ulan_id`)
 - Media: 1, 2
-- Connection to other models:
+- Connection to other models: artists create artworks, which are often on display at galleries
+
 #### Galleries/Museums
 - Instances:
 - Sortable attributes: 1, 2, 3, 4, 5
 - Media: 1, 2
-- Connection to other models: 
+- Connection to other models: galleries display artworks made by artists
 
 ## Organizational Technique
 We intended to use the standard organizational model with a page for each model populated by instances of that model.
@@ -73,7 +77,7 @@ Organize and direct group meetings, create meeting agendas, make sure everyone i
 | Name             | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | ---------------- | -------------------------- | -------------------------- |
 | ??               | n                          | n                          |
-| Tara Roshan      | ?                          | ?                          |
+| Tara Roshan      | 10                         | ?                          |
 
 ### Comments
 
