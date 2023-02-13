@@ -1,11 +1,45 @@
-# Art Project
+# GalleryGuide
 
-## Team members
+## Proposal
+
+### Idea
+GalleryGuide allows users to find works of art and to learn more about their composers.
+
+### APIs
+- Art Institute of Chicago Public API (artwork): https://www.artic.edu/open-access/public-api
+
+### Models
+#### Artworks
+- Instances:
+- Sortable attributes: 1, 2, 3, 4, 5
+- Media: 1, 2
+- Connection to other models: 
+#### Artists
+- Instances:
+- Sortable attributes: 1, 2, 3, 4, 5
+- Media: 1, 2
+- Connection to other models:
+#### Galleries/Museums
+- Instances:
+- Sortable attributes: 1, 2, 3, 4, 5
+- Media: 1, 2
+- Connection to other models: 
+
+## Organizational Technique
+We intended to use the standard organizational model with a page for each model populated by instances of that model.
+
+## Questions
+- What works of art did an artist create?
+- Where can I go to see a work of art?
+- What art does a gallery have?
+
+## Group Info
 
 | Name             | GitLabID         | EID     |
 | ---------------- | ---------------- | ------- |
-| name             | @??              | ??      |
+| Landon Johnson   | @LandonDude      | lyj93   |
 | Tara Roshan      | @troshan         | tsr742  |
+| xxxxxxxxxxx      | xxxxxxxx         | xxxxxx  |
 
 ### Git SHA
 
@@ -29,7 +63,7 @@ Organize and direct group meetings, create meeting agendas, make sure everyone i
 
 # Website Link
 
-TODO
+[galleryguide.me](galleryguide.me)
 
 # Completion Times
 
