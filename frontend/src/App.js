@@ -7,8 +7,8 @@ import {
 
 import './App.css';
 // Import pages
-import About from './components/About';
-import Home from './components/Home';
+import About from './components/pages/About';
+import Home from './components/pages/Home';
 import Navigation from './components/Navigation';
 
 function App() {
