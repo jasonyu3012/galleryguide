@@ -44,7 +44,7 @@ We intended to use the standard organizational model with a page for each model 
 | Landon Johnson   | @LandonDude      | lyj93   |
 | Tara Roshan      | @troshan         | tsr742  |
 | Jason Yu         | @jasonyu3012     | jy23435 |
-| xxxxxxxxxxx      | xxxxxxxx         | xxxxxx  |
+| Jerry Ming       | @jerryming2002   | jm98623 |
 
 ### Git SHA
 
