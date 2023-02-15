@@ -1,7 +1,7 @@
 from flask import Flask
 
 
-app = Flask(__name__, static_folder="app", static_url_path="/app")
+app = Flask(__name__, static_folder="mock_build", static_url_path="/mock_build")
 
 """
 Redirects urls with no routes back to the react-router in index.html
