@@ -152,7 +152,7 @@ Since this virtual environment has the potential to be unaccessable by other dev
 
 2. If you named the folder something other than the original name in the gitignore, then add it to your gitignore list. Otherwise, you should be able to skip this step.
 
-    `echo '<name_of_folder>' .gitignore`
+    `echo '<name_of_folder>' > .gitignore`
 
 3. Activate it:
     
@@ -163,4 +163,79 @@ Since this virtual environment has the potential to be unaccessable by other dev
     `pip install -r /path/to/requirements.txt`
 
 5. Now your venv and packages should be set up.
+
+# Setting up Nginx (EngineX) on the virtual server
+
+Why do we use both Nginx and Gunicorn? Aren't they both webservers? Doesn't flask already have a webserver?
+
+>Although Flask has a built-in web server, as we all know, it's not suitable for production and needs to be put behind a real web server able to communicate with Flask through a WSGI protocol.
+
+[Why do we use both Gunicorn and Nginx? This is a great read on why.](http://www.ines-panker.com/2020/02/16/nginx-uwsqi.html#:~:text=Nginx%20is%20%E2%80%9Ca%20web%20server,a%20type%20of%20web%20server.)
+
+>Also, Nginx has some web server functionality (e.g., serving static pages; SSL handling) that gunicorn does not, whereas gunicorn implements WSGI (which nginx does not). Think of WSGI almost like REST, a specfication for webservers to talk to the application / framework that also supports WSGI.
+
+1. Install Nginx (globally) with `sudo apt install nginx`
+2. Adjust the firewall. You can see preset configurations that ufw (Uncomplicated FireWall) knows how to work with using `sudo ufw app list`
+
+    You should get something like this:
+    ```
+    Output
+    Available applications:
+        Nginx Full
+        Nginx HTTP
+        Nginx HTTPS
+        OpenSSH
+    ```
+
+    Meaning:
+
+    Nginx Full: This profile opens both port 80 (normal, unencrypted web traffic) and port 443 (TLS/SSL encrypted traffic)
+    
+    Nginx HTTP: This profile opens only port 80 (normal, unencrypted web traffic)
+
+    Nginx HTTPS: This profile opens only port 443 (TLS/SSL encrypted traffic)
+
+3. Choose the most restrictive profile for now. *We can always change this later.
+
+    `sudo ufw allow 'Nginx HTTP'`
+
+    and 
+
+    `sudo ufw allow 'OpenSSH'`
+
+4. You can verify the change by:
+
+    `sudo ufw status`
+
+    ```
+    Output
+    Status: active
+
+    To                         Action      From
+    --                         ------      ----
+    OpenSSH                    ALLOW       Anywhere                  
+    Nginx HTTP                 ALLOW       Anywhere                  
+    OpenSSH (v6)               ALLOW       Anywhere (v6)             
+    Nginx HTTP (v6)            ALLOW       Anywhere (v6)
+    ```
+
+    If it says it's inactive, then enable the firewall: `sudo ufw enable` and try again.
+
+Once all of what we have so far is completed, browsing to your domain should return a "Welcome to Nginx" default page.
+
+# Nginx process management
+
+`sudo systemctl stop nginx` Stops the webserver
+
+`sudo systemctl start nginx` Starts the webserver when it's currently stopped
+
+`sudo systemctl restart nginx` Restart
+
+`sudo systemctl reload nginx` If making configuration changes, you can reload without dropping connection.
+
+`sudo systemctl disable nginx` Nginx is configured to start when server boots. You can disable this behavior using this command.
+
+`sudo systemctl enable nginx` Likewise, you can enable start on boot with this command.
+
+
 
