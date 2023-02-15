@@ -278,6 +278,182 @@ if __name__ == "__main__":
     app.run()
 ```
 
+From there, you can check the status of your Gunicorn and see if it cna correctly serve our flask application. Make you have your virtual env activated and have port 5000 open.
+
+```
+(venv) $ cd ~/<project_name>
+(venv) $ gunicorn --bind 0.0.0.0:5000 wsgi:app
+```
+You should get something like this.
+```
+Output
+[2020-05-20 14:13:00 +0000] [46419] [INFO] Starting gunicorn 20.0.4
+[2020-05-20 14:13:00 +0000] [46419] [INFO] Listening at: http://0.0.0.0:5000 (46419)
+[2020-05-20 14:13:00 +0000] [46419] [INFO] Using worker: sync
+[2020-05-20 14:13:00 +0000] [46421] [INFO] Booting worker with pid: 46421
+
+```
+
+### Now, you can deactivate your venv.
+
+Our next step is to create a .service file, which allows us to automatically start Gunicorn and serve our flask application whenever the server boots. If it fails for some reason, it'll also get rebooted.
+
+First step is to create and edit a file using nano:
+
+`sudo nano /etc/systemd/system/<flask_app_name>.service`
+
+Then, we write:
+
+```
+[Unit]
+Description=Gunicorn instance to serve <flask_app_name>
+After=network.target
+
+[Service]
+User=<user>
+Group=www-data
+WorkingDirectory=/home/<user>/<folder>/<containing_app>
+Environment="PATH=/home/<user>/<folder>/<containing_app>/<venv_folder>/bin"
+ExecStart=/home/<user>/<folder>/<containing_app>/<venv_folder>/bin/gunicorn --workers <num_workers> --bind unix:<app_name>.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- This systemd service will be started after the `network` service is UP while booting up
+- The service will be launched by the user specified by the `User` directive (meaning that the service will get the UID of this user) and the same applies to the `Group` directive, we chose `www-data` because this is the group used by nginx, so the communication between gunicorn and Nginx will be easier.
+- `WorkingDirectory` directive refers to the directory in which the flask app is located.
+- `Environment` directive specifies the virtual environment path which we are using for our web app
+- `ExecStart` contains the command that will be used to launch the service, in this case we used bash command to activate the virtual environment and launch the gunicorn with 4 workers
+- We are binding our gunicorn server to `unix:<app_name>.sock`, this simply is a socket in the server that gunicorn uses for interpersonal communication (IPC), nginx will use this socket to communicate with gunicorn, it is created when the command is launched and removed when the process is killed for any reason and it is different every time
+- We’ll set an umask value of 007 so that the socket file is created giving access to the owner and group, while restricting other access
+
+Save and exit.
+
+Next, you want to start the Gunicorn service that you created and enable it so it starts at boot.
+
+```
+sudo systemctl start <service_file_name>
+sudo systemctl enable <service_file_name>
+```
+
+Your naming should be consistent. In our case, our application name, service file, and our ipc file, are all named appserver.
+
+Check the status:
+
+`sudo systemctl status myproject`
+
+Our output looks like this
+```
+● appserver.service - Gunicorn instance to serve appserver
+     Loaded: loaded (/etc/systemd/system/appserver.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2023-02-15 22:19:40 UTC; 24s ago
+   Main PID: 7299 (gunicorn)
+      Tasks: 5 (limit: 1143)
+     Memory: 69.3M
+        CPU: 585ms
+     CGroup: /system.slice/appserver.service
+             ├─7299 /home/ubuntu/art-project/backend/venv/bin/python3 /home/ubuntu/art-project/backend/venv/bin/gunicor>
+             ├─7300 /home/ubuntu/art-project/backend/venv/bin/python3 /home/ubuntu/art-project/backend/venv/bin/gunicor>
+             ├─7301 /home/ubuntu/art-project/backend/venv/bin/python3 /home/ubuntu/art-project/backend/venv/bin/gunicor>
+             ├─7302 /home/ubuntu/art-project/backend/venv/bin/python3 /home/ubuntu/art-project/backend/venv/bin/gunicor>
+             └─7303 /home/ubuntu/art-project/backend/venv/bin/python3 /home/ubuntu/art-project/backend/venv/bin/gunicor>
+
+Feb 15 22:19:40 ip-172-31-51-6 systemd[1]: Started Gunicorn instance to serve appserver.
+Feb 15 22:19:40 ip-172-31-51-6 gunicorn[7299]: [2023-02-15 22:19:40 +0000] [7299] [INFO] Starting gunicorn 20.1.0
+Feb 15 22:19:40 ip-172-31-51-6 gunicorn[7299]: [2023-02-15 22:19:40 +0000] [7299] [INFO] Listening at: unix:appserver.s>
+Feb 15 22:19:40 ip-172-31-51-6 gunicorn[7299]: [2023-02-15 22:19:40 +0000] [7299] [INFO] Using worker: sync
+Feb 15 22:19:40 ip-172-31-51-6 gunicorn[7300]: [2023-02-15 22:19:40 +0000] [7300] [INFO] Booting worker with pid: 7300
+Feb 15 22:19:40 ip-172-31-51-6 gunicorn[7301]: [2023-02-15 22:19:40 +0000] [7301] [INFO] Booting worker with pid: 7301
+Feb 15 22:19:40 ip-172-31-51-6 gunicorn[7302]: [2023-02-15 22:19:40 +0000] [7302] [INFO] Booting worker with pid: 7302
+Feb 15 22:19:40 ip-172-31-51-6 gunicorn[7303]: [2023-02-15 22:19:40 +0000] [7303] [INFO] Booting worker with pid: 7303
+```
+
+---
+
+# Configure Gunicorn as Supervisor?
+
+Not sure, to be added.
+
+# Configuring Nginx
+
+This directory contains all the files related to nginx, we need to create a configuration file that will make nginx act as a proxy for our flask app.
+
+The main configuration file is the one named nginx.conf, by convention, this file is not touched by developers or sys-admins, new configuration files are created in the sites-available/ directory and then sym-linked to the /sites-enabled/ directory.
+
+Begin by creating a new server block configuration file in Nginx’s sites-available directory. Call this myproject to keep in line with the rest of the guide:
+
+```
+sudo nano /etc/nginx/sites-available/<name>
+```
+
+**We will do `appserver` once again to keep inline with our naming system**
+
+```
+server {
+    listen 80;
+    server_name your_domain www.your_domain;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/<user>/<project>/<folder>/myproject.sock;
+    }
+}
+```
+
+Ours looks like this:
+```
+server {
+        listen 80;
+        server_name www.galleryguide.me galleryguide.me;
+
+        location / {
+                include proxy_params;
+                proxy_pass http://unix:/home/ubuntu/art-project/backend/appserver.sock;
+        }
+}
+```
+
+Check your syntax with `sudo nginx -t`
+
+Once everything is OK, then linked your file to the sites-enabled directory using:
+
+`sudo ln -s /etc/nginx/sites-available/<file_name> /etc/nginx/sites-enabled`
+
+Double check using `sudo ls -l  /etc/nginx/sites-enabled/
+` and you should see your site as an output.
+
+Restart using `sudo systemctl restart nginx`
+
+> The above configurations instructs nginx to listen on port 80 and proxy all the connections to the socket that we created earlier, so that gunicorn can read from the socket and allows our flask app to respond, then gunicorn takes the response from the flask app and writes it to the socket so that nginx can read from the socket and return the response to the user.
+
+Lastly, adjust your firewall.
+
+```
+sudo ufw delete allow 5000
+sudo ufw allow 'Nginx Full'
+```
+
+Now you should be able to access your server's domain name in the web browser.
+
+If you get a 502 gateway error, it means Nginx cannot access gunicorn’s socket file. Usually this is because the user’s home directory does not allow other users to access files inside it.
+
+If your socket file is called `/home/ubuntu/art-project/backend/myproject.sock`, ensure that /home/sammy has a minimum of 0755 permissions
+
+`sudo chmod 755 /home/ubuntu`
+
+If there are any other errors, then:
+
+```
+sudo less /var/log/nginx/error.log: checks the Nginx error logs.
+sudo less /var/log/nginx/access.log: checks the Nginx access logs.
+sudo journalctl -u nginx: checks the Nginx process logs.
+sudo journalctl -u myproject: checks your Flask app’s Gunicorn logs.
+```
+
+---
+
+
 
 
 
