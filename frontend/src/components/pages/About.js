@@ -1,11 +1,15 @@
 import React from 'react'
 import axios from 'axios';
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import placeholderImage from '../images/face.png';
 
-class TeamData extends React.Component {
+class TeamCards extends React.Component {
   state = {
     persons: []
   }
 
+  // get the data after the page has loaded
   componentDidMount() {
     axios.get(`https://gitlab.com/api/v4/projects/43453197/repository/contributors`)
       .then(result => {
@@ -16,18 +20,20 @@ class TeamData extends React.Component {
 
   render() {
     return (
-      <ul>
-        {
-          this.state.persons
-            .map(person =>
-              <li key={person.id}>
-                {person.name}<br/>
-                Number of commits: {person.commits}
-              </li>
-            )
-        }
-      </ul>
-    )
+      this.state.persons.map(person =>
+        <div key={person.id}>
+          <Card style={{ width: '15rem', justifyContent: 'center' }}>
+          <Card.Img variant="top" src={placeholderImage} />
+          <Card.Body>
+            <Card.Title>{person.name}</Card.Title>
+            <Card.Text>
+              Commits: {person.commits}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        </div>
+      )
+    );
   }
 }
 
@@ -35,7 +41,9 @@ const About = () => {
   return (
     <div>
       <h1>About</h1>
-      <TeamData />
+      <CardGroup>
+        <TeamCards />
+      </CardGroup>
     </div>
   );
 }
