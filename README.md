@@ -47,6 +47,8 @@ IDB 5:
 | Tara Roshan      | @troshan         | tsr742  |
 | Jason Yu         | @jasonyu3012     | jy23435 |
 | Jerry Ming       | @jerryming2002   | jm98623 |
+| Sunad Adhikari   | @SunadAdhikari   | sa54367 |
+
 
 ### Git SHA
 
@@ -79,7 +81,7 @@ Organize and direct group meetings, create meeting agendas, make sure everyone i
 | ??               | n                          | n                          |
 | Tara Roshan      | 10                         | ?                          |
 | Landon Johnson   | 15                         | ?                          | 
-
+| Sunad Adhikari   | 8                          | ?                          | 
 ### Comments
 
 
