@@ -115,7 +115,7 @@ Then we install our dependencies as we need (Gunicorn, Flask, Wheel, Flask-Restl
 
     Typical and standard names are venv and env.
 
-3. Before installing any packages or application, you must activate your venv using:
+3. Before installing any packages or applications, you must activate your venv using:
 
     `source <name_of_folder>/bin/activate`
 
@@ -139,8 +139,15 @@ Since this virtual environment has the potential to be unaccessable by other dev
 
 1. After installing all your packages, run `deactivate` to stop the virtual environment.
 2. Run `echo '<name_of_folder>' > .gitignore` to include your virtual environment folder to be ignored in source control.
-3. Run `pip freeze > requirements.txt` to place all your dependencies in a .txt file. Pip freezing reads all installed dependencies and their version numbers.
-4. Add the requirements text file to your git source control and commit and push!
+3. Reactivate your virtual environment.
+   
+   Linux:
+   `source <name_of_folder>/bin/activate`
+
+   Windows:
+   `.\<name_of_folder>\Scripts\activate`
+4. Run `pip freeze > requirements.txt` to place all your dependencies in a .txt file. Pip freezing reads all installed dependencies and their version numbers.
+5. Add the requirements text file to your git source control and commit and push!
 
 ---
 
@@ -148,7 +155,23 @@ Since this virtual environment has the potential to be unaccessable by other dev
 
 1. Since now pulling the repo won't pull the venv folder, you'll have to create one once again using:
    
-   `python3 -m venv <name_of_folder>`
+   Linux: `python3 -m venv <name_of_folder>` - for this project, we use venv as our virtual environment folder
+
+   Windows:  `python -m venv <path>\<to>\<current_folder>\<name_of_folder>` e.g. 
+   
+   `python -m venv C:\Projects\SWE\art-project\backend\venv`
+
+    or use `./venv` for current folder location + venv
+
+    **NOTE - If you want the same Python version as our virtual server, download that version and run the following instead**
+
+    Linux: `/<path>/<to>/<python_version>/<bin>/<python_version> -m venv <name_of_folder>`
+
+    Windows: `C:\<path>\<to>\python.exe -m venv <path>\<to>\<current_folder>\<name_of_folder>`
+
+    e.g.
+
+    `C:\Users\jason\AppData\Local\Programs\Python\Python310\python.exe -m venv ./venv`
 
 2. If you named the folder something other than the original name in the gitignore, then add it to your gitignore list. Otherwise, you should be able to skip this step.
 
@@ -156,13 +179,16 @@ Since this virtual environment has the potential to be unaccessable by other dev
 
 3. Activate it:
     
-    `source <name_of_folder>/bin/activate`
+    Linux: `source <name_of_folder>/bin/activate`
 
-4. Once it's activated, do:
+    Windows: `.\<name_of_folder>\Scripts\activate`
+
+4. Once it's activated, do (same on Windows, but with \\ for path):
 
     `pip install -r /path/to/requirements.txt`
 
 5. Now your venv and packages should be set up.
+6. When you run any application, make sure to activate so that your application is ran inside the virtual environment. Once finished, you can just `deactivate` on both Windows/Linux to deactivate.
 
 # Setting up Nginx (EngineX) on the virtual server
 
