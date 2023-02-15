@@ -263,5 +263,21 @@ Once all of what we have so far is completed, browsing to your domain should ret
 
 `sudo systemctl enable nginx` Likewise, you can enable start on boot with this command.
 
+---
+
+# Configuring Gunicorn (Green Unicorn)
+
+## Creating a WSGI entry point
+
+This file essentially tells the Gunicorn server how to interact with application. Right now, we are just importing app and starting it.
+
+```
+from <project_name> import app
+
+if __name__ == "__main__":
+    app.run()
+```
+
+
 
 
