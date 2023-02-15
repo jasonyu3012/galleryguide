@@ -1,3 +1,24 @@
+Table of contents
+
+[Creating an EC2 Instance](#creating-an-ec2-instance)
+
+[Adding DNS Records using Route53](#adding-dns-records-using-route53)
+
+[Configuring your virtual environment for dev with git](#configuring-your-virtual-environment-for-development-with-git)
+
+[Copy venv packages onto your local machine](#how-to-copy-the-venv-packages-onto-your-local-machine)
+
+**Note - these next steps are for reference only. These steps have already been done for our virtual server. Since they are local files / changes to the server, please do not alter any `.service` files, any files in our `/etc/nginx/sites-available` folder, the `.sock` file. If changes are required, please document your exact changes with a before and after.**
+
+[Setting up Nginx on the virtual server](#setting-up-nginx-enginex-on-the-virtual-server)
+
+[Nginx process management](#nginx-process-management)
+
+[Configuring Gunicorn](#configuring-gunicorn-green-unicorn)
+
+[Configuring Nginx](#configuring-nginx)
+
+
 # Creating an EC2 Instance
 
 For our EC2 Instance, we decided to use an Amazon Machine Image running Ubuntu 22.04, t2.micro instance type, with default storage.
@@ -151,7 +172,7 @@ Since this virtual environment has the potential to be unaccessable by other dev
 
 ---
 
-## How to copy the venv packages onto your local machine.
+# How to copy the venv packages onto your local machine.
 
 1. Since now pulling the repo won't pull the venv folder, you'll have to create one once again using:
    
