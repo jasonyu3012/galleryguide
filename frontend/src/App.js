@@ -58,6 +58,7 @@ function App() {
           <Route path="/galleries/NationalGalleryofArt" element={<NationalGalleryofArt />} />
           <Route path="/galleries/ArtInstituteofChicago" element={<ArtInstituteofChicago />} />
 
+
         </Routes>
       </BrowserRouter>
     </div>
