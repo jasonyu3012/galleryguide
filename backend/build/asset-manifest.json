@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0e0ae5b5.css",
+    "main.js": "/static/js/main.22d5c518.js",
+    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/jason_headshot.jpg": "/static/media/jason_headshot.9edcffeccdf6a4bc870d.jpg",
+    "static/media/sunad_headshot.jpg": "/static/media/sunad_headshot.42172727aa2265ad8914.jpg",
+    "static/media/ArtInstituteofChicago.jpg": "/static/media/ArtInstituteofChicago.24e4ef8d7727721a2371.jpg",
+    "static/media/tara_headshot.png": "/static/media/tara_headshot.7766d5b157f87411255d.png",
+    "static/media/jerry-headshot.jpg": "/static/media/jerry-headshot.9e8a9893c0deeaf10268.jpg",
+    "static/media/landon_headshot.jpg": "/static/media/landon_headshot.00a3a214d8a3295e38c3.jpg",
+    "static/media/VincentvanGogh.jpg": "/static/media/VincentvanGogh.a50bfa4ac660d2d7927b.jpg",
+    "static/media/MaryCassatt.jpg": "/static/media/MaryCassatt.8ac2e17edfa491e59c7a.jpg",
+    "static/media/AmericanGothic.jpg": "/static/media/AmericanGothic.00b53527223f8e6e850c.jpg",
+    "static/media/NationalGalleryofArt.jpg": "/static/media/NationalGalleryofArt.e41959413fbe4df4750b.jpg",
+    "static/media/LittleGirlInABlueArmchair.jpg": "/static/media/LittleGirlInABlueArmchair.2200d74eb5af32b0d23c.jpg",
+    "static/media/WheatFieldWithCypresses.jpg": "/static/media/WheatFieldWithCypresses.39e372578ea67cf8ceb3.jpg",
+    "static/media/METMuseum.jpg": "/static/media/METMuseum.f3b9e1ae073f3885387e.jpg",
+    "static/media/GrantWood.jpg": "/static/media/GrantWood.34d0aae75699af31edae.jpg",
+    "index.html": "/index.html",
+    "main.0e0ae5b5.css.map": "/static/css/main.0e0ae5b5.css.map",
+    "main.22d5c518.js.map": "/static/js/main.22d5c518.js.map",
+    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0e0ae5b5.css",
+    "static/js/main.22d5c518.js"
+  ]
+}
