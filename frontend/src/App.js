@@ -15,10 +15,15 @@ import Artists from './components/pages/Artists';
 import Galleries from './components/pages/Galleries';
 
 import ExampleArtistInstance from './components/pages/ArtistInstances/ExampleArtistInstance';
-import VincentvanGogh from './components/pages/ArtistInstances/VincintvanGogh';
+import VincentvanGogh from './components/pages/ArtistInstances/VincentvanGogh';
 import MaryCassat from './components/pages/ArtistInstances/MaryCassat';
 import GrantWood from './components/pages/ArtistInstances/GrantWood';
+
 import ExampleArtworkInstance from './components/pages/ArtworkInstances/ExampleArtworkInstance';
+import AmericanGothic from './components/pages/ArtworkInstances/AmericanGothic';
+import LittleGirlInaBlueArmchair from './components/pages/ArtworkInstances/LittleGirlinaBlueArmchair';
+import WheatFieldwithCypresses from './components/pages/ArtworkInstances/WheatFieldwithCypresses';
+
 import ExampleGalleryInstance from './components/pages/GalleryInstances/ExampleGalleryInstance';
 
 function App() {
@@ -41,7 +46,12 @@ function App() {
           <Route path="/artists/GrantWood" element={<GrantWood />} />
 
           <Route path="/artworks/ExampleArtworkInstance" element={<ExampleArtworkInstance />} />
+          <Route path="/artworks/AmericanGothic" element={<AmericanGothic />} />
+          <Route path="/artworks/WheatFieldwithCypresses" element={<WheatFieldwithCypresses />} />
+          <Route path="/artworks/LittleGirlInaBlueArmchair" element={<LittleGirlInaBlueArmchair />} />
+
           <Route path="/galleries/ExampleGalleryInstance" element={<ExampleGalleryInstance />} />
+          
 
         </Routes>
       </BrowserRouter>

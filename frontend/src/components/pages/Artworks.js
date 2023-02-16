@@ -17,7 +17,7 @@ const Artworks = () => {
             <Card.Text>
               *insert image here*
             </Card.Text>
-            <Link to='/AmericanGothic'>
+            <Link to='/artworks/AmericanGothic'>
               <Button>Explore More</Button>
             </Link>
           </Card.Body>
@@ -31,7 +31,7 @@ const Artworks = () => {
             <Card.Text>
               *image here*
             </Card.Text>
-            <Link to='/WheatFieldwithCypresses'>
+            <Link to='/artworks/WheatFieldwithCypresses'>
               <Button>Explore More</Button>
             </Link>
           </Card.Body>
@@ -45,7 +45,7 @@ const Artworks = () => {
             <Card.Text>
              *image here*
             </Card.Text>
-            <Link to='/LittleGirlInaBlueArmchair'>
+            <Link to='/artworks/LittleGirlInaBlueArmchair'>
               <Button>ExploreMore More</Button>
             </Link>
           </Card.Body>
