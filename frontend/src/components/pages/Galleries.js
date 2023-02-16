@@ -17,7 +17,7 @@ const Galleries = () => {
             <Card.Text>
               The Art Institute of Chicago is the second largest art museum in the USA housing a world-renowned encyclopedic collection.
             </Card.Text>
-            <Link to='/ArtInstituteChicago'>
+            <Link to='/galleries/ArtInstituteofChicago'>
               <Button>Explore the Art Institute of Chicago</Button>
             </Link>
           </Card.Body>
@@ -31,7 +31,7 @@ const Galleries = () => {
             <Card.Text>
               The Metropolitan Museum of Art, also known as the MET, is the largest and most visited Museum in the United States. 
             </Card.Text>
-            <Link to='/TheMet'>
+            <Link to='/galleries/MetMuseum'>
               <Button>Explore the MET Museum</Button>
             </Link>
           </Card.Body>
@@ -45,7 +45,7 @@ const Galleries = () => {
             <Card.Text>
               The National Gallery of Art is a museum in Washington, D.C. that hosts a variety of artworks, collected primarily though donation.  
             </Card.Text>
-            <Link to='/NationalGallery'>
+            <Link to='/galleries/NationalGalleryofArt'>
               <Button>Explore the National Gallery of Art</Button>
             </Link>
           </Card.Body>

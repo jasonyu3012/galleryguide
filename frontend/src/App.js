@@ -25,6 +25,9 @@ import LittleGirlInaBlueArmchair from './components/pages/ArtworkInstances/Littl
 import WheatFieldwithCypresses from './components/pages/ArtworkInstances/WheatFieldwithCypresses';
 
 import ExampleGalleryInstance from './components/pages/GalleryInstances/ExampleGalleryInstance';
+import METMuseum from './components/pages/GalleryInstances/METMuseum';
+import ArtInstituteofChicago from './components/pages/GalleryInstances/ArtInstituteofChicago';
+import NationalGalleryofArt from './components/pages/GalleryInstances/NationalGalleryofArt';
 
 function App() {
   return (
@@ -51,7 +54,9 @@ function App() {
           <Route path="/artworks/LittleGirlInaBlueArmchair" element={<LittleGirlInaBlueArmchair />} />
 
           <Route path="/galleries/ExampleGalleryInstance" element={<ExampleGalleryInstance />} />
-          
+          <Route path="/galleries/METMuseum" element={<METMuseum />} />
+          <Route path="/galleries/NationalGalleryofArt" element={<NationalGalleryofArt />} />
+          <Route path="/galleries/ArtInstituteofChicago" element={<ArtInstituteofChicago />} />
 
         </Routes>
       </BrowserRouter>
