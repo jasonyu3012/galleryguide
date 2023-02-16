@@ -32,7 +32,7 @@ const Artworks = () => {
           <Card.Body>
             <Card.Title>Wheat Field with Cypresses</Card.Title>
             <Card.Text>
-              *image here*
+            Painting of a wheat field with two cypress trees to the right.
             </Card.Text>
             <Link to='/artworks/WheatFieldwithCypresses'>
               <Button>Explore More</Button>
@@ -49,7 +49,7 @@ const Artworks = () => {
             Painting of girl sprawled on a blue armchair in a room with three other chairs of a matching design.
             </Card.Text>
             <Link to='/artworks/LittleGirlInaBlueArmchair'>
-              <Button>ExploreMore More</Button>
+              <Button>Explore More</Button>
             </Link>
           </Card.Body>
         </Card>
