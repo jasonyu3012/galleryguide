@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0e0ae5b5.css",
+    "main.js": "/static/js/main.d7ea440e.js",
+    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/ArtInstituteofChicago.jpg": "/static/media/ArtInstituteofChicago.24e4ef8d7727721a2371.jpg",
+    "static/media/VincentvanGogh.jpg": "/static/media/VincentvanGogh.a50bfa4ac660d2d7927b.jpg",
+    "static/media/MaryCassatt.jpg": "/static/media/MaryCassatt.8ac2e17edfa491e59c7a.jpg",
+    "static/media/NationalGalleryofArt.jpg": "/static/media/NationalGalleryofArt.e41959413fbe4df4750b.jpg",
+    "static/media/METMuseum.jpg": "/static/media/METMuseum.f3b9e1ae073f3885387e.jpg",
+    "static/media/face.png": "/static/media/face.986fa3840452676ff6bb.png",
+    "static/media/GrantWood.jpg": "/static/media/GrantWood.34d0aae75699af31edae.jpg",
+    "index.html": "/index.html",
+    "main.0e0ae5b5.css.map": "/static/css/main.0e0ae5b5.css.map",
+    "main.d7ea440e.js.map": "/static/js/main.d7ea440e.js.map",
+    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0e0ae5b5.css",
+    "static/js/main.d7ea440e.js"
+  ]
+}
