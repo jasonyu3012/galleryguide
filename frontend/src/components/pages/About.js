@@ -14,7 +14,7 @@ const team = [
         name: "Tara Sophia Roshan",
         gitlab_username: "troshan",
         role: "Frontend",
-        bio: "bio ",
+        bio: "I'm a junior CS major (I transferred internally from Math after freshman year)! I still really love math; I'm part of the Association for Women in Math at UT (look us up!) and it's basically my entire friend group. I love AWM.",
         tests: 0,
         email: "troshan@utexas.edu",
         image: tara_img
@@ -41,7 +41,7 @@ const team = [
         name: "Landon Johnson",
         gitlab_username: "LandonDude",
         role: "Backend",
-        bio: "bio ",
+        bio: "I am a senior CS student at the University of Texas at Austin graduating in Fall '23. When I am not doing class work, I participate in the Longhorn Band where I play tuba. If the stakes are high enough, I have been known to solve Leetcode mediums.",
         tests: 0,
         email: "landon@cs.utexas.edu",
         image: landon_img
