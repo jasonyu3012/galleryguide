@@ -14,6 +14,13 @@ import Artworks from './components/pages/Artworks';
 import Artists from './components/pages/Artists';
 import Galleries from './components/pages/Galleries';
 
+import ExampleArtistInstance from './components/pages/ArtistInstances/ExampleArtistInstance';
+import VincentvanGogh from './components/pages/ArtistInstances/VincintvanGogh';
+import MaryCassat from './components/pages/ArtistInstances/MaryCassat';
+import GrantWood from './components/pages/ArtistInstances/GrantWood';
+import ExampleArtworkInstance from './components/pages/ArtworkInstances/ExampleArtworkInstance';
+import ExampleGalleryInstance from './components/pages/GalleryInstances/ExampleGalleryInstance';
+
 function App() {
   return (
     <div className="app-wrapper">
@@ -27,6 +34,15 @@ function App() {
           <Route path="/artworks" element={<Artworks />} />
           <Route path="/artists" element={<Artists />} />
           <Route path="/galleries" element={<Galleries />} />
+
+          <Route path="/artists/ExampleArtistInstance" element={<ExampleArtistInstance />} />
+          <Route path="/artists/VincentvanGogh" element={<VincentvanGogh />} />
+          <Route path="/artists/MaryCassat" element={<MaryCassat />} />
+          <Route path="/artists/GrantWood" element={<GrantWood />} />
+
+          <Route path="/artworks/ExampleArtworkInstance" element={<ExampleArtworkInstance />} />
+          <Route path="/galleries/ExampleGalleryInstance" element={<ExampleGalleryInstance />} />
+
         </Routes>
       </BrowserRouter>
     </div>
