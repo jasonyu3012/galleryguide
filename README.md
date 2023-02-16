@@ -14,7 +14,7 @@ IDB 5:
 
 | Phase | Git Sha                                  |
 | ----- | ---------------------------------------- |
-| 1     | TODO                                     |
+| 1     | b0f20c8e44725d099e09d76647af1fe6b5e6b219 |
 
 ## Project Leaders
 
@@ -34,7 +34,7 @@ Organize and direct group meetings, create meeting agendas, make sure everyone i
 https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 
 # Website Link
-[galleryguide.me](galleryguide.me)
+[galleryguide.me](http://galleryguide.me)
 
 # Completion Times
 ## Phase 1
