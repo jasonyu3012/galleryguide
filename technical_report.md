@@ -3,11 +3,23 @@ We wanted to create GalleryGuide so that art entusiasts could easily learn about
 
 ---
 # User Stories
+
 ## Developer Stories
 - Design and document RESTful API using Postman
     - Developer says: GalleryGuide.me will eventually have collected a mountain of information on our 3 models: artists, artworks, and galleries. We would like to provide a way for users and developers to have access to this data. We will design and document a proposed API that can be reached at galleryguide.me/api
     - Development team designed an API and used the built-in documentation tooling of Postman to publish [the documentation](https://documenter.getpostman.com/view/18824630/2s93CExHF3). More information can be found in the API section of this report.
-
+- Implement sort by era
+    - Developer says: I'm a developer, and I was hoping that we could implement some sort of sorting not by date, but perhaps by the era in chronological order. Many paintings these days are categorized by era - such as the renaissance, the dark ages, modern, etc. These eras are characterized by a certain style, and so I would like to provide the user access to sort by era.
+    - Development team will implement a REST api that allows us to return a list of artwork and artists sorted by era in alphabetical order in formatted JSON
+- Birthdays
+    - I am a developer and want to make sure that users know when artists were born and easily find artists based on when they were born. That way our users could much more easily compare how artists changed over the years. Simply being able to sort/filter by date of birth could make this process a lot easier for our users.
+    - Development team will implement a REST api that allows us to return a list of artists sorted by their birthdays in formatted JSON
+- Add info about at least 9 instances
+    -I'm a developer and would like to add some information to our website. Since the instance pages are already made, could we add some info to them? The information can be found in a markdown file in our repo!
+    - We added info to each instance with relevant information regarding each artist and artwork.
+- User Story: Frontend Visuals
+    - Create some sort of design theme so the website isn't just plain text. Consider background images, colors, and other design choices. Definitely need to add images to all the pages. For phase 1, just use a simple React Bootstrap theme or something.
+    - Development team added a card style to our panel and used Arial to stylize the text on the page.
 **TOOD**: Need five of these
 ## Customer Stories
 - Sorting by Artist's Home Country
@@ -25,9 +37,9 @@ We wanted to create GalleryGuide so that art entusiasts could easily learn about
     - Informed the customer that this feature would be prioritized for implementation in Phase 1.
 ---
 # RESTful API
-Link: https://documenter.getpostman.com/view/18824630/2s93CExHF3
 
-In order to best serve the needs of the website and users, we decided it would be best to have a ```/api``` be the endpoint for API. We also proposed that each model has an enpoint that would get all the available date for each instance of that model. We would eventually like to make these model enpoints use parameters, such as instance ids, so that information can be obtained for one specific instance when needed. Additional parameters can also be used to query a particular field of an instance.
+Link: https://documenter.getpostman.com/view/18824630/2s93CExHF3
+**TODO**: Not really sure how much we can say about this. I just kinda did the bare minimum
 
 ---
 # Models
