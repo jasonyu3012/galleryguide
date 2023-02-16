@@ -346,6 +346,7 @@ WantedBy=multi-user.target
 - `WorkingDirectory` directive refers to the directory in which the flask app is located.
 - `Environment` directive specifies the virtual environment path which we are using for our web app
 - `ExecStart` contains the command that will be used to launch the service, in this case we used bash command to activate the virtual environment and launch the gunicorn with 4 workers
+- How many workers do you need? Depending on the number of requests per second, Gunicorn recommends 4-12, depending on the number of cores you have. Use `nproc -all` to find the number of cores, then Gunicorn recommends 2 * Cores + 1 if you want to maxmize the amount of workers.
 - We are binding our gunicorn server to `unix:<app_name>.sock`, this simply is a socket in the server that gunicorn uses for interpersonal communication (IPC), nginx will use this socket to communicate with gunicorn, it is created when the command is launched and removed when the process is killed for any reason and it is different every time
 - We’ll set an umask value of 007 so that the socket file is created giving access to the owner and group, while restricting other access
 
