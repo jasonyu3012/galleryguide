@@ -43,10 +43,10 @@ const Artists = () => {
           <Card.Body>
             <Card.Title>Mary Cassat</Card.Title>
             <Card.Text>
-              The National Gallery of Art is a museum in Washington, D.C. that hosts a variety of artworks, collected primarily though donation.  
+            One of only three women -- and the only American, woman or man -- invited to exhibit with the Impressionists in Paris, Cassatt spent the majority of her career abroad. 
             </Card.Text>
-            <Link to='/NationalGallery'>
-              <Button>Explore the National Gallery of Art</Button>
+            <Link to='/MaryCassat'>
+              <Button>Read More</Button>
             </Link>
           </Card.Body>
         </Card>
