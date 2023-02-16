@@ -3,7 +3,6 @@ We wanted to create GalleryGuide so that art entusiasts could easily learn about
 
 ---
 # User Stories
-
 ## Developer Stories
 - Design and document RESTful API using Postman
     - Developer says: GalleryGuide.me will eventually have collected a mountain of information on our 3 models: artists, artworks, and galleries. We would like to provide a way for users and developers to have access to this data. We will design and document a proposed API that can be reached at galleryguide.me/api
@@ -26,9 +25,9 @@ We wanted to create GalleryGuide so that art entusiasts could easily learn about
     - Informed the customer that this feature would be prioritized for implementation in Phase 1.
 ---
 # RESTful API
-
 Link: https://documenter.getpostman.com/view/18824630/2s93CExHF3
-**TODO**: Not really sure how much we can say about this. I just kinda did the bare minimum
+
+In order to best serve the needs of the website and users, we decided it would be best to have a ```/api``` be the endpoint for API. We also proposed that each model has an enpoint that would get all the available date for each instance of that model. We would eventually like to make these model enpoints use parameters, such as instance ids, so that information can be obtained for one specific instance when needed. Additional parameters can also be used to query a particular field of an instance.
 
 ---
 # Models
