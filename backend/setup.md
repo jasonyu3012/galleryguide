@@ -18,6 +18,8 @@ Table of contents
 
 [Configuring Nginx](#configuring-nginx)
 
+[HTTPS with Let's Encrypt](#https-encryption)
+
 
 # Creating an EC2 Instance
 
@@ -474,6 +476,43 @@ sudo journalctl -u myproject: checks your Flask app’s Gunicorn logs.
 ```
 
 ---
+
+# HTTPS Encryption
+
+We will use Let's Encrypt's certbot for this part.
+
+Run:
+
+`sudo apt install python3-certbot-nginx`
+
+Then
+
+`sudo certbot --nginx -d your_domain -d www.your_domain`
+
+If this is your first time running certbot, you will be prompted to enter an email address and agree to the terms of service. After doing so, certbot will communicate with the Let’s Encrypt server, then run a challenge to verify that you control the domain you’re requesting a certificate for.
+
+Then certbot will tell you where the certificates are stored.
+
+```
+Account registered.
+Requesting a certificate for galleryguide.me and www.galleryguide.me
+
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/galleryguide.me/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/galleryguide.me/privkey.pem
+This certificate expires on 2023-05-17.
+These files will be updated when the certificate renews.
+Certbot has set up a scheduled task to automatically renew this certificate in the background.
+
+Deploying certificate
+Successfully deployed certificate for galleryguide.me to /etc/nginx/sites-enabled/appserver
+Successfully deployed certificate for www.galleryguide.me to /etc/nginx/sites-enabled/appserver
+Congratulations! You have successfully enabled HTTPS on https://galleryguide.me and https://www.galleryguide.me
+```
+
+Then we can delete the redundant HTTP profile allowance.
+
+`sudo ufw delete allow 'Nginx HTTP'`
 
 
 
