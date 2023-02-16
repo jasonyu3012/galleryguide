@@ -23,7 +23,7 @@ const team = [
         name: "Jason Yu",
         gitlab_username: "jasonyu3012",
         role: "Backend",
-        bio: "bio ",
+        bio: "I am currently a student at the University of Texas pursuing a major in computer science with a minor in business. Outside of code, I love photography, digital media creation, art, design, and following new technology. I also hate Leetcode and dynamically typed programming languages.",
         tests: 0,
         email: "jasonyu3012@gmail.com",
         image: jason_img
@@ -32,7 +32,7 @@ const team = [
         name: "Jerry Ming",
         gitlab_username: "jerryming2002",
         role: "Frontend",
-        bio: "bio ",
+        bio: "I'm a second year CS major at the university of texas at austin. Outside of school, I pursue cooking, baking, and other culinary arts. I also enjoy building computers and playing video games. My favorite cookie is lemon sugar.",
         tests: 0,
         email: "jerryming2002@gmail.com",
         image: jerry_img
@@ -50,7 +50,7 @@ const team = [
         name: "Sunad Adhikari",
         gitlab_username: "sunadadhikari",
         role: "Backend",
-        bio: "bio ",
+        bio: "I am a 2nd year CS student at the University of Texas at Austin from Dallas, Texas. I enjoy watching diffrent Dallas based sports teams like the Cowboys, Mavericks and Rangers along with Forumla 1. Which one I like most depends which is on TV at the time. The rest of my free time is spent watching TV shows, I am all for any thing sci-fi and mystery.",
         tests: 0,
         email: "sunadadhikari@gmail.com",
         image: sunad_img
