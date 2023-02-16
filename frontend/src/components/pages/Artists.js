@@ -41,11 +41,11 @@ const Artists = () => {
           {/* add in image! */}
           <Card.Img variant="top" src=''/>
           <Card.Body>
-            <Card.Title>Mary Cassat</Card.Title>
+            <Card.Title>Mary Cassatt</Card.Title>
             <Card.Text>
             One of only three women -- and the only American, woman or man -- invited to exhibit with the Impressionists in Paris, Cassatt spent the majority of her career abroad. 
             </Card.Text>
-            <Link to='/artists/MaryCassat'>
+            <Link to='/artists/MaryCassatt'>
               <Button>Read More</Button>
             </Link>
           </Card.Body>

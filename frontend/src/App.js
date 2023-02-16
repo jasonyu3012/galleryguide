@@ -16,7 +16,7 @@ import Galleries from './components/pages/Galleries';
 
 import ExampleArtistInstance from './components/pages/ArtistInstances/ExampleArtistInstance';
 import VincentvanGogh from './components/pages/ArtistInstances/VincentvanGogh';
-import MaryCassat from './components/pages/ArtistInstances/MaryCassat';
+import MaryCassatt from './components/pages/ArtistInstances/MaryCassatt';
 import GrantWood from './components/pages/ArtistInstances/GrantWood';
 
 import ExampleArtworkInstance from './components/pages/ArtworkInstances/ExampleArtworkInstance';
@@ -45,7 +45,7 @@ function App() {
 
           <Route path="/artists/ExampleArtistInstance" element={<ExampleArtistInstance />} />
           <Route path="/artists/VincentvanGogh" element={<VincentvanGogh />} />
-          <Route path="/artists/MaryCassat" element={<MaryCassat />} />
+          <Route path="/artists/MaryCassatt" element={<MaryCassatt />} />
           <Route path="/artists/GrantWood" element={<GrantWood />} />
 
           <Route path="/artworks/ExampleArtworkInstance" element={<ExampleArtworkInstance />} />
