@@ -9,12 +9,12 @@ IDB 5:
 | Jerry Ming       | @jerryming2002   | jm98623 |
 | Sunad Adhikari   | @SunadAdhikari   | sa54367 |
 
-
 ## Git SHA
 
 | Phase | Git Sha                                  |
 | ----- | ---------------------------------------- |
 | 1     | b0f20c8e44725d099e09d76647af1fe6b5e6b219 |
+| 2     | ***TODO***                               |
 
 ## Project Leaders
 
@@ -51,7 +51,7 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 
 | Name             | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | ---------------- | -------------------------- | -------------------------- |
-| Tara Roshan      | ?                          | ?                          |
+| Tara Roshan      | 20                         | ?                          |
 | Landon Johnson   | ?                          | ?                          | 
 | Sunad Adhikari   | 12                         | ?                          | 
 | Jerry Ming       | 15                         | ?                          | 
