@@ -41,12 +41,21 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 
 | Name             | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | ---------------- | -------------------------- | -------------------------- |
-| Tara Roshan      | 10                         | ?                          |
+| Tara Roshan      | 10                         | ~13                        |
 | Landon Johnson   | 15                         | 16                         | 
 | Sunad Adhikari   | 8                          | ?                          | 
 | Jerry Ming       | 10                         | ?                          | 
 | Jason Yu         | 15                         | ?                          |
 
+## Phase 2
+
+| Name             | Est. Completion Time (hrs) | Real Completion Time (hrs) |
+| ---------------- | -------------------------- | -------------------------- |
+| Tara Roshan      | ?                          | ?                          |
+| Landon Johnson   | ?                          | ?                          | 
+| Sunad Adhikari   | ?                          | ?                          | 
+| Jerry Ming       | ?                          | ?                          | 
+| Jason Yu         | ?                          | ?                          |
+
 ## Comments
-
-
+ - The code for `About.js` was adapted using code from IDB Group 3 (Spring 2023), WorkItOut (Fall 2022), and GeoJobs (Fall 2022)
