@@ -55,7 +55,7 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 | Landon Johnson   | ?                          | ?                          | 
 | Sunad Adhikari   | 12                         | ?                          | 
 | Jerry Ming       | 15                         | ?                          | 
-| Jason Yu         | ?                          | ?                          |
+| Jason Yu         | 40                         | ?                          |
 
 ## Comments
  - The code for `About.js` was adapted using code from IDB Group 3 (Spring 2023), WorkItOut (Fall 2022), and GeoJobs (Fall 2022)
