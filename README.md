@@ -45,7 +45,7 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 | Landon Johnson   | 15                         | 16                         | 
 | Sunad Adhikari   | 8                          | ?                          | 
 | Jerry Ming       | 10                         | ?                          | 
-| Jason Yu         | 15                         | ?                          |
+| Jason Yu         | 15                         | 15                         |
 
 ## Phase 2
 
