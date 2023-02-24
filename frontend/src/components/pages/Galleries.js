@@ -8,6 +8,7 @@ const Galleries = () => {
   return (
     <div>
       <h1>Galleries</h1>
+      <p>1 Page, 3 galleries.</p>
       <CardGroup>
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
           {/* add in image! */}
