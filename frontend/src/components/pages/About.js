@@ -160,6 +160,10 @@ export default function About() {
     return(
         <Container>
             <h1>About Us</h1>
+            <h2>Purpose and Results</h2>
+            <p>GalleryGuide was created with the purpose of helping ordinary citizens better connect to art. Whether they've already found an artist they like and want to learn more, want to get to know more about a work that strikes a chord in them, or want to get out and explore the galleries their city or state has to offer, GalleryGuide provides information that can enrich the lives of its users.</p>
+            <p>With GalleryGuide, users can better understand what artists and artworks a particular gallery is best suited for (by looking at a Gallery instance), what effect a particular generation had on the works of art produced (by sorting artists by date of birth/death), and where to view a particular piece of art if it's on display (by looking at an Artwork instance).</p>
+            <h1>Members</h1>
             <Row>
                 {
                     team.map((member) => {

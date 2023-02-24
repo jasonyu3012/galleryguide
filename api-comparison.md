@@ -175,13 +175,52 @@ Example input/output: `https://api.artsy.net/api/artworks/516dfb9ab31e2b2270000c
 ```
 
 ### [Galleries](https://developers.artsy.net/v2/docs/partners)
-- Instances:
-- Sortable fields:
-- Media provided:
+- Instances: not sure; paginated
+- Sortable fields: region, type, name (alphabetical), id (loose connection, not really useful), *FEATURE 5 MISSING*
+- Media provided: website link, 
 
-Example input/output: `code`
+Example input/output: `https://api.artsy.net/api/partners/4f99c7b793ab4b0001000179`
 ```json
-result
+{
+    "id": "4f99c7b793ab4b0001000179",
+    "slug": "national-gallery-of-art-washington-dc",
+    "created_at": "2012-04-26T22:09:59+00:00",
+    "updated_at": "2022-05-20T08:57:27+00:00",
+    "type": "Institution",
+    "name": "National Gallery of Art, Washington, D.C.",
+    "email": "",
+    "region": "North America",
+    "enforce_on_platform_transactions": null,
+    "_links": {
+        "self": {
+            "href": "https://api.artsy.net/api/partners/4f99c7b793ab4b0001000179"
+        },
+        "profile": {
+            "href": "https://api.artsy.net/api/profiles/ngadc"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?partner_id=4f99c7b793ab4b0001000179"
+        },
+        "artists": {
+            "href": "https://api.artsy.net/api/artists?partner_id=4f99c7b793ab4b0001000179"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?partner_id=4f99c7b793ab4b0001000179&published=true"
+        },
+        "partner_contacts": {
+            "href": "https://api.artsy.net/api/partner_contacts?partner_id=4f99c7b793ab4b0001000179"
+        },
+        "shows": {
+            "href": "https://api.artsy.net/api/shows?partner_id=4f99c7b793ab4b0001000179"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/ngadc"
+        },
+        "website": {
+            "href": "http://www.nga.gov"
+        }
+    }
+}
 ```
 
 ## The Met
