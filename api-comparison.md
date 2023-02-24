@@ -557,6 +557,7 @@ Example input/output: `https://api.artic.edu/api/v1/galleries/25467`
 - Instances:
 - Sortable fields: 
 - Media provided: 
+
 ## Harvard
 ### [Artists](link)
 - Instances:
@@ -570,6 +571,7 @@ Example input/output: `https://api.artic.edu/api/v1/galleries/25467`
 - Instances:
 - Sortable fields: 
 - Media provided: 
+
 ## Wikidata
 ### [Artists](link)
 - Instances:
