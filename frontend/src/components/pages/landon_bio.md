@@ -1,1 +1,0 @@
-I am a senior CS student at the University of Texas at Austin graduating in Fall '23. When I am not doing class work, I participate in the Longhorn Band where I play tuba. If the stakes are high enough, I have been known to solve Leetcode mediums.
