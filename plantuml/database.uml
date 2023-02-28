@@ -1,0 +1,52 @@
+@startuml
+
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
+!define table(x) entity x << (T, white) >>
+
+table( Artworks ) {
+  primary_key( id ): integer
+  foreign_key(artist_id): integer
+  foreign_key(gallery_id): integer
+  column(artist_name): string
+  column(image): link
+  column(thumbnail): link
+  column(title): string
+  column(date): string
+  column(medium): string
+  column(iconicity): float
+  column(copyright): link?, string?
+}
+
+table( Artists ) {
+  primary_key( id ): integer
+  foreign_key(artwork_ids): list
+  foreign_key(gallery_ids): list
+  column( name ): string 
+  column(biography): string
+  column(birth_year): integer
+  column(death_year): integer
+  column(thumbnail): link
+}
+
+table( Galleries ) {
+  primary_key( id ): integer
+  foreign_key(artwork_ids): list
+  foreign_key(artist_ids): list
+  column(name): string
+  column(location): string 
+  column(description): string
+  column(thumbnail): link
+  column(website): link
+}
+
+Galleries --{ Artists
+Galleries --{ Artworks
+
+Artists --{ Artworks
+Artists --{ Galleries
+
+Artworks --> Artists
+Artworks --> Galleries
+@enduml
