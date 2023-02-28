@@ -20,7 +20,11 @@ const GalleryInstance = () => {
         </p>
       <br></br>
       <br></br>
-      <p>Location: Washington D.C.</p> <br></br>
+      <p>City: Washington D.C.</p> <br></br>
+      <p>Country: United States</p> <br></br>
+      <p>Opening Year: 1937</p> <br></br>
+      <p>Website: https://www.nga.gov/</p> <br></br>
+      <p>Operational Hours: 10 AM to 5 PM</p> <br></br>
     </div>
   );
 }
