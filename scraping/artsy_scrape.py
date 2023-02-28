@@ -1,7 +1,9 @@
 import requests
 import time
+import logging
 ARTSY_BASE_URL = "https://api.artsy.net/api"
-PARTNER_PAGE_LIMIT = 3
+PARTNER_PAGE_LIMIT = 100
+LOG_LEVEL = logging.INFO
 
 """We need a better rate limiting solution."""
 
@@ -16,7 +18,8 @@ def kickoff(session):
             #iterate over partners on a page
             profile = get_partner_profile(session, partner)
             if meets_gallery_requirement(profile):
-                print(profile)
+                logging.info(profile)
+                
                 
         time.sleep(1)
         partner_page = get_next_partner_page(session, partner_page)
@@ -31,10 +34,9 @@ def get_artsy_partners(session):
     return partners
 
 def get_next_partner_page(session, current_page):
+    logging.info("Getting next partners page")
     if current_page["_links"]["next"]["href"]:
-        print(current_page["_links"]["next"]["href"])
         r = session.get(current_page["_links"]["next"]["href"])
-        print(r)
         next = r.json()
     else:
         next = None
@@ -51,14 +53,22 @@ def get_partner_profile(session, partner):
 def meets_gallery_requirement(profile):
     if "message" in profile and profile["message"] == "Profile Not Found":
         return False
+
+    if "image_versions" not in profile:
+        return False
     
     desc = profile["description"]
     loc = profile["location"]
     site = profile["_links"]["website"]["href"]
     image_versions = profile["image_versions"]
-    return not desc == "" and not loc == "" and not site == "" and image_versions.len > 2
+    logging.info("Desc: " + desc)
+    logging.info("Loc: " + loc)
+    logging.info("site: " + site)
+    logging.info("image_versions: " + str(image_versions))
+    return not desc == "" and not loc == "" and not site == "" and len(image_versions) > 1
 
 if __name__ == "__main__":
+    logging.basicConfig(level=LOG_LEVEL)
     f = open("artsy_token.txt", "r")
     ARTSY_TOKEN = f.readline()
     f.close()
