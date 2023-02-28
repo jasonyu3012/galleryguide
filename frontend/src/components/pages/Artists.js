@@ -8,7 +8,7 @@ const Artists = () => {
   return (
     <div>
       <h1>Artists</h1>
-      <p>1 Page, 3 artists.</p>
+      <p>Showing 1/1 Pages, 3/3 Artists.</p>
       <CardGroup>
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
           {/* add in image! */}

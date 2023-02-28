@@ -11,7 +11,7 @@ const Artworks = () => {
   return (
     <div>
       <h1>Artworks</h1>
-      <p>1 Page, 3 works.</p>
+      <p>Showing 1/1 Pages, 3/3 Works.</p>
       <CardGroup>
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
           {/* add in image! */}
