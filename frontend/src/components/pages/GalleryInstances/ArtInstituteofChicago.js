@@ -18,7 +18,11 @@ const GalleryInstance = () => {
         </p>
       <br></br>
       <br></br>
-      <p>Location: Chicago</p> <br></br>
+      <p>City: Chicago</p> <br></br>
+      <p>Country: United States</p> <br></br>
+      <p>Opening Year: 1879</p> <br></br>
+      <p>Website: https://www.artic.edu/</p> <br></br>
+      <p>Operational Hours: Thursday - Monday, 11 AM to 5 PM</p> <br></br>
 
     </div>
   );

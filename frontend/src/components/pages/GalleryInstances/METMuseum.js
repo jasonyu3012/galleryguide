@@ -19,7 +19,11 @@ const GalleryInstance = () => {
         </p>
       <br></br>
       <br></br>
-      <p>Location: New York City</p> <br></br>
+      <p>City: New York City</p> <br></br>
+      <p>Country: United States</p> <br></br>
+      <p>Opening Year: 1870</p> <br></br>
+      <p>Website: https://www.metmuseum.org/</p> <br></br>
+      <p>Operational Hours: F, Sa 10 AM to 9 PM; M, T, Th, Su, 10 AM to 5 PM</p> <br></br>
     </div>
   );
 }
