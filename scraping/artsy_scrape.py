@@ -12,20 +12,37 @@ def kickoff(session):
     partners = get_artsy_partners(session)
 
     partner_page = partners
+    total_commitable_partners = 0
+    total_commitable_artists = 0
+    total_commitable_artworks = 0
     for partner in iterate_over_partners(session, partner_page):
         #for every good partner profile
+        num_commitable_artists = 0
         logging.info("Found good partner: " + partner["name"])
-        logging.info(json.dumps(partner, indent=4))
+        #logging.info(json.dumps(partner, indent=4))
         artist_page = get_artists_from_partner(session, partner)
         for artist in iterate_over_artists(session, artist_page):
             #for every good artist
+            num_commitable_artworks = 0
+            time.sleep(.5)
             logging.info("Found good artist: " + artist["name"])
-            logging.info(json.dumps(artist, indent=4))
+            #logging.info(json.dumps(artist, indent=4))
             artwork_page = get_artworks_from_artist(session, artist)
             for artwork in iterate_over_artworks(session, artwork_page):
                 #for every good artwork
                 logging.info("Found good artwork: " + artwork["title"])
-                logging.info(json.dumps(artwork, indent=4))
+                #logging.info(json.dumps(artwork, indent=4))
+                num_commitable_artworks += 1
+                total_commitable_artworks += 1
+            if num_commitable_artworks > 0:
+                num_commitable_artists += 1
+                total_commitable_artists += 1
+        if num_commitable_artists > 0:
+            total_commitable_partners += 1
+            logging.info("Commitable partners: " + str(total_commitable_partners) + 
+                         "\tartists: " + str(total_commitable_artists) + 
+                         "\tartworks: " + str(total_commitable_artworks))
+            
         
 
 
@@ -119,15 +136,15 @@ def iterate_over_artworks(session, artwork_page):
 
 def meets_artwork_requirements(artwork):
     #We should already know the artist name
-    if not "title" in artwork or artwork["title"] == "":
+    if not "title" in artwork or artwork["title"] == "" or artwork["title"] == None:
         return False
-    if not "date" in artwork or artwork["date"] == "":
+    if not "date" in artwork or artwork["date"] == "" or artwork["date"] == None:
         return False
-    if not "medium" in artwork or artwork["medium"] == "":
+    if not "medium" in artwork or artwork["medium"] == "" or artwork["medium"] == None:
         return False
     if not "iconicity" in artwork:
         return False
-    if not "image_rights" in artwork or artwork["image_rights"] == "":
+    if not "image_rights" in artwork or artwork["image_rights"] == "" or artwork["image_rights"] == None:
         return False
     if not "_links" in artwork:
         return False
