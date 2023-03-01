@@ -1,0 +1,1383 @@
+INFO:root:0
+INFO:root:Error type: other_error	Message: Profile Not Found
+INFO:root:Found good partner: Susan Eley Fine Art
+INFO:root:{
+    "id": "4d8b92c34eb68a1b2c0004a3",
+    "slug": "susan-eley-fine-art",
+    "created_at": "2011-03-24T18:51:47+00:00",
+    "updated_at": "2023-02-25T21:21:05+00:00",
+    "type": "Gallery",
+    "name": "Susan Eley Fine Art",
+    "email": "susie@susaneleyfineart.com",
+    "region": "North America",
+    "enforce_on_platform_transactions": true,
+    "_links": {
+        "self": {
+            "href": "https://api.artsy.net/api/partners/4d8b92c34eb68a1b2c0004a3"
+        },
+        "profile": {
+            "href": "https://api.artsy.net/api/profiles/susan-eley-fine-art"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?partner_id=4d8b92c34eb68a1b2c0004a3"
+        },
+        "artists": {
+            "href": "https://api.artsy.net/api/artists?partner_id=4d8b92c34eb68a1b2c0004a3"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?partner_id=4d8b92c34eb68a1b2c0004a3&published=true"
+        },
+        "partner_contacts": {
+            "href": "https://api.artsy.net/api/partner_contacts?partner_id=4d8b92c34eb68a1b2c0004a3"
+        },
+        "shows": {
+            "href": "https://api.artsy.net/api/shows?partner_id=4d8b92c34eb68a1b2c0004a3"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/susan-eley-fine-art"
+        },
+        "website": {
+            "href": "http://www.susaneleyfineart.com"
+        }
+    }
+}
+INFO:root:Found good artist: Angela A'Court
+INFO:root:{
+    "id": "4d8b92b74eb68a1b2c00041a",
+    "slug": "angela-acourt",
+    "created_at": "2010-08-24T15:11:51+00:00",
+    "updated_at": "2023-02-28T00:13:31+00:00",
+    "name": "Angela A'Court",
+    "sortable_name": "A'Court Angela",
+    "gender": "female",
+    "biography": "Angela A'Court was born in London in 1961. She attended the West Surrey College of Art and Design, UK, Parsons School of Art and Design, New York and Goldsmiths' College London BA (Hons) Fine Art Textiles. After graduating from Goldsmiths' College, A'Court worked as an interior designer for an architectural practice and then independently as a designer. Her work has been recorded in various English magazines, including Homes and Gardens, the Sunday Times and Traditional Interiors. Her work has also appeared in books such as Modern Rustic and Interiors by Design.  \n    \n \nThroughout her years as a designer, A'Court always had a sketchbook in hand and continued to paint. In 2002, she decided to put design behind her and return to painting full time. Since then, she has regularly exhibited her pastels in the UK at venues such as the Stour Gallery, the Pastel Society, the Discerning Eye and Josie Eastwood Gallery. In 2004, A'Court and her family moved to the US, where she now lives and works in New York. \"Regarding Arcadia\" is A'Court's first major exhibition in the US.",
+    "birthday": "1961",
+    "deathday": null,
+    "hometown": "London, UK",
+    "location": "New York, NY, USA",
+    "nationality": "British",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/WkJHNRhY4I4Qc2ORLJDKVw/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/WkJHNRhY4I4Qc2ORLJDKVw/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92b74eb68a1b2c00041a"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/angela-acourt"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92b74eb68a1b2c00041a"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92b74eb68a1b2c00041a&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92b74eb68a1b2c00041a"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92b74eb68a1b2c00041a&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92b74eb68a1b2c00041a"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Found good artist: Tracy Silva Barbosa
+INFO:root:{
+    "id": "4d8b92b74eb68a1b2c00041c",
+    "slug": "tracy-silva-barbosa",
+    "created_at": "2010-08-24T15:19:01+00:00",
+    "updated_at": "2023-02-11T14:18:38+00:00",
+    "name": "Tracy Silva Barbosa",
+    "sortable_name": "Barbosa Tracy Silva",
+    "gender": "female",
+    "biography": "Tracy Silva Barbosa was born in 1977 in Taunton, MA to immigrant factory workers from the Azorean Islands of Portugal. The second child of three, Tracy displayed an early passion for the arts and an inclination toward abstract thought. Imbued with a sense of cultural contrast and an ambitious desire to pursue a career as an artist, Tracy attended The Massachusetts College of Art, where she entered the sculpture department and majored in glass. This course of study, which allowed access to many different facilities, provided the foundation for a process-oriented approach in her work. \n   \n \nEarly influences included Gustav Klimt, Donald Judd, and Gerhard Richter as well as more classical paradigms found in the Byzantine, Baroque, and Rococo periods. As a student traveling to Japan, the young artist was taken by the aesthetic of asymmetry and the narrative quality found in Asian scroll paintings. Upon graduation Barbosa relocated to the San Francisco Bay area to work for John Lewis Glass. Over the next three years she worked closely with Lewis on a variety of projects including the Oklahoma City Memorial. After moving on to New York City, Tracy began to focus more on painting as a formal study method for her glass sculpture. Through this medium she discovered a new freedom, reflected in the prolific outturn of her paintings and sculptures for an increasingly enthusiastic contingent of collectors. Tracy now lives and works in Brooklyn, New York.",
+    "birthday": "1977",
+    "deathday": null,
+    "hometown": "Taunton, MA, USA",
+    "location": "Brooklyn, NY, USA",
+    "nationality": "American",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/syRxN8kKdKgwqs4NZghIWg/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/syRxN8kKdKgwqs4NZghIWg/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92b74eb68a1b2c00041c"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/tracy-silva-barbosa"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92b74eb68a1b2c00041c"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92b74eb68a1b2c00041c&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92b74eb68a1b2c00041c"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92b74eb68a1b2c00041c&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92b74eb68a1b2c00041c"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Ellen Hermanos
+INFO:root:{
+    "id": "4d8b92a44eb68a1b2c00032c",
+    "slug": "ellen-hermanos",
+    "created_at": "2010-08-24T15:17:51+00:00",
+    "updated_at": "2023-02-09T20:42:25+00:00",
+    "name": "Ellen Hermanos",
+    "sortable_name": "Hermanos Ellen",
+    "gender": "female",
+    "biography": "Ellen Hermanos was born and raised in New York City, surrounded by a family of artists and collectors. Discussions of art emanated from family dinners and cocktail hours. Growing up, she received presents of boxes of pastels, paper and paint sets and was introduced to the concept of creativity before she was old enough to know its meaning. \n   \n \nHermanos received a BA in Art History from William Smith College. She studied abroad in Florence and Venice, at the Scuola Internationale di Grafica. She received a certificate in graphic design from the Massachusetts College of Art, 1992. Her influences continue in the less formal, but no less colorful New Orleans, where Ellen often retreats, free from the structures of her past to uncover her own expressions.\n    \n \nHermanos' interest in the emotional world threads not only through her art, but also her alternate career as a psychotherapist. As a therapist, she helps others to make tangible meaning of their experiences, developing compassion and value for themselves and their accomplishments. Connecting with others, she escapes the narrowness of personal introspection, giving an emotional perspective that reaches beyond the borders of self. \n   \n \nHermanos' work has been featured in Massachusetts at The Stove Factory Gallery, Charlestown, Artana Gallery, Coolidge Corner, Charlesmark Hotel, Claremont Caf\u00e9, South End, Boston, at Crystal Duell Arts, South Boston Open Studio, as well as in New Orleans at Gallery Diva. \n   \n \nThe artist lives in Boston, away from the distractions and pace of Manhattan. She is a member of a group therapy practice and spends time in her studio.",
+    "birthday": "1964",
+    "deathday": null,
+    "hometown": "New York, NY, USA",
+    "location": "Boston, MA, USA",
+    "nationality": "American",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/KiaSA0lUGHAp1yrRgC8QsA/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/KiaSA0lUGHAp1yrRgC8QsA/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92a44eb68a1b2c00032c"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/ellen-hermanos"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92a44eb68a1b2c00032c"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92a44eb68a1b2c00032c&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92a44eb68a1b2c00032c"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92a44eb68a1b2c00032c&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92a44eb68a1b2c00032c"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: James Isherwood
+INFO:root:{
+    "id": "4d8b92a94eb68a1b2c000376",
+    "slug": "james-isherwood",
+    "created_at": "2010-08-24T15:18:20+00:00",
+    "updated_at": "2023-02-28T00:18:44+00:00",
+    "name": "James Isherwood",
+    "sortable_name": "Isherwood James",
+    "gender": "male",
+    "biography": "James Isherwood was born in 1971 in Fall River, Massachusetts. As a child of 3 or 4, he was writing on the walls and by age 5 was drawing constantly. The artist graduated with a BFA from Parson's School of Design in 1993 and has exhibited in New York at 722 Projects Space, Brooklyn Fireproof Gallery; the Killebacksgarten Gallery in Sweden; and at NYU's Small Works Show, among others.\n    \n \nThis current body of representational work, a year and a half in the making, has evolved from Isherwood's previously abstract, more conceptual work. Isherwood appropriates the generic, four-walled barn structure to use as the architectural protagonist in his current paintings, combining them with layered, textured environments. The simple geometry of the rural structure intrigues Isherwood and allows him to reveal the ever-changing colors and angles of the buildings we live with. Isherwood lives and works in New York City.",
+    "birthday": "1971",
+    "deathday": null,
+    "hometown": "Fall River, MA, USA",
+    "location": "New York, NY, USA",
+    "nationality": "American",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/yFjCtP-6k_BJdEMEOjvKIg/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/yFjCtP-6k_BJdEMEOjvKIg/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92a94eb68a1b2c000376"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/james-isherwood"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92a94eb68a1b2c000376"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92a94eb68a1b2c000376&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92a94eb68a1b2c000376"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92a94eb68a1b2c000376&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92a94eb68a1b2c000376"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Found good artist: Jongwang Lee
+INFO:root:{
+    "id": "4d8b92984eb68a1b2c00029a",
+    "slug": "jongwang-lee",
+    "created_at": "2010-08-23T20:54:18+00:00",
+    "updated_at": "2023-02-14T08:15:11+00:00",
+    "name": "Jongwang Lee",
+    "sortable_name": "Lee Jongwang",
+    "gender": "male",
+    "biography": "Lee was born in Seoul, Korea in 1960. He attended Sunhwa Art High School and received a B.F.A. in Sumi-e painting and drawing from HongIk, University, Seoul, and an M.F.A. from the National University of Tokyo Arts and Sciences, Japan. \n   \n \nLee has been featured in group and solo shows throughout museums and galleries in Japan and Korea, including the Tokyo Metropolitan Art Museum and the Kawasaki City Museum. Since moving to New York in 1999, he has exhibited at the Sonoma Museum of Visual Arts, CA, the Hammond Museum, NY, the Korean Embassy, Washington, DC, the Japan American Art Association at the Tenri Gallery, NY, the International Art Festival Lantern of the East, Los Angeles, CA, and more.\n   \n \nLee has lectured in Japanese and Korean universities on \"Oriental Sensation and Neo-postmodernism\" and \"Contemporary Visual Art and Psychology.\" He is a tenured instructor of Sumi-e, oil painting and drawing at the Nakano Art Center, Japan, and currently teaches Sumi-e painting at the National Jewish Council Center, NY. He is a member of the New Century Artists, NY, the Japanese Artists Association, NY, the Korean Japanese Exchange Art Association, Tokyo, and the Japan International Art Group, Tokyo.",
+    "birthday": "1960",
+    "deathday": null,
+    "hometown": "Seoul, South Korea",
+    "location": "New York, NY, USA",
+    "nationality": "Korean",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/MS6Y6W_AGi7Y2NdxEh9Ezw/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/MS6Y6W_AGi7Y2NdxEh9Ezw/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92984eb68a1b2c00029a"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/jongwang-lee"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92984eb68a1b2c00029a"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92984eb68a1b2c00029a&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92984eb68a1b2c00029a"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92984eb68a1b2c00029a&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92984eb68a1b2c00029a"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Found good artist: Kim Luttrell
+INFO:root:{
+    "id": "4d8b92864eb68a1b2c0001c2",
+    "slug": "kim-luttrell",
+    "created_at": "2010-08-23T18:15:46+00:00",
+    "updated_at": "2023-01-24T08:44:15+00:00",
+    "name": "Kim Luttrell",
+    "sortable_name": "Luttrell Kim",
+    "gender": "female",
+    "biography": "Kim Luttrell has persisted in her journey to create marvelously compelling artwork. Her seemingly endless ideas come from the artist's willingness to explore and mine her eccentric imagination. Luttrell's recent pieces, labor-intensive, labyrinth-like works, consist of thousands of cut cards. Upon close view they reveal their extremely complex and tortuous structure; from afar they tell a story, often with a profound political or philosophical message. Along with these works, Luttrell's abstract forms hold the viewer's attention with waves of infinitesimal colors of intensity.\n    \n \nRaised in Kentucky, Luttrell left home to become a fine artist. She attended Ringling School of Fine Art and Design in Sarasota, Florida. Although Kim majored in Graphic Design and worked in this field after leaving school, she knew she was on a predetermined path to New York City. After arriving in NY in 1991, she started a business creating 3-dimensional functional works, which lasted for six years. Kim currently works from her studio in Long Island City, New York. \n   \n \nLuttrell has allowed herself to appreciate the fragments, both past and present, of her life and bring them into her mind as she drives through her work. The smallest remembrance\u00d1a snapshot passed by, a phrase heard in conversation, an accidental happenstance\u00d1all evoke ideas and spark Luttrell's imagination.\n    \n \n\"My work is both a blend of inspiration and compulsion,\" says Luttrell. \"I find my ideas thrusting me further into a seemingly endless day. Those days become further filled with genuine excitement as I see my creations grow in complexity. My thoughts can then be brought to those who view my work, leaving words unnecessary in the telling of my stories.\" \n   \n \nLuttrell's works are in corporate and private collections throughout the United States, Holland, Israel, Australia, Argentina, England, Brazil, China, Japan and Republic of Guinea. She has participated in solo and group shows in New York and was a featured artist at the House and Garden Showhouse in New Jersey's Havemeyer Mansion. Kim was also the topic of an independent documentary produced by an Australian filmmaker. Her work has been added to the permanent archives of the Library and Research Center of the National Museum of Women in the Arts in Washington, DC.",
+    "birthday": "1965",
+    "deathday": null,
+    "hometown": "Kentucky, USA",
+    "location": "Brooklyn, NY, USA",
+    "nationality": "American",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/Vzv6-zN4347lzWyhPs1o8A/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/Vzv6-zN4347lzWyhPs1o8A/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92864eb68a1b2c0001c2"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/kim-luttrell"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92864eb68a1b2c0001c2"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92864eb68a1b2c0001c2&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92864eb68a1b2c0001c2"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92864eb68a1b2c0001c2&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92864eb68a1b2c0001c2"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Silvina Mamani
+INFO:root:{
+    "id": "4d8b92a94eb68a1b2c000374",
+    "slug": "silvina-mamani",
+    "created_at": "2010-08-23T17:57:00+00:00",
+    "updated_at": "2022-10-03T10:08:17+00:00",
+    "name": "Silvina Mamani",
+    "sortable_name": "Mamani Silvina",
+    "gender": "female",
+    "biography": "Argentine artist Silvina Mamani paints figures, solo or in groups, in repose, playing or dancing to an unsung musical score. Trained as a sculptor, Mamani carves the figures - equally beloved by her in their various shapes and sizes - out of two-dimensional settings. For Mamani, shape does not determine beauty; it is whether people move through space, and ultimately through their lives, with conviction and integrity that is of greater import. \n   \n \nA triathlete, marathoner and recent Iron Man, Mamani has great respect for physical strength and the potential of the human form. She spends hours in pools, locker rooms and on the road observing bodies in motion. For Mamani, the figure is the physical manifestation of character and personality. \"I see all kinds of people\u00d1big, skinny, small. I love to watch large women sitting in chairs, comfortable with who they are and unconscious of their intrinsic beauty.\" \n   \n \nMamani was born in Buenos Aires, Argentina in 1973, where she graduated from La Scuela Nacional de Bellas Artes Lola Mora, an art magnet high school, with a concentration in drawing. She developed her passion for sculpture at the University Prilidiano Pueyrredon, Buenos Aires, where she was mentored by Daniel Fiore. \"At that time I thought sculpture was the truest form of the expression of the figure,\" she says. \"My sculpture training gave me the skills to look behind the figure and carve a space from a flat plane.\" \n   \n \nIn 1997 Mamani arrived in New York to study at the Art Students League, where she remains today. The following year the artist found a trove of discarded wallpaper sheets outside a factory in her Queens\u00d5s neighborhood. Out of a desire to reuse and recycle the found material, the artist began to paint on the back of the wallpaper \"After nearly a decade of working with it, I have come to prefer its smooth texture and quality over standard artist paper,\" she says, adding that fortunately, she has a thick stack remaining. \n   \n \nMamani received an Honorable Mention for sculpture at the XI Salon de Estudiantes at the Avellaneda Institute of Fine Art in Buenos Aires, I992, and an Honorable Mention for drawing at the 2005 Jury Show, the Art Society of Old Greenwich (CT). Her work has been featured at the Gallery of the Banco de la Cudad de Buenos Aires Foundation, 1989, 1990, the Student Salon of the Argentine Association of Sculptors Artes I, Centro de Estudios Municipales, 1994, at the Java Studio Art Show, 2006, and at several recent Open Studio tours at Crane Street Studios, LIC. This is her first exhibition at Susan Eley Fine Art.",
+    "birthday": "1973",
+    "deathday": null,
+    "hometown": "Buenos Aires, Argentina",
+    "location": null,
+    "nationality": "Argentine",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/cXj-8GkjeCAp2ji0_7xcaA/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/cXj-8GkjeCAp2ji0_7xcaA/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92a94eb68a1b2c000374"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/silvina-mamani"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92a94eb68a1b2c000374"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92a94eb68a1b2c000374&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92a94eb68a1b2c000374"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92a94eb68a1b2c000374&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92a94eb68a1b2c000374"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Found good artist: Carolyn Monastra
+INFO:root:{
+    "id": "4d8b92a04eb68a1b2c000304",
+    "slug": "carolyn-monastra",
+    "created_at": "2010-08-23T20:55:00+00:00",
+    "updated_at": "2023-02-28T00:15:30+00:00",
+    "name": "Carolyn Monastra",
+    "sortable_name": "Monastra Carolyn",
+    "gender": "female",
+    "biography": "Carolyn Monastra received her first camera on her 15th birthday and started printing her own work in the basement darkroom her father built in their Cleveland home. The highschooler's early passion for photography deepened with photography classes at the Cleveland Institute of Art. \n   \n \nMonastra received a BA in English Literature from Fordham University in the Bronx. Following a stint as a social worker (for the Jesuit Volunteer Corps and a psychiatric hospital in Philadelphia), she left for Yale University, where she received an MFA in photography. \n   \n \nEach photograph in the series \"The Dominion of Trees,\" created between 2001-04 at artist residencies in the northeast, is a landscape narrative, usually featuring a single character in a story--the viewer's alone to unravel. \n   \n \n\"I was reading a lot of fairytales at the time and was inspired by these, my dreams, myths, my connection to nature, as well as the exquisite natural beauty at these residencies,\" explains the artist. \n   \n \nIn \"lovely, dark and deep,\" an ongoing series named from a line in the Robert Frost poem, \"Stopping by Woods on a Snowy Evening,\" the artist continues her quest for recording quiet, devotional moments in nature, all photographed at dusk. \n   \n \nMonastra has exhibited her work in many galleries including Julie Saul, Capsule, and Exit Art in NY, as well as at Miami Art Basel with Ambrosino Gallery, the Tokyo Art Fair, the Palm Beach Contemporary Art Fair and more.",
+    "birthday": null,
+    "deathday": null,
+    "hometown": "Cleveland, OH, USA",
+    "location": "Brooklyn, NY, USA",
+    "nationality": "American",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/aoKvfslPoqJ7cIUfh9iR8g/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/aoKvfslPoqJ7cIUfh9iR8g/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92a04eb68a1b2c000304"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/carolyn-monastra"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92a04eb68a1b2c000304"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92a04eb68a1b2c000304&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92a04eb68a1b2c000304"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92a04eb68a1b2c000304&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92a04eb68a1b2c000304"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Found good artist: Maria Passarotti
+INFO:root:{
+    "id": "4d8b92634eb68a1b2c000074",
+    "slug": "maria-passarotti",
+    "created_at": "2010-08-23T19:24:40+00:00",
+    "updated_at": "2023-01-19T08:18:00+00:00",
+    "name": "Maria Passarotti",
+    "sortable_name": "Passarotti Maria",
+    "gender": "female",
+    "biography": "Photographer and painter Maria Passarotti graduated in 2000 with a BFA from the Cooper Union for the Advancement of Science and Art, NY. Her work has been showcased in many galleries in New York, including OK Harris, David Allen Gallery, John Jay College and the American Museum of Natural History, as well as in Vancouver British Columbia. She lives and works in Tappan, NY. \n    \n \nHer most recent photographs are inspired by the intersection of nature and humanity. Passarotti uncovers beauty in the most mundane of scenes. Dozens of empty trash cans strewn across an airy stretch of Jones Beach appear as elegant, upright characters on a stage; light from a pair of automobile headlights casts a saintly glow across a ground cover of fallen leaves; and a lush forested scene is surprisingly the edge of a college parking lot.\n    \n \nNearly always absent of people, Passarotti's photographs evoke a haunting human presence through details such as electrical wires, roads and hints of domestic life. Having grown up in suburban Cresskill, NJ, Passarotti has always sought moments to freeze to define endless stretches of asphalt, vast parking lots and suburban backyards. The artist carefully selects scenes to photograph, often returning to the same location many times, waiting for just the right light, dew or mugginess to achieve a desired quality. The results are stunning, stage-like environments--which appear to be happened upon--often illuminated by street lamps or headlights. \n   \n \nPassarotti created the rooftop series - photographs taken of other buildings from various rooftops - when she lived in Boerum Hill, Brooklyn from 2000-03. Passarotti employed a very slow exposure, 5-30 minutes, which allowed her to capture the crisp detail of interior, inanimate objects glimpsed through windows, such as a dining table with candlesticks or throw pillows piled at a windowsill. She contrasts these items with shimmering, hazy treetops and puddles outside, the blurred effect the result of the slightest changes in wind or light during the long exposure time.",
+    "birthday": "1978",
+    "deathday": "",
+    "hometown": "Cresskill, United States",
+    "location": "Tappan, USA",
+    "nationality": "American",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/ctHyJKs344LcpZUPuAaKGw/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/ctHyJKs344LcpZUPuAaKGw/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92634eb68a1b2c000074"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/maria-passarotti"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92634eb68a1b2c000074"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92634eb68a1b2c000074&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92634eb68a1b2c000074"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92634eb68a1b2c000074&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92634eb68a1b2c000074"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Fumiko Toda
+INFO:root:{
+    "id": "4d8b928f4eb68a1b2c000228",
+    "slug": "fumiko-toda",
+    "created_at": "2010-08-24T15:16:13+00:00",
+    "updated_at": "2023-02-28T00:09:32+00:00",
+    "name": "Fumiko Toda",
+    "sortable_name": "Toda Fumiko",
+    "gender": "female",
+    "biography": "Japanese artist Fumiko Toda grew up in a rural community outside of Kyoto. Feeling alienated, lonely and oppressed by Japan's rigid school system, the young Toda often escaped to a nearby pond where she would observe insects and bugs for hours. These tiny creatures eventually worked their way into her artwork, where they remain to this day. She eventually studied at the Sugii Art Institution in Mie, and graduated from Kyoto University of Art and Design in 2000. \n   \n \nIn 2001, Toda moved to New York City, where she studied painting with Sonia Gechtoff, figurative drawing with Costa Vavagiakis and printmaking with William Behnken and Kathy Carraccio at the National Academy of Fine Art through 2007. Toda moves seamlessly between the realms of painting and printmaking and has exhibited her work extensively. Her paintings and prints have an obsessive quality of intricate detail, repetition of forms and patterns, all rendered with colors so vibrant, as to appear as if they were ground from pure minerals and substances found only in nature, or in the insects themselves. She eschews sketching and reference materials, etching directly onto zinc plates, applying complex techniques, such as chine colle and a la poupee. Toda attributes her sense of design, space and line to her years in Japanese art schools, such skills and craftsmanship are emphasized. She counts as her artistic influences Odilon Redon and Jakuchu Ito. \n   \n \nRecent solo exhibitions include \"Recent Insects\" at the Safe-T Gallery, NYC, and at the Cottage Gallery, Ridgewood, NJ. Group exhibitions include \"Sonia Gechtoff and Friends\" at Alex Adam Gallery, NYC; Robert Bob Blackburn Member show, NYC; The Second Bangkok Triennale International Print and Drawing Exhibition,Thailand. In 2008, Toda participated in the 183rd Annual An Invitational Exhibition of Contemporary American Art at The National Academy Museum, NYC.",
+    "birthday": "1979",
+    "deathday": "",
+    "hometown": "Kyoto, Japan",
+    "location": "New York, NY, USA",
+    "nationality": "Japanese",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/uDlbO_pyzwDQN4bvDMrneQ/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/uDlbO_pyzwDQN4bvDMrneQ/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b928f4eb68a1b2c000228"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/fumiko-toda"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b928f4eb68a1b2c000228"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b928f4eb68a1b2c000228&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b928f4eb68a1b2c000228"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b928f4eb68a1b2c000228&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b928f4eb68a1b2c000228"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Found good artist: Alex Wood
+INFO:root:{
+    "id": "4d8b92604eb68a1b2c000058",
+    "slug": "alex-wood",
+    "created_at": "2010-08-23T19:53:03+00:00",
+    "updated_at": "2022-10-29T06:36:25+00:00",
+    "name": "Alex Wood",
+    "sortable_name": "Wood Alex",
+    "gender": "male",
+    "biography": "Born in Essex in 1966, Alex Wood spent his first five years in Canada before returning to the United Kingdom and settling in a quiet Manchester suburb. During six years of Art School, studying Graphic Design and Photography, Wood became part of the Manchester underground music scene throughout the 1980's and 1990's. After a year divided between Paris and Milan Wood returned to Manchester and began creating Street Art, choosing stencils for the immediate result they gave. This led to a commission for Factory Records Headquarters in Manchester and his work featured in the Oasis video 'Shakermaker'. Settling in Amsterdam in 2002, Wood began re-exploring images, texts and composition with a series of graphic canvases. Now living and working in Sweden since 2004, Wood's work has moved away from its purely flat graphic origin towards a more multi-layered abstraction.",
+    "birthday": "1966",
+    "deathday": "",
+    "hometown": "Essex, UK",
+    "location": "Manchester, United Kingdom and Sweden",
+    "nationality": "British",
+    "target_supply": false,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/ZmsfN4PyO8huUjxu8z1yJw/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/ZmsfN4PyO8huUjxu8z1yJw/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92604eb68a1b2c000058"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/alex-wood"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92604eb68a1b2c000058"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92604eb68a1b2c000058&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92604eb68a1b2c000058"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92604eb68a1b2c000058&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92604eb68a1b2c000058"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Error type: other_error	Message: Profile Not Found
+INFO:root:No profile description field
+INFO:root:Error type: other_error	Message: Profile Not Found
+INFO:root:Getting next partners page
+INFO:root:1
+INFO:root:Found good partner: Tibor de Nagy
+INFO:root:{
+    "id": "4d8b92c44eb68a1b2c0004c6",
+    "slug": "tibor-de-nagy",
+    "created_at": "2011-03-24T18:51:48+00:00",
+    "updated_at": "2022-11-11T22:45:36+00:00",
+    "type": "Gallery",
+    "name": "Tibor de Nagy",
+    "email": "info@tibordenagy.com",
+    "region": "North America",
+    "enforce_on_platform_transactions": true,
+    "_links": {
+        "self": {
+            "href": "https://api.artsy.net/api/partners/4d8b92c44eb68a1b2c0004c6"
+        },
+        "profile": {
+            "href": "https://api.artsy.net/api/profiles/tibor-de-nagy"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?partner_id=4d8b92c44eb68a1b2c0004c6"
+        },
+        "artists": {
+            "href": "https://api.artsy.net/api/artists?partner_id=4d8b92c44eb68a1b2c0004c6"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?partner_id=4d8b92c44eb68a1b2c0004c6&published=true"
+        },
+        "partner_contacts": {
+            "href": "https://api.artsy.net/api/partner_contacts?partner_id=4d8b92c44eb68a1b2c0004c6"
+        },
+        "shows": {
+            "href": "https://api.artsy.net/api/shows?partner_id=4d8b92c44eb68a1b2c0004c6"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/tibor-de-nagy"
+        },
+        "website": {
+            "href": "http://www.tibordenagy.com"
+        }
+    }
+}
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Larry Rivers
+INFO:root:{
+    "id": "4d8b929a4eb68a1b2c0002c6",
+    "slug": "larry-rivers",
+    "created_at": "2010-08-13T22:03:44+00:00",
+    "updated_at": "2023-02-28T00:14:46+00:00",
+    "name": "Larry Rivers",
+    "sortable_name": "Rivers Larry",
+    "gender": "male",
+    "biography": "Born:\u00a0\u00a0\u00a0 1923; Bronx, NY\u00a0\u00a0\u00a0  Died:\u00a0\u00a0\u00a0 2002; New York, NY",
+    "birthday": "1923",
+    "deathday": "2002",
+    "hometown": "Bronx, United States",
+    "location": "New York, USA",
+    "nationality": "American",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/usx_SNa79NhMrNNYF-_U-A/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/usx_SNa79NhMrNNYF-_U-A/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b929a4eb68a1b2c0002c6"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/larry-rivers"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b929a4eb68a1b2c0002c6"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b929a4eb68a1b2c0002c6&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b929a4eb68a1b2c0002c6"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b929a4eb68a1b2c0002c6&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b929a4eb68a1b2c0002c6"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Found good partner: Gagosian
+INFO:root:{
+    "id": "4d8b92c44eb68a1b2c0004cb",
+    "slug": "gagosian",
+    "created_at": "2011-03-24T18:51:48+00:00",
+    "updated_at": "2023-02-27T17:18:11+00:00",
+    "type": "Gallery",
+    "name": "Gagosian",
+    "email": "newyork@gagosian.com",
+    "region": "North America",
+    "enforce_on_platform_transactions": false,
+    "_links": {
+        "self": {
+            "href": "https://api.artsy.net/api/partners/4d8b92c44eb68a1b2c0004cb"
+        },
+        "profile": {
+            "href": "https://api.artsy.net/api/profiles/gagosian-gallery"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?partner_id=4d8b92c44eb68a1b2c0004cb"
+        },
+        "artists": {
+            "href": "https://api.artsy.net/api/artists?partner_id=4d8b92c44eb68a1b2c0004cb"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?partner_id=4d8b92c44eb68a1b2c0004cb&published=true"
+        },
+        "partner_contacts": {
+            "href": "https://api.artsy.net/api/partner_contacts?partner_id=4d8b92c44eb68a1b2c0004cb"
+        },
+        "shows": {
+            "href": "https://api.artsy.net/api/shows?partner_id=4d8b92c44eb68a1b2c0004cb"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/gagosian-gallery"
+        },
+        "website": {
+            "href": "http://www.gagosian.com"
+        }
+    }
+}
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Anselm Kiefer
+INFO:root:{
+    "id": "4d8b92ba4eb68a1b2c000448",
+    "slug": "anselm-kiefer",
+    "created_at": "2010-11-15T16:32:38+00:00",
+    "updated_at": "2023-02-28T16:14:03+00:00",
+    "name": "Anselm Kiefer",
+    "sortable_name": "Kiefer Anselm",
+    "gender": "male",
+    "biography": "Born in 1945 in Donauschingen, Germany, at the close of World War II, Anselm Kiefer studied art informally under Joseph Beuys at the D\u00fcsseldorf Academy in the early 1970s. Kiefer reflects upon and critiques the myths and chauvinism which eventually propelled the German Third Reich to power. His paintings depict his generation\u2019s ambivalence toward the grandiose impulse of German nationalism and its impact on history. Kiefer's work consistently balances the dual purposes of visually powerful imagery and intellectually critical analysis.",
+    "birthday": "1945",
+    "deathday": "",
+    "hometown": "Donauschingen, Germany",
+    "location": "Paris, France",
+    "nationality": "German",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/Gesr8OfPD3sGN-nPYte64w/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/Gesr8OfPD3sGN-nPYte64w/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92ba4eb68a1b2c000448"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/anselm-kiefer"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92ba4eb68a1b2c000448"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92ba4eb68a1b2c000448&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92ba4eb68a1b2c000448"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92ba4eb68a1b2c000448&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92ba4eb68a1b2c000448"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Found good artist: Andy Warhol
+INFO:root:{
+    "id": "4d8b92b34eb68a1b2c0003f4",
+    "slug": "andy-warhol",
+    "created_at": "2010-08-23T14:15:30+00:00",
+    "updated_at": "2023-02-28T15:41:06+00:00",
+    "name": "Andy Warhol",
+    "sortable_name": "Warhol Andy",
+    "gender": "male",
+    "biography": "An American painter, printmaker, sculptor, draughtsman, illustrator, filmmaker, writer and collector, who became one of the most famous artists of the 20th century. Warhol began his career as a successful commercial artist and illustrator for magazines and newspapers but by 1960 was determined to establish his name as a painter. He quickly became renowned for painting everyday advertisements or images from comic strips that looked eerily similar to the originals and contained no traditional marks of an artist. Warhol accentuated this look through the use of silkscreens and by painting in collaboration with a team of assistants in a studio he called \"The Factory.\" In the late sixties, Warhol turned his attention to making experimental films and multimedia events, and in the 1970s, to creating commissioned portraits. During the 1980s Warhol continued to exert an influence on the art world, collaborating with young artists such as Jean-Michel Basquiat and creating a series of paintings, which engaged with Renaissance masterworks.",
+    "birthday": "1928",
+    "deathday": "1987",
+    "hometown": "Pittsburgh, PA, USA",
+    "location": "New York, NY, USA",
+    "nationality": "American",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/E-k-uLoQADM8AjadsSKHrA/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/E-k-uLoQADM8AjadsSKHrA/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92b34eb68a1b2c0003f4"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/andy-warhol"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92b34eb68a1b2c0003f4"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92b34eb68a1b2c0003f4&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92b34eb68a1b2c0003f4"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92b34eb68a1b2c0003f4&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92b34eb68a1b2c0003f4"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Found good artist: Ellen Gallagher
+INFO:root:{
+    "id": "4d8b92904eb68a1b2c000236",
+    "slug": "ellen-gallagher",
+    "created_at": "2010-11-09T17:05:28+00:00",
+    "updated_at": "2023-02-28T00:14:19+00:00",
+    "name": "Ellen Gallagher",
+    "sortable_name": "Gallagher Ellen",
+    "gender": "female",
+    "biography": "Ellen Gallagher was born in 1965 in Providence, Rhode Island. She studied at Oberlin College, Ohio (1982\u20101984); Studio 70, Fort Thomas, Kentucky (1989); School of the Museum of Fine Arts, Boston, Massachusetts (1992); and Skowhegan School of Art, Maine (1993). In 2000 Gallagher was awarded the American Academy Award in Art and participated in the Biennale di Venezia in 2003. Her work is represented in public collections including Tate Modern, London; Centre Pompidou, Paris; Moderna Museet, Stockholm; Museum of Modern Art, New York, and Whitney Museum of American Art; Museum of Fine Arts, Boston; San Francisco Museum of Modern Art; and the Museum of Contemporary Art, Los Angeles. Solo exhibitions include \u201cWatery Ecstatic,\u201d Institute of Contemporary Art, Boston (2001, traveled to the Museum of Contemporary Art, Sydney Australia in 2002); \u201cPreserve,\u201d Des Moines Art Center, Iowa (2001, traveled to Yerba Buena Arts Center, San Francisco and The Drawing Center, New York in 2002); St. Louis Art Museum, Missouri (2003); \u201cIchthyosaurus,\u201d Freud Museum, London (2005); \u201cDeluxe,\u201d Whitney Museum of American Art, New York and Museum of Contemporary Art, Miami (2005); Tate Liverpool (2007); and \u201cAn experiment of unusual opportunity,\u201d South London Gallery (2009).\nGallagher lives and works in Rotterdam, The Netherlands and New York City.",
+    "birthday": "1965",
+    "deathday": null,
+    "hometown": "Providence, RI, USA",
+    "location": "New York and Rotterdam, Netherlands",
+    "nationality": "American",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/JzzhIgjes7xjLmHTGnkC2A/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/JzzhIgjes7xjLmHTGnkC2A/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92904eb68a1b2c000236"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/ellen-gallagher"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92904eb68a1b2c000236"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92904eb68a1b2c000236&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92904eb68a1b2c000236"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92904eb68a1b2c000236&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92904eb68a1b2c000236"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Franz West
+INFO:root:{
+    "id": "4d8b92bd4eb68a1b2c000476",
+    "slug": "franz-west",
+    "created_at": "2010-11-15T16:32:39+00:00",
+    "updated_at": "2023-02-28T10:37:51+00:00",
+    "name": "Franz West",
+    "sortable_name": "West Franz",
+    "gender": "male",
+    "biography": "Franz West lives and works in Vienna, where he was born in 1947. West began his career in mid\u2010 1960s Vienna when a local movement called Actionism was in full swing. West\u2019s earliest sculptures, performances, and collages were a reaction to this movement, in which artists engaged in displays of radical public behavior and physical endurance meant to shake up art\u2010 world passivity. In the early 1970s, West began making a series of small, portable sculptures called \u201cAdaptives\u201d (\u201cPa\u00dft\u00fccke\u201d), awkward\u2010looking plaster objects that were only completed as artworks when the viewer picked them up and carried them around, or performed some other inherently slapstick action with them. In many ways, his large\u2010scale aluminum sculptures are simply overgrown versions of the \u201cAdaptives.\u201d But they also relate directly to his installations, where West makes furniture. West has the ability to make comfortable and colorfully upholstered couches and chairs which transform galleries, museums, and public spaces into lounge\u2010like, sociable environments for viewing art.",
+    "birthday": "1947",
+    "deathday": "2012",
+    "hometown": "Vienna, Austria",
+    "location": "Vienna, Austria",
+    "nationality": "Austrian",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/pW6x2anz_BhxSySRZu0ANg/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/pW6x2anz_BhxSySRZu0ANg/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92bd4eb68a1b2c000476"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/franz-west"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92bd4eb68a1b2c000476"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92bd4eb68a1b2c000476&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92bd4eb68a1b2c000476"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92bd4eb68a1b2c000476&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92bd4eb68a1b2c000476"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Douglas Gordon
+INFO:root:{
+    "id": "4d8b92934eb68a1b2c000260",
+    "slug": "douglas-gordon",
+    "created_at": "2010-11-09T17:05:35+00:00",
+    "updated_at": "2023-02-28T00:18:00+00:00",
+    "name": "Douglas Gordon",
+    "sortable_name": "Gordon Douglas",
+    "gender": "male",
+    "biography": "Douglas Gordon was born in 1966 in Glasgow, Scotland. He lives and works in New York. After receiving a B.A. at the Glasgow School of Art from 1984 to 1988, Gordon undertook a graduate program at the Slade School of Art in London from 1988 to 1990. Gordon was the recipient of the 1996 Turner Prize, the 1997 Venice Biennial's Premio 2000 award, the 1998 Hugo Boss Prize awarded by the Solomon R. Guggenheim Museum, and the 2008 Roswitha Haftmann Prize. His work has been the subject of numerous museum exhibitions, including the Museum of Contemporary Art, Los Angeles (2001); the Fundaci\u00f3 Joan Mir\u00f3, Barcelona (2006); \u201cTimeline,\u201d The Museum of Modern Art, New York (2006), traveled to MALBA Colecci\u00f3n Costantini, Buenos Aires (2007); \u201cPretty much every word written, spoken, heard, overheard from 1989...,\u201d the MART, Museo di arte moderna e contemporanea di Trento e Rovereto, Rovereto, Italy (2006); \u201cSuperhumanatural,\u201d the National Galleries of Scotland, Edinburgh (2006); \u201cBetween Darkness and Light: Works 1989 \u2013 2007,\u201d Kunstmuseum Wolfsburg, Germany (2007); \u201cBlood, Sweat, Tears,\u201d DOX Centre for Contemporary Art, Prague (2009) and Tate Britain, London (2010). The feature\u2010length film, Zidane: A 21st Century Portrait, which he co\u2010directed with artist Philippe Parreno, premiered at the 2006 Cannes Film Festival before screenings at numerous international venues. k.364 premiered at the Venice Film Festival in September 2010.",
+    "birthday": "1966",
+    "deathday": "",
+    "hometown": "Glasgow, UK",
+    "location": "Berlin, Germany",
+    "nationality": "Scottish",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/ch_oRiKm766yqAST0_jtWQ/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/ch_oRiKm766yqAST0_jtWQ/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92934eb68a1b2c000260"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/douglas-gordon"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92934eb68a1b2c000260"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92934eb68a1b2c000260&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92934eb68a1b2c000260"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92934eb68a1b2c000260&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92934eb68a1b2c000260"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Richard Prince
+INFO:root:{
+    "id": "4d8b92774eb68a1b2c000136",
+    "slug": "richard-prince",
+    "created_at": "2010-11-11T22:22:58+00:00",
+    "updated_at": "2023-02-28T09:40:40+00:00",
+    "name": "Richard Prince",
+    "sortable_name": "Prince Richard",
+    "gender": "male",
+    "biography": "Richard Prince was born in 1949 in the Panama Canal Zone and lives and works in upstate New York. Mining images from mass media, advertising and entertainment since the late seventies, Prince has redefined the concepts of authorship, ownership, and aura. Applying his understanding of the complex transactions of representation to the making of art, he evolved a unique signature filled with echoes of other signatures yet that is unquestionably his own. An avid collector and perceptive chronicler of American subcultures and vernaculars and their role in the construction of American identity, he has probed the depths of racism, sexism, and psychosis in mainstream humor; the mythical status of cowboys, bikers, customized cars, and celebrities; and most recently, the push\u2010pull allure of pulp fiction and soft porn, producing such unlikely icons as the highly coveted Nurse paintings.",
+    "birthday": "1949",
+    "deathday": "",
+    "hometown": "Panama Canal Zone",
+    "location": "New York, NY, USA",
+    "nationality": "American",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/S4I04Xe2szfxB2sp_xphEQ/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/S4I04Xe2szfxB2sp_xphEQ/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92774eb68a1b2c000136"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/richard-prince"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92774eb68a1b2c000136"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92774eb68a1b2c000136&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92774eb68a1b2c000136"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92774eb68a1b2c000136&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92774eb68a1b2c000136"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Michael Craig-Martin
+INFO:root:{
+    "id": "4d8b928b4eb68a1b2c0001f4",
+    "slug": "michael-craig-martin",
+    "created_at": "2010-11-09T17:05:09+00:00",
+    "updated_at": "2023-02-28T14:35:35+00:00",
+    "name": "Michael Craig-Martin",
+    "sortable_name": "Craig-Martin Michael",
+    "gender": "male",
+    "biography": "Michael Craig-Martin was born in Dublin in 1941 and educated in the United States, where he studied at Yale University. He returned to Europe in the mid-1960s and was a key figure in the first generation of British conceptual artists. As a tutor at Goldsmith's College from 1974-1988 and 1994-2000, he had a significant influence on two generations of young British artists. Throughout his career Craig-Martin has explored the aesthetic and linguistic character of everyday, designer and iconic \u2018art-historical' objects which he has realized through a variety of media including paintings, sculpture, prints and, most recently, computer animations.",
+    "birthday": "1941",
+    "deathday": "",
+    "hometown": "Dublin, Ireland",
+    "location": "London, UK",
+    "nationality": "Irish",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/3xmSGYbje4QLs1NyvVwLyQ/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/3xmSGYbje4QLs1NyvVwLyQ/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b928b4eb68a1b2c0001f4"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/michael-craig-martin"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b928b4eb68a1b2c0001f4"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b928b4eb68a1b2c0001f4&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b928b4eb68a1b2c0001f4"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b928b4eb68a1b2c0001f4&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b928b4eb68a1b2c0001f4"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Richard Avedon
+INFO:root:{
+    "id": "4de27c32ac3e7e0001004171",
+    "slug": "richard-avedon",
+    "created_at": "2011-05-29T17:02:42+00:00",
+    "updated_at": "2023-02-28T00:17:19+00:00",
+    "name": "Richard Avedon",
+    "sortable_name": "Avedon Richard",
+    "gender": "male",
+    "biography": "Richard Avedon is regarded as one of the most influential artists of the 20th century. Born in New York City, Avedon began his professional photographic career in 1942 in the U.S. Merchant Marine Photographic Department and then attended the Design Laboratory at the New School. He began work as a fashion photographer for Harper\u2019s Bazaar in 1945, eventually joining rival Vogue magazine, where he would remain on staff until 1990. In 1992 he was named the first staff photographer for The New Yorker. He received a Master of Photography Award from the International Century for Photography and his work is included in the collections of MoMa, the Smithsonian, and Metropolitan Museum of Art, along with countless other museums and institutions worldwide. Avedon\u2019s portraits were the subject of an exhibition at the Metropolitan Museum of Art in 2002. A major 2007 retrospective exhibition organized by the Louisiana Museum of Modern Art in Denmark traveled to Milan, Paris, Berlin, Amsterdam and San Francisco.",
+    "birthday": "1923",
+    "deathday": "2004",
+    "hometown": "New York, USA",
+    "location": "San Antonio, USA",
+    "nationality": "American",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/onuXwn7jqcXMQsW8wY-xYA/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/onuXwn7jqcXMQsW8wY-xYA/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4de27c32ac3e7e0001004171"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/richard-avedon"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4de27c32ac3e7e0001004171"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4de27c32ac3e7e0001004171&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4de27c32ac3e7e0001004171"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4de27c32ac3e7e0001004171&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4de27c32ac3e7e0001004171"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Zeng Fanzhi 曾梵志
+INFO:root:{
+    "id": "4d8b92814eb68a1b2c000186",
+    "slug": "zeng-fanzhi-ceng-fan-zhi",
+    "created_at": "2010-12-28T15:15:47+00:00",
+    "updated_at": "2023-02-28T00:17:39+00:00",
+    "name": "Zeng Fanzhi \u66fe\u68b5\u5fd7",
+    "sortable_name": "Zeng Fanzhi \u66fe\u68b5\u5fd7",
+    "gender": "male",
+    "biography": "Born in 1964 in Wuhan, China, Zeng Fanzhi developed his passion for painting at an early age. In the 1970s, artists were limited to painting politically sanctioned subjects in socialist realist styles. It was not until the 1980s, following the gradual opening up of the country, that Western art entered China, and Zeng was struck by the abstract and expressive works that he saw. In his third year as a student in the oil painting department at the Hubei Academy of Fine Arts, Zeng put aside socialist realism and be- gan working in a painterly vocabulary particularly influenced by Max Beckmann and other German expressionists.\n\nFor his graduation piece from the Hubei Academy of Fine Arts in 1991, Zeng completed his Hospital Triptych No. 1, the first of his hospital paintings. In these paintings, Zeng portrayed the trauma and anguish of sickness and death in his images of tense hospital waiting rooms and doctor-patient encounters. Zeng was inspired to make this series because he visited the hospital next-door to him in order to use their toilets (his house did not have a bathroom), and he was struck by what he saw at the hospital each day.\n\nIn 1993, Zeng moved to Beijing because he felt that he could only achieve serious recognition for his work in a more cosmopolitan city. However, after relocating to Beijing, Zeng felt alone and alienated from the friends and family he left behind in Wuhan. In response to these feelings of isolation, Zeng began the Mask series in 1994. In these paintings, he depicts well-dressed figures wearing white masks with blank, vacant expressions against flat and indescript backgrounds. Zeng has explained that these paintings were made in reaction to China\u2019s rapid transformation in the mid-1990s. He felt that people started wearing western suits and ties to \u201cchange themselves on the surface,\u201d and that this change felt artificial. His figures present themselves to the world in a contrived and self-conscious manner, hiding their true emotions and character behind white masks.\n\nIn 2001, Zeng moved on from the Mask series and began experimenting with other styles. He completed a series of portraits with spiraling, coiled brushstrokes that obscure faces into blurry, abstracted portraits. Zeng also began a series of probing portraits that convey expressive qualities and an emotional intensity that sharply contradict the insincerity and hidden emotions of the Mask series.\n\nIn 2003-4, he began experimenting with a new technique in a series of landscapes reminiscent of traditional Chinese landscape paintings. In these landscapes, Zeng creates emotionally charged, poetic images with energetic networks of lines. He paints with several brushes simultaneously, sometimes even holding two brushes in each hand, allowing spontaneity and accidental effects to abstract his images. His experimentation with line is inspired by the different strokes of traditional Chinese calligraphy and the process of learning to master these types of lines. By looking to Chinese landscapes and calligraphy for inspiration, Zeng has created a new style that blends Western expressionism with traditional Chinese influences.",
+    "birthday": "1964",
+    "deathday": "",
+    "hometown": "Wuhan, China",
+    "location": "Beijing, China",
+    "nationality": "Chinese",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/HmVtXU3ajdygo2MyhOFrTA/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/HmVtXU3ajdygo2MyhOFrTA/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92814eb68a1b2c000186"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/zeng-fanzhi-ceng-fan-zhi"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92814eb68a1b2c000186"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92814eb68a1b2c000186&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92814eb68a1b2c000186"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92814eb68a1b2c000186&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92814eb68a1b2c000186"
+        }
+    }
+}
+INFO:root:Getting next artwork page
+INFO:root:Getting next artist page
+INFO:root:Getting next artist page
+INFO:root:Found good artist: Claude Monet
+INFO:root:{
+    "id": "4d8b92774eb68a1b2c000134",
+    "slug": "claude-monet",
+    "created_at": "2010-08-03T15:39:00+00:00",
+    "updated_at": "2023-02-28T02:53:26+00:00",
+    "name": "Claude Monet",
+    "sortable_name": "Monet Claude",
+    "gender": "male",
+    "biography": "Claude Monet, born\u00a0Oscar Claude Monet\u00a0(14\u00a0November 1840 \u0096 5 December 1926)\u00a0was a founder of French\u00a0impressionist\u00a0painting, and the most consistent and prolific practitioner of the movement's philosophy of expressing one's perceptions before nature, especially as applied to\u00a0plein-airlandscape painting.\u00a0The term Impressionism is derived from the title of his painting\u00a0Impression, Sunrise\u00a0(Impression, soleil levant).",
+    "birthday": "1840",
+    "deathday": "1926",
+    "hometown": "Paris, France",
+    "location": "Giverny, France",
+    "nationality": "French",
+    "target_supply": true,
+    "image_versions": [
+        "four_thirds",
+        "large",
+        "square",
+        "tall"
+    ],
+    "_links": {
+        "thumbnail": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/95EYpbkhcWsEKG18njyhCw/four_thirds.jpg"
+        },
+        "image": {
+            "href": "https://d32dm0rphc51dk.cloudfront.net/95EYpbkhcWsEKG18njyhCw/{image_version}.jpg",
+            "templated": true
+        },
+        "self": {
+            "href": "https://api.artsy.net/api/artists/4d8b92774eb68a1b2c000134"
+        },
+        "permalink": {
+            "href": "https://www.artsy.net/artist/claude-monet"
+        },
+        "artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92774eb68a1b2c000134"
+        },
+        "published_artworks": {
+            "href": "https://api.artsy.net/api/artworks?artist_id=4d8b92774eb68a1b2c000134&published=true"
+        },
+        "similar_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92774eb68a1b2c000134"
+        },
+        "similar_contemporary_artists": {
+            "href": "https://api.artsy.net/api/artists?similar_to_artist_id=4d8b92774eb68a1b2c000134&similarity_type=contemporary"
+        },
+        "genes": {
+            "href": "https://api.artsy.net/api/genes?artist_id=4d8b92774eb68a1b2c000134"
+        }
+    }
+}
+Traceback (most recent call last):
+  File "artsy_scrape.py", line 199, in <module>
+    kickoff(session)
+  File "artsy_scrape.py", line 25, in kickoff
+    for artwork in iterate_over_artworks(session, artwork_page):
+  File "artsy_scrape.py", line 115, in iterate_over_artworks
+    if meets_artwork_requirements(artwork):
+  File "artsy_scrape.py", line 130, in meets_artwork_requirements
+    if not "image_rights" in artwork or artwork["image_rigths"] == "":
+KeyError: 'image_rigths'

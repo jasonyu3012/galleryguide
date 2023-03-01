@@ -3,6 +3,9 @@
 Used to test endpoints of APIs
 ## Gitlab
 Used for hosting code
+## PlantUML
+Used to create database diagram
+
 ---
 # API Docs
 ## Artsy
