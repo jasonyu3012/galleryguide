@@ -59,3 +59,4 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 
 ## Comments
  - The code for `About.js` was adapted using code from IDB Group 3 (Spring 2023), WorkItOut (Fall 2022), and GeoJobs (Fall 2022)
+ - The code for the yml file was adapted using code from [WorkItOut](https://gitlab.com/sriyab/workitout/-/blob/main/.gitlab-ci.yml) and [ArtDB](https://gitlab.com/krent22/idb/-/blob/main/.gitlab-ci.yml).

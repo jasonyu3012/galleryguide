@@ -5,9 +5,48 @@ stages:
     - test
     - deploy
 
-frontend_build:
+# I'm not entirely sure about this, but it might be necessary for dependencies
+cache:
+    paths:
+        - frontend/node_modules/
+
+build-frontend:
     stage: build
     script:
         - cd frontend
-        - npm run build
+        - npm install
+        # not entirely sure why CI environment var should be set to false
+        - CI=false npm run-script build
         - echo "built frontend"
+
+test-postman:
+    stage: test
+    image:
+        # command line collection runner, defined in docker image
+        name: postman/newman:alpine
+        entrypoint: [""]
+    script:
+        # TODO add script here when ready! the format will be like
+        # newman run <file_name>.json
+
+test-selenium:
+    stage: test
+    image: python:3.9-slim
+    services:
+        # run in chrome browser
+        - selenium/standalone-chrome
+    # TODO uncomment when ready!
+    # before_script:
+    #     - python3 -m pip install -r frontend/selenium/requirements.txt
+    # script:
+    #     - cd frontend/selenium
+    #     - python3 -m pytest
+    
+test-jest:
+    stage: test
+    image: node:latest
+    script:
+        - cd frontend
+        - npm install
+        # suppress output when running
+        - npm test --silent
