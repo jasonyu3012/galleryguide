@@ -2,13 +2,13 @@ import requests
 import time
 import logging
 import json
+import wiki_scrape
 ARTSY_BASE_URL = "https://api.artsy.net/api"
 PARTNER_PAGE_LIMIT = 100
 LOG_LEVEL = logging.INFO
 
-"""We need a better rate limiting solution."""
 
-def kickoff(session):
+def brute_force_scrape(session):
     partners = get_artsy_partners(session)
 
     partner_page = partners
@@ -18,34 +18,212 @@ def kickoff(session):
     for partner in iterate_over_partners(session, partner_page):
         #for every good partner profile
         num_commitable_artists = 0
-        logging.info("Found good partner: " + partner["name"])
-        #logging.info(json.dumps(partner, indent=4))
         artist_page = get_artists_from_partner(session, partner)
         for artist in iterate_over_artists(session, artist_page):
             #for every good artist
             num_commitable_artworks = 0
             time.sleep(.5)
-            logging.info("Found good artist: " + artist["name"])
-            #logging.info(json.dumps(artist, indent=4))
             artwork_page = get_artworks_from_artist(session, artist)
             for artwork in iterate_over_artworks(session, artwork_page):
                 #for every good artwork
-                logging.info("Found good artwork: " + artwork["title"])
-                #logging.info(json.dumps(artwork, indent=4))
+                logging.info(json.dumps(artwork, indent=4))
                 num_commitable_artworks += 1
                 total_commitable_artworks += 1
             if num_commitable_artworks > 0:
+                logging.info(json.dumps(artist, indent=4))
                 num_commitable_artists += 1
                 total_commitable_artists += 1
         if num_commitable_artists > 0:
+            logging.info(json.dumps(partner, indent=4))
             total_commitable_partners += 1
             logging.info("Commitable partners: " + str(total_commitable_partners) + 
                          "\tartists: " + str(total_commitable_artists) + 
                          "\tartworks: " + str(total_commitable_artworks))
             
         
+def nga_scrape(session):
+    partner = session.get(ARTSY_BASE_URL + "/partners/4f99c7b793ab4b0001000179").json()
+    artist_page = get_artists_from_partner(session, partner)
+    total_commitable_artists = 0
+    total_commitable_artworks = 0
+    for artist in iterate_over_artists(session, artist_page):
+        #for every good artist
+        num_commitable_artworks = 0
+        time.sleep(.5)
+        artwork_page = get_artworks_from_artist(session, artist)
+        for artwork in iterate_over_artworks(session, artwork_page):
+            #for every good artwork
+            logging.info(json.dumps(artwork, indent=4))
+            num_commitable_artworks += 1
+            total_commitable_artworks += 1
+        if num_commitable_artworks > 0:
+            logging.info(json.dumps(artist, indent=4))
+            total_commitable_artists += 1
 
 
+def met_scrape(session):
+    partner = session.get(ARTSY_BASE_URL + "/partners/52e9639bc9dc24eff7000103").json()
+    artist_page = get_artists_from_partner(session, partner)
+    total_commitable_artists = 0
+    total_commitable_artworks = 0
+    for artist in iterate_over_artists(session, artist_page):
+        #for every good artist
+        num_commitable_artworks = 0
+        time.sleep(.5)
+        artwork_page = get_artworks_from_artist(session, artist)
+        for artwork in iterate_over_artworks(session, artwork_page):
+            #for every good artwork
+            logging.info(json.dumps(artwork, indent=4))
+            num_commitable_artworks += 1
+            total_commitable_artworks += 1
+        if num_commitable_artworks > 0:
+            logging.info(json.dumps(artist, indent=4))
+            total_commitable_artists += 1
+
+def yale_scrape(session):
+    partner = session.get(ARTSY_BASE_URL + "/partners/50475d94b08eaa0002000340").json()
+    artist_page = get_artists_from_partner(session, partner)
+    total_commitable_artists = 0
+    total_commitable_artworks = 0
+    for artist in iterate_over_artists(session, artist_page):
+        #for every good artist
+        num_commitable_artworks = 0
+        time.sleep(.5)
+        artwork_page = get_artworks_from_artist(session, artist)
+        for artwork in iterate_over_artworks(session, artwork_page):
+            #for every good artwork
+            logging.info(json.dumps(artwork, indent=4))
+            num_commitable_artworks += 1
+            total_commitable_artworks += 1
+        if num_commitable_artworks > 0:
+            logging.info(json.dumps(artist, indent=4))
+            total_commitable_artists += 1
+
+def dorsay_scrape(session):
+    partner = session.get(ARTSY_BASE_URL + "/partners/5554bf037261697700010000").json()
+    artist_page = get_artists_from_partner(session, partner)
+    total_commitable_artists = 0
+    total_commitable_artworks = 0
+    for artist in iterate_over_artists(session, artist_page):
+        #for every good artist
+        num_commitable_artworks = 0
+        time.sleep(.5)
+        artwork_page = get_artworks_from_artist(session, artist)
+        for artwork in iterate_over_artworks(session, artwork_page):
+            #for every good artwork
+            logging.info(json.dumps(artwork, indent=4))
+            num_commitable_artworks += 1
+            total_commitable_artworks += 1
+        if num_commitable_artworks > 0:
+            logging.info(json.dumps(artist, indent=4))
+            total_commitable_artists += 1
+
+"""
+This really needs a way to find an external bio for artists
+"""
+def getty_scrape(session):
+    partner = session.get(ARTSY_BASE_URL + "/partners/5321cf66275b24683a00022d").json()
+    artist_page = get_artists_from_partner(session, partner)
+    total_commitable_artists = 0
+    total_commitable_artworks = 0
+    for artist in iterate_over_artists(session, artist_page):
+        #for every good artist
+        num_commitable_artworks = 0
+        time.sleep(.5)
+        artwork_page = get_artworks_from_artist(session, artist)
+        for artwork in iterate_over_artworks(session, artwork_page):
+            #for every good artwork
+            logging.info(json.dumps(artwork, indent=4))
+            num_commitable_artworks += 1
+            total_commitable_artworks += 1
+        if num_commitable_artworks > 0:
+            logging.info(json.dumps(artist, indent=4))
+            total_commitable_artists += 1
+"""
+This really needs a way to find an external bio for artists
+"""
+def sfmoma_scrape(session):
+    partner = session.get(ARTSY_BASE_URL + "/partners/504a229f8d00490002000166").json()
+    artist_page = get_artists_from_partner(session, partner)
+    total_commitable_artists = 0
+    total_commitable_artworks = 0
+    for artist in iterate_over_artists(session, artist_page):
+        #for every good artist
+        num_commitable_artworks = 0
+        time.sleep(.5)
+        artwork_page = get_artworks_from_artist(session, artist)
+        for artwork in iterate_over_artworks(session, artwork_page):
+            #for every good artwork
+            logging.info(json.dumps(artwork, indent=4))
+            num_commitable_artworks += 1
+            total_commitable_artworks += 1
+        if num_commitable_artworks > 0:
+            logging.info(json.dumps(artist, indent=4))
+            total_commitable_artists += 1
+
+def artic_scrape(session):
+    partner = session.get(ARTSY_BASE_URL + "/partners/50d20b9e6e23ab206c000a60").json()
+    artist_page = get_artists_from_partner(session, partner)
+    total_commitable_artists = 0
+    total_commitable_artworks = 0
+    for artist in iterate_over_artists(session, artist_page):
+        #for every good artist
+        num_commitable_artworks = 0
+        time.sleep(.5)
+        artwork_page = get_artworks_from_artist(session, artist)
+        for artwork in iterate_over_artworks(session, artwork_page):
+            #for every good artwork
+            logging.info(json.dumps(artwork, indent=4))
+            num_commitable_artworks += 1
+            total_commitable_artworks += 1
+        if num_commitable_artworks > 0:
+            logging.info(json.dumps(artist, indent=4))
+            total_commitable_artists += 1
+"""
+This really needs a way to find an external bio for artists
+"""
+def belvedere_scrape(session):
+    partner = session.get(ARTSY_BASE_URL + "/partners/55d36f94726169049b000126").json()
+    artist_page = get_artists_from_partner(session, partner)
+    total_commitable_artists = 0
+    total_commitable_artworks = 0
+    for artist in iterate_over_artists(session, artist_page):
+        #for every good artist
+        num_commitable_artworks = 0
+        time.sleep(.5)
+        artwork_page = get_artworks_from_artist(session, artist)
+        for artwork in iterate_over_artworks(session, artwork_page):
+            #for every good artwork
+            logging.info(json.dumps(artwork, indent=4))
+            num_commitable_artworks += 1
+            total_commitable_artworks += 1
+        if num_commitable_artworks > 0:
+            logging.info(json.dumps(artist, indent=4))
+            total_commitable_artists += 1
+
+def partner_scrape(session, partner_id):
+    """
+    Given an Artsy partner id (or slug), scrapes that partner.
+    """
+    partner = session.get(ARTSY_BASE_URL + "/partners/" + partner_id).json()
+    artist_page = get_artists_from_partner(session, partner)
+    total_commitable_artists = 0
+    total_commitable_artworks = 0
+    for artist in iterate_over_artists(session, artist_page):
+        #for every good artist
+        num_commitable_artworks = 0
+        time.sleep(.5)
+        artwork_page = get_artworks_from_artist(session, artist)
+        for artwork in iterate_over_artworks(session, artwork_page):
+            #for every good artwork
+            logging.info(json.dumps(artwork, indent=4))
+            num_commitable_artworks += 1
+            total_commitable_artworks += 1
+        if num_commitable_artworks > 0:
+            logging.info(json.dumps(artist, indent=4))
+            total_commitable_artists += 1
+
+#TODO: find other big partners and cherry pick them for easy artists and artworks
 
 def get_artsy_partners(session):
     r = session.get(ARTSY_BASE_URL + "/partners")
@@ -148,7 +326,9 @@ def meets_artwork_requirements(artwork):
         return False
     if not "_links" in artwork:
         return False
-    if artwork["_links"]["thumbnail"]["href"] == "" or artwork["_links"]["image"]["href"] == "":
+    
+    links = artwork["_links"]
+    if "thumbnail" not in links or "image" not in links:
         return False
     return True 
 
@@ -160,7 +340,9 @@ def meets_artist_requirements(artist):
     if not "name" in artist or artist["name"] == "":
         return False
     if not "biography" in artist or artist["biography"] == "" or artist["biography"] == None:
-        return False
+        if not try_wiki_for_bio(artist):
+            return False
+        logging.info("Added bio from wiki")            
     if not "birthday" in artist or artist["birthday"] == "":
         return False
     if not "hometown" in artist or artist["hometown"] == "" or artist["hometown"] == None:
@@ -172,6 +354,13 @@ def meets_artist_requirements(artist):
     if artist["_links"]["artworks"]["href"] == "":
         return False
     return True
+
+def try_wiki_for_bio(artist):
+    wiki_summary = wiki_scrape.get_page_summary(artist["name"])
+    if "extract" in wiki_summary:
+        artist["biography"] = wiki_summary["extract"]
+        return True
+    return False
 
 def meets_gallery_requirement(partner, profile):
     if "message" in profile and profile["message"] == "Profile Not Found":
@@ -196,15 +385,6 @@ def meets_gallery_requirement(partner, profile):
         return False
     return True
 
-
-    # name = profile["name"]
-    # desc = profile["description"]
-    # loc = profile["location"]
-    # site = profile["_links"]["website"]["href"]
-    # image_versions = profile["image_versions"]
-    # artist_link = not profile["_links"]["artists"]["href"] == ""
-    # return artist_link and not name == "" and not desc == "" and not loc == "" and not site == "" and len(image_versions) > 1
-
 if __name__ == "__main__":
     logging.basicConfig(level=LOG_LEVEL)
     f = open("artsy_token.txt", "r")
@@ -213,4 +393,4 @@ if __name__ == "__main__":
     requests.Session 
     with requests.Session() as session:
         session.headers = {"X-Xapp-Token": ARTSY_TOKEN}
-        kickoff(session)
+        partner_scrape(session, "belvedere-museum")

@@ -14,3 +14,5 @@ Used to create database diagram
 - https://metmuseum.github.io/#search
 ## Art Institute of Chicago
 - https://api.artic.edu/docs/#quick-start
+## Wikipedia API
+- https://en.wikipedia.org/api/rest_v1/#/
