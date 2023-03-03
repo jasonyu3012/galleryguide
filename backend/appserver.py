@@ -13,10 +13,33 @@ def serve(path):
     print("serve")
     return app.send_static_file('index.html')
 
-# @app.route("/about")
-# def about():
-#     return "<h1>Hello there</h1>"
+@app.route("/api/galleries")
+def gallery_endpoint():
+    pass
 
+@app.route("/api/galleries/<int: id>")
+def gallery_id_endpoint(id):
+    pass
+
+@app.route("/api/artists")
+def artist_endpoint():
+    pass
+
+@app.route("/api/artists/<int: id>")
+def artist_id_endpoint(id):
+    pass
+
+@app.route("/api/artworks")
+def artwork_endpoint():
+    pass
+
+@app.route("/api/artworks/<int: id>")
+def artwork_id_endpoint(id):
+    pass
+
+@app.route("/api/spotlight")
+def spotlight_endpoint():
+    pass
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
