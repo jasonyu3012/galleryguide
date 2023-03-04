@@ -61,11 +61,13 @@ def partner_scrape(session, partner_id):
         for artwork in iterate_over_artworks(session, artwork_page):
             #for every good artwork
             id = db.add_artwork(artwork)
-            artist_artwork_ids.append(id)
-            gallery_artwork_ids.append(id)
+            if id > 0:
+                artist_artwork_ids.append(id)
+                gallery_artwork_ids.append(id)
         if len(artist_artwork_ids) > 0:
             id = db.add_artist(artist, artist_artwork_ids)
-            artist_ids.append(id)
+            if id > 0:
+                artist_ids.append(id)
     if len(artist_ids) > 0:
         id = db.add_gallery(partner, profile, artist_ids, gallery_artwork_ids)
             
@@ -143,6 +145,8 @@ def iterate_over_partners(session, partners_page):
 
 def iterate_over_artists(session, artists_page):
     while artists_page:
+        if "_embedded" not in artists_page:
+            break
         for artist in artists_page["_embedded"]["artists"]:
             if meets_artist_requirements(artist):
                 yield artist
@@ -222,13 +226,17 @@ def meets_gallery_requirement(partner, profile):
     if "region" not in partner or partner["region"] == "":
         logging.info("No partner region field")
         return False
-    
+
     if "_links" not in partner:
         return False
     links = partner["_links"]
     if "website" not in links:
         return False
     if "artists" not in links:
+        return False
+    
+    profile_links = profile["_links"]
+    if "thumbnail" not in profile_links:
         return False
     return True
 
@@ -240,6 +248,7 @@ PARTNER_IDS = [
     "getty-research-institute",
     "san-francisco-museum-of-modern-art-sfmoma",
     "art-institute-of-chicago",
+    "blanton-museum-of-art",
 ]
 
 if __name__ == "__main__":
@@ -252,5 +261,7 @@ if __name__ == "__main__":
 
     with requests.Session() as session:
         session.headers = {"X-Xapp-Token": ARTSY_TOKEN}
-        partner_scrape(session, "belvedere-museum")
+        partner_scrape(session, PARTNER_IDS[0])
     db.commit()
+
+    db.test()
