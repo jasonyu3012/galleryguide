@@ -3,6 +3,7 @@ import time
 import logging
 import json
 import wiki_scrape
+import db
 ARTSY_BASE_URL = "https://api.artsy.net/api"
 PARTNER_PAGE_LIMIT = 100
 LOG_LEVEL = logging.INFO
@@ -55,11 +56,15 @@ def partner_scrape(session, partner_id):
         artwork_page = get_artworks_from_artist(session, artist)
         for artwork in iterate_over_artworks(session, artwork_page):
             #for every good artwork
-            logging.info(json.dumps(artwork, indent=4))
+            #logging.info(json.dumps(artwork, indent=4))
+            #TODO: pass image link instead of thumbnail?
+            db.add_artwork(artwork)
             num_commitable_artworks += 1
             total_commitable_artworks += 1
         if num_commitable_artworks > 0:
-            logging.info(json.dumps(artist, indent=4))
+            #logging.info(json.dumps(artist, indent=4))
+            #TODO: find a way to get the artist to be made with its artwork ids
+            db.add_artist(artist)
             total_commitable_artists += 1
 
 #TODO: find other big partners and cherry pick them for easy artists and artworks
@@ -224,7 +229,6 @@ def meets_gallery_requirement(partner, profile):
         return False
     return True
 
-
 PARTNER_IDS = [
     "belvedere-museum",
     "national-gallery-of-art-washington-dc",
@@ -233,7 +237,6 @@ PARTNER_IDS = [
     "getty-research-institute",
     "san-francisco-museum-of-modern-art-sfmoma",
     "art-institute-of-chicago",
-    ""
 ]
 
 if __name__ == "__main__":
@@ -241,7 +244,9 @@ if __name__ == "__main__":
     f = open("artsy_token.txt", "r")
     ARTSY_TOKEN = f.readline()
     f.close()
-    requests.Session 
+    
+    db.db_init()
+
     with requests.Session() as session:
         session.headers = {"X-Xapp-Token": ARTSY_TOKEN}
         partner_scrape(session, "belvedere-museum")
