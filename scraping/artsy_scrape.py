@@ -46,28 +46,30 @@ def partner_scrape(session, partner_id):
     Given an Artsy partner id (or slug), scrapes that partner.
     """
     partner = session.get(ARTSY_BASE_URL + "/partners/" + partner_id).json()
+    profile = get_partner_profile(session, partner)
+    if not meets_gallery_requirement(partner, profile):
+        return
+
     artist_page = get_artists_from_partner(session, partner)
-    total_commitable_artists = 0
-    total_commitable_artworks = 0
+    artist_ids = []
+    gallery_artwork_ids = []
     for artist in iterate_over_artists(session, artist_page):
         #for every good artist
-        num_commitable_artworks = 0
+        artist_artwork_ids = []
         time.sleep(.5)
         artwork_page = get_artworks_from_artist(session, artist)
         for artwork in iterate_over_artworks(session, artwork_page):
             #for every good artwork
-            #logging.info(json.dumps(artwork, indent=4))
-            #TODO: pass image link instead of thumbnail?
-            db.add_artwork(artwork)
-            num_commitable_artworks += 1
-            total_commitable_artworks += 1
-        if num_commitable_artworks > 0:
-            #logging.info(json.dumps(artist, indent=4))
-            #TODO: find a way to get the artist to be made with its artwork ids
-            db.add_artist(artist)
-            total_commitable_artists += 1
+            id = db.add_artwork(artwork)
+            artist_artwork_ids.append(id)
+            gallery_artwork_ids.append(id)
+        if len(artist_artwork_ids) > 0:
+            id = db.add_artist(artist, artist_artwork_ids)
+            artist_ids.append(id)
+    if len(artist_ids) > 0:
+        id = db.add_gallery(partner, profile, artist_ids, gallery_artwork_ids)
+            
 
-#TODO: find other big partners and cherry pick them for easy artists and artworks
 
 def get_artsy_partners(session):
     r = session.get(ARTSY_BASE_URL + "/partners")
@@ -81,7 +83,6 @@ def get_partner_profile(session, partner):
         if r.status_code >= 400:
             logging.info("Error type: " + json["type"] + "\tMessage: " + json["message"])
     except requests.exceptions.JSONDecodeError as e:
-        
         json = {"type": "other_error", "message": "Profile Not Found"}
     return json
 
@@ -176,11 +177,11 @@ def meets_artwork_requirements(artwork):
         return False
     return True 
 
-"""
-Takes an Artsy artist json object and determines whether it has the
-required attributes, checks for an artworks link.
-"""
 def meets_artist_requirements(artist):
+    """
+    Takes an Artsy artist json object and determines whether it has the
+    required attributes, checks for an artworks link.
+    """
     if not "name" in artist or artist["name"] == "":
         return False
     if not "biography" in artist or artist["biography"] == "" or artist["biography"] == None:
@@ -189,6 +190,8 @@ def meets_artist_requirements(artist):
         logging.info("Added bio from wiki")            
     if not "birthday" in artist or artist["birthday"] == "":
         return False
+    if "deathday" not in artist or artist["deathday"] == "":
+        artist["deathday"] = None
     if not "hometown" in artist or artist["hometown"] == "" or artist["hometown"] == None:
         return False
     if not "_links" in artist:
@@ -250,3 +253,4 @@ if __name__ == "__main__":
     with requests.Session() as session:
         session.headers = {"X-Xapp-Token": ARTSY_TOKEN}
         partner_scrape(session, "belvedere-museum")
+    db.commit()
