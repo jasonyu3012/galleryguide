@@ -5,7 +5,7 @@ import json
 import wiki_scrape
 import db
 ARTSY_BASE_URL = "https://api.artsy.net/api"
-PARTNER_PAGE_LIMIT = 100
+PARTNER_PAGE_LIMIT = 10
 LOG_LEVEL = logging.INFO
 
 
@@ -17,31 +17,33 @@ def brute_force_scrape(session):
     total_commitable_artists = 0
     total_commitable_artworks = 0
     for partner in iterate_over_partners(session, partner_page):
-        #for every good partner profile
-        num_commitable_artists = 0
-        artist_page = get_artists_from_partner(session, partner)
-        for artist in iterate_over_artists(session, artist_page):
-            #for every good artist
-            num_commitable_artworks = 0
-            time.sleep(.5)
-            artwork_page = get_artworks_from_artist(session, artist)
-            for artwork in iterate_over_artworks(session, artwork_page):
-                #for every good artwork
-                logging.info(json.dumps(artwork, indent=4))
-                num_commitable_artworks += 1
-                total_commitable_artworks += 1
-            if num_commitable_artworks > 0:
-                logging.info(json.dumps(artist, indent=4))
-                num_commitable_artists += 1
-                total_commitable_artists += 1
-        if num_commitable_artists > 0:
-            logging.info(json.dumps(partner, indent=4))
-            total_commitable_partners += 1
-            logging.info("Commitable partners: " + str(total_commitable_partners) + 
-                         "\tartists: " + str(total_commitable_artists) + 
-                         "\tartworks: " + str(total_commitable_artworks))
+        #for every good partner
+        profile = get_partner_profile(partner)
+        partner_scrape(session, partner, profile)
+        # num_commitable_artists = 0
+        # artist_page = get_artists_from_partner(session, partner)
+        # for artist in iterate_over_artists(session, artist_page):
+        #     #for every good artist
+        #     num_commitable_artworks = 0
+        #     time.sleep(.5)
+        #     artwork_page = get_artworks_from_artist(session, artist)
+        #     for artwork in iterate_over_artworks(session, artwork_page):
+        #         #for every good artwork
+        #         logging.info(json.dumps(artwork, indent=4))
+        #         num_commitable_artworks += 1
+        #         total_commitable_artworks += 1
+        #     if num_commitable_artworks > 0:
+        #         logging.info(json.dumps(artist, indent=4))
+        #         num_commitable_artists += 1
+        #         total_commitable_artists += 1
+        # if num_commitable_artists > 0:
+        #     logging.info(json.dumps(partner, indent=4))
+        #     total_commitable_partners += 1
+        #     logging.info("Commitable partners: " + str(total_commitable_partners) + 
+        #                  "\tartists: " + str(total_commitable_artists) + 
+        #                  "\tartworks: " + str(total_commitable_artworks))
 
-def partner_scrape(session, partner_id):
+def specific_partner_scrape(session, partner_id):
     """
     Given an Artsy partner id (or slug), scrapes that partner.
     """
@@ -49,7 +51,9 @@ def partner_scrape(session, partner_id):
     profile = get_partner_profile(session, partner)
     if not meets_gallery_requirement(partner, profile):
         return
+    partner_scrape(session, partner, profile)
 
+def partner_scrape(session, partner, profile):
     artist_page = get_artists_from_partner(session, partner)
     artist_ids = []
     gallery_artwork_ids = []
@@ -61,17 +65,16 @@ def partner_scrape(session, partner_id):
         for artwork in iterate_over_artworks(session, artwork_page):
             #for every good artwork
             id = db.add_artwork(artwork)
-            if id > 0:
+            if id >= 0:
                 artist_artwork_ids.append(id)
                 gallery_artwork_ids.append(id)
         if len(artist_artwork_ids) > 0:
             id = db.add_artist(artist, artist_artwork_ids)
-            if id > 0:
+            if id >= 0:
                 artist_ids.append(id)
     if len(artist_ids) > 0:
         id = db.add_gallery(partner, profile, artist_ids, gallery_artwork_ids)
             
-
 
 def get_artsy_partners(session):
     r = session.get(ARTSY_BASE_URL + "/partners")
@@ -130,7 +133,7 @@ def get_next_artwork_page(session, current_page):
 
 def iterate_over_partners(session, partners_page):
     i = 0
-    while partners_page and i < 100:
+    while partners_page and i < PARTNER_PAGE_LIMIT:
         #iterate through pages
         time.sleep(1)
         logging.info(i) 
@@ -200,6 +203,10 @@ def meets_artist_requirements(artist):
         return False
     if not "_links" in artist:
         return False
+
+    links = artist["_links"]    
+    if "thumbnail" not in links or "image" not in links or "artworks" not in links:
+        return False    
     if artist["_links"]["thumbnail"]["href"] == "" or artist["_links"]["image"]["href"] == "":
         return False
     if artist["_links"]["artworks"]["href"] == "":
@@ -241,14 +248,25 @@ def meets_gallery_requirement(partner, profile):
     return True
 
 PARTNER_IDS = [
-    "belvedere-museum",
-    "national-gallery-of-art-washington-dc",
-    "the-metropolitan-museum-of-art",
+    #nothing
+    "taipei-fine-arts-museum",
+    "zeitz-mocaa",
+    "madison-square-park",
+    "shen-wei-studio",
+    "robert-rauschenberg-foundation",
+    "musee-picasso-paris",
+    #tiny
+    "the-national-museum-of-modern-art-tokyo",
+    #medium
     "musee-dorsay",
-    "getty-research-institute",
     "san-francisco-museum-of-modern-art-sfmoma",
-    "art-institute-of-chicago",
+    #big
+    "getty-research-institute",
+    "belvedere-museum",
     "blanton-museum-of-art",
+    "art-institute-of-chicago",
+    "the-metropolitan-museum-of-art",
+    "national-gallery-of-art-washington-dc",
 ]
 
 if __name__ == "__main__":
@@ -261,7 +279,8 @@ if __name__ == "__main__":
 
     with requests.Session() as session:
         session.headers = {"X-Xapp-Token": ARTSY_TOKEN}
-        partner_scrape(session, PARTNER_IDS[0])
+        specific_partner_scrape(session, PARTNER_IDS[8])
+        #specific_partner_scrape(session, PARTNER_IDS[6])
     db.commit()
 
     db.test()

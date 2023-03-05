@@ -49,12 +49,16 @@ def db_init():
     artwork_table = Table(
         "artwork",
         metadata,
+        #We might not actually need the artwork to know about its artist id
+        #or gallery id. Since the relationships are defined in separate tables
+        #they can be found using the artwork id. This does mean an extra query
+        #from the database though when we want to know the painter or gallery
         Column("id", Integer, primary_key=True, autoincrement=True),
+        Column("artist_id", Integer, ForeignKey("artist.id"), nullable=False),
+        Column("gallery_id", Integer, ForeignKey("gallery.id"), nullable=False),
         #It is possible that the title could be the same for some works,
         #we may consider removing this unique constraint. If we never
         #get duplicate artists, we will never see duplicate artworks.
-        Column("artist_id", Integer, ForeignKey("artist.id") nullable=False),
-        Column("gallery_id", Integer, ForeignKey("gallery.id"), nullable=False),
         Column("title", String, unique=True, nullable=False),
         Column("date", String, nullable=False),
         Column("medium", String, nullable=False),
@@ -122,8 +126,6 @@ def add_gallery(gallery, profile, artist_ids, artwork_ids):
 
         return id
     except IntegrityError:
-        #get gallery id
-        #add relationships
         return -1
     
 
@@ -141,7 +143,7 @@ def add_artist(artist, artwork_ids):
         death_year = artist["deathday"],
         thumbnail = artist["_links"]["thumbnail"]["href"],
         num_artworks = 0,
-        num_galleries = 0 #TODO:
+        num_galleries = 0
     )
 
     try:
@@ -161,6 +163,9 @@ def add_artist(artist, artwork_ids):
             add_artist_artwork_rel(id, work_id)
         
         if len(artwork_ids) > 0:
+            #If the duplicate artist has unique works found, that means that
+            #this gallery should try to relate to the artist. Is this what we
+            #want?
             return id    
         return -1
 
@@ -171,8 +176,8 @@ def add_artwork(artwork):
     returns: positive work id or -1 if the work was not inserted 
     """
     s = insert(artwork_table).values(
-        artist_id = ,
-        gallery_id = ,
+        artist_id = 0,
+        gallery_id = 0,
         image = artwork["_links"]["thumbnail"]["href"],
         title= artwork["title"],
         date = artwork["date"],
@@ -197,8 +202,8 @@ def add_gallery_artist_rel(gallery_id, artist_id):
 
     conn.execute(i)
     #increment the num_galleries field of the artist
-
     update_num_galleries_of_artist(artist_id)
+
 
 def update_num_galleries_of_artist(artist_id):
     #select the artist and get the previous num_galleries
@@ -259,19 +264,37 @@ def test():
     s_artist = select(artist_table)
     s_galleries = select(gallery_table)
     s_artworks = select(artwork_table)
+    s_art_gallery = select(gallery_artwork_rel_table)
+    s_gallery_artist = select(gallery_artist_rel_table)
+    s_artist_art = select(artist_artwork_rel_table)
 
     artworks = conn.execute(s_artworks)
     galleries = conn.execute(s_galleries)
     artists = conn.execute(s_artist)
+    g_a_rel =  conn.execute(s_art_gallery)
+    g_artist_rel = conn.execute(s_gallery_artist)
+    a_a_rel = conn.execute(s_artist_art)
 
-    print("----------Artworks----------")
+    print("----------Artworks-----------")
     for artwork in artworks:
         print(artwork)
     
-    print("----------Artists-----------")
+    print("----------Artists------------")
     for artists in artists:
         print(artists)
 
-    print("----------Galleries---------")
+    print("----------Galleries----------")
     for gallery in galleries:
         print(gallery)
+
+    print("-Gallery Artwork Relationship-")
+    for rel in g_a_rel:
+        print(rel)
+
+    print("------Gallery Artist Rel-----")
+    for rel in g_artist_rel:
+        print(rel)
+    
+    print("------Artist Artwork Rel-----")
+    for rel in a_a_rel:
+        print(rel)
