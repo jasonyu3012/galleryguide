@@ -104,7 +104,7 @@ const sources = [
         link: "https://www.artic.edu/open-access/public-api"     
     },
     {
-        name: "Art Institute of Chicago Public API",
+        name: "Artsy API",
         description: "API used for gathering gallery data",
         // image: "./toolsPic/wgerLogo.png",
         link: "https://developers.artsy.net/v2/docs/partners"     
