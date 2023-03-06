@@ -17,7 +17,6 @@ def serve(path):
 
 @app.route("/api/galleries")
 def gallery_endpoint():
-    #pagination handled here by ? parameter
     page_num = 1
     if request.args.get("page"):
         page_num = int(request.args.get("page"))
@@ -30,31 +29,29 @@ def gallery_endpoint():
         #Do something, probably out of galleries
         return
     
-    #handle whatever this returns, make it json or something
-    #then return it
+    
     next_url = "galleryguide.me/api/galleries?page=" + str((end_id // PAGE_SIZE) + 1)
     json = {"size": 0, "next": next_url, "galleries": []}
     for gallery in rows:
-        #does it do it recursivley?
         json["galleries"].append(gallery._asdict())
+    
     json["size"] = len(json["galleries"])
-    #Flask takes a returned python dict and converts it to
-    #a proper json format. 
-    # https://stackoverflow.com/questions/13081532/return-json-response-from-flask-view
+    if json["size"] == 0:
+        json["next"] = ""
+
     return json
 
-@app.route("/api/galleries/<int: id>")
+@app.route("/api/galleries/<int:id>")
 def gallery_id_endpoint(id):
     rows = model.get_gallery(id)
     if rows is None:
         #Do something, probably got bad id
-        return
+        return "Bad gallery ID", 400
     
-    #handle and reutrn
     gallery = rows.first()
     if gallery is None:
         #Do something, probably got bad id
-        return
+        return "Bad gallery ID", 400
 
     return gallery._asdict()
 
@@ -64,23 +61,26 @@ def artist_endpoint():
     if request.args.get("page"):
         page_num = int(request.args.get("page"))
 
-    rows = model.get_artist_page(page_num)
+    start_id = ((page_num - 1) * PAGE_SIZE) + 1
+    end_id = start_id + PAGE_SIZE - 1  
+    
+    rows = model.get_artist_page(start_id, end_id)
     if rows is None:
         #database error
         return
 
-    start_id = ((page_num - 1) * PAGE_SIZE) + 1
-    end_id = start_id + PAGE_SIZE - 1  
-    
     next_url = "galleryguide.me/api/artists?page=" + str((end_id // PAGE_SIZE) + 1)
     json = {"size": 0, "next": next_url, "artists": []}
     for artist in rows:
         json["artists"].append(artist._asdict())
-    json["size"] = len(json["artists"])
     
+    json["size"] = len(json["artists"])
+    if json["size"] == 0:
+        json["next"] = ""
+
     return json
 
-@app.route("/api/artists/<int: id>")
+@app.route("/api/artists/<int:id>")
 def artist_id_endpoint(id):
     rows = model.get_artist(id)
     if rows is None:
@@ -91,10 +91,10 @@ def artist_id_endpoint(id):
     artist = rows.first()
     if artist is None:
         #Do something, probably got bad id
-        return
+        return "Bad artist ID", 400
 
     return artist._asdict()
-    pass
+
 
 @app.route("/api/artworks")
 def artwork_endpoint():
@@ -102,23 +102,26 @@ def artwork_endpoint():
     if request.args.get("page"):
         page_num = int(request.args.get("page"))
     
-    rows = model.get_artwork_page(page_num)
+    start_id = ((page_num - 1) * PAGE_SIZE) + 1
+    end_id = start_id + PAGE_SIZE - 1
+    
+    rows = model.get_artwork_page(start_id, end_id)
     if rows is None:
         #Database error
         return
-    
-    start_id = ((page_num - 1) * PAGE_SIZE) + 1
-    end_id = start_id + PAGE_SIZE - 1
 
     next_url = "galleryguide.me/api/artworks?page=" + str((end_id // PAGE_SIZE) + 1)
     json = {"size": 0, "next": next_url, "artworks": []}
     for artist in rows:
         json["artworks"].append(artist._asdict())
+    
     json["size"] = len(json["artworks"])
+    if json["size"] == 0:
+        json["next"] = ""
     
     return json
 
-@app.route("/api/artworks/<int: id>")
+@app.route("/api/artworks/<int:id>")
 def artwork_id_endpoint(id):
     rows = model.get_artwork(id)
     if rows is None:
@@ -129,7 +132,7 @@ def artwork_id_endpoint(id):
     artwork = rows.first()
     if artwork is None:
         #Do something, probably got bad id
-        return
+        return "Bad artwork ID", 400
 
     return artwork._asdict()
 

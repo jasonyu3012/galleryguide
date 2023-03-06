@@ -158,7 +158,7 @@ def get_artist_artwork_pair():
     return (lucky_artist, lucky_artwork)
 
 
-def db_init():
+def db_init(db_string, echo):
     """
     Initializes the database tables and stuff
     """
@@ -166,7 +166,7 @@ def db_init():
     metadata = MetaData()
 
     global engine
-    engine = create_engine("sqlite+pysqlite:///:memory:", echo=True, future=True)
+    engine = create_engine(db_string, echo=echo, future=True)
 
     """
     TODO: Add all necessary elements, just testing these for now.
@@ -252,3 +252,48 @@ def db_init():
     conn = engine.connect()
 
 
+def setup_test_db():
+    db_init("sqlite+pysqlite:///:memory:", False)
+
+    i = insert(gallery_table).values(
+        name = "Test Gallery",
+        region = "Antarctica",
+        description = "Fake gallery.",
+        thumbnail = "link",
+        website = "link",
+        num_artworks = 1,
+        num_artists = 1,
+    )
+    conn.execute(i)
+
+    i = insert(artist_table).values(
+        name = "Artist Name",
+        biography = "Not interesting.",
+        birth_year = 0,
+        death_year = 10,
+        thumbnail = "link",
+        num_artworks = 1,
+        num_galleries = 1,
+    )
+    conn.execute(i)
+
+    i = insert(artwork_table).values(
+        artist_id = 1,
+        gallery_id = 1,
+        title = "Artwork",
+        date = "2",
+        medium = "Dirt.",
+        iconicity = 1.23534,
+        image_rights = "Do whatever you want with it.",
+        image = "link",
+    )
+    conn.execute(i)
+
+    i = insert(gallery_artist_rel_table).values(gallery_id = 1, artist_id = 1)
+    conn.execute(i)
+
+    i = insert(gallery_artwork_rel_table).values(gallery_id = 1, artwork_id = 1)
+    conn.execute(i)
+
+    i = insert(artist_artwork_rel_table).values(artist_id = 1, artwork_id = 1)
+    conn.execute(i)
