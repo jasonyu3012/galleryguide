@@ -13,9 +13,6 @@ def brute_force_scrape(session):
     partners = get_artsy_partners(session)
 
     partner_page = partners
-    total_commitable_partners = 0
-    total_commitable_artists = 0
-    total_commitable_artworks = 0
     for partner in iterate_over_partners(session, partner_page):
         #for every good partner
         profile = get_partner_profile(partner)
@@ -54,6 +51,7 @@ def specific_partner_scrape(session, partner_id):
     partner_scrape(session, partner, profile)
 
 def partner_scrape(session, partner, profile):
+    time.sleep(1)
     artist_page = get_artists_from_partner(session, partner)
     artist_ids = []
     gallery_artwork_ids = []
@@ -215,7 +213,7 @@ def meets_artist_requirements(artist):
 
 def try_wiki_for_bio(artist):
     wiki_summary = wiki_scrape.get_page_summary(artist["name"])
-    if "extract" in wiki_summary:
+    if "extract" in wiki_summary and wiki_summary["extract"] != None and wiki_summary["extract"] != "":
         artist["biography"] = wiki_summary["extract"]
         return True
     return False
@@ -279,8 +277,7 @@ if __name__ == "__main__":
 
     with requests.Session() as session:
         session.headers = {"X-Xapp-Token": ARTSY_TOKEN}
-        specific_partner_scrape(session, PARTNER_IDS[8])
-        #specific_partner_scrape(session, PARTNER_IDS[6])
-    db.commit()
-
-    db.test()
+        for partner in PARTNER_IDS:
+            specific_partner_scrape(session, partner)
+            db.commit()
+            db.test()

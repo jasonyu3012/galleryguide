@@ -49,11 +49,11 @@ def db_init():
     artwork_table = Table(
         "artwork",
         metadata,
+        Column("id", Integer, primary_key=True, autoincrement=True),
         #We might not actually need the artwork to know about its artist id
         #or gallery id. Since the relationships are defined in separate tables
         #they can be found using the artwork id. This does mean an extra query
         #from the database though when we want to know the painter or gallery
-        Column("id", Integer, primary_key=True, autoincrement=True),
         Column("artist_id", Integer, ForeignKey("artist.id"), nullable=False),
         Column("gallery_id", Integer, ForeignKey("gallery.id"), nullable=False),
         #It is possible that the title could be the same for some works,
@@ -261,6 +261,7 @@ def commit():
     conn.commit()
 
 def test():
+    print("---------------------Database Dump-------------------")
     s_artist = select(artist_table)
     s_galleries = select(gallery_table)
     s_artworks = select(artwork_table)

@@ -3,7 +3,7 @@
 Used to test endpoints of APIs
 ## Gitlab
 Used for hosting code
-## PlantUML
+## PlantUML and PlantText
 Used to create database diagram
 
 ---
