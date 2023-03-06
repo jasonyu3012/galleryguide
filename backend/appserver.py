@@ -6,14 +6,13 @@ import model
 
 app = Flask(__name__, static_folder='build', static_url_path='/')
 PAGE_SIZE = 9
-"""
-Redirects urls with no routes back to the react-router in index.html
-"""
 
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def serve(path):
-    print("serve")
+    """
+    Redirects urls with no routes back to the react-router in index.html
+    """
     return app.send_static_file('index.html')
 
 @app.route("/api/galleries")
@@ -37,7 +36,7 @@ def gallery_endpoint():
     json = {"size": 0, "next": next_url, "galleries": []}
     for gallery in rows:
         #does it do it recursivley?
-        json["galleries"].append(dict(gallery))
+        json["galleries"].append(gallery._asdict())
     json["size"] = len(json["galleries"])
     #Flask takes a returned python dict and converts it to
     #a proper json format. 
@@ -57,7 +56,7 @@ def gallery_id_endpoint(id):
         #Do something, probably got bad id
         return
 
-    return dict(gallery)
+    return gallery._asdict()
 
 @app.route("/api/artists")
 def artist_endpoint():
@@ -76,7 +75,7 @@ def artist_endpoint():
     next_url = "galleryguide.me/api/artists?page=" + str((end_id // PAGE_SIZE) + 1)
     json = {"size": 0, "next": next_url, "artists": []}
     for artist in rows:
-        json["artists"].append(dict(artist))
+        json["artists"].append(artist._asdict())
     json["size"] = len(json["artists"])
     
     return json
@@ -94,7 +93,7 @@ def artist_id_endpoint(id):
         #Do something, probably got bad id
         return
 
-    return dict(artist)
+    return artist._asdict()
     pass
 
 @app.route("/api/artworks")
@@ -114,7 +113,7 @@ def artwork_endpoint():
     next_url = "galleryguide.me/api/artworks?page=" + str((end_id // PAGE_SIZE) + 1)
     json = {"size": 0, "next": next_url, "artworks": []}
     for artist in rows:
-        json["artworks"].append(dict(artist))
+        json["artworks"].append(artist._asdict())
     json["size"] = len(json["artworks"])
     
     return json
@@ -132,7 +131,7 @@ def artwork_id_endpoint(id):
         #Do something, probably got bad id
         return
 
-    return dict(artwork)
+    return artwork._asdict()
 
 @app.route("/api/spotlight")
 def spotlight_endpoint():
@@ -141,7 +140,7 @@ def spotlight_endpoint():
         #Database error, do something
         return
     
-    return {"artist": dict(artist_artwork_pair[0]), "artwork": dict(artist_artwork_pair[1])}
+    return {"artist": artist_artwork_pair[0]._asdict(), "artwork": artist_artwork_pair[1]._asdict()}
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
