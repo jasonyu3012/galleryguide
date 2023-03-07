@@ -17,28 +17,6 @@ def brute_force_scrape(session):
         #for every good partner
         profile = get_partner_profile(partner)
         partner_scrape(session, partner, profile)
-        # num_commitable_artists = 0
-        # artist_page = get_artists_from_partner(session, partner)
-        # for artist in iterate_over_artists(session, artist_page):
-        #     #for every good artist
-        #     num_commitable_artworks = 0
-        #     time.sleep(.5)
-        #     artwork_page = get_artworks_from_artist(session, artist)
-        #     for artwork in iterate_over_artworks(session, artwork_page):
-        #         #for every good artwork
-        #         logging.info(json.dumps(artwork, indent=4))
-        #         num_commitable_artworks += 1
-        #         total_commitable_artworks += 1
-        #     if num_commitable_artworks > 0:
-        #         logging.info(json.dumps(artist, indent=4))
-        #         num_commitable_artists += 1
-        #         total_commitable_artists += 1
-        # if num_commitable_artists > 0:
-        #     logging.info(json.dumps(partner, indent=4))
-        #     total_commitable_partners += 1
-        #     logging.info("Commitable partners: " + str(total_commitable_partners) + 
-        #                  "\tartists: " + str(total_commitable_artists) + 
-        #                  "\tartworks: " + str(total_commitable_artworks))
 
 def specific_partner_scrape(session, partner_id):
     """
@@ -81,6 +59,7 @@ def get_artsy_partners(session):
 
 def get_partner_profile(session, partner):
     try:
+        print(partner)
         r = session.get(partner["_links"]["profile"]["href"])
         json = r.json()
         if r.status_code >= 400:
@@ -235,12 +214,15 @@ def meets_gallery_requirement(partner, profile):
     if "_links" not in partner:
         return False
     links = partner["_links"]
+    profile_links = profile["_links"]
     if "website" not in links:
-        return False
+        if "website" in profile_links and profile_links["website"]["href"] != "" and profile_links["website"]["href"] != None:
+            partner["_links"]["website"]["href"] = profile_links["website"]["href"]
+        else:
+            return False
     if "artists" not in links:
         return False
     
-    profile_links = profile["_links"]
     if "thumbnail" not in profile_links:
         return False
     return True
@@ -277,7 +259,8 @@ if __name__ == "__main__":
 
     with requests.Session() as session:
         session.headers = {"X-Xapp-Token": ARTSY_TOKEN}
-        for partner in PARTNER_IDS:
-            specific_partner_scrape(session, partner)
-            db.commit()
-            db.test()
+        specific_partner_scrape(session, PARTNER_IDS[9])
+        #for partner in PARTNER_IDS:
+        #    specific_partner_scrape(session, partner)
+        #    db.commit()
+        #    db.test()
