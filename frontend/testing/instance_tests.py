@@ -20,17 +20,17 @@ class Test(unittest.TestCase):
   def tearDownClass(self):
     self.driver.quit()
 
-  def test_job(self):
-    self.driver.get(URL + "jobs")
-    self.assertEqual(self.driver.current_url, URL + "jobs")
+  def test_galleries(self):
+    self.driver.get(URL + "galleries")
+    self.assertEqual(self.driver.current_url, URL + "galleries")
   
-  def test_city(self):
-    self.driver.get(URL + "cities")
-    self.assertEqual(self.driver.current_url, URL + "cities")
+  def test_artists(self):
+    self.driver.get(URL + "artists")
+    self.assertEqual(self.driver.current_url, URL + "artists")
 
-  def test_apartment(self):
-    self.driver.get(URL + "apartments")
-    self.assertEqual(self.driver.current_url, URL + "apartments")
+  def test_artworks(self):
+    self.driver.get(URL + "artworks")
+    self.assertEqual(self.driver.current_url, URL + "artworks")
 
 if __name__ == '__main__':
     unittest.main()

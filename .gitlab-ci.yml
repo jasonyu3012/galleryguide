@@ -5,7 +5,7 @@ stages:
     - test
     - deploy
 
-# I'm not entirely sure about this, but it might be necessary for dependencies
+# store files so it doesn't have to redownload it every time.
 cache:
     paths:
         - frontend/node_modules/
@@ -37,7 +37,7 @@ test-frontent-gui:
   script:
   - cd frontend
   - pip install --upgrade pip
-  - pip install --no-cache-dir -r ./flow_tests/requirements.txt
+  - pip install --no-cache-dir -r ./testing/requirements.txt
   - apt-get update -q -y
   - apt-get --yes install libnss3
   - apt-get --yes install libgconf-2-4
