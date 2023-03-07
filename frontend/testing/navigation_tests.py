@@ -31,7 +31,7 @@ class Test(unittest.TestCase):
     self.driver.quit()
 
   def test_Brand(self):
-    element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand') # TODO change this
+    element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand')
     element.click()
     self.assertEqual(self.driver.current_url, URL)
 
@@ -39,21 +39,21 @@ class Test(unittest.TestCase):
   # TODO test splash
   def test_Home(self):
     try:
-      WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-brand'))) # TODO change this
-      element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand') # TODO change this
+      WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-brand')))
+      element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand')
       element.click()
     except Exception as ex:
       print("Couldn't find navbar brand: " + str(ex))
 
     try:
-      WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-toggler'))) # TODO change this
-      element = self.driver.find_element(By.CLASS_NAME, 'navbar-toggler') # TODO change this
+      WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-toggler')))
+      element = self.driver.find_element(By.CLASS_NAME, 'navbar-toggler')
       element.click()
     except Exception as ex:
       print("Couldn't find navbar: " + str(ex))
     
     try:
-      WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/nav/div/div/div/a[1]'))) # TODO change this
+      WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/nav/div/div/div/a[1]')))
       element = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/nav/div/div/div/a[1]')
       element.click()
     except Exception as ex:
@@ -88,8 +88,8 @@ class Test(unittest.TestCase):
     self.assertEqual(self.driver.current_url, URL + "about")
 
 
-  # TODO test artists
-  def test_Jobs(self):
+  # TODO
+  def test_Artworks(self):
     try:
       WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-brand')))
       element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand')
@@ -111,11 +111,11 @@ class Test(unittest.TestCase):
     except Exception as ex:
       print("Couldn't find About link: " + str(ex))
 
-    self.assertEqual(self.driver.current_url, URL + "jobs")
+    self.assertEqual(self.driver.current_url, URL + "artworks")
 
 
-  # TODO test artworks
-  def test_Cities(self):
+  # TODO
+  def test_Artists(self):
     try:
       WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-brand')))
       element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand')
@@ -137,11 +137,11 @@ class Test(unittest.TestCase):
     except Exception as ex:
       print("Couldn't find About link: " + str(ex))
 
-    self.assertEqual(self.driver.current_url, URL + "cities")
+    self.assertEqual(self.driver.current_url, URL + "artists")
 
 
-  # TODO test galleries
-  def test_Apartments(self):
+  # TODO
+  def test_Galleries(self):
     try:
       WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-brand')))
       element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand')
@@ -163,7 +163,7 @@ class Test(unittest.TestCase):
     except Exception as ex:
       print("Couldn't find About link: " + str(ex))
 
-    self.assertEqual(self.driver.current_url, URL + "apartments")
+    self.assertEqual(self.driver.current_url, URL + "galleries")
 
 if __name__ == '__main__':
     unittest.main()
