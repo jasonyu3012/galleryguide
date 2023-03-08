@@ -11,7 +11,7 @@ def db_init():
     metadata = MetaData()
 
     global engine
-    engine = create_engine("postgresql://ubuntu:iluvgalleryguide123@localhost:5432/ggdb", echo=True, future=True)
+    engine = create_engine("sqlite://", echo=True, future=True)
 
     """
     TODO: Add all necessary elements, just testing these for now.
@@ -54,8 +54,8 @@ def db_init():
         #or gallery id. Since the relationships are defined in separate tables
         #they can be found using the artwork id. This does mean an extra query
         #from the database though when we want to know the painter or gallery
-        Column("artist_id", Integer, ForeignKey("artist.id"), nullable=False),
-        Column("gallery_id", Integer, ForeignKey("gallery.id"), nullable=False),
+        Column("artist_id", Integer, nullable=False),
+        Column("gallery_id", Integer, nullable=False),
         #It is possible that the title could be the same for some works,
         #we may consider removing this unique constraint. If we never
         #get duplicate artists, we will never see duplicate artworks.
@@ -71,24 +71,24 @@ def db_init():
     gallery_artist_rel_table = Table(
         "gallery artist relationship",
         metadata,
-        Column("gallery_id", Integer, ForeignKey("gallery.id"), nullable=False),
-        Column("artist_id", Integer, ForeignKey("artist.id"), nullable=False),
+        Column("gallery_id", Integer, nullable=False),
+        Column("artist_id", Integer, nullable=False),
     )
 
     global gallery_artwork_rel_table
     gallery_artwork_rel_table = Table(
         "gallery artwork relationship",
         metadata,
-        Column("gallery_id", Integer, ForeignKey("gallery.id"), nullable=False),
-        Column("artwork_id", Integer, ForeignKey("artwork.id"), nullable=False),
+        Column("gallery_id", Integer, nullable=False),
+        Column("artwork_id", Integer, nullable=False),
     )
 
     global artist_artwork_rel_table
     artist_artwork_rel_table = Table(
         "artist artwork relationship",
         metadata,
-        Column("artist_id", Integer, ForeignKey("artist.id"), nullable=False),
-        Column("artwork_id", Integer, ForeignKey("artwork.id"), nullable=False),
+        Column("artist_id", Integer, nullable=False),
+        Column("artwork_id", Integer, nullable=False),
     )
 
     metadata.create_all(engine)
