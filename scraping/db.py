@@ -125,7 +125,8 @@ def add_gallery(gallery, profile, artist_ids, artwork_ids):
             add_gallery_artist_rel(id, artist_id)
         conn.commit()
         return id
-    except IntegrityError:
+    except:
+        conn.rollback()
         return -1
     
 
@@ -153,7 +154,8 @@ def add_artist(artist, artwork_ids):
             add_artist_artwork_rel(id, work_id)
         conn.commit()
         return id
-    except IntegrityError:
+    except:
+        conn.rollback()
         #get artist id from database
         rows = select(artist_table.c.id).where(artwork_table.c.name == artist["name"])
         print(rows)
@@ -204,7 +206,7 @@ def add_gallery_artist_rel(gallery_id, artist_id):
     )
 
     conn.execute(i)
-    commit()
+    conn.commit()
     #increment the num_galleries field of the artist
     update_num_galleries_of_artist(artist_id)
 

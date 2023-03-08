@@ -267,8 +267,8 @@ if __name__ == "__main__":
 
     with requests.Session() as session:
         session.headers = {"X-Xapp-Token": ARTSY_TOKEN}
-        specific_partner_scrape(session, PARTNER_IDS[5])
-        #for partner in PARTNER_IDS:
-        #    specific_partner_scrape(session, partner)
+        #specific_partner_scrape(session, PARTNER_IDS[6])
+        for partner in PARTNER_IDS:
+            specific_partner_scrape(session, partner)
         db.commit()
         db.test()
