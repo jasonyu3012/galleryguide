@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import './Artists.css';
 
 const Artists = () => {
   return (

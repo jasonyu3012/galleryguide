@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import AmericanGothic from '../images/AmericanGothic.jpg'
 import GirlInChair from '../images/LittleGirlInABlueArmchair.jpg'
 import WheatField from '../images/WheatFieldWithCypresses.jpg'
+import './Artworks.css';
 
 const Artworks = () => {
   return (
