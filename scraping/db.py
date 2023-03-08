@@ -194,7 +194,8 @@ def add_artwork(artwork):
         result = conn.execute(s)
         conn.commit()
         return result.inserted_primary_key[0]
-    except:
+    except BaseException as E:
+        print(E)
         conn.rollback()
         return -1    
 
@@ -244,7 +245,7 @@ def add_artist_artwork_rel(artist_id, artwork_id):
 
     conn.execute(i)
     conn.commit()
-    #increment the num_galleries field of the artist
+    #increment the num_artworks field of the artist
     update_num_artworks_of_artist(artist_id)
 
     #could set artwork's artist id here
@@ -266,6 +267,12 @@ def update_num_artworks_of_artist(artist_id):
 
 def commit():
     conn.commit()
+
+def artwork_present(artwork_title):
+    s = select(artwork_table).where(artwork_table.title==artwork_title)
+    result = conn.execute(s).fetchone()
+
+    return result is not None
 
 def test():
     print("---------------------Database Dump-------------------")

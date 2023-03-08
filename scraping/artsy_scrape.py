@@ -155,6 +155,8 @@ def meets_artwork_requirements(artwork):
         return False
     if not "_links" in artwork:
         return False
+    if db.artwork_present(artwork["title"]):
+        return False
     
     links = artwork["_links"]
     if "thumbnail" not in links or "image" not in links:
