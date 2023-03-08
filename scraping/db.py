@@ -269,7 +269,7 @@ def commit():
     conn.commit()
 
 def artwork_present(artwork_title):
-    s = select(artwork_table).where(artwork_table.title==artwork_title)
+    s = select(artwork_table).where(artwork_table.c.title==artwork_title)
     result = conn.execute(s).fetchone()
 
     return result is not None
