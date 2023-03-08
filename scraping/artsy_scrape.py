@@ -173,8 +173,16 @@ def meets_artist_requirements(artist):
             return False
         logging.info("Added bio from wiki")            
     if not "birthday" in artist or artist["birthday"] == "":
+        try:
+            int(artist["deathday"])
+        except:
+            return False
         return False
-    if "deathday" not in artist or artist["deathday"] == "":
+    if "deathday" not in artist or artist["deathday"] == "" or artist["deathday"]:
+        try:
+            int(artist["deathday"])
+        except:
+            return False
         artist["deathday"] = None
     if not "hometown" in artist or artist["hometown"] == "" or artist["hometown"] == None:
         return False
