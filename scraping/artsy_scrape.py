@@ -171,19 +171,22 @@ def meets_artist_requirements(artist):
     if not "biography" in artist or artist["biography"] == "" or artist["biography"] == None:
         if not try_wiki_for_bio(artist):
             return False
-        logging.info("Added bio from wiki")            
-    if not "birthday" in artist or artist["birthday"] == "":
-        try:
-            int(artist["deathday"])
-        except:
-            return False
+        logging.info("Added bio from wiki") 
+
+    if "birthday" not in artist or artist["birthday"] == "" or artist["birthday"] == None:
         return False
-    if "deathday" not in artist or artist["deathday"] == "" or artist["deathday"]:
+    try:
+        int(artist["birthday"])
+    except:
+        return False
+
+    if "deathday" not in artist or artist["deathday"] == "" or artist["deathday"] == None:
+        artist["deathday"] = None
+    else :
         try:
             int(artist["deathday"])
         except:
             return False
-        artist["deathday"] = None
     if not "hometown" in artist or artist["hometown"] == "" or artist["hometown"] == None:
         return False
     if not "_links" in artist:
