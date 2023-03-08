@@ -2,6 +2,7 @@ from sqlalchemy import MetaData, create_engine
 from sqlalchemy import Table, Column, Integer, String, Float, ForeignKey
 from sqlalchemy import insert, select, update, func
 import random
+
 """
 This is where our database code goes. 
 Controller (appserver.py) calls this.
@@ -162,7 +163,6 @@ def db_init(db_string, echo):
     """
     Initializes the database tables and stuff
     """
-    global metadata_obj
     metadata = MetaData()
 
     global engine
@@ -245,8 +245,6 @@ def db_init(db_string, echo):
         Column("artist_id", Integer, ForeignKey("artist.id"), nullable=False),
         Column("artwork_id", Integer, ForeignKey("artwork.id"), nullable=False),
     )
-
-    metadata.create_all(engine)
 
     global conn
     conn = engine.connect()

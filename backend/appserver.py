@@ -2,9 +2,26 @@ import re
 from typing import ParamSpec
 from flask import Flask, request
 from flask.helpers import send_from_directory
+# from flask_sqlalchemy import SQLAlchemy
+import os
 import model
 
 app = Flask(__name__, static_folder='build', static_url_path='/')
+
+# check for environment variable
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
+
+dialect = "postgresql"
+driver = "psycopg2"
+# app.config["SQLALCHEMY_DATABASE_URI"] = dialect + '+' + driver + "://" + os.getenv("DATABASE_URL")
+# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# db = SQLAlchemy(app)
+# conn = db.make_connector()
+
+model.db_init(dialect + "+" + driver + "://" + os.getenv("DATABASE_URL"), echo=False)
+
 PAGE_SIZE = 9
 
 @app.route("/", defaults={"path": ""})
