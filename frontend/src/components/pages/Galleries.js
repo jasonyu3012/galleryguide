@@ -3,6 +3,9 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import METMuseum from '../images/METMuseum.jpg'
+import NationalGalleryofArt from '../images/NationalGalleryofArt.jpg'
+import ArtInstituteofChicago from '../images/ArtInstituteofChicago.jpg'
 
 const Galleries = () => {
   return (
@@ -12,7 +15,7 @@ const Galleries = () => {
       <CardGroup>
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
           {/* add in image! */}
-          <Card.Img variant="top" src=''/>
+          <Card.Img variant="top" src={ArtInstituteofChicago}/>
           <Card.Body>
             <Card.Title>Art Institute of Chicago</Card.Title>
             <Card.Text>
@@ -26,7 +29,7 @@ const Galleries = () => {
 
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
           {/* add in image! */}
-          <Card.Img variant="top" src=''/>
+          <Card.Img variant="top" src={METMuseum}/>
           <Card.Body>
             <Card.Title>MET Museum</Card.Title>
             <Card.Text>
@@ -40,7 +43,7 @@ const Galleries = () => {
 
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
           {/* add in image! */}
-          <Card.Img variant="top" src=''/>
+          <Card.Img variant="top" src={NationalGalleryofArt}/>
           <Card.Body>
             <Card.Title>National Gallery of Art</Card.Title>
             <Card.Text>

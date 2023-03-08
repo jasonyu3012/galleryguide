@@ -4,6 +4,9 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import './Artists.css';
+import GrantWood from '../images/GrantWood.jpg'
+import VanGogh from '../images/VanGogh.jpg'
+import MaryCassatt from '../images/MaryCassatt.jpg'
 
 const Artists = () => {
   return (
@@ -13,7 +16,7 @@ const Artists = () => {
       <CardGroup>
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
           {/* add in image! */}
-          <Card.Img variant="top" src=''/>
+          <Card.Img variant="top" src={GrantWood}/>
           <Card.Body>
             <Card.Title>Grant Wood</Card.Title>
             <Card.Text>
@@ -27,7 +30,7 @@ const Artists = () => {
 
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
           {/* add in image! */}
-          <Card.Img variant="top" src=''/>
+          <Card.Img variant="top" src={VanGogh}/>
           <Card.Body>
             <Card.Title>Vincent van Gogh</Card.Title>
             <Card.Text>
@@ -41,7 +44,7 @@ const Artists = () => {
 
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
           {/* add in image! */}
-          <Card.Img variant="top" src=''/>
+          <Card.Img variant="top" src={MaryCassatt}/>
           <Card.Body>
             <Card.Title>Mary Cassatt</Card.Title>
             <Card.Text>
