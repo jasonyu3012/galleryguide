@@ -163,6 +163,7 @@ def db_init(db_string, echo):
     """
     Initializes the database tables and stuff
     """
+    global metadata
     metadata = MetaData()
 
     global engine
@@ -252,7 +253,8 @@ def db_init(db_string, echo):
 
 def setup_test_db():
     db_init("sqlite+pysqlite:///:memory:", False)
-
+    metadata.create_all(engine)
+    
     i = insert(gallery_table).values(
         name = "Test Gallery",
         region = "Antarctica",
