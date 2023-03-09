@@ -9,10 +9,10 @@ import model
 app = Flask(__name__, static_folder='build', static_url_path='/')
 
 # check for environment variable
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
+#if not os.getenv("DATABASE_URL"):
+    #raise RuntimeError("DATABASE_URL is not set")
 
-model.db_init(os.getenv("DATABASE_URL"), echo=False)
+model.db_init('postgresql://ubuntu:iluvgalleryguide123@localhost:5432/ggdb', echo=False)
 # app.config["SQLALCHEMY_DATABASE_URI"] = dialect + '+' + driver + "://" + os.getenv("DATABASE_URL")
 # app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
