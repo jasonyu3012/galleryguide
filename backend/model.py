@@ -118,43 +118,37 @@ def get_artwork(id):
 
 def get_artist_artwork_pair():
     num_artists = 0
-    count_artists = func.count(artist_table.c.id)
     try:
-        #returns int?
-        num_artists = conn.execute(count_artists)
+        num_artists = conn.execute(func.count(artist_table.c.id)).scalar()
     except:
         #Database error
         return ()
     
 
-    lucky_artist_id = random.randrange(1, num_artists)
+    lucky_artist_id = random.randrange(1, num_artists + 1)
 
     s = select(artist_table).where(artist_table.c.id == lucky_artist_id)
-    rows = None
     try:
-        rows = conn.execute(s)
+        lucky_artist = conn.execute(s).fetchone()
     except:
         #Database error
         return ()
 
-    if rows is None:
+    if lucky_artist is None:
         return ()
     
-    lucky_artist = rows.first()
-    num_artworks = lucky_artist["num_artworks"]
-    lucky_artwork_id = random.randrange(1, num_artworks)
+    num_artworks = lucky_artist._get_by_key_impl_mapping("num_artworks")
+    lucky_artwork_id = random.randrange(1, num_artworks + 1)
 
     s = select(artwork_table).where(artwork_table.c.id == lucky_artwork_id)
     try:
-        rows = conn.execute(s)
+        lucky_artwork = conn.execute(s).fetchone()
     except:
         #Database error
         return ()
 
-    if rows is None:
+    if lucky_artwork is None:
         return ()
-
-    lucky_artwork = rows.first()
 
     return (lucky_artist, lucky_artwork)
 
@@ -169,10 +163,7 @@ def db_init(db_string, echo):
     global engine
     engine = create_engine(db_string, echo=echo, future=True)
 
-    """
-    TODO: Add all necessary elements, just testing these for now.
-    Also add nullable=false where possible to the columns
-    """
+
     global gallery_table
     gallery_table = Table(
         "gallery",
@@ -297,3 +288,4 @@ def setup_test_db():
 
     i = insert(artist_artwork_rel_table).values(artist_id = 1, artwork_id = 1)
     conn.execute(i)
+    conn.commit()

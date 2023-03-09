@@ -9,16 +9,11 @@ import model
 app = Flask(__name__, static_folder='build', static_url_path='/')
 
 # check for environment variable
-#if not os.getenv("DATABASE_URL"):
-    #raise RuntimeError("DATABASE_URL is not set")
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
 
-model.db_init('postgresql://ubuntu:iluvgalleryguide123@localhost:5432/ggdb', echo=False)
-# app.config["SQLALCHEMY_DATABASE_URI"] = dialect + '+' + driver + "://" + os.getenv("DATABASE_URL")
-# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-# db = SQLAlchemy(app)
-# conn = db.make_connector()
-
+#Used hardcoded string to deploy on EC2, but I am testing so I am using env variable
+model.db_init(os.getenv("DATABASE_URL"), echo=False)
 
 PAGE_SIZE = 9
 
@@ -154,9 +149,9 @@ def artwork_id_endpoint(id):
 @app.route("/api/spotlight")
 def spotlight_endpoint():
     artist_artwork_pair = model.get_artist_artwork_pair()
-    if len(artist_artwork_pair) == 0:
+    if len(artist_artwork_pair) != 2:
         #Database error, do something
-        return
+        return "Had trouble getting a spotlight pair", 500
     
     return {"artist": artist_artwork_pair[0]._asdict(), "artwork": artist_artwork_pair[1]._asdict()}
 

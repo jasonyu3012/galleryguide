@@ -101,6 +101,16 @@ def test_artowrk_id_with_bad_id(db_init, client):
     assert response.status_code == 400
     assert response.data.decode("utf-8") == "Bad artwork ID"
 
+def test_spotlight(db_init, client):
+    response = client.get("/api/spotlight")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+
+    assert "artist" in data and data["artist"] is not None
+    assert "artwork" in data and data["artwork"] is not None
+
+    assert data["artwork"]["artist_id"] == data["artist"]["id"]
+
 @pytest.fixture
 def db_init():
     model.setup_test_db()
