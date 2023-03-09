@@ -55,7 +55,6 @@ const Galleries = () => {
           </Card.Body>
         </Card>
       </CardGroup>
-
     </div>
   );
 }

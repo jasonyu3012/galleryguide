@@ -10,7 +10,7 @@ import './App.css';
 import About from './components/pages/About';
 import Home from './components/pages/Home';
 import Navigation from './components/Navigation';
-import Artworks from './components/pages/Artworks';
+import Artworks from './components/pages/ArtworksDynamic';
 import Artists from './components/pages/Artists';
 import Galleries from './components/pages/Galleries';
 

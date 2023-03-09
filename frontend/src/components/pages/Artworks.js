@@ -56,6 +56,7 @@ const Artworks = () => {
           </Card.Body>
         </Card>
       </CardGroup>
+
     </div>
   );
 }
