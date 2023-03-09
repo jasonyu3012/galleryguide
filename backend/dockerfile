@@ -1,0 +1,14 @@
+#For creating the backend development environment
+FROM python:3
+
+WORKDIR /usr/app
+
+COPY . .
+
+RUN sudo apt-get update
+
+RUN pip install -r requirements.txt
+
+RUN sudo apt-get -y install nano
+
+ENTRYPOINT ["bash"]
