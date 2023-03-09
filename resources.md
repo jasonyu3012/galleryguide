@@ -3,6 +3,9 @@
 Used to test endpoints of APIs
 ## Gitlab
 Used for hosting code
+## PlantUML and PlantText
+Used to create database diagram
+
 ---
 # API Docs
 ## Artsy
@@ -11,3 +14,5 @@ Used for hosting code
 - https://metmuseum.github.io/#search
 ## Art Institute of Chicago
 - https://api.artic.edu/docs/#quick-start
+## Wikipedia API
+- https://en.wikipedia.org/api/rest_v1/#/

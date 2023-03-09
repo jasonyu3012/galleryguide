@@ -23,6 +23,8 @@ table( Artists ) {
   primary_key( id ): integer
   foreign_key(artwork_ids): list
   foreign_key(gallery_ids): list
+  column(num_artworks): integer
+  column(num_galleries): integer
   column( name ): string 
   column(biography): string
   column(birth_year): integer
@@ -34,6 +36,8 @@ table( Galleries ) {
   primary_key( id ): integer
   foreign_key(artwork_ids): list
   foreign_key(artist_ids): list
+  column(num_artworks): integer
+  column(num_galleries): integer
   column(name): string
   column(location): string 
   column(description): string

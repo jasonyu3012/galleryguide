@@ -1,17 +1,18 @@
-image: node:latest
-
 stages:
     - build
     - test
     - deploy
 
-# store files so it doesn't have to redownload it every time.
+# I'm not entirely sure about this, but it might be necessary for dependencies
 cache:
     paths:
         - frontend/node_modules/
 
 build-frontend:
+    image: node:latest
     stage: build
+    rules:
+        - if: $CI_COMMIT_BRANCH == "main"
     script:
         - cd frontend
         - npm install
@@ -19,6 +20,27 @@ build-frontend:
         - CI=false npm run-script build
         - echo "built frontend"
 
+dev-test-api:
+    image: python:3.10
+    stage: test
+    rules:
+        - if: $CI_COMMIT_BRANCH == "development"
+    script:
+        - cd backend
+        - pip install --upgrade pip
+        - pip install -r requirements.txt
+        - export DATABASE_URL="sqlite://"
+        - echo $DATABASE_URL
+        - pytest
+
+
+prod-test-api:
+    image: postman/newman:alpine entrypoint[""]
+    stage: test
+    rules:
+        - if: $CI_COMMIT_BRANCH == "main"
+    script:
+        - newman run GalleryGuide.postman_collection.json
 # TODO based on ArtDB
 # test-postman:
 #     stage: test
