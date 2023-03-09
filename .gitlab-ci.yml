@@ -29,8 +29,18 @@ dev-test-api:
         - cd backend
         - pip install --upgrade pip
         - pip install -r requirements.txt
+        - export DATABASE_URL="sqlite://"
+        - echo $DATABASE_URL
         - pytest
 
+
+prod-test-api:
+    image: postman/newman:alpine entrypoint[""]
+    stage: test
+    rules:
+        - if: $CI_COMMIT_BRANCH == "main"
+    script:
+        - newman run GalleryGuide.postman_collection.json
 # TODO based on ArtDB
 # test-postman:
 #     stage: test
