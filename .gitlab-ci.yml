@@ -35,7 +35,8 @@ dev-test-api:
 
 
 prod-test-api:
-    image: postman/newman:alpine entrypoint[""]
+    image: postman/newman:alpine 
+        entrypoint[""]
     stage: test
     rules:
         - if: $CI_COMMIT_BRANCH == "main"
