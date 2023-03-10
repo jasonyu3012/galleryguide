@@ -10,7 +10,8 @@ import './App.css';
 import About from './components/pages/About';
 import Home from './components/pages/Home';
 import Navigation from './components/Navigation';
-import Artworks from './components/pages/ArtworksDynamic';
+// Note from Tara: I changed this to test out my own code but keep Jerry's
+import Artworks from './components/pages/ArtworksDogfood';
 import Artists from './components/pages/Artists';
 import Galleries from './components/pages/Galleries';
 
