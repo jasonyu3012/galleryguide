@@ -61,7 +61,8 @@ const DynamicArt = () => {
 }
 
 const instance = axios.create({
-  baseURL: 'https://api.artic.edu/api/v1/artworks'
+  baseURL: 'https://galleryguide.me/api/artworks'
+  // baseURL: 'https://api.artic.edu/api/v1/artworks'
 });
 
 export default class Artworks extends React.Component {
@@ -83,24 +84,25 @@ export default class Artworks extends React.Component {
     };
   }
 
-  getUsersData() {
+  getResponseData() {
     instance.get()
       .then(response => {
         const responseData = response.data
         console.log("response data:")
         console.log(responseData)
 
-        this.setState({databaseResponse:responseData})
-        this.setState({data:responseData.data})
+        this.setState({databaseResponse: responseData})
+        this.setState({data: responseData.artworks})
       })
       .catch((error) => {
         console.log("axios error: ", error)
       })
   }
 
+  // Run once the page has loaded (will actually run twice because of App.js, I think)
   componentDidMount() {
     console.log("page loaded")
-    this.getUsersData()
+    this.getResponseData()
   }
 
   // // https://medium.com/how-to-react/simplest-way-to-use-axios-to-fetch-data-from-an-api-in-reactjs-cd9af9d7230
@@ -122,7 +124,7 @@ export default class Artworks extends React.Component {
         <ul>
           {
             this.state.data.map(entry =>
-              <li key={entry.id}>{entry.id}: {entry.api_model}, {entry.api_link}</li>
+              <li key={entry.id}>{entry.id}:{entry.api_model}, {entry.api_link}</li>
             )
           }
         </ul>
