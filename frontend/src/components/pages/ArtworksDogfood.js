@@ -4,10 +4,12 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
+import axios from 'axios';
+
 // import { Card, Row, Col, Container } from "react-bootstrap";
 import './Artworks.css';
 
-const Artworks = () => {
+const DynamicArt = () => {
   const artInfo = [
     {
       artist_id:"chicken artist",
@@ -35,16 +37,6 @@ const Artworks = () => {
     }
   ]
 
-  // Initialize artwork data
-  // const [artworkData, setArtworkData] = useState({
-  //   artist_id:"",
-  //   date:"",
-  //   id:"",
-  //   image:"",
-  //   medium:"",
-  //   title:"",
-  // });
-
   const renderCard = (card, index) => {
     return (
       <Card style={{ width: '15rem', justifyContent: 'center' }} key={index}>
@@ -52,7 +44,7 @@ const Artworks = () => {
         <Card.Body>
           <Card.Title>{card.title}</Card.Title>
           <Card.Text>{card.medium}</Card.Text>
-          {/* TODO #75 figure out how to link artwork previous to their instance pages */}
+          {/* TODO #75 figure out how to link artwork previews to their instance pages */}
           <Link to='/artworks/AmericanGothic'>
             <Button>Explore More</Button>
           </Link>
@@ -62,14 +54,80 @@ const Artworks = () => {
   }
 
   return (
-    <div>
-      <h1>Artworks</h1>
-      <p>Showing 1/1 Pages, 3/3 Works.</p>
-      <CardGroup>
-       {artInfo.map(renderCard)}
-      </CardGroup>
-    </div>
+    <CardGroup>
+      {artInfo.map(renderCard)}
+    </CardGroup>
   );
 }
 
-export default Artworks;
+const instance = axios.create({
+  baseURL: 'https://api.artic.edu/api/v1/artworks'
+});
+
+export default class Artworks extends React.Component {
+  
+  // Initialize artwork data
+  // const [artworkData, setArtworkData] = useState({
+  //   artist_id:"",
+  //   date:"",
+  //   id:"",
+  //   image:"",
+  //   medium:"",
+  //   title:"",
+  // });
+  constructor(props) {
+    super(props);
+    this.state = {
+      databaseResponse: [],
+      data: []
+    };
+  }
+
+  getUsersData() {
+    instance.get()
+      .then(response => {
+        const responseData = response.data
+        console.log("response data:")
+        console.log(responseData)
+
+        this.setState({databaseResponse:responseData})
+        this.setState({data:responseData.data})
+      })
+      .catch((error) => {
+        console.log("axios error: ", error)
+      })
+  }
+
+  componentDidMount() {
+    console.log("page loaded")
+    this.getUsersData()
+  }
+
+  // // https://medium.com/how-to-react/simplest-way-to-use-axios-to-fetch-data-from-an-api-in-reactjs-cd9af9d7230
+  // componentDidMount() {
+  //   // axios.get(`https://galleryguide.me/api/artworks`)
+  //   axios.get(`https://api.artic.edu/api/v1/artworks`)
+  //     .then(response => {
+  //       console.log(response.data)
+  //       console.log(response.data.data)
+  //       this.setState({ databaseResponse: response.data });
+  //       console.log("state of databaseResponse:")
+  //       console.log(this.state.databaseResponse)
+  //     })
+  // }
+
+  render() {
+    return (
+      <div>
+        <ul>
+          {
+            this.state.data.map(entry =>
+              <li key={entry.id}>{entry.id}: {entry.api_model}, {entry.api_link}</li>
+            )
+          }
+        </ul>
+        {DynamicArt()}
+      </div>
+    )
+  }
+}
