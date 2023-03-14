@@ -4,3 +4,9 @@
   height: 30vw;
   object-fit: cover;
 }
+
+.floating-card {
+  float: left;
+  margin: 5px;
+  max-width: 300px;
+}
