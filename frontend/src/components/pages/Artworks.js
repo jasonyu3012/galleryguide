@@ -48,6 +48,8 @@ export default class Artworks extends React.Component {
   render() {
     return (
       <div>
+        <h1>Artworks</h1>
+        <p>Showing page {this.state.pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
         {
           <Row xs={ 1 } md={ 3 } className="g-4">
             { this.state.data.map(entry => (
