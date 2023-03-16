@@ -1,64 +1,73 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Button from 'react-bootstrap/Button';
+// React imports
 import { Link } from 'react-router-dom';
-import AmericanGothic from '../images/AmericanGothic.jpg'
-import GirlInChair from '../images/LittleGirlInABlueArmchair.jpg'
-import WheatField from '../images/WheatFieldWithCypresses.jpg'
+import React from 'react';
+// Library imports
+import axios from 'axios';
+import { Button, Card, Col, Row } from 'react-bootstrap';
+// Local imports
 import './Artworks.css';
 
-const Artworks = () => {
-  return (
-    <div>
-      <h1>Artworks</h1>
-      <p>Showing 1/1 Pages, 3/3 Works.</p>
-      <CardGroup>
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={AmericanGothic}/>
-          <Card.Body>
-            <Card.Title>American Gothic</Card.Title>
-            <Card.Text>
-            Painting of a woman and an older white man holding a pitchfork, both seen from the waist up. They stand side by side with stern expressions, in front of a white house with a peaked roof.
-            </Card.Text>
-            <Link to='/artworks/AmericanGothic'>
-              <Button>Explore More</Button>
-            </Link>
-          </Card.Body>
-        </Card>
+const ARTWORKS_NUM_PAGES = 888;
+export const ARTWORKS_NUM_IDS = 7986;
 
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={WheatField}/>
-          <Card.Body>
-            <Card.Title>Wheat Field with Cypresses</Card.Title>
-            <Card.Text>
-            Painting of a wheat field with two cypress trees to the right.
-            </Card.Text>
-            <Link to='/artworks/WheatFieldwithCypresses'>
-              <Button>Explore More</Button>
-            </Link>
-          </Card.Body>
-        </Card>
+export default class Artworks extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      databaseResponse: [],
+      data: [],
+      pageIndex: 1
+    };
+  }
 
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={GirlInChair}/>
-          <Card.Body>
-            <Card.Title>Little Girl in a Blue Armchair</Card.Title>
-            <Card.Text>
-            Painting of girl sprawled on a blue armchair in a room with three other chairs of a matching design.
-            </Card.Text>
-            <Link to='/artworks/LittleGirlInaBlueArmchair'>
-              <Button>Explore More</Button>
-            </Link>
-          </Card.Body>
-        </Card>
-      </CardGroup>
+  // TODO #33 implement pagination
+  getResponseData() {
+    axios.get(`https://galleryguide.me/api/artworks?page=${this.state.pageIndex}`)
+      .then(response => {
+        console.log(this.url)
+        const responseData = response.data
+        console.log("response data:")
+        console.log(responseData)
+        console.log("artwork data:")
+        console.log(responseData.artworks)
 
-    </div>
-  );
+        this.setState({ databaseResponse: responseData })
+        this.setState({ data: responseData.artworks })
+      })
+      .catch((error) => {
+        console.log("axios error: ", error)
+      })
+  }
+
+  // Run once the page has loaded (will actually run twice because of App.js, I think)
+  componentDidMount() {
+    console.log("page loaded")
+    this.getResponseData()
+  }
+
+  render() {
+    return (
+      <div>
+        {
+          <Row xs={ 1 } md={ 3 } className="g-4">
+            { this.state.data.map(entry => (
+              <Col>
+                <Card style={{ justifyContent: 'center' }} key={ entry.id }>
+                  <Card.Img variant="top" src={ entry.image } />
+                  <Card.Body>
+                    <Card.Title>{ entry.title }</Card.Title>
+                    <Card.Text>{ entry.medium }</Card.Text>
+                    {/* TODO #75 figure out how to link artwork previews to their instance pages */ }
+                    <Link to={`/artworks/${ entry.id }`}>
+                      <Button>Explore More</Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            )) }
+          </Row>
+        }
+      </div>
+    )
+  }
 }
-
-export default Artworks;

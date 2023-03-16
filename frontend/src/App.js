@@ -10,8 +10,10 @@ import './App.css';
 import About from './components/pages/About';
 import Home from './components/pages/Home';
 import Navigation from './components/Navigation';
-// Note from Tara: I changed this to test out my own code but keep Jerry's
-import Artworks from './components/pages/ArtworksDogfood';
+
+import Artworks from './components/pages/Artworks';
+import ArtworkInstance from './components/pages/ArtworkInstance';
+
 import Artists from './components/pages/Artists';
 import Galleries from './components/pages/Galleries';
 
@@ -19,11 +21,6 @@ import ExampleArtistInstance from './components/pages/ArtistInstances/ExampleArt
 import VincentvanGogh from './components/pages/ArtistInstances/VincentvanGogh';
 import MaryCassatt from './components/pages/ArtistInstances/MaryCassatt';
 import GrantWood from './components/pages/ArtistInstances/GrantWood';
-
-import ExampleArtworkInstance from './components/pages/ArtworkInstances/ExampleArtworkInstance';
-import AmericanGothic from './components/pages/ArtworkInstances/AmericanGothic';
-import LittleGirlInaBlueArmchair from './components/pages/ArtworkInstances/LittleGirlinaBlueArmchair';
-import WheatFieldwithCypresses from './components/pages/ArtworkInstances/WheatFieldwithCypresses';
 
 import ExampleGalleryInstance from './components/pages/GalleryInstances/ExampleGalleryInstance';
 import METMuseum from './components/pages/GalleryInstances/METMuseum';
@@ -34,13 +31,14 @@ function App() {
   return (
     <div className="app-wrapper">
       <BrowserRouter>
-        {/* for the global navbar*/}
+        {/* placement for the global navbar below (items to show up on every page) */}
         <Navigation />
-        {/* for all of the internal pages */}
+        {/* placement for all of the internal pages below */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/artworks" element={<Artworks />} />
+          <Route path="/" element={ <Home/> }/>
+          <Route path="/about" element={ <About/> }/>
+          <Route path="/artworks" element={ <Artworks/> }/>
+          <Route path="/artworks/:artworkId" element={ <ArtworkInstance/> }/>
           <Route path="/artists" element={<Artists />} />
           <Route path="/galleries" element={<Galleries />} />
 
@@ -49,16 +47,10 @@ function App() {
           <Route path="/artists/MaryCassatt" element={<MaryCassatt />} />
           <Route path="/artists/GrantWood" element={<GrantWood />} />
 
-          <Route path="/artworks/ExampleArtworkInstance" element={<ExampleArtworkInstance />} />
-          <Route path="/artworks/AmericanGothic" element={<AmericanGothic />} />
-          <Route path="/artworks/WheatFieldwithCypresses" element={<WheatFieldwithCypresses />} />
-          <Route path="/artworks/LittleGirlInaBlueArmchair" element={<LittleGirlInaBlueArmchair />} />
-
           <Route path="/galleries/ExampleGalleryInstance" element={<ExampleGalleryInstance />} />
           <Route path="/galleries/METMuseum" element={<METMuseum />} />
           <Route path="/galleries/NationalGalleryofArt" element={<NationalGalleryofArt />} />
           <Route path="/galleries/ArtInstituteofChicago" element={<ArtInstituteofChicago />} />
-
 
         </Routes>
       </BrowserRouter>
