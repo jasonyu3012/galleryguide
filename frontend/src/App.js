@@ -17,11 +17,14 @@ import ArtworkInstance from './components/pages/ArtworkInstance';
 import Artists from './components/pages/Artists';
 import Galleries from './components/pages/Galleries';
 
+import GalleriesDynamic from './components/pages/GalleriesDynamic';
+import GalleryInstance from './components/pages/GalleryInstance';
+/*
 import ExampleArtistInstance from './components/pages/ArtistInstances/ExampleArtistInstance';
 import VincentvanGogh from './components/pages/ArtistInstances/VincentvanGogh';
 import MaryCassatt from './components/pages/ArtistInstances/MaryCassatt';
 import GrantWood from './components/pages/ArtistInstances/GrantWood';
-
+*/
 import ExampleGalleryInstance from './components/pages/GalleryInstances/ExampleGalleryInstance';
 import METMuseum from './components/pages/GalleryInstances/METMuseum';
 import ArtInstituteofChicago from './components/pages/GalleryInstances/ArtInstituteofChicago';
@@ -39,13 +42,10 @@ function App() {
           <Route path="/about" element={ <About/> }/>
           <Route path="/artworks" element={ <Artworks/> }/>
           <Route path="/artworks/:artworkId" element={ <ArtworkInstance/> }/>
+
           <Route path="/artists" element={<Artists />} />
-          <Route path="/galleries" element={<Galleries />} />
-          
-          <Route path="/artists/ExampleArtistInstance" element={<ExampleArtistInstance />} />
-          <Route path="/artists/VincentvanGogh" element={<VincentvanGogh />} />
-          <Route path="/artists/MaryCassatt" element={<MaryCassatt />} />
-          <Route path="/artists/GrantWood" element={<GrantWood />} />
+          <Route path="/galleries" element={<GalleriesDynamic />} />
+          <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>
           
           <Route path="/galleries/ExampleGalleryInstance" element={<ExampleGalleryInstance />} />
           <Route path="/galleries/METMuseum" element={<METMuseum />} />

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 // Local imports
-import { GALLERIES_NUM_IDS } from './Galleries';
+import { GALLERIES_NUM_IDS } from './GalleriesDynamic';
 import './Artworks.css';
 
 

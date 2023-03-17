@@ -9,7 +9,7 @@ import './Artworks.css';
 
 //where to find the actual numbers?
 const GALLERIES_NUM_PAGES = 10;
-export const GALLLERIES_NUM_IDS = 1000;
+export const GALLERIES_NUM_IDS = 1000;
 
 export default class Galleries extends React.Component {
   constructor(props) {
@@ -50,7 +50,7 @@ export default class Galleries extends React.Component {
     return (
       <div>
         <h1>Galleries</h1>
-        <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, 9/{GALLLERIES_NUM_IDS} artworks.</p>
+        <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, 9/{GALLERIES_NUM_IDS} artworks.</p>
         {
           <Row xs={ 1 } md={ 3 } className="g-4">
             { this.state.data.map(entry => (
