@@ -41,12 +41,12 @@ function App() {
           <Route path="/artworks/:artworkId" element={ <ArtworkInstance/> }/>
           <Route path="/artists" element={<Artists />} />
           <Route path="/galleries" element={<Galleries />} />
-
+          
           <Route path="/artists/ExampleArtistInstance" element={<ExampleArtistInstance />} />
           <Route path="/artists/VincentvanGogh" element={<VincentvanGogh />} />
           <Route path="/artists/MaryCassatt" element={<MaryCassatt />} />
           <Route path="/artists/GrantWood" element={<GrantWood />} />
-
+          
           <Route path="/galleries/ExampleGalleryInstance" element={<ExampleGalleryInstance />} />
           <Route path="/galleries/METMuseum" element={<METMuseum />} />
           <Route path="/galleries/NationalGalleryofArt" element={<NationalGalleryofArt />} />

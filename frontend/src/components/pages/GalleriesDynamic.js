@@ -7,11 +7,11 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 // Local imports
 import './Artworks.css';
 
-//where on earth did these numbers come from
-const ARTWORKS_NUM_PAGES = 888;
-export const ARTWORKS_NUM_IDS = 7986;
+//where to find the actual numbers?
+const GALLERIES_NUM_PAGES = 10;
+export const GALLLERIES_NUM_IDS = 1000;
 
-export default class Artworks extends React.Component {
+export default class Galleries extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,17 +23,17 @@ export default class Artworks extends React.Component {
 
   // TODO #33 implement pagination
   getResponseData() {
-    axios.get(`https://galleryguide.me/api/artworks?page=${this.state.pageIndex}`)
+    axios.get(`https://galleryguide.me/api/galleries?page=${this.state.pageIndex}`)
       .then(response => {
         console.log(this.url)
         const responseData = response.data
         console.log("response data:")
         console.log(responseData)
-        console.log("artwork data:")
-        console.log(responseData.artworks)
+        console.log("gallery data:")
+        console.log(responseData.galleries)
 
         this.setState({ databaseResponse: responseData })
-        this.setState({ data: responseData.artworks })
+        this.setState({ data: responseData.galleries })
       })
       .catch((error) => {
         console.log("axios error: ", error)
@@ -49,8 +49,8 @@ export default class Artworks extends React.Component {
   render() {
     return (
       <div>
-        <h1>Artworks</h1>
-        <p>Showing page {this.state.pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
+        <h1>Galleries</h1>
+        <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, 9/{GALLLERIES_NUM_IDS} artworks.</p>
         {
           <Row xs={ 1 } md={ 3 } className="g-4">
             { this.state.data.map(entry => (
@@ -59,9 +59,9 @@ export default class Artworks extends React.Component {
                   <Card.Img variant="top" src={ entry.image } />
                   <Card.Body>
                     <Card.Title>{ entry.title }</Card.Title>
-                    <Card.Text>{ entry.medium }</Card.Text>
-                    {/* TODO #75 figure out how to link artwork previews to their instance pages */ }
-                    <Link to={`/artworks/${ entry.id }`}>
+                    <Card.Text>{ "put relevant gallery information here" }</Card.Text>
+                    {/* TODO #75 figure out how to link gallery previews to their instance pages */ }
+                    <Link to={`/galleries/${ entry.id }`}>
                       <Button>Explore More</Button>
                     </Link>
                   </Card.Body>
