@@ -14,8 +14,11 @@ import Navigation from './components/Navigation';
 import Artworks from './components/pages/Artworks';
 import ArtworkInstance from './components/pages/ArtworkInstance';
 
-import Artists from './components/pages/Artists';
-import Galleries from './components/pages/Galleries';
+//import Artists from './components/pages/Artists';
+//import Galleries from './components/pages/Galleries';
+
+import ArtistsDynamic from './components/pages/ArtistsDynamic';
+import ArtistInstance from './components/pages/ArtistInstance';
 
 import GalleriesDynamic from './components/pages/GalleriesDynamic';
 import GalleryInstance from './components/pages/GalleryInstance';
@@ -43,7 +46,9 @@ function App() {
           <Route path="/artworks" element={ <Artworks/> }/>
           <Route path="/artworks/:artworkId" element={ <ArtworkInstance/> }/>
 
-          <Route path="/artists" element={<Artists />} />
+          <Route path="/artists" element={<ArtistsDynamic />} />
+          <Route path="/galleries/:galleryId" element={ <ArtistInstance/> }/>
+
           <Route path="/galleries" element={<GalleriesDynamic />} />
           <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>
           

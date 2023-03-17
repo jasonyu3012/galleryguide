@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 // Local imports
-import { ARTISTS_NUM_IDS } from './Artists';
+import { ARTISTS_NUM_IDS } from './ArtistsDynamic';
 import './Artworks.css';
 
 
@@ -29,8 +29,8 @@ const ArtistInstance = () => {
     })
 
     // Get gallery and artwork information
-    if (artistData) {
-      axios.get(`https://galleryguide.me/api/galleries/${ artworkData.gallery_id }`)
+    if (artistInfo) {
+      axios.get(`https://galleryguide.me/api/artists/${ artistInfo.gallery_id }`)
       .then(response => {
         setGalleryInfo(response.data);
         console.log("gallery data: ", galleryInfo);
@@ -41,7 +41,7 @@ const ArtistInstance = () => {
       axios.get(`https://galleryguide.me/api/artworks/${ artworkData.artwork_id }`)
       .then(response => {
         setArtworkData(response.data);
-        console.log("artwork data: ", artworkInfo);
+        console.log("artwork data: ", artworkData);
       })
       .catch((error) => {
         console.log("axios error while getting artwork info: ", error);
@@ -55,7 +55,7 @@ const ArtistInstance = () => {
       <div>
         <h1>Oops...!</h1>
         {/* Tara's note: &#41; is the html code for a closing parenthesis, ) */}
-        <p>How did you get here? We don't have an artwork with identification #{ artworkId }. Let us know if you think this is our error. :&#41;</p>
+        <p>How did you get here? We don't have an artist with identification #{ artistId }. Let us know if you think this is our error. :&#41;</p>
       </div>
     );
   }
