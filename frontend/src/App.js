@@ -14,24 +14,11 @@ import Navigation from './components/Navigation';
 import Artworks from './components/pages/Artworks';
 import ArtworkInstance from './components/pages/ArtworkInstance';
 
-//import Artists from './components/pages/Artists';
-//import Galleries from './components/pages/Galleries';
-
-import ArtistsDynamic from './components/pages/ArtistsDynamic';
+import Artists from './components/pages/Artists';
 import ArtistInstance from './components/pages/ArtistInstance';
 
-import GalleriesDynamic from './components/pages/GalleriesDynamic';
+import Galleries from './components/pages/Galleries';
 import GalleryInstance from './components/pages/GalleryInstance';
-/*
-import ExampleArtistInstance from './components/pages/ArtistInstances/ExampleArtistInstance';
-import VincentvanGogh from './components/pages/ArtistInstances/VincentvanGogh';
-import MaryCassatt from './components/pages/ArtistInstances/MaryCassatt';
-import GrantWood from './components/pages/ArtistInstances/GrantWood';
-*/
-import ExampleGalleryInstance from './components/pages/GalleryInstances/ExampleGalleryInstance';
-import METMuseum from './components/pages/GalleryInstances/METMuseum';
-import ArtInstituteofChicago from './components/pages/GalleryInstances/ArtInstituteofChicago';
-import NationalGalleryofArt from './components/pages/GalleryInstances/NationalGalleryofArt';
 
 function App() {
   return (
@@ -46,17 +33,11 @@ function App() {
           <Route path="/artworks" element={ <Artworks/> }/>
           <Route path="/artworks/:artworkId" element={ <ArtworkInstance/> }/>
 
-          <Route path="/artists" element={<ArtistsDynamic />} />
-          <Route path="/galleries/:galleryId" element={ <ArtistInstance/> }/>
+          <Route path="/artists" element={ <Artists/> }/>
+          <Route path="/artists/:galleryId" element={ <ArtistInstance/> }/>
 
-          <Route path="/galleries" element={<GalleriesDynamic />} />
+          <Route path="/galleries" element={ <Galleries/>} />
           <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>
-          
-          <Route path="/galleries/ExampleGalleryInstance" element={<ExampleGalleryInstance />} />
-          <Route path="/galleries/METMuseum" element={<METMuseum />} />
-          <Route path="/galleries/NationalGalleryofArt" element={<NationalGalleryofArt />} />
-          <Route path="/galleries/ArtInstituteofChicago" element={<ArtInstituteofChicago />} />
-
         </Routes>
       </BrowserRouter>
     </div>

@@ -15,7 +15,7 @@ const ArtworkInstance = () => {
   const [artistInfo, setArtistInfo] = useState({});
   const [galleryInfo, setGalleryInfo] = useState({});
 
-  // Run only once due to second arg
+  // Tara's note: Run only once due to second arg
   useEffect(() => {
     console.log("page loaded")
     axios.get(`https://galleryguide.me/api/artworks/${ artworkId }`)
@@ -24,7 +24,7 @@ const ArtworkInstance = () => {
       console.log("artwork data: ", artworkData);
       setArtworkData(artworkData);
 
-      // Want to get information only after getting the artwork data, hence the nesting
+      // Tara's note: Want to get information only after getting the artwork data, hence the nesting
       // Could also use async/await, but I figure this is okay for only a couple requests.
       axios.get(`https://galleryguide.me/api/galleries/${ artworkData.gallery_id }`)
       .then(response => {
