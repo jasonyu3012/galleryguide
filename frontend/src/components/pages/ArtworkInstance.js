@@ -23,13 +23,9 @@ const ArtworkInstance = () => {
       const artworkData = response.data;
       console.log("artwork data: ", artworkData);
       setArtworkData(artworkData);
-    })
-    .catch((error) => {
-      console.log("axios error: ", error);
-    })
 
-    // Get gallery and artist information
-    if (artworkData) {
+      // Want to get information only after getting the artwork data, hence the nesting
+      // Could also use async/await, but I figure this is okay for only a couple requests.
       axios.get(`https://galleryguide.me/api/galleries/${ artworkData.gallery_id }`)
       .then(response => {
         setGalleryInfo(response.data);
@@ -38,6 +34,7 @@ const ArtworkInstance = () => {
       .catch((error) => {
         console.log("axios error while getting gallery info: ", error);
       })
+
       axios.get(`https://galleryguide.me/api/artists/${ artworkData.artist_id }`)
       .then(response => {
         setArtistInfo(response.data);
@@ -46,7 +43,10 @@ const ArtworkInstance = () => {
       .catch((error) => {
         console.log("axios error while getting artist info: ", error);
       })
-    }
+    })
+    .catch((error) => {
+      console.log("axios error: ", error);
+    })
   }, [])
 
   // Check that we got a valid ID request
@@ -71,12 +71,12 @@ const ArtworkInstance = () => {
           <em>{ artworkData.medium }</em>
           <br/>
           <br/>
-          <p>{galleryInfo ? `Artwork hosted at ${galleryInfo.name} in ${galleryInfo.region}` : null}</p>
+          <p>{galleryInfo.name ? `Artwork hosted at ${galleryInfo.name} in ${galleryInfo.region}` : null}</p>
           <p>{ artworkData.image_rights }</p>
         </div>
       </div>
 
-      {/* TODO #? Add connections to other instances */}
+      {/* TODO #65 Add connections to other instances */}
 
       <Link to={'/artworks'}>
         <Button>&#60;</Button> Back to main artworks page

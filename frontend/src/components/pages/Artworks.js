@@ -60,7 +60,6 @@ export default class Artworks extends React.Component {
                   <Card.Body>
                     <Card.Title>{ entry.title }</Card.Title>
                     <Card.Text>{ entry.medium }</Card.Text>
-                    {/* TODO #75 figure out how to link artwork previews to their instance pages */ }
                     <Link to={`/artworks/${ entry.id }`}>
                       <Button>Explore More</Button>
                     </Link>
