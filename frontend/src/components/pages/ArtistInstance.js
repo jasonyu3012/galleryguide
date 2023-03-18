@@ -5,8 +5,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 // Local imports
-import { ARTISTS_NUM_IDS } from './ArtistsDynamic';
-import './Artworks.css';
+import { ARTISTS_NUM_IDS } from './Artists';
+import './InstanceModels.css';
 
 
 const ArtistInstance = () => {

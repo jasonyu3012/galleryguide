@@ -4,8 +4,9 @@ import {
   Route,
   Routes
 } from 'react-router-dom';
-
+// Local imports
 import './App.css';
+
 // Import pages
 import About from './components/pages/About';
 import Home from './components/pages/Home';
@@ -34,7 +35,7 @@ function App() {
           <Route path="/artworks/:artworkId" element={ <ArtworkInstance/> }/>
 
           <Route path="/artists" element={ <Artists/> }/>
-          <Route path="/artists/:galleryId" element={ <ArtistInstance/> }/>
+          <Route path="/artists/:artistId" element={ <ArtistInstance/> }/>
 
           <Route path="/galleries" element={ <Galleries/>} />
           <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>

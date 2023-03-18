@@ -1,62 +1,75 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Button from 'react-bootstrap/Button';
+// React imports
 import { Link } from 'react-router-dom';
-import METMuseum from '../images/METMuseum.jpg'
-import NationalGalleryofArt from '../images/NationalGalleryofArt.jpg'
-import ArtInstituteofChicago from '../images/ArtInstituteofChicago.jpg'
+import React from 'react';
+// Library imports
+import axios from 'axios';
+import { Button, Card, Col, Row } from 'react-bootstrap';
+// Local imports
+import './InstanceModels.css';
 
-const Galleries = () => {
-  return (
-    <div>
-      <h1>Galleries</h1>
-      <p>Showing 1/1 Pages, 3/3 galleries.</p>
-      <CardGroup>
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={ArtInstituteofChicago}/>
-          <Card.Body>
-            <Card.Title>Art Institute of Chicago</Card.Title>
-            <Card.Text>
-              The Art Institute of Chicago is the second largest art museum in the USA housing a world-renowned encyclopedic collection.
-            </Card.Text>
-            <Link to='/galleries/ArtInstituteofChicago'>
-              <Button>Explore the Art Institute of Chicago</Button>
-            </Link>
-          </Card.Body>
-        </Card>
+//where on earth did these numbers come from
+const ARTWORKS_NUM_PAGES = 888;
+export const ARTWORKS_NUM_IDS = 7986;
 
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={METMuseum}/>
-          <Card.Body>
-            <Card.Title>MET Museum</Card.Title>
-            <Card.Text>
-              The Metropolitan Museum of Art, also known as the MET, is the largest and most visited Museum in the United States. 
-            </Card.Text>
-            <Link to='/galleries/MetMuseum'>
-              <Button>Explore the MET Museum</Button>
-            </Link>
-          </Card.Body>
-        </Card>
+export default class Artworks extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      databaseResponse: [],
+      data: [],
+      pageIndex: 1
+    };
+  }
 
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={NationalGalleryofArt}/>
-          <Card.Body>
-            <Card.Title>National Gallery of Art</Card.Title>
-            <Card.Text>
-              The National Gallery of Art is a museum in Washington, D.C. that hosts a variety of artworks, collected primarily though donation.  
-            </Card.Text>
-            <Link to='/galleries/NationalGalleryofArt'>
-              <Button>Explore the National Gallery of Art</Button>
-            </Link>
-          </Card.Body>
-        </Card>
-      </CardGroup>
-    </div>
-  );
+  // TODO #33 implement pagination
+  getResponseData() {
+    axios.get(`https://galleryguide.me/api/artworks?page=${this.state.pageIndex}`)
+      .then(response => {
+        console.log(this.url)
+        const responseData = response.data
+        console.log("response data:")
+        console.log(responseData)
+        console.log("artwork data:")
+        console.log(responseData.artworks)
+
+        this.setState({ databaseResponse: responseData })
+        this.setState({ data: responseData.artworks })
+      })
+      .catch((error) => {
+        console.log("axios error: ", error)
+      })
+  }
+
+  // Run once the page has loaded (will actually run twice because of App.js, I think)
+  componentDidMount() {
+    console.log("page loaded")
+    this.getResponseData()
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Artworks</h1>
+        <p>Showing page {this.state.pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
+        {
+          <Row xs={ 1 } md={ 3 } className="g-4">
+            { this.state.data.map(entry => (
+              <Col>
+                <Card style={{ justifyContent: 'center' }} key={ entry.id }>
+                  <Card.Img variant="top" src={ entry.image } />
+                  <Card.Body>
+                    <Card.Title>{ entry.title }</Card.Title>
+                    <Card.Text>{ entry.medium }</Card.Text>
+                    <Link to={`/artworks/${ entry.id }`}>
+                      <Button>Explore More</Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            )) }
+          </Row>
+        }
+      </div>
+    )
+  }
 }
-
-export default Galleries;

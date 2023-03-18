@@ -5,7 +5,7 @@ import React from 'react';
 import axios from 'axios';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 // Local imports
-import './Artworks.css';
+import './InstanceModels.css';
 
 //where on earth did these numbers come from
 const ARTWORKS_NUM_PAGES = 888;

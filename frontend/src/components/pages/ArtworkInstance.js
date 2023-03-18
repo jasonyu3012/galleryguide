@@ -6,7 +6,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 // Local imports
 import { ARTWORKS_NUM_IDS } from './Artworks';
-import './Artworks.css';
+import './InstanceModels.css';
 
 
 const ArtworkInstance = () => {
