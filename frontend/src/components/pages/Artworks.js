@@ -7,7 +7,6 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 // Local imports
 import './InstanceModels.css';
 
-//where on earth did these numbers come from
 const ARTWORKS_NUM_PAGES = 888;
 export const ARTWORKS_NUM_IDS = 7986;
 
@@ -40,7 +39,7 @@ export default class Artworks extends React.Component {
       })
   }
 
-  // Run once the page has loaded (will actually run twice because of App.js, I think)
+  // Run once the page has loaded
   componentDidMount() {
     console.log("page loaded")
     this.getResponseData()
