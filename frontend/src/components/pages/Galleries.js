@@ -30,7 +30,7 @@ export default class Artworks extends React.Component {
         console.log("response data:")
         console.log(responseData)
         console.log("gallery data:")
-        console.log(responseData.artworks)
+        console.log(responseData.galleries)
 
         this.setState({ databaseResponse: responseData })
         this.setState({ data: responseData.galleries })

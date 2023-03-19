@@ -69,9 +69,12 @@ const ArtworkInstance = () => {
           <h1>{ artworkData.title }</h1>
           <h3>{ artistInfo.name }, { artworkData.date }</h3>
           <em>{ artworkData.medium }</em>
+          <em>Iconicity of the image: { artworkData.iconicity }</em>
           <br/>
           <br/>
           <p>{galleryInfo.name ? `Artwork hosted at ${ galleryInfo.name } in ${ galleryInfo.region }` : null}</p>
+          <br/>
+          <p>This artwork is stored as ID #{ artworkData.id } in GalleryGuide.</p>
           <p>{ artworkData.image_rights }</p>
         </div>
       </div>

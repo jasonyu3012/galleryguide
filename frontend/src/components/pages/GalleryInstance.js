@@ -21,15 +21,15 @@ const GalleryInstance = () => {
     axios.get(`https://galleryguide.me/api/galleries/${ galleryId }`)
     .then(response => {
       const galleryData = response.data;
-      console.log("gallery data: ", galleryData);
       setGalleryData(galleryData);
+      console.log("response data: ", galleryData);
     })
     .catch((error) => {
       console.log("axios error: ", error);
     })
 
     // Get artwork and artist information
-    if (galleryData.description) {
+    // if (galleryData.description) {
       // TODO filter artworks by gallery id
       // axios.get(`https://galleryguide.me/api/artworks/${ galleryData.artwork_id }`)
       // .then(response => {
@@ -48,7 +48,7 @@ const GalleryInstance = () => {
       // .catch((error) => {
       //   console.log("axios error while getting artist info: ", error);
       // })
-    }
+    // }
   }, [])
 
   // Check that we got a valid ID request
@@ -74,6 +74,10 @@ const GalleryInstance = () => {
           <br/>
           <br/>
           <p>Located in { galleryData.region }</p>
+          <p>Number of artists hosted: { galleryData.num_artists }</p>
+          <p>Number of artworks hosted: { galleryData.num_artworks }</p>
+          <p><a href={ galleryData.website }>Gallery website</a></p>
+          <p>This gallery is stored as ID #{ galleryData.id } in GalleryGuide.</p>
         </div>
       </div>
 

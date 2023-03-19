@@ -61,7 +61,7 @@ export default class Artworks extends React.Component {
                     {/* TODO #? add 5 sortable features to card */}
                     <Card.Title>{ entry.name }</Card.Title>
                     <Card.Text>{ entry.medium }</Card.Text>
-                    <Link to={`/artworks/${ entry.id }`}>
+                    <Link to={`/artists/${ entry.id }`}>
                       <Button>Explore More</Button>
                     </Link>
                   </Card.Body>
