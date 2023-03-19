@@ -57,6 +57,7 @@ export default class Artworks extends React.Component {
                 <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                   <Card.Img variant="top" src={ entry.image } />
                   <Card.Body>
+                    {/* TODO #? add 5 sortable features to card */}
                     <Card.Title>{ entry.title }</Card.Title>
                     <Card.Text>{ entry.medium }</Card.Text>
                     <Link to={`/artworks/${ entry.id }`}>

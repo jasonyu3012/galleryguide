@@ -7,8 +7,9 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 // Local imports
 import './InstanceModels.css';
 
-const ARTWORKS_NUM_PAGES = 888;
-export const ARTWORKS_NUM_IDS = 7986;
+// TODO Placeholders for now
+const ARTISTS_NUM_PAGES = 100;
+export const ARTISTS_NUM_IDS = 1000;
 
 export default class Artworks extends React.Component {
   constructor(props) {
@@ -22,17 +23,17 @@ export default class Artworks extends React.Component {
 
   // TODO #33 implement pagination
   getResponseData() {
-    axios.get(`https://galleryguide.me/api/artworks?page=${this.state.pageIndex}`)
+    axios.get(`https://galleryguide.me/api/artists?page=${this.state.pageIndex}`)
       .then(response => {
         console.log(this.url)
         const responseData = response.data
         console.log("response data:")
         console.log(responseData)
         console.log("artwork data:")
-        console.log(responseData.artworks)
+        console.log(responseData.artists)
 
         this.setState({ databaseResponse: responseData })
-        this.setState({ data: responseData.artworks })
+        this.setState({ data: responseData.artists })
       })
       .catch((error) => {
         console.log("axios error: ", error)
@@ -49,7 +50,7 @@ export default class Artworks extends React.Component {
     return (
       <div>
         <h1>Artworks</h1>
-        <p>Showing page {this.state.pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
+        <p>Showing page {this.state.pageIndex}/{ARTISTS_NUM_PAGES}, 9/{ARTISTS_NUM_IDS} artworks.</p>
         {
           <Row xs={ 1 } md={ 3 } className="g-4">
             { this.state.data.map(entry => (
@@ -57,6 +58,7 @@ export default class Artworks extends React.Component {
                 <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                   <Card.Img variant="top" src={ entry.image } />
                   <Card.Body>
+                    {/* TODO #? add 5 sortable features to card */}
                     <Card.Title>{ entry.title }</Card.Title>
                     <Card.Text>{ entry.medium }</Card.Text>
                     <Link to={`/artworks/${ entry.id }`}>

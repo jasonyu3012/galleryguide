@@ -6,7 +6,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 // Local imports
 import { GALLERIES_NUM_IDS } from './Galleries';
-import './Artworks.css';
+import './InstanceModels.css';
 
 
 const GalleryInstance = () => {
