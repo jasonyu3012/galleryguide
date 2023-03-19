@@ -71,7 +71,7 @@ const ArtworkInstance = () => {
           <em>{ artworkData.medium }</em>
           <br/>
           <br/>
-          <p>{galleryInfo.name ? `Artwork hosted at ${galleryInfo.name} in ${galleryInfo.region}` : null}</p>
+          <p>{galleryInfo.name ? `Artwork hosted at ${ galleryInfo.name } in ${ galleryInfo.region }` : null}</p>
           <p>{ artworkData.image_rights }</p>
         </div>
       </div>

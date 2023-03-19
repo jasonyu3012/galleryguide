@@ -11,41 +11,43 @@ import './InstanceModels.css';
 
 const GalleryInstance = () => {
   const galleryId = useParams().galleryId;
-  const [artworkData, setArtworkData] = useState({});
-  const [artistInfo, setArtistInfo] = useState({});
-  const [galleryInfo, setGalleryInfo] = useState({});
+  const [galleryData, setGalleryData] = useState({});
+  // const [artworkInfo, setArtworkInfo] = useState({});
+  // const [artistInfo, setArtistInfo] = useState({});
 
   // Run only once due to second arg
   useEffect(() => {
     console.log("page loaded")
     axios.get(`https://galleryguide.me/api/galleries/${ galleryId }`)
     .then(response => {
-      const galleryInfo = response.data;
-      console.log("gallery data: ", galleryInfo);
-      setGalleryInfo(galleryInfo);
+      const galleryData = response.data;
+      console.log("gallery data: ", galleryData);
+      setGalleryData(galleryData);
     })
     .catch((error) => {
       console.log("axios error: ", error);
     })
 
     // Get artwork and artist information
-    if (artworkData) {
-      axios.get(`https://galleryguide.me/api/artworks/${ artworkData.artwork_id }`)
-      .then(response => {
-        setArtworkData(response.data);
-        console.log("artwork data: ", artworkData);
-      })
-      .catch((error) => {
-        console.log("axios error while getting artwork info: ", error);
-      })
-      axios.get(`https://galleryguide.me/api/artists/${ artworkData.artist_id }`)
-      .then(response => {
-        setArtistInfo(response.data);
-        console.log("artist data: ", artistInfo);
-      })
-      .catch((error) => {
-        console.log("axios error while getting artist info: ", error);
-      })
+    if (galleryData.description) {
+      // TODO filter artworks by gallery id
+      // axios.get(`https://galleryguide.me/api/artworks/${ galleryData.artwork_id }`)
+      // .then(response => {
+      //   setArtworkData(response.data);
+      //   console.log("artwork data: ", artworkData);
+      // })
+      // .catch((error) => {
+      //   console.log("axios error while getting artwork info: ", error);
+      // })
+      // // TODO filter artists by gallery id
+      // axios.get(`https://galleryguide.me/api/artists/${ artworkData.artist_id }`)
+      // .then(response => {
+      //   setArtistInfo(response.data);
+      //   console.log("artist data: ", artistInfo);
+      // })
+      // .catch((error) => {
+      //   console.log("axios error while getting artist info: ", error);
+      // })
     }
   }, [])
 
@@ -55,7 +57,7 @@ const GalleryInstance = () => {
       <div>
         <h1>Oops...!</h1>
         {/* Tara's note: &#41; is the html code for a closing parenthesis, ) */}
-        <p>How did you get here? We don't have an artwork with identification #{ artworkId }. Let us know if you think this is our error. :&#41;</p>
+        <p>How did you get here? We don't have a gallery with identification #{ galleryId }. Let us know if you think this is our error. :&#41;</p>
       </div>
     );
   }
@@ -65,15 +67,13 @@ const GalleryInstance = () => {
   return (
     <div>
       <div class="art-instance-image-description-wrapper">
-        <img class="art-instance-img" src={ artworkData.image } alt="Artwork visual representation"/>
+        <img class="art-instance-img" src={ galleryData.thumbnail } alt="Artwork visual representation"/>
         <div class="art-instance-description">
-          <h1>{ artworkData.title }</h1>
-          <h3>{ artistInfo.name }, { artworkData.date }</h3>
-          <em>{ artworkData.medium }</em>
+          <h1>{ galleryData.name }</h1>
+          <em>{ galleryData.description }</em>
           <br/>
           <br/>
-          <p>{galleryInfo ? `Artwork hosted at ${galleryInfo.name} in ${galleryInfo.region}` : null}</p>
-          <p>{ artworkData.image_rights }</p>
+          <p>Located in { galleryData.region }</p>
         </div>
       </div>
 

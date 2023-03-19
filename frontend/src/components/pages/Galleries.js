@@ -49,18 +49,18 @@ export default class Artworks extends React.Component {
   render() {
     return (
       <div>
-        <h1>Artworks</h1>
+        <h1>Galleries</h1>
         <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, 9/{GALLERIES_NUM_IDS} galleries.</p>
         {
           <Row xs={ 1 } md={ 3 } className="g-4">
             { this.state.data.map(entry => (
               <Col>
                 <Card style={{ justifyContent: 'center' }} key={ entry.id }>
-                  <Card.Img variant="top" src={ entry.image } />
+                  <Card.Img variant="top" src={ entry.thumbnail } />
                   <Card.Body>
                     {/* TODO #? add 5 sortable features to card */}
-                    <Card.Title>{ entry.title }</Card.Title>
-                    <Card.Text>{ entry.medium }</Card.Text>
+                    <Card.Title>{ entry.name }</Card.Title>
+                    <Card.Text>{ entry.region }</Card.Text>
                     <Link to={`/galleries/${ entry.id }`}>
                       <Button>Explore More</Button>
                     </Link>
