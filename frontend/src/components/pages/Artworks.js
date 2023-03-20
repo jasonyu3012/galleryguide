@@ -33,7 +33,7 @@ export default class Artworks extends React.Component {
 
   // TODO #33 implement pagination
   getResponseData = (targetIndex) => {
-    // TODO do some checks
+    // TODO PHASE 3 do some checks to make sure within range
     axios.get(`https://galleryguide.me/api/artworks?page=${ targetIndex }`)
       .then(response => {
         console.log(this.url)
@@ -62,7 +62,6 @@ export default class Artworks extends React.Component {
       <div>
         <h1>Artworks</h1>
         <p>Showing page { this.state.pageIndex }/{ ARTWORKS_NUM_PAGES }, 9/{ ARTWORKS_NUM_IDS } artworks.</p>
-        {/* { this.paginationSetup() } */}
         {<ReactPaginate
             pageCount={ARTWORKS_NUM_PAGES}
             marginPagesDisplayed={2}
