@@ -5,7 +5,6 @@ import React from 'react';
 import axios from 'axios';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
-import Pagination from 'react-bootstrap/Pagination';
 // Local imports
 import './InstanceModels.css';
 
@@ -31,7 +30,6 @@ export default class Artworks extends React.Component {
     this.getResponseData(selected)
   }
 
-  // TODO #33 implement pagination
   getResponseData = (targetIndex) => {
     // TODO PHASE 3 do some checks to make sure within range
     axios.get(`https://galleryguide.me/api/artworks?page=${ targetIndex }`)
@@ -63,18 +61,17 @@ export default class Artworks extends React.Component {
         <h1>Artworks</h1>
         <p>Showing page { this.state.pageIndex }/{ ARTWORKS_NUM_PAGES }, 9/{ ARTWORKS_NUM_IDS } artworks.</p>
         {<ReactPaginate
-            pageCount={ARTWORKS_NUM_PAGES}
-            marginPagesDisplayed={2}
-            onPageChange={this.handleClick}
-            containerClassName={'container'}
-            previousLinkClassName={'page'}
-            breakClassName={'page'}
-            nextLinkClassName={'page'}
-            pageClassName={'page'}
-            disabledClassNae={'disabled'}
-            activeClassName={'active'}
-          />}
-        <h1>test</h1>
+          pageCount={ARTWORKS_NUM_PAGES}
+          marginPagesDisplayed={2}
+          onPageChange={this.handleClick}
+          containerClassName={'container'}
+          previousLinkClassName={'page'}
+          breakClassName={'page'}
+          nextLinkClassName={'page'}
+          pageClassName={'page'}
+          disabledClassNae={'disabled'}
+          activeClassName={'active'}
+        />}
         {
           <Row xs={ 1 } md={ 3 } className="g-4">
             { this.state.data.map(entry => (

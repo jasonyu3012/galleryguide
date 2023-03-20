@@ -4,6 +4,7 @@ import React from 'react';
 // Library imports
 import axios from 'axios';
 import { Button, Card, Col, Row } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 // Local imports
 import './InstanceModels.css';
 
@@ -19,11 +20,18 @@ export default class Artworks extends React.Component {
       data: [],
       pageIndex: 1
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  // TODO #33 implement pagination
-  getResponseData() {
-    axios.get(`https://galleryguide.me/api/galleries?page=${this.state.pageIndex}`)
+  handleClick (clickAction) {
+    console.log("SELECTED: ", clickAction.selected)
+    let selected = clickAction.selected + 1;
+    this.setState({ pageIndex: selected })
+    this.getResponseData(selected)
+  }
+
+  getResponseData = (targetIndex) => {
+    axios.get(`https://galleryguide.me/api/galleries?page=${ targetIndex }`)
       .then(response => {
         console.log(this.url)
         const responseData = response.data
@@ -43,7 +51,7 @@ export default class Artworks extends React.Component {
   // Run once the page has loaded
   componentDidMount() {
     console.log("page loaded")
-    this.getResponseData()
+    this.getResponseData(1)
   }
 
   render() {
@@ -51,6 +59,18 @@ export default class Artworks extends React.Component {
       <div>
         <h1>Galleries</h1>
         <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, 9/{GALLERIES_NUM_IDS} galleries.</p>
+        {<ReactPaginate
+          pageCount={GALLERIES_NUM_PAGES}
+          marginPagesDisplayed={2}
+          onPageChange={this.handleClick}
+          containerClassName={'container'}
+          previousLinkClassName={'page'}
+          breakClassName={'page'}
+          nextLinkClassName={'page'}
+          pageClassName={'page'}
+          disabledClassNae={'disabled'}
+          activeClassName={'active'}
+        />}
         {
           <Row xs={ 1 } md={ 3 } className="g-4">
             { this.state.data.map(entry => (
