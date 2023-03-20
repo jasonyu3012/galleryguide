@@ -4,6 +4,7 @@ import React from 'react';
 // Library imports
 import axios from 'axios';
 import { Button, Card, Col, Row } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 import Pagination from 'react-bootstrap/Pagination';
 // Local imports
 import './InstanceModels.css';
@@ -20,11 +21,18 @@ export default class Artworks extends React.Component {
       data: [],
       pageIndex: 1,
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick (clickAction) {
+    console.log("SELECTED: ", clickAction.selected)
+    let selected = clickAction.selected + 1;
+    this.setState({ pageIndex: selected })
+    this.getResponseData(selected)
   }
 
   // TODO #33 implement pagination
   getResponseData = (targetIndex) => {
-    console.log("getting response data")
     // TODO do some checks
     axios.get(`https://galleryguide.me/api/artworks?page=${ targetIndex }`)
       .then(response => {
@@ -37,33 +45,10 @@ export default class Artworks extends React.Component {
 
         this.setState({ databaseResponse: responseData })
         this.setState({ data: responseData.artworks })
-        this.setState({ pageIndex: targetIndex })
       })
       .catch((error) => {
         console.log("axios error: ", error)
       })
-  }
-
-  // Set up pagination items
-  paginationSetup() {
-    return (
-      <Pagination>
-        <Pagination.First onClick={this.getResponseData(1)}/>
-        <Pagination.Prev onClick={this.getResponseData(this.state.pageIndex - 1)}/>
-        <Pagination.Item onClick={this.getResponseData(5)} key={5} active={5 === this.state.pageIndex}>
-          {5}</Pagination.Item>
-        <Pagination.Ellipsis/>
-
-        <Pagination.Item onClick={this.getResponseData(10)} key={10} active={10 === this.state.pageIndex}>
-          {10}</Pagination.Item>
-
-        <Pagination.Ellipsis/>
-        <Pagination.Item onClick={this.getResponseData(ARTWORKS_NUM_PAGES)} key={ARTWORKS_NUM_PAGES} active={ARTWORKS_NUM_PAGES === this.state.pageIndex}>
-          { ARTWORKS_NUM_PAGES }</Pagination.Item>
-        <Pagination.Next onClick={this.getResponseData(this.state.pageIndex + 1)}/>
-        <Pagination.Last onClick={this.getResponseData(ARTWORKS_NUM_PAGES)}/>
-      </Pagination>
-    )
   }
 
   // Run once the page has loaded
@@ -77,10 +62,22 @@ export default class Artworks extends React.Component {
       <div>
         <h1>Artworks</h1>
         <p>Showing page { this.state.pageIndex }/{ ARTWORKS_NUM_PAGES }, 9/{ ARTWORKS_NUM_IDS } artworks.</p>
-        { this.paginationSetup() }
+        {/* { this.paginationSetup() } */}
+        {<ReactPaginate
+            pageCount={ARTWORKS_NUM_PAGES}
+            marginPagesDisplayed={2}
+            onPageChange={this.handleClick}
+            containerClassName={'container'}
+            previousLinkClassName={'page'}
+            breakClassName={'page'}
+            nextLinkClassName={'page'}
+            pageClassName={'page'}
+            disabledClassNae={'disabled'}
+            activeClassName={'active'}
+          />}
         <h1>test</h1>
         {
-          <Row xs={1} md={3} className="g-4">
+          <Row xs={ 1 } md={ 3 } className="g-4">
             { this.state.data.map(entry => (
               <Col>
                 <Card style={{ justifyContent: 'center' }} key={ entry.id }>
