@@ -62,8 +62,23 @@ def gallery_id_endpoint(id):
     if gallery is None:
         #Do something, probably got bad id
         return "Bad gallery ID", 400
+    
+    gallery_obj = gallery._asdict()
 
-    return gallery._asdict()
+    #Does this check need to be against 1 (int) or "1"
+    if request.args.get("artist_ids") == "1":
+        try: 
+            gallery_obj["artist_ids"] = model.get_gallery_artists(id)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artist ids of gallery " + id, 500)
+
+    if request.args.get("artwork_ids") == "1":
+        try:
+            gallery_obj["artwork_ids"] = model.get_gallery_artworks(id)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artwork ids of gallery " + id, 500)
+
+    return gallery_obj
 
 @app.route("/api/artists")
 def artist_endpoint():
@@ -102,8 +117,22 @@ def artist_id_endpoint(id):
     if artist is None:
         #Do something, probably got bad id
         return "Bad artist ID", 400
+    
+    artist_obj = artist._asdict()
 
-    return artist._asdict()
+    if request.args.get("artwork_ids") == "1":
+        try:
+            artist_obj["artwork_ids"] = model.get_artist_artworks(id)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artworks of artist " + id, 500)
+
+    if request.args.get("gallery_ids") == "1":
+        try:
+            artist_obj["gallery_ids"] = model.get_artist_galleries(id)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving galleries of artist " + id, 500)
+
+    return artist_obj
 
 
 @app.route("/api/artworks")

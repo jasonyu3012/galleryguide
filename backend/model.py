@@ -80,6 +80,40 @@ def get_gallery(id):
     #TODO: what happens when we are given an id not in the database?
     return rows
 
+def get_gallery_artists(gallery_id):
+    """
+    Gets all the artist ids associated with the given gallery_id
+
+    returns: A list of artist ids or raises an exception if there was a database error
+    """
+    s = select(gallery_artist_rel_table.c.artist_id).where(gallery_artist_rel_table.c.gallery_id == gallery_id)
+
+    try:
+        rows = conn.execute(s)
+        ids = []
+        for row in rows:
+            ids.append(row._mapping["artist_id"])
+        return ids
+    except BaseException as e:
+        raise e
+
+def get_gallery_artworks(gallery_id):
+    """
+    Gets all the artwork ids associated with the given gallery_id
+
+    returns: A list of artwork ids or raises an exception if there was a database error
+    """
+    s = select(gallery_artwork_rel_table.c.artwork_id).where(gallery_artwork_rel_table.c.gallery_id == gallery_id)
+
+    try:
+        rows = conn.execute(s)
+        ids = []
+        for row in rows:
+            ids.append(row._mapping["artwork_id"])
+        return ids
+    except BaseException as e:
+        raise e
+
 def get_artist(id):
     """
     Gets the artist from the database with the given id
@@ -97,6 +131,39 @@ def get_artist(id):
         pass
     #TODO: what happens when we are given an id not in the database?
     return rows
+
+def get_artist_artworks(artist_id):
+    """
+    Gets all the artwork ids associated with the given artist_id
+
+    returns: A list of artwork ids or raises an exception if there was a database error
+    """
+    s = select(artist_artwork_rel_table.c.artwork_id).where(artist_artwork_rel_table.c.artist_id == artist_id)
+
+    try:
+        rows = conn.execute(s)
+        ids = []
+        for row in rows:
+            ids.append(row._mapping["artwork_id"])
+        return ids
+    except BaseException as e:
+        raise e
+    
+def get_artist_galleries(artist_id):
+    """
+    Gets all the gallery ids associated with the given artist_id
+
+    returns: A list of gallery ids or raises an exception if there was a database error
+    """
+    s = select(gallery_artist_rel_table.c.gallery_id).where(gallery_artist_rel_table.c.artist_id == artist_id)
+    try:
+        rows = conn.execute(s)
+        ids = []
+        for row in rows:
+            ids.append(row._mapping["gallery_id"])
+        return ids
+    except BaseException as e:
+        raise e
 
 def get_artwork(id):
     """
