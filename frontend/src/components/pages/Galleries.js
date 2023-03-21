@@ -1,12 +1,14 @@
 // React imports
 import { Link } from 'react-router-dom';
 import React from 'react';
+import ReactPaginate from 'react-paginate';
 // Library imports
 import axios from 'axios';
 import { Button, Card, Col, Row } from 'react-bootstrap';
-import ReactPaginate from 'react-paginate';
+import Pagination from 'react-bootstrap/Pagination';
 // Local imports
 import './InstanceModels.css';
+import '../Pagination.css';
 
 // TODO Placeholders for now
 const GALLERIES_NUM_PAGES = 100;
@@ -60,16 +62,21 @@ export default class Artworks extends React.Component {
         <h1>Galleries</h1>
         <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, 9/{GALLERIES_NUM_IDS} galleries.</p>
         {<ReactPaginate
-          pageCount={GALLERIES_NUM_PAGES}
-          marginPagesDisplayed={2}
+          breakLabel={'...'}
+          nextLabel={<Pagination.Next />}
           onPageChange={this.handleClick}
-          containerClassName={'container'}
-          previousLinkClassName={'page'}
-          breakClassName={'page'}
-          nextLinkClassName={'page'}
-          pageClassName={'page'}
-          disabledClassNae={'disabled'}
-          activeClassName={'active'}
+          activeClassName={'item active'}
+          breakClassName={'item break-me'}
+          containerClassName={'pagination'}
+          disabledClassName={'disabled-page'}
+          marginPagesDisplayed={2}
+          nextClassName={'item next'}
+          pageClassName={'item pagination-page'}
+          pageRangeDisplayed={5}
+          previousClassName={'item previous'}
+          pageCount={GALLERIES_NUM_PAGES}
+          previousLabel={<Pagination.Prev /> }
+          renderOnZeroPageCount={null}
         />}
         {
           <Row xs={ 1 } md={ 3 } className="g-4">
