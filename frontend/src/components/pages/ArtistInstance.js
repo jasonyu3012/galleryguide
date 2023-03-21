@@ -11,9 +11,11 @@ import './InstanceModels.css';
 
 const ArtistInstance = () => {
   const artistId = useParams().artistId;
+  // Note on naming conventions: `data` is for the main information on the instance cards. `info` is
+  // for the supplementary info (not the main point).
   const [artistData, setArtistData] = useState({});
-  // const [artworkInfo, setArtworkInfo] = useState({});
-  // const [galleryInfo, setGalleryInfo] = useState({});
+  const [artworkInfo, setArtworkInfo] = useState({});
+  const [galleryInfo, setGalleryInfo] = useState({});
 
   // Run only once due to second arg
   useEffect(() => {
