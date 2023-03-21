@@ -1,63 +1,103 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Button from 'react-bootstrap/Button';
+// React imports
 import { Link } from 'react-router-dom';
-import './Artists.css';
-import GrantWood from '../images/GrantWood.jpg'
-import VanGogh from '../images/VanGogh.jpg'
-import MaryCassatt from '../images/MaryCassatt.jpg'
+import React from 'react';
+import ReactPaginate from 'react-paginate';
+// Library imports
+import axios from 'axios';
+import { Button, Card, Col, Row } from 'react-bootstrap';
+import Pagination from 'react-bootstrap/Pagination';
+// Local imports
+import './InstanceModels.css';
+import '../Pagination.css';
 
-const Artists = () => {
-  return (
-    <div>
-      <h1>Artists</h1>
-      <p>Showing 1/1 Pages, 3/3 Artists.</p>
-      <CardGroup>
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={GrantWood}/>
-          <Card.Body>
-            <Card.Title>Grant Wood</Card.Title>
-            <Card.Text>
-              Grant Wood is known for his stylized and subtly humorous scenes of rural people, Iowa cornfields, and mythic subjects from American history
-            </Card.Text>
-            <Link to='/artists/GrantWood'>
-              <Button>Read More</Button>
-            </Link>
-          </Card.Body>
-        </Card>
+// TODO Placeholders for now
+const ARTISTS_NUM_PAGES = 100;
+export const ARTISTS_NUM_IDS = 1000;
 
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={VanGogh}/>
-          <Card.Body>
-            <Card.Title>Vincent van Gogh</Card.Title>
-            <Card.Text>
-              A Dutch Post-Impressionist painter who posthumously became one of the most famous and influential figures in Western art history. 
-            </Card.Text>
-            <Link to='/artists/VincentvanGogh'>
-              <Button>Read More</Button>
-            </Link>
-          </Card.Body>
-        </Card>
+export default class Artworks extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      databaseResponse: [],
+      data: [],
+      pageIndex: 1
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={MaryCassatt}/>
-          <Card.Body>
-            <Card.Title>Mary Cassatt</Card.Title>
-            <Card.Text>
-            One of only three women -- and the only American, woman or man -- invited to exhibit with the Impressionists in Paris, Cassatt spent the majority of her career abroad. 
-            </Card.Text>
-            <Link to='/artists/MaryCassatt'>
-              <Button>Read More</Button>
-            </Link>
-          </Card.Body>
-        </Card>
-      </CardGroup>
-    </div>
-  );
+  handleClick (clickAction) {
+    console.log("SELECTED: ", clickAction.selected)
+    let selected = clickAction.selected + 1;
+    this.setState({ pageIndex: selected })
+    this.getResponseData(selected)
+  }
+
+  getResponseData = (targetIndex) => {
+    axios.get(`https://galleryguide.me/api/artists?page=${ targetIndex }`)
+      .then(response => {
+        console.log(this.url)
+        const responseData = response.data
+        console.log("response data:")
+        console.log(responseData)
+        console.log("artist data:")
+        console.log(responseData.artists)
+
+        this.setState({ databaseResponse: responseData })
+        this.setState({ data: responseData.artists })
+      })
+      .catch((error) => {
+        console.log("axios error: ", error)
+      })
+  }
+
+  // Run once the page has loaded
+  componentDidMount() {
+    console.log("page loaded")
+    this.getResponseData(1)
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Artists</h1>
+        <p>Showing page {this.state.pageIndex}/{ARTISTS_NUM_PAGES}, 9/{ARTISTS_NUM_IDS} artworks.</p>
+        {<ReactPaginate
+          breakLabel={'...'}
+          nextLabel={<Pagination.Next />}
+          onPageChange={this.handleClick}
+          activeClassName={'item active'}
+          breakClassName={'item break-me'}
+          containerClassName={'pagination'}
+          disabledClassName={'disabled-page'}
+          marginPagesDisplayed={2}
+          nextClassName={'item next'}
+          pageClassName={'item pagination-page'}
+          pageRangeDisplayed={5}
+          previousClassName={'item previous'}
+          pageCount={ARTISTS_NUM_PAGES}
+          previousLabel={<Pagination.Prev /> }
+          renderOnZeroPageCount={null} 
+        />}
+        {
+          <Row xs={ 1 } md={ 3 } className="g-4">
+            { this.state.data.map(entry => (
+              <Col>
+                <Card style={{ justifyContent: 'center' }} key={ entry.id }>
+                  <Card.Img variant="top" src={ entry.thumbnail } />
+                  <Card.Body>
+                    {/* TODO #? add 5 sortable features to card */}
+                    <Card.Title>{ entry.name }</Card.Title>
+                    <Card.Text>{ entry.medium }</Card.Text>
+                    <Link to={`/artists/${ entry.id }`}>
+                      <Button>Explore More</Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            )) }
+          </Row>
+        }
+      </div>
+    )
+  }
 }
-
-export default Artists;
