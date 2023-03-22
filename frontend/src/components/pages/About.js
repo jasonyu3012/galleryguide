@@ -224,7 +224,8 @@ export default function About() {
                     })
                 }
             </Row>
-
+            <h2>Postman Documentation</h2>
+            <p>Want to use our public APIs? We can't wait! Check out our Postman documentation made by our backend team <a href="https://documenter.getpostman.com/view/18824630/2s93CExHF3" target={'_blank'}>here</a>!</p>
             <h3 className="d-flex justify-content-center p-4"> Data Sources</h3>
             <Row>
                 {
