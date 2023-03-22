@@ -76,6 +76,14 @@ const ArtworkInstance = () => {
           <br/>
           <p>This artwork is stored as ID #{ artworkData.id } in GalleryGuide.</p>
           <p>{ artworkData.image_rights }</p>
+          <Link to={`/artists/${ artistInfo.id }`}>
+            <Button>Explore Artist</Button>
+          </Link>
+          <p></p>
+          <Link to={`/galleries/${ galleryInfo.id }`}>
+            <Button>Explore Gallery</Button>
+          </Link>
+          
         </div>
       </div>
 
