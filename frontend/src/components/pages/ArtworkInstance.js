@@ -76,6 +76,7 @@ const ArtworkInstance = () => {
           <br/>
           <p>This artwork is stored as ID #{ artworkData.id } in GalleryGuide.</p>
           <p>{ artworkData.image_rights }</p>
+          {/* INSTANCE CONNECTIONS  */}
           <Link to={`/artists/${ artistInfo.id }`}>
             <Button>Explore Artist</Button>
           </Link>
@@ -86,8 +87,6 @@ const ArtworkInstance = () => {
           
         </div>
       </div>
-
-      {/* TODO #65 Add connections to other instances */}
 
       <Link to={'/artworks'}>
         <Button>&#60;</Button> Back to main artworks page

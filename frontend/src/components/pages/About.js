@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import CardGroup from 'react-bootstrap/CardGroup';
 import { Card, Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import tara_img from '../images/tara_headshot.png';
@@ -225,7 +224,7 @@ export default function About() {
                 }
             </Row>
             <h2>Postman Documentation</h2>
-            <p>Want to use our public APIs? We can't wait! Check out our Postman documentation made by our backend team <a href="https://documenter.getpostman.com/view/18824630/2s93CExHF3" target={'_blank'}>here</a>!</p>
+            <p>Want to use our RESTful public APIs? We can't wait! Check out our Postman documentation made by our backend team <a href="https://documenter.getpostman.com/view/18824630/2s93CExHF3" target={'_blank'} rel={'noreferrer'}>here</a>!</p>
             <h3 className="d-flex justify-content-center p-4"> Data Sources</h3>
             <Row>
                 {
