@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 // Local imports
 import { GALLERIES_NUM_IDS } from './Galleries';
 import './InstanceModels.css';
-import { youtubeKey } from '../../API_keys/Keys.js';
+import { googleKey } from '../../API_keys/Keys.js';
 
 
 const GalleryInstance = () => {
@@ -28,7 +28,7 @@ const GalleryInstance = () => {
 
       // Get media
       console.log("getting src for gallery ", galleryData.name)
-      axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${ galleryData.name }&type=video&key=${ youtubeKey.key }`)
+      axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${ galleryData.name }&type=video&key=${ googleKey.key }`)
       .then(response => {
         console.log("youtube video data: ", response.data);
         setVideoSrc(`https://www.youtube.com/embed/${ response.data.items[0].id.videoId }`)

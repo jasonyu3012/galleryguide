@@ -15,7 +15,6 @@ const Home = () => {
       <p>Welcome to Gallery Guide!</p>
       <CardGroup>
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
           <Card.Img variant="top" src={StarryNight}/>
           <Card.Body>
             <Card.Title>Artworks</Card.Title>
@@ -29,7 +28,6 @@ const Home = () => {
         </Card>
 
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
           <Card.Img variant="top" src={VanGogh}/>
           <Card.Body>
             <Card.Title>Artists</Card.Title>
@@ -43,7 +41,6 @@ const Home = () => {
         </Card>
 
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
           <Card.Img variant="top" src={METMuseum}/>
           <Card.Body>
             <Card.Title>Galleries</Card.Title>
