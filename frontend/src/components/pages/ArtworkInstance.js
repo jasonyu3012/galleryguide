@@ -27,7 +27,6 @@ const ArtworkInstance = () => {
       setArtworkData(artworkData);
 
       // Tara's note: Want to get information only after getting the artwork data, hence the nesting
-      // Could also use async/await, but I figure this is okay for only a couple requests.
       axios.get(`https://galleryguide.me/api/galleries/${ artworkData.gallery_id }`)
       .then(response => {
         setGalleryInfo(response.data);
@@ -36,7 +35,7 @@ const ArtworkInstance = () => {
       .catch((error) => {
         console.log("axios error while getting gallery info: ", error);
       })
-
+  
       axios.get(`https://galleryguide.me/api/artists/${ artworkData.artist_id }`)
       .then(response => {
         setArtistInfo(response.data);
@@ -45,22 +44,23 @@ const ArtworkInstance = () => {
       .catch((error) => {
         console.log("axios error while getting artist info: ", error);
       })
-    })
-    .catch((error) => {
-      console.log("axios error: ", error);
-    })
 
-    // Get media
-    console.log("getting src for gallery ", artworkData.title)
-    axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${ artworkData.title }&type=video&key=${ youtubeKey.key }`)
-    .then(response => {
-      console.log("youtube video data: ", response.data);
-      setVideoSrc(`https://www.youtube.com/embed/${ response.data.items[0].id.videoId }`)
-      console.log("id in request: ", response.data.items[0].id.videoId)
-      console.log("src in request: ", videoSrc);
+      // Get media
+      console.log("getting src for artwork ", artworkData)
+      console.log("artwork title ", artworkData.title)
+      axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${ artworkData.title }&type=video&key=${ youtubeKey.key }`)
+      .then(response => {
+        console.log("youtube video data: ", response.data);
+        setVideoSrc(`https://www.youtube.com/embed/${ response.data.items[0].id.videoId }`)
+        console.log("id in request: ", response.data.items[0].id.videoId)
+        console.log("src in request: ", videoSrc);
+      })
+      .catch((error) => {
+        console.log("axios error when fetching video: ", error);
+      })
     })
     .catch((error) => {
-      console.log("axios error when fetching video: ", error);
+      console.log("axios error while getting artist info: ", error);
     })
   }, [])
 

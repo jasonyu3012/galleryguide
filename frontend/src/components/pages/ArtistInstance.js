@@ -27,6 +27,20 @@ const ArtistInstance = () => {
       const artistData = response.data;
       setArtistData(artistData);
       console.log("response data: ", artistData);
+
+      // Get media
+      console.log("getting src for gallery ", artistData.name)
+      axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${ artistData.name }&type=video&key=${ youtubeKey.key }`)
+      .then(response => {
+        console.log("youtube video data: ", response.data);
+        const fullSrc = `https://www.youtube.com/embed/${ response.data.items[0].id.videoId }`
+        setVideoSrc(fullSrc)
+        console.log("id in request: ", response.data.items[0].id.videoId)
+        console.log("src in request: ", fullSrc);
+      })
+      .catch((error) => {
+        console.log("axios error when fetching video: ", error);
+      })
     })
     .catch((error) => {
       console.log("axios error: ", error);
@@ -51,20 +65,6 @@ const ArtistInstance = () => {
     //     console.log("axios error while getting artwork info: ", error);
     //   })
     // }
-
-    // Get media
-    console.log("getting src for gallery ", artistData.name)
-    axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${ artistData.name }&type=video&key=${ youtubeKey.key }`)
-    .then(response => {
-      console.log("youtube video data: ", response.data);
-      const fullSrc = `https://www.youtube.com/embed/${ response.data.items[0].id.videoId }`
-      setVideoSrc(fullSrc)
-      console.log("id in request: ", response.data.items[0].id.videoId)
-      console.log("src in request: ", fullSrc);
-    })
-    .catch((error) => {
-      console.log("axios error when fetching video: ", error);
-    })
   }, [])
 
   // Check that we got a valid ID request
