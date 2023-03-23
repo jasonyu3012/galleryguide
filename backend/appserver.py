@@ -5,8 +5,10 @@ from flask.helpers import send_from_directory
 # from flask_sqlalchemy import SQLAlchemy
 import os
 import model
+from flask_cors import COS
 
 app = Flask(__name__, static_folder='build', static_url_path='/')
+CORS(app)
 
 # check for environment variable
 if not os.getenv("DATABASE_URL"):
