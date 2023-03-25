@@ -1,3 +1,4 @@
 .vscode
 frontend/selenium/.*
 frontend/selenium/__pycache__
+.pytest_cache
