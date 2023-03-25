@@ -93,7 +93,8 @@ const ArtistInstance = () => {
         <img class="art-instance-img" src={ artistData.thumbnail } alt="Artwork visual representation"/>
         <div class="art-instance-description">
           <h1>{ artistData.name }</h1>
-          <h3><em>from { artistData.birth_year } to { artistData.death_year }</em></h3>
+          {/* Death year is null if still alive */}
+          <h3><em>from { artistData.birth_year } to { artistData.death_year ? artistData.death_year : "Present" }</em></h3>
           <p>Number of artworks made: { artistData.num_artworks }</p>
           <p>Number of associated galleries: { artistData.num_galleries }</p>
           <br/>
