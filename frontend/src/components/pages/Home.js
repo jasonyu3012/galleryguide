@@ -21,7 +21,7 @@ const Home = () => {
             <Card.Text>
               View our artwork instances.
             </Card.Text>
-            <Link to='/artworks'>
+            <Link to='/artworks' id="artworks-link">
               <Button>Artworks</Button>
             </Link>
           </Card.Body>
@@ -34,7 +34,7 @@ const Home = () => {
             <Card.Text>
               View our artist instances.
             </Card.Text>
-            <Link to='/artists'>
+            <Link to='/artists' id="artists-link">
               <Button>Artists</Button>
             </Link>
           </Card.Body>
@@ -47,7 +47,7 @@ const Home = () => {
             <Card.Text>
               View our gallery instances.
             </Card.Text>
-            <Link to='/galleries'>
+            <Link to='/galleries' id="galleries-link">
               <Button>Galleries</Button>
             </Link>
           </Card.Body>
