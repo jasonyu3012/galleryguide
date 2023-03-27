@@ -2,8 +2,7 @@ import React from 'react';
 import {
   BrowserRouter,
   Route,
-  Routes, 
-  Redirect
+  Routes,
 } from 'react-router-dom';
 // Local imports
 import './App.css';
@@ -43,10 +42,10 @@ function App() {
           <Route path="/galleries" element={ <Galleries/>} />
           <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>
         </Routes>
-        <Switch>
+        <Routes>
           <Route exact path='/' component={Home} />
-          <Route path="*" component={PageNotFound} />
-        </Switch>
+          <Route path="*" component={NotFoundPage} />
+        </Routes>
       </BrowserRouter>
     </div>
   );

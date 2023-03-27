@@ -1,4 +1,3 @@
 .vscode
-frontend/src/API_keys
 frontend/selenium/.*
 frontend/selenium/__pycache__
