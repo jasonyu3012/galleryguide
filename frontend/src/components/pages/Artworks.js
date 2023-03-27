@@ -6,6 +6,7 @@ import Pagination from 'react-bootstrap/Pagination';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import './InstanceModels.css';
 import '../Pagination.css';
+import { ArtworkSearch } from '../Search';
 
 const ARTWORKS_NUM_PAGES = 888;
 export const ARTWORKS_NUM_IDS = 7986;
@@ -45,6 +46,7 @@ class Artworks extends Component {
     return (
       <div>
         <h1>Artworks</h1>
+        <ArtworkSearch/>
         <p>Showing page {pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         <ReactPaginate

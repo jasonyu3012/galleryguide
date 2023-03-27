@@ -9,6 +9,7 @@ import Pagination from 'react-bootstrap/Pagination';
 // Local imports
 import './InstanceModels.css';
 import '../Pagination.css';
+import { GallerySearch } from '../Search';
 
 // TODO Placeholders for now
 const GALLERIES_NUM_PAGES = 100;
@@ -60,6 +61,7 @@ export default class Artworks extends React.Component {
     return (
       <div>
         <h1>Galleries</h1>
+        <GallerySearch/>
         <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, 9/{GALLERIES_NUM_IDS} galleries.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         {<ReactPaginate
