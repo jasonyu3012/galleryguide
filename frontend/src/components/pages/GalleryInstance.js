@@ -13,8 +13,8 @@ import { googleKey } from '../../API_keys/Keys.js';
 const GalleryInstance = () => {
   const galleryId = useParams().galleryId;
   const [galleryData, setGalleryData] = useState({});
-  // const [artworkInfo, setArtworkInfo] = useState({});
-  // const [artistInfo, setArtistInfo] = useState({});
+  const [artworkId, setArtworkId] = useState({});
+  const [artistId, setArtistId] = useState({});
   const [videoSrc, setVideoSrc] = useState("");
   const [mapSrc, setMapSrc] = useState("");
 
@@ -49,32 +49,18 @@ const GalleryInstance = () => {
       .catch((error) => {
         console.log("axios error when fetching video: ", error);
       })
+
+      // Get artwork and artist IDs
+      if (galleryData.artwork_ids) {
+        setArtworkId(galleryData.artwork_ids[Math.floor(Math.random() * galleryData.artwork_ids.length)])
+      }
+      if (galleryData.artist_ids) {
+        setArtistId(galleryData.artist_ids[Math.floor(Math.random() * galleryData.artist_ids.length)])
+      }
     })
     .catch((error) => {
       console.log("axios error: ", error);
     })
-
-    // Get artwork and artist information
-    // if (galleryData.description) {
-      // TODO filter artworks by gallery id
-      // axios.get(`https://galleryguide.me/api/artworks/${ galleryData.artwork_id }`)
-      // .then(response => {
-      //   setArtworkData(response.data);
-      //   console.log("artwork data: ", artworkData);
-      // })
-      // .catch((error) => {
-      //   console.log("axios error while getting artwork info: ", error);
-      // })
-      // // TODO filter artists by gallery id
-      // axios.get(`https://galleryguide.me/api/artists/${ artworkData.artist_id }`)
-      // .then(response => {
-      //   setArtistInfo(response.data);
-      //   console.log("artist data: ", artistInfo);
-      // })
-      // .catch((error) => {
-      //   console.log("axios error while getting artist info: ", error);
-      // })
-    // }
   }, [])
 
   // Check that we got a valid ID request
@@ -108,6 +94,14 @@ const GalleryInstance = () => {
           <p>Number of artworks hosted: { galleryData.num_artworks }</p>
           <p><a href={ galleryData.website }>Gallery website</a></p>
           <p>This gallery is stored as ID #{ galleryData.id } in GalleryGuide.</p>
+          {/* INSTANCE CONNECTIONS  */}
+          <Link to={`/artists/${ artistId }`}>
+            <Button>Explore Artist</Button>
+          </Link>
+          <p></p>
+          <Link to={`/artworks/${ artworkId }`}>
+            <Button>Explore Artwork</Button>
+          </Link>
         </div>
       </div>
 

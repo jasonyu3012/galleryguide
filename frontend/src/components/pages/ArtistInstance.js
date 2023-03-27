@@ -15,8 +15,8 @@ const ArtistInstance = () => {
   // Note on naming conventions: `data` is for the main information on the instance cards. `info` is
   // for the supplementary info (not the main point).
   const [artistData, setArtistData] = useState({});
-  const [artworkInfo, setArtworkInfo] = useState({});
-  const [galleryInfo, setGalleryInfo] = useState({});
+  const [artworkId, setArtworkId] = useState(0);
+  const [galleryId, setGalleryId] = useState(0);
   const [videoSrc, setVideoSrc] = useState("");
   const [mapSrc, setMapSrc] = useState("");
 
@@ -48,30 +48,18 @@ const ArtistInstance = () => {
       .catch((error) => {
         console.log("axios error when fetching video: ", error);
       })
+
+      // Get artwork and gallery IDs
+      if (artistData.artwork_ids) {
+        setArtworkId(artistData.artwork_ids[Math.floor(Math.random() * artistData.artwork_ids.length)])
+      }
+      if (artistData.gallery_ids) {
+        setGalleryId(artistData.gallery_ids[Math.floor(Math.random() * artistData.gallery_ids.length)])
+      }
     })
     .catch((error) => {
       console.log("axios error: ", error);
     })
-
-    // TODO Get gallery and artwork information
-    // if (artistData) {
-    //   axios.get(`https://galleryguide.me/api/artists/${ artistInfo.gallery_id }`)
-    //   .then(response => {
-    //     setGalleryInfo(response.data);
-    //     console.log("gallery data: ", galleryInfo);
-    //   })
-    //   .catch((error) => {
-    //     console.log("axios error while getting gallery info: ", error);
-    //   })
-    //   axios.get(`https://galleryguide.me/api/artworks/${ artworkData.artwork_id }`)
-    //   .then(response => {
-    //     setArtworkData(response.data);
-    //     console.log("artwork data: ", artworkData);
-    //   })
-    //   .catch((error) => {
-    //     console.log("axios error while getting artwork info: ", error);
-    //   })
-    // }
   }, [])
 
   // Check that we got a valid ID request
@@ -105,6 +93,14 @@ const ArtistInstance = () => {
       <br/>
       <br/>
       <p>This artist is stored as ID #{ artistData.id } in GalleryGuide.</p>
+      {/* INSTANCE CONNECTIONS  */}
+      <Link to={`/artwork/${ artworkId }`}>
+        <Button>Explore Artwork</Button>
+      </Link>
+      <p></p>
+      <Link to={`/galleries/${ galleryId }`}>
+        <Button>Explore Gallery</Button>
+      </Link>
 
       {/* More media */}
       <div>
