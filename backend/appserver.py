@@ -1,6 +1,6 @@
 import re
 from typing import ParamSpec
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask.helpers import send_from_directory
 # from flask_sqlalchemy import SQLAlchemy
 import os
@@ -17,6 +17,7 @@ if not os.getenv("DATABASE_URL"):
 #Used hardcoded string to deploy on EC2, but I am testing so I am using env variable
 model.db_init(os.getenv("DATABASE_URL"), echo=False)
 
+# Jason's local postgres "postgresql://postgres:password@localhost:5432/ggdb"
 PAGE_SIZE = 9
 
 @app.route("/", defaults={"path": ""})
@@ -186,5 +187,20 @@ def spotlight_endpoint():
     
     return {"artist": artist_artwork_pair[0]._asdict(), "artwork": artist_artwork_pair[1]._asdict()}
 
+# Currently just used for testing and prototyping
+@app.route("/searchdummy")
+def search():
+    table_name = "artist" # for testing, just using artist table
+    keywords = ["dummy", "keywords", "pablo", "VINCENT"] # Using dummy list of keywords until we decide on retrieval method
+    search = True
+    sort = True
+    if (search):
+        records = model.search_records(table_name, keywords)
+    # else just grab all records? Might be slow
+    if (sort):
+        records = model.sort_records_list(records, "name", True)
+
+    return jsonify(records)
+    
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

@@ -1,12 +1,47 @@
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy import Table, Column, Integer, String, Float, ForeignKey
 from sqlalchemy import insert, select, update, func
+from sqlalchemy import text, or_, cast, String
 import random
 
 """
 This is where our database code goes. 
 Controller (appserver.py) calls this.
 """
+
+def search_records(table_name, keywords):
+    # Load table schema again
+    table = Table(table_name, metadata, autoload=True, autoload_with=engine)
+
+    column_names = [c.name for c in table.columns]
+
+    # list of search conditions
+    search_conditions = []
+
+    # Go through list of keywords, adds % to both sides of the keyword
+    # Appends ilike conditions for specified columns. If it's a string, append the keyword directly, otherwise do a cast.
+    for keyword in keywords:
+        keyword = f"%{keyword}%"
+        for column in table.columns:
+            if isinstance(column.type, String):
+                condition = column.ilike(keyword)
+            else:
+                condition = cast(column, String).ilike(keyword)
+            search_conditions.append(condition)
+
+    # the or_ function is used to combine all search conditions in the list
+    query = table.select().where(or_(*search_conditions))
+    result = conn.execute(query).fetchall()
+
+    records_list = [row._asdict() for row in result]
+    return records_list
+
+def sort_records_list(records_list, sort_by, reverse=False) :
+    # Note current implementation only works for artist table
+    if sort_by == "name" or sort_by == "title":
+        return sorted(records_list, key=lambda record: record[sort_by].lower(), reverse=reverse)
+    else:
+        return sorted(records_list, key=lambda record: record[sort_by], reverse=reverse)
 
 def get_gallery_page(start_id, end_id):
     """
@@ -218,7 +253,6 @@ def get_artist_artwork_pair():
         return ()
 
     return (lucky_artist, lucky_artwork)
-
 
 def db_init(db_string, echo):
     """
