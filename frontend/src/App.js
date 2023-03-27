@@ -2,7 +2,8 @@ import React from 'react';
 import {
   BrowserRouter,
   Route,
-  Routes
+  Routes, 
+  Redirect
 } from 'react-router-dom';
 // Local imports
 import './App.css';
@@ -20,6 +21,8 @@ import ArtistInstance from './components/pages/ArtistInstance';
 
 import Galleries from './components/pages/Galleries';
 import GalleryInstance from './components/pages/GalleryInstance';
+
+import NotFoundPage from './components/pages/NotFoundPage';
 
 function App() {
   return (
@@ -40,6 +43,10 @@ function App() {
           <Route path="/galleries" element={ <Galleries/>} />
           <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>
         </Routes>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path="*" component={PageNotFound} />
+        </Switch>
       </BrowserRouter>
     </div>
   );
