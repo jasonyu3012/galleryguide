@@ -46,6 +46,7 @@ class Artworks extends Component {
       <div>
         <h1>Artworks</h1>
         <p>Showing page {pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
+        <div style={{ display: "flex", justifyContent: "center" }}>
         <ReactPaginate
           breakLabel={'...'}
           nextLabel={<Pagination.Next />}
@@ -63,6 +64,7 @@ class Artworks extends Component {
           previousLabel={<Pagination.Prev />}
           renderOnZeroPageCount={null}
         />
+        </div>
         <Row xs={1} md={3} className="g-4">
           {data.map((entry) => (
             <Col key={entry.id}>
