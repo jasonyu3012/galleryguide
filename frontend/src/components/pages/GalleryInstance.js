@@ -74,9 +74,9 @@ const GalleryInstance = () => {
     );
   }
   
-  var artworkIds = galleryData.artist_ids;
-  var randomIndex = Math.floor(Math.random() * artworkIds.length);
-  var randomArtworkId = artworkIds[randomIndex];
+  //var artworkIds = galleryData.artist_ids;
+  //var randomIndex = Math.floor(Math.random() * artworkIds.length);
+  //var randomArtworkId = artworkIds[randomIndex];
 
   // Tara's note: there's a lot more potential data we can add in Phase 3 to make this look prettier!
   //change to be relevant to galleries
@@ -116,9 +116,6 @@ const GalleryInstance = () => {
       {/* TODO #? Add connections to other instances */}
       
       <p></p>
-      <Link to={`/galleries/` + randomArtworkId}>
-          <Button>Explore an Artwork</Button>
-      </Link>
       <p></p>
       <Link to={'/galleries'}>
         <Button>&#60;</Button> Back to main galleries page

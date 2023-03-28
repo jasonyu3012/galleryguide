@@ -45,10 +45,7 @@ function App() {
           <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>
           <Route path="/search" element={<SearchPage/>}/>
         </Routes>
-        <Routes>
-          <Route exact path='/' component={Home} />
-          <Route path="*" component={NotFoundPage} />
-        </Routes>
+        
       </BrowserRouter>
     </div>
   );
