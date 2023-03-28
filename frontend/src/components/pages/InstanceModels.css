@@ -1,0 +1,27 @@
+/* Styling for Artworks.js (model cards) and ArtworkInstance.js (instance pages). */
+.art-instance-description {
+  align-items: top left;
+  column-gap: 0.875rem;
+  margin-bottom: 0.5rem;
+  overflow: auto;
+}
+
+.art-instance-img {
+  width: 50%;
+}
+
+.art-instance-image-description-wrapper {
+  align-items: center;
+  column-gap: 0.875rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+  overflow: auto;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 30vw;
+  object-fit: cover;
+}

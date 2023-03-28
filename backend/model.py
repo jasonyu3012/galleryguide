@@ -1,12 +1,47 @@
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy import Table, Column, Integer, String, Float, ForeignKey
 from sqlalchemy import insert, select, update, func
+from sqlalchemy import text, or_, cast, String
 import random
 
 """
 This is where our database code goes. 
 Controller (appserver.py) calls this.
 """
+
+def search_records(table_name, keywords):
+    # Load table schema again
+    table = Table(table_name, metadata, autoload=True, autoload_with=engine)
+
+    column_names = [c.name for c in table.columns]
+
+    # list of search conditions
+    search_conditions = []
+
+    # Go through list of keywords, adds % to both sides of the keyword
+    # Appends ilike conditions for specified columns. If it's a string, append the keyword directly, otherwise do a cast.
+    for keyword in keywords:
+        keyword = f"%{keyword}%"
+        for column in table.columns:
+            if isinstance(column.type, String):
+                condition = column.ilike(keyword)
+            else:
+                condition = cast(column, String).ilike(keyword)
+            search_conditions.append(condition)
+
+    # the or_ function is used to combine all search conditions in the list
+    query = table.select().where(or_(*search_conditions))
+    result = conn.execute(query).fetchall()
+
+    records_list = [row._asdict() for row in result]
+    return records_list
+
+def sort_records_list(records_list, sort_by, reverse=False) :
+    # Note current implementation only works for artist table
+    if sort_by == "name" or sort_by == "title":
+        return sorted(records_list, key=lambda record: record[sort_by].lower(), reverse=reverse)
+    else:
+        return sorted(records_list, key=lambda record: record[sort_by], reverse=reverse)
 
 def get_gallery_page(start_id, end_id):
     """
@@ -80,6 +115,40 @@ def get_gallery(id):
     #TODO: what happens when we are given an id not in the database?
     return rows
 
+def get_gallery_artists(gallery_id):
+    """
+    Gets all the artist ids associated with the given gallery_id
+
+    returns: A list of artist ids or raises an exception if there was a database error
+    """
+    s = select(gallery_artist_rel_table.c.artist_id).where(gallery_artist_rel_table.c.gallery_id == gallery_id)
+
+    try:
+        rows = conn.execute(s)
+        ids = []
+        for row in rows:
+            ids.append(row._mapping["artist_id"])
+        return ids
+    except BaseException as e:
+        raise e
+
+def get_gallery_artworks(gallery_id):
+    """
+    Gets all the artwork ids associated with the given gallery_id
+
+    returns: A list of artwork ids or raises an exception if there was a database error
+    """
+    s = select(gallery_artwork_rel_table.c.artwork_id).where(gallery_artwork_rel_table.c.gallery_id == gallery_id)
+
+    try:
+        rows = conn.execute(s)
+        ids = []
+        for row in rows:
+            ids.append(row._mapping["artwork_id"])
+        return ids
+    except BaseException as e:
+        raise e
+
 def get_artist(id):
     """
     Gets the artist from the database with the given id
@@ -97,6 +166,39 @@ def get_artist(id):
         pass
     #TODO: what happens when we are given an id not in the database?
     return rows
+
+def get_artist_artworks(artist_id):
+    """
+    Gets all the artwork ids associated with the given artist_id
+
+    returns: A list of artwork ids or raises an exception if there was a database error
+    """
+    s = select(artist_artwork_rel_table.c.artwork_id).where(artist_artwork_rel_table.c.artist_id == artist_id)
+
+    try:
+        rows = conn.execute(s)
+        ids = []
+        for row in rows:
+            ids.append(row._mapping["artwork_id"])
+        return ids
+    except BaseException as e:
+        raise e
+    
+def get_artist_galleries(artist_id):
+    """
+    Gets all the gallery ids associated with the given artist_id
+
+    returns: A list of gallery ids or raises an exception if there was a database error
+    """
+    s = select(gallery_artist_rel_table.c.gallery_id).where(gallery_artist_rel_table.c.artist_id == artist_id)
+    try:
+        rows = conn.execute(s)
+        ids = []
+        for row in rows:
+            ids.append(row._mapping["gallery_id"])
+        return ids
+    except BaseException as e:
+        raise e
 
 def get_artwork(id):
     """
@@ -118,46 +220,39 @@ def get_artwork(id):
 
 def get_artist_artwork_pair():
     num_artists = 0
-    count_artists = func.count(artist_table.c.id)
     try:
-        #returns int?
-        num_artists = conn.execute(count_artists)
+        num_artists = conn.execute(func.count(artist_table.c.id)).scalar()
     except:
         #Database error
         return ()
     
 
-    lucky_artist_id = random.randrange(1, num_artists)
+    lucky_artist_id = random.randrange(1, num_artists + 1)
 
     s = select(artist_table).where(artist_table.c.id == lucky_artist_id)
-    rows = None
     try:
-        rows = conn.execute(s)
+        lucky_artist = conn.execute(s).fetchone()
     except:
         #Database error
         return ()
 
-    if rows is None:
+    if lucky_artist is None:
         return ()
     
-    lucky_artist = rows.first()
-    num_artworks = lucky_artist["num_artworks"]
-    lucky_artwork_id = random.randrange(1, num_artworks)
+    num_artworks = lucky_artist._get_by_key_impl_mapping("num_artworks")
+    lucky_artwork_id = random.randrange(1, num_artworks + 1)
 
     s = select(artwork_table).where(artwork_table.c.id == lucky_artwork_id)
     try:
-        rows = conn.execute(s)
+        lucky_artwork = conn.execute(s).fetchone()
     except:
         #Database error
         return ()
 
-    if rows is None:
+    if lucky_artwork is None:
         return ()
 
-    lucky_artwork = rows.first()
-
     return (lucky_artist, lucky_artwork)
-
 
 def db_init(db_string, echo):
     """
@@ -169,10 +264,7 @@ def db_init(db_string, echo):
     global engine
     engine = create_engine(db_string, echo=echo, future=True)
 
-    """
-    TODO: Add all necessary elements, just testing these for now.
-    Also add nullable=false where possible to the columns
-    """
+
     global gallery_table
     gallery_table = Table(
         "gallery",
@@ -297,3 +389,4 @@ def setup_test_db():
 
     i = insert(artist_artwork_rel_table).values(artist_id = 1, artwork_id = 1)
     conn.execute(i)
+    conn.commit()

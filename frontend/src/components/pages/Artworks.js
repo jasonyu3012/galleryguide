@@ -1,64 +1,91 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Button from 'react-bootstrap/Button';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import AmericanGothic from '../images/AmericanGothic.jpg'
-import GirlInChair from '../images/LittleGirlInABlueArmchair.jpg'
-import WheatField from '../images/WheatFieldWithCypresses.jpg'
-import './Artworks.css';
+import axios from 'axios';
+import ReactPaginate from 'react-paginate';
+import Pagination from 'react-bootstrap/Pagination';
+import { Button, Card, Col, Row } from 'react-bootstrap';
+import './InstanceModels.css';
+import '../Pagination.css';
+import { ArtworkSearch } from '../Search';
 
-const Artworks = () => {
-  return (
-    <div>
-      <h1>Artworks</h1>
-      <p>Showing 1/1 Pages, 3/3 Works.</p>
-      <CardGroup>
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={AmericanGothic}/>
-          <Card.Body>
-            <Card.Title>American Gothic</Card.Title>
-            <Card.Text>
-            Painting of a woman and an older white man holding a pitchfork, both seen from the waist up. They stand side by side with stern expressions, in front of a white house with a peaked roof.
-            </Card.Text>
-            <Link to='/artworks/AmericanGothic'>
-              <Button>Explore More</Button>
-            </Link>
-          </Card.Body>
-        </Card>
+const ARTWORKS_NUM_PAGES = 888;
+export const ARTWORKS_NUM_IDS = 7986;
 
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={WheatField}/>
-          <Card.Body>
-            <Card.Title>Wheat Field with Cypresses</Card.Title>
-            <Card.Text>
-            Painting of a wheat field with two cypress trees to the right.
-            </Card.Text>
-            <Link to='/artworks/WheatFieldwithCypresses'>
-              <Button>Explore More</Button>
-            </Link>
-          </Card.Body>
-        </Card>
+class Artworks extends Component {
+  state = {
+    databaseResponse: [],
+    data: [],
+    pageIndex: 1,
+  };
 
-        <Card style={{ width: '15rem', justifyContent: 'center' }}>
-          {/* add in image! */}
-          <Card.Img variant="top" src={GirlInChair}/>
-          <Card.Body>
-            <Card.Title>Little Girl in a Blue Armchair</Card.Title>
-            <Card.Text>
-            Painting of girl sprawled on a blue armchair in a room with three other chairs of a matching design.
-            </Card.Text>
-            <Link to='/artworks/LittleGirlInaBlueArmchair'>
-              <Button>Explore More</Button>
-            </Link>
-          </Card.Body>
-        </Card>
-      </CardGroup>
+  componentDidMount() {
+    this.getResponseData(1);
+  }
 
-    </div>
-  );
+  handleClick = (clickAction) => {
+    const selected = clickAction.selected + 1;
+    this.setState({ pageIndex: selected });
+    this.getResponseData(selected);
+  };
+
+  getResponseData = (targetIndex) => {
+    axios
+      .get(`https://galleryguide.me/api/artworks?page=${targetIndex}`)
+      .then((response) => {
+        const responseData = response.data;
+        this.setState({ databaseResponse: responseData, data: responseData.artworks });
+      })
+      .catch((error) => {
+        console.log("axios error: ", error);
+      });
+  };
+
+  render() {
+    const { pageIndex, data } = this.state;
+
+    return (
+      <div>
+        <h1>Artworks</h1>
+        <ArtworkSearch/>
+        <p>Showing page {pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+        <ReactPaginate
+          breakLabel={'...'}
+          nextLabel={<Pagination.Next />}
+          onPageChange={this.handleClick}
+          activeClassName={'item active'}
+          breakClassName={'item break-me'}
+          containerClassName={'pagination'}
+          disabledClassName={'disabled-page'}
+          marginPagesDisplayed={2}
+          nextClassName={'item next'}
+          pageClassName={'item pagination-page'}
+          pageRangeDisplayed={5}
+          previousClassName={'item previous'}
+          pageCount={ARTWORKS_NUM_PAGES}
+          previousLabel={<Pagination.Prev />}
+          renderOnZeroPageCount={null}
+        />
+        </div>
+        <Row xs={1} md={3} className="g-4">
+          {data.map((entry) => (
+            <Col key={entry.id}>
+              <Card style={{ justifyContent: 'center' }}>
+                <Card.Img variant="top" src={entry.image} />
+                <Card.Body>
+                  <Card.Title>{entry.title}</Card.Title>
+                  <Card.Text>{entry.medium}</Card.Text>
+                  <Link to={`/artworks/${entry.id}`}>
+                    <Button>Explore More</Button>
+                  </Link>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
+    );
+  }
 }
 
 export default Artworks;

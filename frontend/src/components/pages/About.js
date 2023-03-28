@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import CardGroup from 'react-bootstrap/CardGroup';
 import { Card, Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import tara_img from '../images/tara_headshot.png';
@@ -61,52 +60,52 @@ const tools = [
     {
         name: "React",
         description: "JavaScript framework for frontend development",
-        // image: "./toolsPic/react-logo.png",
+        image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.a_wOSqpiu-wR6KEOKE1E0wAAAA%26pid%3DApi&f=1&ipt=ee3b1db5c464daf81e8ba7ecf7a344b040d2d89c4fdcf612b451d55d9eeab701&ipo=images",
         link: "https://reactjs.org"
     },
     {
         name: "GitLab",
         description: "Storing code and running CI/CD",
-        // image: "./toolsPic/gitlab-logo.png",
+        image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Flarge%2F2x%2Fgitlab-logo-png-transparent.png&f=1&nofb=1&ipt=0396643c2b70b4f5f1b1d1b433560c30e0feb02c449b7770b78fcca08c9a1535&ipo=images",
         link: "https://gitlab.com"
     },
     {
         name: "React Bootstrap",
         description: "CSS framework",
-        // image: "./toolsPic/react-bootstrap-logo.png",
+        image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F27-278320_bootstrap-logo-logo-png-bootstrap-logo-transparent-png.png&f=1&nofb=1&ipt=11da922f4efd21494fdec1ead65e9e7781b89fdc27c68f164a74897235947b54&ipo=images",
         link: "https://react-bootstrap.github.io/"
     },
     {
         name: "Postman",
         description: "For designing, testing, and documenting APIs",
-        // image: "./toolsPic/postman-logo.png",
+        image: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fww1.prweb.com%2Fprfiles%2F2018%2F10%2F05%2F15812110%2Fpostman-logo-vert-2018.png&f=1&nofb=1&ipt=a666d1715184b008c9d7b389cc891cf83af9e067d90afb08bdef7bbf685bcbd8&ipo=images",
         link: "https://www.postman.com/"
     },
     {
         name: "Namecheap",
         description: "Domain name provider",
-        // image: "./toolsPic/namecheap-logo.png",
+        image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmma.prnewswire.com%2Fmedia%2F484507%2Fnamecheap_Logo.jpg%3Fp%3Dpublish%26w%3D800&f=1&nofb=1&ipt=cb95508bc623a96ee56cb36f309a6ced5e219d4c1930b5d3496ada653e178ba1&ipo=images",
         link: "https://www.namecheap.com/"
     },
 ]
 
 const sources = [
     {
-        name: "MET Museum API",
+        name: "Artsy Artworks API",
         description: "API used for gathering artwork data",
-        // image: "./toolsPic/yelpLogo.png",
-        link: "https://metmuseum.github.io/"
+        image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.dtgukGqkoXQ_P2Tb07vxmwAAAA%26pid%3DApi&f=1&ipt=e9010ad40649b1ab2e18d0b68789994faa196a87f3ef297a5e6acd1caaf0bc90&ipo=images",
+        link: "https://developers.artsy.net/v2/docs/artworks"
     },
     {
-        name: "Art Institute of Chicago Public API",
+        name: "Artsy Artists API",
         description: "API used for gathering artist data",
-        // image: "./toolsPic/wgerLogo.png",
-        link: "https://www.artic.edu/open-access/public-api"     
+        image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.dtgukGqkoXQ_P2Tb07vxmwAAAA%26pid%3DApi&f=1&ipt=e9010ad40649b1ab2e18d0b68789994faa196a87f3ef297a5e6acd1caaf0bc90&ipo=images",
+        link: "https://developers.artsy.net/v2/docs/artists"     
     },
     {
-        name: "Artsy API",
+        name: "Artsy Partners API",
         description: "API used for gathering gallery data",
-        // image: "./toolsPic/wgerLogo.png",
+        image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.dtgukGqkoXQ_P2Tb07vxmwAAAA%26pid%3DApi&f=1&ipt=e9010ad40649b1ab2e18d0b68789994faa196a87f3ef297a5e6acd1caaf0bc90&ipo=images",
         link: "https://developers.artsy.net/v2/docs/partners"     
     },
 ]
@@ -224,7 +223,8 @@ export default function About() {
                     })
                 }
             </Row>
-
+            <h2>Postman Documentation</h2>
+            <p>Want to use our RESTful public APIs? We can't wait! Check out our Postman documentation made by our backend team <a href="https://documenter.getpostman.com/view/18824630/2s93CExHF3" target={'_blank'} rel={'noreferrer'}>here</a>!</p>
             <h3 className="d-flex justify-content-center p-4"> Data Sources</h3>
             <Row>
                 {

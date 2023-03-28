@@ -1,25 +1,23 @@
 import re
 from typing import ParamSpec
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask.helpers import send_from_directory
 # from flask_sqlalchemy import SQLAlchemy
 import os
 import model
+from flask_cors import CORS
 
 app = Flask(__name__, static_folder='build', static_url_path='/')
+CORS(app)
 
 # check for environment variable
-#if not os.getenv("DATABASE_URL"):
-    #raise RuntimeError("DATABASE_URL is not set")
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
 
-model.db_init('postgresql://ubuntu:iluvgalleryguide123@localhost:5432/ggdb', echo=False)
-# app.config["SQLALCHEMY_DATABASE_URI"] = dialect + '+' + driver + "://" + os.getenv("DATABASE_URL")
-# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+#Used hardcoded string to deploy on EC2, but I am testing so I am using env variable
+model.db_init(os.getenv("DATABASE_URL"), echo=False)
 
-# db = SQLAlchemy(app)
-# conn = db.make_connector()
-
-
+# Jason's local postgres "postgresql://postgres:password@localhost:5432/ggdb"
 PAGE_SIZE = 9
 
 @app.route("/", defaults={"path": ""})
@@ -67,8 +65,23 @@ def gallery_id_endpoint(id):
     if gallery is None:
         #Do something, probably got bad id
         return "Bad gallery ID", 400
+    
+    gallery_obj = gallery._asdict()
 
-    return gallery._asdict()
+    #Does this check need to be against 1 (int) or "1"
+    if request.args.get("artist_ids") == "1":
+        try: 
+            gallery_obj["artist_ids"] = model.get_gallery_artists(id)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artist ids of gallery " + id, 500)
+
+    if request.args.get("artwork_ids") == "1":
+        try:
+            gallery_obj["artwork_ids"] = model.get_gallery_artworks(id)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artwork ids of gallery " + id, 500)
+
+    return gallery_obj
 
 @app.route("/api/artists")
 def artist_endpoint():
@@ -107,8 +120,22 @@ def artist_id_endpoint(id):
     if artist is None:
         #Do something, probably got bad id
         return "Bad artist ID", 400
+    
+    artist_obj = artist._asdict()
 
-    return artist._asdict()
+    if request.args.get("artwork_ids") == "1":
+        try:
+            artist_obj["artwork_ids"] = model.get_artist_artworks(id)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artworks of artist " + id, 500)
+
+    if request.args.get("gallery_ids") == "1":
+        try:
+            artist_obj["gallery_ids"] = model.get_artist_galleries(id)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving galleries of artist " + id, 500)
+
+    return artist_obj
 
 
 @app.route("/api/artworks")
@@ -154,11 +181,26 @@ def artwork_id_endpoint(id):
 @app.route("/api/spotlight")
 def spotlight_endpoint():
     artist_artwork_pair = model.get_artist_artwork_pair()
-    if len(artist_artwork_pair) == 0:
+    if len(artist_artwork_pair) != 2:
         #Database error, do something
-        return
+        return "Had trouble getting a spotlight pair", 500
     
     return {"artist": artist_artwork_pair[0]._asdict(), "artwork": artist_artwork_pair[1]._asdict()}
 
+# Currently just used for testing and prototyping
+@app.route("/searchdummy")
+def search():
+    table_name = "artist" # for testing, just using artist table
+    keywords = ["dummy", "keywords", "pablo", "VINCENT"] # Using dummy list of keywords until we decide on retrieval method
+    search = True
+    sort = True
+    if (search):
+        records = model.search_records(table_name, keywords)
+    # else just grab all records? Might be slow
+    if (sort):
+        records = model.sort_records_list(records, "name", True)
+
+    return jsonify(records)
+    
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

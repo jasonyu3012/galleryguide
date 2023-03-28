@@ -1,0 +1,54 @@
+/* Code credit to WorkItOut */
+.item {
+  align-items: center;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.disabled-page {
+  color: #808e9b;
+}
+
+.active {
+  border: solid 1px #808e9b;
+  border-radius: 40px;
+  color: #808e9b;
+}
+
+.pagination {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.next {
+  font-size: 4px;
+  height: 60px;
+  width: 150px;
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  justify-content: center;
+  list-style-type: none;
+  position: relative;
+  width: 1000px;
+}
+
+.pagination-page {
+  font-weight: 700;
+}
+
+.previous {
+  font-size: 4px;
+  height: 60px;
+  width: 150px;
+}
