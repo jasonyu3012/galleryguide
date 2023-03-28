@@ -23,7 +23,12 @@ const ArtistInstance = () => {
   // Run only once due to second arg
   useEffect(() => {
     console.log("page loaded")
-    axios.get(`https://galleryguide.me/api/artists/${ artistId }`)
+    axios.get(`https://galleryguide.me/api/artists/${ artistId }`, {
+    params : {
+      gallery_ids: 1 , 
+      artwork_ids : 1
+      }
+    })
     .then(response => {
       const artistData = response.data;
       setArtistData(artistData);
@@ -94,7 +99,7 @@ const ArtistInstance = () => {
       <br/>
       <p>This artist is stored as ID #{ artistData.id } in GalleryGuide.</p>
       {/* INSTANCE CONNECTIONS  */}
-      <Link to={`/artwork/${ artworkId }`}>
+      <Link to={`/artworks/${ artworkId }`}>
         <Button>Explore Artwork</Button>
       </Link>
       <p></p>

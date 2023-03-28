@@ -43,10 +43,7 @@ function App() {
           <Route path="/galleries" element={ <Galleries/>} />
           <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>
         </Routes>
-        <Routes>
-          <Route exact path='/' component={Home} />
-          <Route path="*" component={NotFoundPage} />
-        </Routes>
+        
       </BrowserRouter>
     </div>
   );
