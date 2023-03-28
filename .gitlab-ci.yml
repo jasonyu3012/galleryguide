@@ -66,11 +66,11 @@ test-selenium:
 
 
 # TODO 
-# test-jest:
-#     stage: test
-#     image: node:latest
-#     script:
-#         - cd frontend
-#         - npm install
-#         # suppress output when running
-#         - npm test --silent
+ test-jest:
+     stage: test
+     image: node:latest
+     script:
+         - cd frontend
+         - npm install
+         # suppress output when running
+         - npm test --silent
