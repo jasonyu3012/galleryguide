@@ -21,6 +21,7 @@ import ArtistInstance from './components/pages/ArtistInstance';
 import Galleries from './components/pages/Galleries';
 import GalleryInstance from './components/pages/GalleryInstance';
 
+import SearchPage from './components/pages/SearchPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
 
           <Route path="/galleries" element={ <Galleries/>} />
           <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>
+          <Route path="/search" element={<SearchPage/>}/>
         </Routes>
         <Routes>
           <Route exact path='/' component={Home} />
