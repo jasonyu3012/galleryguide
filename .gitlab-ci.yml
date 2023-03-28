@@ -34,7 +34,7 @@ dev-test-api:
 
 prod-test-api:
     image: 
-        name: postman/newman:alpine
+        name: "postman/newman:alpine"
         entrypoint: [""]
     stage: test
     rules:
@@ -64,9 +64,8 @@ test-selenium:
         - cd frontend/selenium
         - python3 -m pytest
 
-
 # TODO 
- test-jest:
+test-jest:
      stage: test
      image: node:latest
      script:
