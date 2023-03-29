@@ -54,7 +54,7 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 | Tara Roshan      | 20                         | 60                         |
 | Landon Johnson   | 25                         | 35                         | 
 | Sunad Adhikari   | 12                         | 25                         | 
-| Jerry Ming       | 15                         | ?                          | 
+| Jerry Ming       | 15                         | 25                         | 
 | Jason Yu         | 40                         | 40                         |
 
 ## Phase 3
@@ -64,7 +64,7 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 | Tara Roshan      | 20                         | ?                          |
 | Landon Johnson   | x                          | ?                          | 
 | Sunad Adhikari   | x                          | ?                          | 
-| Jerry Ming       | x                          | ?                          | 
+| Jerry Ming       | 30                         | ?                          | 
 | Jason Yu         | x                          | ?                          |
 
 ## Comments
