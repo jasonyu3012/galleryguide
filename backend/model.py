@@ -3,6 +3,7 @@ from sqlalchemy import Table, Column, Integer, String, Float, ForeignKey
 from sqlalchemy import insert, select, update, func
 from sqlalchemy import text, or_, cast, String
 import random
+import sys
 
 """
 This is where our database code goes. 
@@ -41,7 +42,39 @@ def sort_records_list(records_list, sort_by, reverse=False) :
     if sort_by == "name" or sort_by == "title":
         return sorted(records_list, key=lambda record: record[sort_by].lower(), reverse=reverse)
     else:
-        return sorted(records_list, key=lambda record: record[sort_by], reverse=reverse)
+        return sorted(records_list, key=lambda record: sys.maxsize if record[sort_by] == None else record[sort_by], reverse=reverse)
+
+def filter_records(sorted_records, filter_column, filter_value, filter_type = 'numeric', greater_than=True) :
+    if filter_type == 'numeric':
+        if greater_than:
+            l = []
+            for record in sorted_records:
+                val = record[filter_column] if record[filter_column] != None else sys.maxsize
+                if val > filter_value:
+                    l.append(record)
+            return l
+        else :
+            l = []
+            for record in sorted_records:
+                val = record[filter_column] if record[filter_column] != None else sys.maxsize
+                if val < filter_value:
+                    l.append(record)
+            return l
+    elif filter_type == 'string':
+        return [record for record in sorted_records if record[filter_column] == filter_value]
+    else:
+        raise ValueError("Invalid filter_type. It must be either 'numeric' or 'string'.")
+
+def get_artists():
+
+    s = select(artist_table)
+    try:
+        rows = conn.execute(s).fetchall()
+        result = [row._asdict() for row in rows]
+        return result
+    except BaseException as e:
+        raise e
+    
 
 def get_gallery_page(start_id, end_id):
     """

@@ -6,16 +6,17 @@ from flask.helpers import send_from_directory
 import os
 import model
 from flask_cors import CORS
+from urllib.parse import urlencode
 
 app = Flask(__name__, static_folder='build', static_url_path='/')
 CORS(app)
 
 # check for environment variable
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
+# if not os.getenv("DATABASE_URL"):
+#     raise RuntimeError("DATABASE_URL is not set")
 
 #Used hardcoded string to deploy on EC2, but I am testing so I am using env variable
-model.db_init(os.getenv("DATABASE_URL"), echo=False)
+model.db_init("postgresql://postgres:jasonyubc9293@localhost:5432/ggdb", echo=False)
 
 # Jason's local postgres "postgresql://postgres:password@localhost:5432/ggdb"
 PAGE_SIZE = 9
@@ -190,17 +191,90 @@ def spotlight_endpoint():
 # Currently just used for testing and prototyping
 @app.route("/searchdummy")
 def search():
+    
+    #http://127.0.0.1:5000/searchdummy?query=VINCENT+Pablo&sort=death_year+true&death_year=1970+true
+    #http://127.0.0.1:5000/searchdummy?sort=death_year+true&death_year=1+true&
+    #http://127.0.0.1:5000/searchdummy?sort=death_year+false&death_year=1970+true   sorting in ascending
+    
+    #http://127.0.0.1:5000/searchdummy?sort=death_year+false&death_year=1940+true&birth_year=1900+false
+    #http://127.0.0.1:5000/searchdummy?sort=death_year+false&death_year=1940+true&birth_year=1900+false&num_artworks=1+true
+    #galleryguide.me/api/artists?min_deathyear=1940&max_deathyear=2000
+    url_params = request.args.to_dict()
+
+    print(url_params)
+    sort_arg = request.args.get("sort")
+    
     table_name = "artist" # for testing, just using artist table
-    keywords = ["dummy", "keywords", "pablo", "VINCENT"] # Using dummy list of keywords until we decide on retrieval method
+    #need to split by whatever we decide 
     search = True
     sort = True
-    if (search):
-        records = model.search_records(table_name, keywords)
-    # else just grab all records? Might be slow
-    if (sort):
-        records = model.sort_records_list(records, "name", True)
+    filter = False
 
-    return jsonify(records)
+    page = 1 # Get page number from request.args
+    page_size = 9
+    
+    if "query" in url_params:
+        # Using dummy list of keywords until we decide on retrieval method
+        keywords = url_params["query"].split()
+        print(keywords)
+        records = model.search_records(table_name, keywords)
+    else:
+        try:
+            records = model.get_artists()
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artists from database " + id, 500)
+    # else just grab all records? Might be slow
+
+    # ?query&birth_year=value+true&death_year=value+true&sort, etc etc
+    if "birth_year" in url_params:
+        birth_year_value, greater_than_str = url_params["birth_year"].split()
+        records = model.filter_records(records, "birth_year", int(birth_year_value), "numeric", greater_than_str.lower() == "true")
+    if "death_year" in url_params:
+        death_year_value, greater_than_str = url_params["death_year"].split()
+        records = model.filter_records(records, "death_year", int(death_year_value), "numeric", greater_than_str.lower() == "true")
+    if "num_artworks" in url_params:
+        num_artworks_value, greater_than_str = url_params["num_artworks"].split()
+        records = model.filter_records(records, "num_artworks", int(num_artworks_value), "numeric", greater_than_str.lower() == "true")
+    # if "filter" in url_params:
+    #     records = model.filter_records(records, "name", "Pablo Picasso", "string")
+    #     filter_parts = url_params["filter"].split("+")
+    #     if len(filter_parts) == 4:
+    #         filter_column, filter_value, filter_type, greater_than_str = filter_parts
+    #         greater_than = greater_than_str.lower() == "true"
+    #     else:
+    #         filter_column, filter_value, filter_type, 
+    # if (sort):
+    #     records = model.sort_records_list(records, "name", True)
+
+    if "sort" in url_params:
+        sort_by, reverse = url_params["sort"].split()
+        records = model.sort_records_list(records, sort_by, reverse.lower() == "true")
+    
+    total = len(records)
+
+    if "page" in url_params:
+        page = url_params["page"]
+
+    records = paginate_records(records, int(page), page_size)
+    
+    url_params["page"] = page + 1
+    json = {}
+    json["artists"] = []
+    for record in records:
+        json["artists"].append(record)
+    json["next"] = ("galleryguide.me/api/artists?" + urlencode(url_params))
+    json["total"] = total
+    json["size"] = len(records)
+
+    #http://127.0.0.1:5000/api/artistssort=death_year+false&death_year=1920+true&birth_year=1900+false&num_artworks=1+true&page=2
+    
+    #add extra information
+    return json
+
+def paginate_records(records, page, page_size):
+    start_index = (page - 1) * page_size
+    end_index = start_index + page_size
+    return records[start_index:end_index]
     
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
