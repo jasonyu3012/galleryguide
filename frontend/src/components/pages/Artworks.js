@@ -7,9 +7,12 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import './InstanceModels.css';
 import '../Pagination.css';
 import { ArtworkSearch } from '../Search';
+import {IconicityFilter, DateFilter} from '../Filters';
 
 const ARTWORKS_NUM_PAGES = 888;
 export const ARTWORKS_NUM_IDS = 7986;
+
+
 
 class Artworks extends Component {
   state = {
@@ -40,6 +43,51 @@ class Artworks extends Component {
       });
   };
 
+  handleIconicity = (option) => {
+    if(option === 'ascending'){
+      axios
+      .get(`https://galleryguide.me/api/artworks`, {
+        params : {
+          sort : 'iconicity+false'
+          }
+        })
+        .then((response) => {
+          const responseData = response.data;
+          this.setState({ databaseResponse: responseData, data: responseData.artworks });
+        })
+        .catch((error) => {
+          console.log("axios error: ", error);
+        });
+    }
+  }
+
+  handleDate = (option) => {
+    if(option === 'ascending'){
+      axios
+      .get(`https://galleryguide.me/api/artworks`, {
+        params : {
+          sort : 'date+false'
+          }
+        })
+        .then((response) => {
+          const responseData = response.data;
+          this.setState({ databaseResponse: responseData, data: responseData.artworks });
+        })
+        .catch((error) => {
+          console.log("axios error: ", error);
+        });
+    }
+  }
+  /*
+  IconicityFilter(props) {
+    return (
+      <DropdownButton id="filter-iconicity" title="Filter by Iconicity">
+        <Dropdown.Item onClick={() => props.onSelect('ascending')}>Ascending</Dropdown.Item>
+        <Dropdown.Item onClick={() => props.onSelect('descending')}>Descending</Dropdown.Item>
+      </DropdownButton>
+    );
+  }
+  */
   render() {
     const { pageIndex, data } = this.state;
 
@@ -47,6 +95,8 @@ class Artworks extends Component {
       <div>
         <h1>Artworks</h1>
         <ArtworkSearch/>
+        <IconicityFilter onSelect={this.handleIconicity}/>
+        <DateFilter onSelect={this.handleDate}/>
         <p>Showing page {pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         <ReactPaginate
