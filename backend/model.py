@@ -422,4 +422,146 @@ def setup_test_db():
 
     i = insert(artist_artwork_rel_table).values(artist_id = 1, artwork_id = 1)
     conn.execute(i)
+
+    # #Search/Filter/Sort tests
+
+    #insert in new Galleries
+
+    i = insert(gallery_table).values(
+        name = "More artworks",
+        region = "South America",
+        description = "Real gallery.",
+        thumbnail = "link",
+        website = "link",
+        num_artworks = 4,
+        num_artists = 4,
+    )
+    conn.execute(i)
+
+
+    #insert in new Artists
+
+    i = insert(artist_table).values(
+        name = "Alfred",
+        biography = "Bruce Waynes Butler",
+        birth_year = 1900,
+        death_year = NULL,
+        thumbnail = "link",
+        num_artworks = 1,
+        num_galleries = 1,
+    )
+    conn.execute(i)
+
+
+    i = insert(artist_table).values(
+        name = "Bob",
+        biography = "Professional Builder",
+        birth_year = 1950,
+        death_year = 1980,
+        thumbnail = "link",
+        num_artworks = 1,
+        num_galleries = 1,
+    )
+    conn.execute(i)
+
+    i = insert(artist_table).values(
+        name = "Carmen",
+        biography = "Women from San Diego",
+        birth_year = 1900,
+        death_year = 2000,
+        thumbnail = "link",
+        num_artworks = 1,
+        num_galleries = 1,
+    )
+    conn.execute(i)
+
+    i = insert(artist_table).values(
+        name = "Daenerys",
+        biography = "Queen of the dragons",
+        birth_year = 1984,
+        death_year = 2010,
+        thumbnail = "link",
+        num_artworks = 1,
+        num_galleries = 1,
+    )
+    conn.execute(i)
+
+
+    #insert in new Artworks
+    i = insert(artwork_table).values(
+        artist_id = 2,
+        gallery_id = 2,
+        title = "Artwork-Bruce",
+        date = "2",
+        medium = "Dirt.",
+        iconicity = 1.23,
+        image_rights = "Do whatever you want with it.",
+        image = "link",
+    )
+    conn.execute(i)
+    i = insert(artwork_table).values(
+        artist_id = 3,
+        gallery_id = 2,
+        title = "Artwork-Bob",
+        date = "2",
+        medium = "Dirt.",
+        iconicity = 1.23,
+        image_rights = "Do whatever you want with it.",
+        image = "link",
+    )
+    conn.execute(i)
+    i = insert(artwork_table).values(
+        artist_id = 4,
+        gallery_id = 2,
+        title = "Artwork-Carmen",
+        date = "2",
+        medium = "Dirt.",
+        iconicity = 1.23,
+        image_rights = "Do whatever you want with it.",
+        image = "link",
+    )
+    conn.execute(i)
+    i = insert(artwork_table).values(
+        artist_id = 5,
+        gallery_id = 2,
+        title = "Artwork-Daenerys",
+        date = "2",
+        medium = "Dirt.",
+        iconicity = 1.23,
+        image_rights = "Do whatever you want with it.",
+        image = "link",
+    )
+    conn.execute(i)
+
+
+    #insert in new gallery_artist relations
+    i = insert(gallery_artist_rel_table).values(gallery_id = 2, artist_id = 2)
+    conn.execute(i)
+    i = insert(gallery_artist_rel_table).values(gallery_id = 2, artist_id = 3)
+    conn.execute(i)
+    i = insert(gallery_artist_rel_table).values(gallery_id = 2, artist_id = 4)
+    conn.execute(i)
+    i = insert(gallery_artist_rel_table).values(gallery_id = 2, artist_id = 5)
+    conn.execute(i)
+
+    #insert in new gallery_artworks relations
+    i = insert(gallery_artwork_rel_table).values(gallery_id = 2, artwork_id = 2)
+    conn.execute(i)
+    i = insert(gallery_artwork_rel_table).values(gallery_id = 2, artwork_id = 3)
+    conn.execute(i)
+    i = insert(gallery_artwork_rel_table).values(gallery_id = 2, artwork_id = 4)
+    conn.execute(i)
+    i = insert(gallery_artwork_rel_table).values(gallery_id = 2, artwork_id = 5)
+    conn.execute(i)
+
+    #insert in new artist_artwork relations
+    i = insert(artist_artwork_rel_table).values(artist_id = 2, artwork_id = 2)
+    conn.execute(i)
+    i = insert(artist_artwork_rel_table).values(artist_id = 3, artwork_id = 3)
+    conn.execute(i)
+    i = insert(artist_artwork_rel_table).values(artist_id = 4, artwork_id = 4)
+    conn.execute(i)
+    i = insert(artist_artwork_rel_table).values(artist_id = 5, artwork_id = 5)
+    conn.execute(i)
+
     conn.commit()
