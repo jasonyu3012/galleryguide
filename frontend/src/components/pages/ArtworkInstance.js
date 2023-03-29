@@ -63,6 +63,7 @@ const ArtworkInstance = () => {
         console.log("src in request: ", videoSrc);
       })
       .catch((error) => {
+        setVideoSrc(`https://www.youtube.com/embed/fhdZxedNFr0`);
         console.log("axios error when fetching video: ", error);
       })
     })
@@ -90,7 +91,7 @@ const ArtworkInstance = () => {
         <div class="art-instance-description">
           <h1>{ artworkData.title }</h1>
           <h3>{ artistInfo.name }, { artworkData.date }</h3>
-          <em>{ artworkData.medium }</em>
+          <em>{ artworkData.medium }</em><br/>
           <em>Iconicity of the image: { artworkData.iconicity }</em>
           <br/>
           <br/>
