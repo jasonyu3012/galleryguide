@@ -22,7 +22,6 @@ export default class Artworks extends React.Component {
       data: [],
       pageIndex: 1,
       query: '',
-      URL: "https://galleryguide.me/api/artists"
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleQueryChange = this.handleQueryChange.bind(this);
@@ -75,7 +74,6 @@ export default class Artworks extends React.Component {
         ...(this.state.query === '' ? {} : { query: this.state.query })
     }})
     .then(response => {
-      console.log(this.url)
       const responseData = response.data
       console.log("response data:")
       console.log(responseData)

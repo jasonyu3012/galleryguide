@@ -16,6 +16,7 @@ class Artworks extends Component {
     databaseResponse: [],
     data: [],
     pageIndex: 1,
+    query: '',
   };
 
   componentDidMount() {
@@ -47,6 +48,8 @@ class Artworks extends Component {
     }})
     .then(response => {
       const responseData = response.data
+      console.log("SEARCH artworks data:")
+      console.log(responseData.artworks)
 
       this.setState({ databaseResponse: responseData })
       this.setState({ data: responseData.artworks })
