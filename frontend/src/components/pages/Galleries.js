@@ -77,6 +77,7 @@ export default class Artworks extends React.Component {
         page: targetIndex,
         ...(this.state.query === '' ? {} : { query: this.state.query }),
         ...(this.state.sortOption === '' ? {} : { sort: this.state.sortOption+"+"+this.state.sortState }),
+        ...(this.state.filterOption === '' ? {} : { filter: this.state.filterOption}),
     }})
       .then(response => {
         console.log(this.url)
@@ -96,13 +97,38 @@ export default class Artworks extends React.Component {
 
   handleRegion = (option) => {
     this.setState({ pageIndex: 1 })
-    this.setState({filterOption : option})
+    this.setState({filterOption : option}, () =>
     axios
     .get(`https://galleryguide.me/api/galleries`, {
       params : {
         page: this.state.pageIndex,
         region: this.state.filterOption
       }
+      })
+      .then((response) => {
+        const responseData = response.data;
+        console.log("response data:")
+        console.log(responseData)
+        console.log("gallery data:")
+        console.log(responseData.galleries)
+        this.setState({ databaseResponse: responseData, data: responseData.galleries });
+      })
+      .catch((error) => {
+        console.log("axios error: ", error);
+      })
+    )
+}
+
+  handleArtistNum = (option) => {
+    this.setState({ pageIndex: 1 })
+    this.setState({sortOption : 'artists'})
+    this.setState({sortState : option})
+    axios
+     .get(`https://galleryguide.me/api/galleries`, {
+      params : {
+        page: this.state.pageIndex,
+        sort: this.state.sortOption+'+'+this.state.sortState
+        }
       })
       .then((response) => {
         const responseData = response.data;
@@ -115,34 +141,25 @@ export default class Artworks extends React.Component {
       .catch((error) => {
         console.log("axios error: ", error);
       });
-}
-
-  handleArtistNum = (option) => {
-    axios
-     .get(`https://galleryguide.me/api/galleries`, {
-      params : {
-        sort : option.toString()
-        }
-      })
-      .then((response) => {
-        console.log(option.toString()+"");
-        const responseData = response.data;
-        this.setState({ databaseResponse: responseData, data: responseData.galleries });
-      })
-      .catch((error) => {
-        console.log("axios error: ", error);
-      });
   }
 
   handleArtworkNum = (option) => {
+    this.setState({ pageIndex: 1 })
+    this.setState({sortOption : 'artworks'})
+    this.setState({sortState : option})
     axios
      .get(`https://galleryguide.me/api/galleries`, {
       params : {
-        sort : option.toString()
+        page: this.state.pageIndex,
+        sort: this.state.sortOption+'+'+this.state.sortState
         }
       })
       .then((response) => {
         const responseData = response.data;
+        console.log("response data:")
+        console.log(responseData)
+        console.log("artwork data:")
+        console.log(responseData.galleries)
         this.setState({ databaseResponse: responseData, data: responseData.galleries });
       })
       .catch((error) => {
