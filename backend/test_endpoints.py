@@ -24,6 +24,90 @@ def test_gallery_endpoint_with_bad_page(small_db_init, client):
     assert data["size"] == 0
     assert data["next"] == None
 
+def test_gallery_query(medium_db_init,client):
+    #Test gallery query with space seperated words 
+    response = client.get("/api/galleries?query=more+artworks")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 1
+    assert data["galleries"][0]["id"] == 1
+
+    #check query for partial string
+    response = client.get("/api/galleries?query=South+GreatGallery")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 2
+    assert data["galleries"][0]["id"] == 1
+    assert data["galleries"][1]["id"] == 2
+
+def test_gallery_filter(medium_db_init,client):
+    #basic filter
+    response = client.get("/api/galleries?region=South+America")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 1
+    assert data["galleries"][0]["id"] == 1
+
+    #check exclusive
+    response = client.get("/api/galleries?artworks=4+false")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 0
+
+    #check not exclusive
+    response = client.get("/api/galleries?artworks=5+false")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 1
+    assert data["galleries"][0]["id"] == 2
+
+    #check exlusion in true direction
+    response = client.get("/api/galleries?artworks=4+true")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 1
+    assert data["galleries"][0]["id"] == 1
+
+def test_query_and_sort(medium_db_init, client):
+    response = client.get("/api/galleries?query=South+GreatGallery&sort=num_artworks+true")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 2
+    assert data["galleries"][0]["id"] == 1
+    assert data["galleries"][1]["id"] == 2
+
+def test_query_and_filter(medium_db_init, client):
+    response = client.get("/api/galleries?query=South+GreatGallery&region=Antarctica")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 1
+    assert data["galleries"][0]["id"] == 2
+
+def test_all(medium_db_init, client):
+    #tests all three param, and page param and out of order param
+    response = client.get("/api/galleries?query=South+GreatGallery&region=Antarctica&sort=num_artworks+true&page=1")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 1
+    assert data["galleries"][0]["id"] == 2
+
+
+def test_gallery_sort(medium_db_init, client):
+    response = client.get("/api/galleries?sort=num_artworks+true")
+    data = json.loads(response.data.decode("utf-8"))
+    assert response.status_code == 200
+    assert data["size"] == 2
+    assert data["galleries"][0]["id"] == 1
+    assert data["galleries"][1]["id"] == 2
+
+    #Filter other direction
+    response = client.get("/api/galleries?sort=num_artworks+false")
+    data = json.loads(response.data.decode("utf-8"))
+    assert response.status_code == 200
+    assert data["size"] == 2
+    assert data["galleries"][0]["id"] == 2
+    assert data["galleries"][1]["id"] == 1
+
 """
 Galleries/<id> endpoint
 """
