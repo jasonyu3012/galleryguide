@@ -12,8 +12,8 @@ import '../Pagination.css';
 import { GallerySearch } from '../Search';
 
 // TODO Placeholders for now
-const GALLERIES_NUM_PAGES = 100;
-export const GALLERIES_NUM_IDS = 1000;
+const GALLERIES_NUM_PAGES = 3;
+export const GALLERIES_NUM_IDS = 30;
 
 export default class Artworks extends React.Component {
   constructor(props) {
@@ -24,6 +24,7 @@ export default class Artworks extends React.Component {
       pageIndex: 1
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleQueryChange = this.handleQueryChange.bind(this);
   }
 
   handleClick (clickAction) {
@@ -33,8 +34,45 @@ export default class Artworks extends React.Component {
     this.getResponseData(selected)
   }
 
+  handleQueryChange () {
+    let value = this.state.query;
+    this.setState({ pageIndex: 1 })
+    if (value === '') {
+      this.setState({ query: ''})
+    } else {
+      // Update the request URL by replacing ' ' with +
+      value = value.replaceAll(' ', '+')
+      this.setState({ query: value})
+    }
+    console.log("gallery search value: ", value)
+
+    // Make the request to the DB
+    axios.get("https://galleryguide.me/api/galleries", { 
+      params: {
+        page: this.state.pageIndex,
+        ...(this.state.query === '' ? {} : { query: this.state.query })
+    }})
+    .then(response => {
+      const responseData = response.data
+      console.log("SEARCH response data:")
+      console.log(responseData)
+      console.log("SEARCH gallery data:")
+      console.log(responseData.galleries)
+
+      this.setState({ databaseResponse: responseData })
+      this.setState({ data: responseData.galleries })
+    })
+    .catch((error) => {
+      console.log("axios error: ", error)
+    })
+  }
+
   getResponseData = (targetIndex) => {
-    axios.get(`https://galleryguide.me/api/galleries?page=${ targetIndex }`)
+    axios.get("https://galleryguide.me/api/galleries", { 
+      params: {
+        page: targetIndex,
+        ...(this.state.query === '' ? {} : { query: this.state.query })
+    }})
       .then(response => {
         console.log(this.url)
         const responseData = response.data
@@ -49,6 +87,53 @@ export default class Artworks extends React.Component {
       .catch((error) => {
         console.log("axios error: ", error)
       })
+  }
+
+  handleRegion = (option) => {
+    axios
+     .get(`https://galleryguide.me/api/galleries`, {
+      
+      })
+      .then((response) => {
+        const responseData = response.data;
+        this.setState({ databaseResponse: responseData, data: responseData.galleries });
+      })
+      .catch((error) => {
+        console.log("axios error: " + option.toString(), error);
+      });
+  }
+
+  handleArtistNum = (option) => {
+    axios
+     .get(`https://galleryguide.me/api/galleries`, {
+      params : {
+        sort : option.toString()
+        }
+      })
+      .then((response) => {
+        console.log(option.toString()+"");
+        const responseData = response.data;
+        this.setState({ databaseResponse: responseData, data: responseData.galleries });
+      })
+      .catch((error) => {
+        console.log("axios error: ", error);
+      });
+  }
+
+  handleArtworkNum = (option) => {
+    axios
+     .get(`https://galleryguide.me/api/galleries`, {
+      params : {
+        sort : option.toString()
+        }
+      })
+      .then((response) => {
+        const responseData = response.data;
+        this.setState({ databaseResponse: responseData, data: responseData.galleries });
+      })
+      .catch((error) => {
+        console.log("axios error: ", error);
+      });
   }
 
   // Run once the page has loaded
@@ -89,9 +174,9 @@ export default class Artworks extends React.Component {
                 <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                   <Card.Img variant="top" src={ entry.thumbnail } />
                   <Card.Body>
-                    {/* TODO #? add 5 sortable features to card */}
                     <Card.Title>{ entry.name }</Card.Title>
                     <Card.Text>{ entry.region }</Card.Text>
+                    <Card.Text>ID #{ entry.id } | { entry.num_artworks } artworks | { entry.num_artists } artists</Card.Text>
                     <Link to={`/galleries/${ entry.id }`}>
                       <Button>Explore More</Button>
                     </Link>
