@@ -10,6 +10,7 @@ import Pagination from 'react-bootstrap/Pagination';
 import './InstanceModels.css';
 import '../Pagination.css';
 import { GallerySearch } from '../Search';
+import {RegionFilter, ArtistNumSort, ArtworkNumSort} from '../Filters';
 
 // TODO Placeholders for now
 const GALLERIES_NUM_PAGES = 100;
@@ -51,6 +52,53 @@ export default class Artworks extends React.Component {
       })
   }
 
+  handleRegion = (option) => {
+    axios
+     .get(`https://galleryguide.me/api/galleries`, {
+      
+      })
+      .then((response) => {
+        const responseData = response.data;
+        this.setState({ databaseResponse: responseData, data: responseData.galleries });
+      })
+      .catch((error) => {
+        console.log("axios error: " + option.toString(), error);
+      });
+  }
+
+  handleArtistNum = (option) => {
+    axios
+     .get(`https://galleryguide.me/api/galleries`, {
+      params : {
+        sort : option.toString()
+        }
+      })
+      .then((response) => {
+        console.log(option.toString()+"");
+        const responseData = response.data;
+        this.setState({ databaseResponse: responseData, data: responseData.galleries });
+      })
+      .catch((error) => {
+        console.log("axios error: ", error);
+      });
+  }
+
+  handleArtworkNum = (option) => {
+    axios
+     .get(`https://galleryguide.me/api/galleries`, {
+      params : {
+        sort : option.toString()
+        }
+      })
+      .then((response) => {
+        const responseData = response.data;
+        this.setState({ databaseResponse: responseData, data: responseData.galleries });
+      })
+      .catch((error) => {
+        console.log("axios error: ", error);
+      });
+  }
+
   // Run once the page has loaded
   componentDidMount() {
     console.log("page loaded")
@@ -62,6 +110,9 @@ export default class Artworks extends React.Component {
       <div>
         <h1>Galleries</h1>
         <GallerySearch/>
+        <RegionFilter onSelect={this.handleRegion}/>
+        <ArtistNumSort onSelect={this.handleArtistNum}/>
+        <ArtworkNumSort onSelect={this.handleArtworkNum}/>
         <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, 9/{GALLERIES_NUM_IDS} galleries.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         {<ReactPaginate

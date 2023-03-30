@@ -36,6 +36,10 @@ class Artworks extends Component {
       .get(`https://galleryguide.me/api/artworks?page=${targetIndex}`)
       .then((response) => {
         const responseData = response.data;
+        console.log("response data:")
+        console.log(responseData)
+        console.log("gallery data:")
+        console.log(responseData.galleries)
         this.setState({ databaseResponse: responseData, data: responseData.artworks });
       })
       .catch((error) => {
@@ -44,11 +48,10 @@ class Artworks extends Component {
   };
 
   handleIconicity = (option) => {
-    if(option === 'ascending'){
       axios
       .get(`https://galleryguide.me/api/artworks`, {
         params : {
-          sort : 'iconicity+false'
+          sort : option
           }
         })
         .then((response) => {
@@ -58,7 +61,6 @@ class Artworks extends Component {
         .catch((error) => {
           console.log("axios error: ", error);
         });
-    }
   }
 
   handleDate = (option) => {
@@ -78,16 +80,7 @@ class Artworks extends Component {
         });
     }
   }
-  /*
-  IconicityFilter(props) {
-    return (
-      <DropdownButton id="filter-iconicity" title="Filter by Iconicity">
-        <Dropdown.Item onClick={() => props.onSelect('ascending')}>Ascending</Dropdown.Item>
-        <Dropdown.Item onClick={() => props.onSelect('descending')}>Descending</Dropdown.Item>
-      </DropdownButton>
-    );
-  }
-  */
+
   render() {
     const { pageIndex, data } = this.state;
 
