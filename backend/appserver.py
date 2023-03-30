@@ -92,13 +92,13 @@ def gallery_endpoint():
     url_params["page"] = page + 1
     
     json = {}
-    json["artists"] = []
+    json["galleries"] = []
     for record in records:
-        json["artists"].append(record)
+        json["galleries"].append(record)
     if len(records) < PAGE_SIZE:
         json["next"] = None
     else :
-        json["next"] = ("galleryguide.me/api/artworks?" + urlencode(url_params))
+        json["next"] = ("galleryguide.me/api/galleries?" + urlencode(url_params))
     json["total"] = total
     json["size"] = len(records)
 
@@ -205,7 +205,7 @@ def artist_endpoint():
     if len(records) < PAGE_SIZE:
         json["next"] = None
     else :
-        json["next"] = ("galleryguide.me/api/artworks?" + urlencode(url_params))
+        json["next"] = ("galleryguide.me/api/artists?" + urlencode(url_params))
     json["total"] = total
     json["size"] = len(records)
     
