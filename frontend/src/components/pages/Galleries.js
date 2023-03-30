@@ -11,8 +11,8 @@ import './InstanceModels.css';
 import '../Pagination.css';
 
 // TODO Placeholders for now
-const GALLERIES_NUM_PAGES = 100;
-export const GALLERIES_NUM_IDS = 1000;
+const GALLERIES_NUM_PAGES = 3;
+export const GALLERIES_NUM_IDS = 30;
 
 export default class Artworks extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ export default class Artworks extends React.Component {
       pageIndex: 1
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleQueryChange = this.handleQueryChange.bind(this);
   }
 
   handleClick (clickAction) {
@@ -30,6 +31,39 @@ export default class Artworks extends React.Component {
     let selected = clickAction.selected + 1;
     this.setState({ pageIndex: selected })
     this.getResponseData(selected)
+  }
+
+  handleQueryChange () {
+    let value = this.state.query;
+    this.setState({ pageIndex: 1 })
+    if (value === '') {
+      this.setState({ query: ''})
+    } else {
+      // Update the request URL by replacing ' ' with +
+      value = value.replaceAll(' ', '+')
+      this.setState({ query: value})
+    }
+    console.log("gallery search value: ", value)
+
+    // Make the request to the DB
+    axios.get("https://galleryguide.me/api/galleries", { 
+      params: {
+        page: this.state.pageIndex,
+        ...(this.state.query === '' ? {} : { query: this.state.query })
+    }})
+    .then(response => {
+      const responseData = response.data
+      console.log("SEARCH response data:")
+      console.log(responseData)
+      console.log("SEARCH gallery data:")
+      console.log(responseData.galleries)
+
+      this.setState({ databaseResponse: responseData })
+      this.setState({ data: responseData.galleries })
+    })
+    .catch((error) => {
+      console.log("axios error: ", error)
+    })
   }
 
   getResponseData = (targetIndex) => {
@@ -60,8 +94,17 @@ export default class Artworks extends React.Component {
     return (
       <div>
         <h1>Galleries</h1>
-        {/* <GallerySearch/> */}
-        <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, 9/{GALLERIES_NUM_IDS} galleries.</p>
+        <div>
+          <input
+            type="text"
+            placeholder="Search galleries"
+            id="query"
+            name="query"
+            onChange={(event) => this.setState({query: event.target.value})}
+          />
+          <button style={{marginLeft: "1em"}} type="submit" onClick={ this.handleQueryChange }>Search</button>
+        </div>
+        <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, {this.state.data.length}/{GALLERIES_NUM_IDS} galleries.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         {<ReactPaginate
           breakLabel={'...'}

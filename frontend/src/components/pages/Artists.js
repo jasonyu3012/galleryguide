@@ -104,8 +104,8 @@ export default class Artworks extends React.Component {
           <input
             type="text"
             placeholder="Search artists"
-            id="artists-query"
-            name="artists-search-query"
+            id="query"
+            name="query"
             onChange={(event) => this.setState({query: event.target.value})}
           />
           <button style={{marginLeft: "1em"}} type="submit" onClick={ this.handleQueryChange }>Search</button>
