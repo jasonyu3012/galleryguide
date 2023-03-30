@@ -54,7 +54,7 @@ def test_gallery_id_artwork_param(db_init, client):
 
     data = json.loads(response.data.decode("utf-8"))
     assert "artwork_ids" in data
-    assert data["artwork_ids"] == [1]
+    assert data["artist_ids"] == [1,2,3]
 
 """
 Artists endpoint
@@ -77,22 +77,6 @@ def test_artist_endpoint_with_bad_page(db_init, client):
     assert data["size"] == 0
     assert data["next"] == ""
 
-"""
-Artists/<id> endpoint
-"""
-def test_artist_id_endpoint(db_init, client):
-    response = client.get("/api/artists/1")
-    assert response.status_code == 200
-
-    data = json.loads(response.data.decode("utf-8"))
-    assert data["id"] == 1
-    assert data["name"] == "Artist Name"
-
-def test_artist_id_with_bad_id(db_init, client):
-    response = client.get("/api/artists/2")
-    assert response.status_code == 400
-    assert response.data.decode("utf-8") == "Bad artist ID"
-
 def test_artist_id_galllery_param(db_init, client):
     response = client.get("/api/artists/1?gallery_ids=1")
     assert response.status_code == 200
@@ -108,6 +92,90 @@ def test_artist_id_artwork_param(db_init, client):
     data = json.loads(response.data.decode("utf-8"))
     assert "artwork_ids" in data
     assert data["artwork_ids"] == [1]
+
+def test_query_artworks_param(db_init, client):
+    #basic query
+    response = client.get("/api/artist?query=Alfred")
+    assert response.status_code == 200
+
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 1
+    assert data["artists"][0]["id"] == 2
+
+def test_filter_artworks_param(db_init, client):
+    #basic filter
+    response = client.get("/api/artist?death_year=1998+true")
+    assert response.status_code == 200
+
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 1
+    assert data["artists"][0]["id"] == 2
+
+    #check exclusive
+    response = client.get("/api/artist?death_year=1999+true")
+    assert response.status_code == 200
+
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 0
+
+    #check less than 
+    response = client.get("/api/artist?death_year=1999+false")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 2
+    assert data["artists"][0]["id"] == 1
+    assert data["artists"][1]["id"] == 3
+
+def test_sort_artworks_param(db_init, client):
+    #standard sort
+    response = client.get("/api/artist?sort=death_year+false")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 3
+    assert data["artists"][0]["id"] == 1
+    assert data["artists"][1]["id"] == 3
+    assert data["artists"][2]["id"] == 2
+
+    #backward sort
+    response = client.get("/api/artist?sort=death_year+true")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 3
+    assert data["artists"][0]["id"] == 2
+    assert data["artists"][1]["id"] == 3
+    assert data["artists"][2]["id"] == 1
+
+def test_sort_filter_and_sort(db_init, client):
+    response = client.get("/api/artist?sort=death_year+true&birth_year=1+false")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 2
+    assert data["artists"][0]["id"] == 2
+    assert data["artists"][1]["id"] == 1
+
+    #statements should work in any order
+    response = client.get("/api/artist?birth_year=1+false&sort=death_year+true")
+    assert response.status_code == 200
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 2
+    assert data["artists"][0]["id"] == 2
+    assert data["artists"][1]["id"] == 1
+
+"""
+Artists/<id> endpoint
+"""
+def test_artist_id_endpoint(db_init, client):
+    response = client.get("/api/artists/1")
+    assert response.status_code == 200
+
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["id"] == 1
+    assert data["name"] == "Artist Name"
+
+def test_artist_id_with_bad_id(db_init, client):
+    response = client.get("/api/artists/4")
+    assert response.status_code == 400
+    assert response.data.decode("utf-8") == "Bad artist ID"
 
 """
 Artworks endpoint

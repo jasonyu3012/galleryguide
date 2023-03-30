@@ -4,6 +4,7 @@ from sqlalchemy import insert, select, update, func
 from sqlalchemy import text, or_, cast, String
 import random
 import sys
+import re
 
 """
 This is where our database code goes. 
@@ -41,6 +42,8 @@ def sort_records_list(records_list, sort_by, reverse=False) :
     # Note current implementation only works for artist table
     if sort_by == "name" or sort_by == "title":
         return sorted(records_list, key=lambda record: record[sort_by].lower(), reverse=reverse)
+    elif sort_by == "date" :
+        return sorted(records_list, key=lambda record: extract_year(record[sort_by]), reverse=reverse)
     else:
         return sorted(records_list, key=lambda record: sys.maxsize if record[sort_by] == None else record[sort_by], reverse=reverse)
 
@@ -50,6 +53,10 @@ def filter_records(sorted_records, filter_column, filter_value, filter_type = 'n
             l = []
             for record in sorted_records:
                 val = record[filter_column] if record[filter_column] != None else sys.maxsize
+                if type(val) == str:
+                    val = extract_year(val)
+                    if val == None:
+                        continue
                 if val > filter_value:
                     l.append(record)
             return l
@@ -57,17 +64,34 @@ def filter_records(sorted_records, filter_column, filter_value, filter_type = 'n
             l = []
             for record in sorted_records:
                 val = record[filter_column] if record[filter_column] != None else sys.maxsize
+                if type(val) == str:
+                        val = extract_year(val)
+                        if val == None:
+                            continue
                 if val < filter_value:
                     l.append(record)
             return l
     elif filter_type == 'string':
-        return [record for record in sorted_records if record[filter_column] == filter_value]
+        return [record for record in sorted_records if record[filter_column].lower() == filter_value.lower()]
     else:
         raise ValueError("Invalid filter_type. It must be either 'numeric' or 'string'.")
 
-def get_artists():
+def extract_year(str):
+    if str.isdigit() and len(str) == 4:
+        return int(str)
+    
+    century = re.search(r'(\d{1,2})th century', str)
+    if century:
+        century = int(century.group(1))
+        return (century - 1) * 100
 
-    s = select(artist_table)
+    probably = re.search(r'\d{4}', str)
+    if probably:
+        return(int(probably.group(0)))
+
+def get_table(table_name):
+    table = Table(table_name, metadata, autoload=True, autoload_with=engine)
+    s = table.select()
     try:
         rows = conn.execute(s).fetchall()
         result = [row._asdict() for row in rows]
@@ -75,7 +99,6 @@ def get_artists():
     except BaseException as e:
         raise e
     
-
 def get_gallery_page(start_id, end_id):
     """
     Gets a gallery page from the database based on start and end id
@@ -376,6 +399,95 @@ def db_init(db_string, echo):
     conn = engine.connect()
 
 
+def db_init(db_string, echo):
+    """
+    Initializes the database tables and stuff
+    """
+    global metadata
+    metadata = MetaData()
+
+    global engine
+    engine = create_engine(db_string, echo=echo, future=True)
+
+
+    global gallery_table
+    gallery_table = Table(
+        "gallery",
+        metadata,
+        Column("id", Integer, primary_key=True, autoincrement=True),
+        Column("name", String, unique=True, nullable=False),
+        Column("region", String, nullable=False),
+        Column("description", String, nullable=False),
+        Column("thumbnail", String, nullable=False),
+        Column("website", String, nullable=False),
+        Column("num_artworks", Integer, nullable=False),
+        Column("num_artists", Integer, nullable=False)
+    )
+
+    global artist_table
+    artist_table = Table(
+        "artist",
+        metadata,
+        Column("id", Integer, primary_key=True, autoincrement=True),
+        Column("name", String, unique=True, nullable=False),
+        Column("biography", String, nullable=False),
+        Column("birth_year", Integer, nullable=False),
+        Column("death_year", Integer),
+        Column("thumbnail", String, nullable=False),
+        Column("num_artworks", Integer, nullable=False),
+        Column("num_galleries", Integer, nullable=False)
+    )
+
+    global artwork_table
+    artwork_table = Table(
+        "artwork",
+        metadata,
+        Column("id", Integer, primary_key=True, autoincrement=True),
+        #We might not actually need the artwork to know about its artist id
+        #or gallery id. Since the relationships are defined in separate tables
+        #they can be found using the artwork id. This does mean an extra query
+        #from the database though when we want to know the painter or gallery
+        Column("artist_id", Integer, ForeignKey("artist.id"), nullable=False),
+        Column("gallery_id", Integer, ForeignKey("gallery.id"), nullable=False),
+        #It is possible that the title could be the same for some works,
+        #we may consider removing this unique constraint. If we never
+        #get duplicate artists, we will never see duplicate artworks.
+        Column("title", String, unique=True, nullable=False),
+        Column("date", String, nullable=False),
+        Column("medium", String, nullable=False),
+        Column("iconicity", Float, nullable=False),
+        Column("image_rights", String, nullable=False),
+        Column("image", String, nullable=False)
+    )
+
+    global gallery_artist_rel_table
+    gallery_artist_rel_table = Table(
+        "gallery artist relationship",
+        metadata,
+        Column("gallery_id", Integer, ForeignKey("gallery.id"), nullable=False),
+        Column("artist_id", Integer, ForeignKey("artist.id"), nullable=False),
+    )
+
+    global gallery_artwork_rel_table
+    gallery_artwork_rel_table = Table(
+        "gallery artwork relationship",
+        metadata,
+        Column("gallery_id", Integer, ForeignKey("gallery.id"), nullable=False),
+        Column("artwork_id", Integer, ForeignKey("artwork.id"), nullable=False),
+    )
+
+    global artist_artwork_rel_table
+    artist_artwork_rel_table = Table(
+        "artist artwork relationship",
+        metadata,
+        Column("artist_id", Integer, ForeignKey("artist.id"), nullable=False),
+        Column("artwork_id", Integer, ForeignKey("artwork.id"), nullable=False),
+    )
+
+    global conn
+    conn = engine.connect()
+
+
 def setup_test_db():
     db_init("sqlite+pysqlite:///:memory:", False)
     metadata.create_all(engine)
@@ -387,7 +499,7 @@ def setup_test_db():
         thumbnail = "link",
         website = "link",
         num_artworks = 1,
-        num_artists = 1,
+        num_artists = 3,
     )
     conn.execute(i)
 
@@ -422,4 +534,159 @@ def setup_test_db():
 
     i = insert(artist_artwork_rel_table).values(artist_id = 1, artwork_id = 1)
     conn.execute(i)
+
+    # #Search/Filter/Sort tests
+
+     #insert in new Galleries
+
+    # i = insert(gallery_table).values(
+    #     name = "More artworks",
+    #     region = "South America",
+    #     description = "Real gallery.",
+    #     thumbnail = "link",
+    #     website = "link",
+    #     num_artworks = 0,
+    #     num_artists = 0,
+    # )
+    # conn.execute(i)
+
+
+    # #insert in new Artists
+
+    i = insert(artist_table).values(
+        name = "Alfred",
+        biography = "Bruce Waynes Butler",
+        birth_year = 0,
+        death_year = 1999,
+        thumbnail = "link",
+        num_artworks = 1,
+        num_galleries = 1,
+    )
+    conn.execute(i)
+
+
+    i = insert(artist_table).values(
+        name = "Bob",
+        biography = "Professional Builder",
+        birth_year = 1950,
+        death_year = 1980,
+        thumbnail = "link",
+        num_artworks = 1,
+        num_galleries = 1,
+    )
+    conn.execute(i)
+
+    # i = insert(artist_table).values(
+    #     name = "Carmen",
+    #     biography = "Women from San Diego",
+    #     birth_year = 1900,
+    #     death_year = 2000,
+    #     thumbnail = "link",
+    #     num_artworks = 1,
+    #     num_galleries = 1,
+    # )
+    # conn.execute(i)
+
+    # i = insert(artist_table).values(
+    #     name = "Daenerys",
+    #     biography = "Queen of the dragons",
+    #     birth_year = 1984,
+    #     death_year = 2010,
+    #     thumbnail = "link",
+    #     num_artworks = 1,
+    #     num_galleries = 1,
+    # )
+    # conn.execute(i)
+    
+    # i = insert(artwork_table).values(
+    #     artist_id = 2,
+    #     gallery_id = 2,
+    #     title = "Artwork-Bruce2",
+    #     date = "2",
+    #     medium = "Dirt.",
+    #     iconicity = 1.23,
+    #     image_rights = "Do whatever you want with it.",
+    #     image = "link",
+    # )
+
+    # #insert in new Artworks
+    # i = insert(artwork_table).values(
+    #     artist_id = 2,
+    #     gallery_id = 2,
+    #     title = "Artwork-Bruce",
+    #     date = "2",
+    #     medium = "Dirt.",
+    #     iconicity = 1.23,
+    #     image_rights = "Do whatever you want with it.",
+    #     image = "link",
+    # )
+    # conn.execute(i)
+
+    # conn.execute(i)
+    # i = insert(artwork_table).values(
+    #     artist_id = 3,
+    #     gallery_id = 2,
+    #     title = "Artwork-Bob",
+    #     date = "2",
+    #     medium = "Dirt.",
+    #     iconicity = 1.23,
+    #     image_rights = "Do whatever you want with it.",
+    #     image = "link",
+    # )
+    # conn.execute(i)
+    # i = insert(artwork_table).values(
+    #     artist_id = 4,
+    #     gallery_id = 2,
+    #     title = "Artwork-Carmen",
+    #     date = "2",
+    #     medium = "Dirt.",
+    #     iconicity = 1.23,
+    #     image_rights = "Do whatever you want with it.",
+    #     image = "link",
+    # )
+    # conn.execute(i)
+    # i = insert(artwork_table).values(
+    #     artist_id = 5,
+    #     gallery_id = 2,
+    #     title = "Artwork-Daenerys",
+    #     date = "2",
+    #     medium = "Dirt.",
+    #     iconicity = 1.23,
+    #     image_rights = "Do whatever you want with it.",
+    #     image = "link",
+    # )
+    # conn.execute(i)
+
+
+    # #insert in new gallery_artist relations
+    i = insert(gallery_artist_rel_table).values(gallery_id = 1, artist_id = 2)
+    conn.execute(i)
+    i = insert(gallery_artist_rel_table).values(gallery_id = 1, artist_id = 3)
+    conn.execute(i)
+    # i = insert(gallery_artist_rel_table).values(gallery_id = 2, artist_id = 4)
+    # conn.execute(i)
+    # i = insert(gallery_artist_rel_table).values(gallery_id = 2, artist_id = 5)
+    # conn.execute(i)
+
+    # #insert in new gallery_artworks relations
+    # i = insert(gallery_artwork_rel_table).values(gallery_id = 2, artwork_id = 2)
+    # conn.execute(i)
+    # i = insert(gallery_artwork_rel_table).values(gallery_id = 2, artwork_id = 3)
+    # conn.execute(i)
+    # i = insert(gallery_artwork_rel_table).values(gallery_id = 2, artwork_id = 4)
+    # conn.execute(i)
+    # i = insert(gallery_artwork_rel_table).values(gallery_id = 2, artwork_id = 5)
+    # conn.execute(i)
+
+    # #insert in new artist_artwork relations
+    # i = insert(artist_artwork_rel_table).values(artist_id = 2, artwork_id = 2)
+    # conn.execute(i)
+    # i = insert(artist_artwork_rel_table).values(artist_id = 3, artwork_id = 3)
+    # conn.execute(i)
+    # i = insert(artist_artwork_rel_table).values(artist_id = 4, artwork_id = 4)
+    # conn.execute(i)
+    # i = insert(artist_artwork_rel_table).values(artist_id = 5, artwork_id = 5)
+    # conn.execute(i)
+
     conn.commit()
+
