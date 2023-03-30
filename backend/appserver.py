@@ -1,16 +1,14 @@
-import re
-from typing import ParamSpec
 from flask import Flask, request, jsonify
 from flask.helpers import send_from_directory
-# from flask_sqlalchemy import SQLAlchemy
 import os
 import model
 from flask_cors import CORS
+from urllib.parse import urlencode
 
 app = Flask(__name__, static_folder='build', static_url_path='/')
 CORS(app)
 
-# check for environment variable
+#check for environment variable
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
@@ -30,28 +28,83 @@ def serve(path):
 
 @app.route("/api/galleries")
 def gallery_endpoint():
-    page_num = 1
-    if request.args.get("page"):
-        page_num = int(request.args.get("page"))
+    # page_num = 1
+    # if request.args.get("page"):
+    #     page_num = int(request.args.get("page"))
 
-    start_id = ((page_num - 1) * PAGE_SIZE) + 1
-    end_id = start_id + PAGE_SIZE - 1  
+    # start_id = ((page_num - 1) * PAGE_SIZE) + 1
+    # end_id = start_id + PAGE_SIZE - 1  
 
-    rows = model.get_gallery_page(start_id, end_id)
-    if rows is None:
-        #Do something, probably out of galleries
-        return
+    # rows = model.get_gallery_page(start_id, end_id)
+    # if rows is None:
+    #     #Do something, probably out of galleries
+    #     return
     
     
-    next_url = "galleryguide.me/api/galleries?page=" + str((end_id // PAGE_SIZE) + 1)
-    json = {"size": 0, "next": next_url, "galleries": []}
-    for gallery in rows:
-        json["galleries"].append(gallery._asdict())
+    # next_url = "galleryguide.me/api/galleries?page=" + str((end_id // PAGE_SIZE) + 1)
+    # json = {"size": 0, "next": next_url, "galleries": []}
+    # for gallery in rows:
+    #     json["galleries"].append(gallery._asdict())
     
-    json["size"] = len(json["galleries"])
-    if json["size"] == 0:
-        json["next"] = ""
+    # json["size"] = len(json["galleries"])
+    # if json["size"] == 0:
+    #     json["next"] = ""
 
+    # return json
+
+    url_params = request.args.to_dict()
+    table_name = "gallery"
+    if "page" not in url_params:
+        page = 1
+    else:
+        page = int(url_params["page"])
+
+
+    if "query" in url_params:
+        # Using dummy list of keywords until we decide on retrieval method
+        keywords = url_params["query"].split()
+        records = model.search_records(table_name, keywords)
+    else:
+        try:
+            records = model.get_table(table_name)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artists from database " + id, 500)
+
+    # ?query&birth_year=value+true&death_year=value+true&sort, etc etc
+    if "artworks" in url_params:
+        artworks_value, greater_than_str = url_params["artworks"].split()
+        records = model.filter_records(records, "num_artworks", int(artworks_value), "numeric", greater_than_str.lower() == "true")
+    if "artists" in url_params:
+        artists_value, greater_than_str = url_params["artists"].split()
+        records = model.filter_records(records, "num_artists", int(artists_value), "numeric", greater_than_str.lower() == "true")
+    if "region" in url_params:
+        region_value = url_params["region"]
+        records = model.filter_records(records, "region", region_value, "string")
+
+    if "sort" in url_params:
+        sort_by, reverse = url_params["sort"].split()
+        records = model.sort_records_list(records, sort_by, reverse.lower() == "true")
+    
+    total = len(records)
+
+    records = paginate_records(records, page, PAGE_SIZE)
+    
+    url_params["page"] = page + 1
+    
+    json = {}
+    json["galleries"] = []
+    for record in records:
+        json["galleries"].append(record)
+    if len(records) < PAGE_SIZE:
+        json["next"] = None
+    else :
+        json["next"] = ("galleryguide.me/api/galleries?" + urlencode(url_params))
+    json["total"] = total
+    json["size"] = len(records)
+
+    #http://127.0.0.1:5000/api/artistssort=death_year+false&death_year=1920+true&birth_year=1900+false&num_artworks=1+true&page=2
+    
+    #add extra information
     return json
 
 @app.route("/api/galleries/<int:id>")
@@ -85,28 +138,80 @@ def gallery_id_endpoint(id):
 
 @app.route("/api/artists")
 def artist_endpoint():
-    page_num = 1
-    if request.args.get("page"):
-        page_num = int(request.args.get("page"))
+    # page_num = 1
+    # if request.args.get("page"):
+    #     page_num = int(request.args.get("page"))
 
-    start_id = ((page_num - 1) * PAGE_SIZE) + 1
-    end_id = start_id + PAGE_SIZE - 1  
+    # start_id = ((page_num - 1) * PAGE_SIZE) + 1
+    # end_id = start_id + PAGE_SIZE - 1  
     
-    rows = model.get_artist_page(start_id, end_id)
-    if rows is None:
-        #database error
-        return
+    # rows = model.get_artist_page(start_id, end_id)
+    # if rows is None:
+    #     #database error
+    #     return
 
-    next_url = "galleryguide.me/api/artists?page=" + str((end_id // PAGE_SIZE) + 1)
-    json = {"size": 0, "next": next_url, "artists": []}
-    for artist in rows:
-        json["artists"].append(artist._asdict())
+    # next_url = "galleryguide.me/api/artists?page=" + str((end_id // PAGE_SIZE) + 1)
+    # json = {"size": 0, "next": next_url, "artists": []}
+    # for artist in rows:
+    #     json["artists"].append(artist._asdict())
     
-    json["size"] = len(json["artists"])
-    if json["size"] == 0:
-        json["next"] = ""
+    # json["size"] = len(json["artists"])
+    # if json["size"] == 0:
+    #     json["next"] = ""
 
+    # return json
+
+    url_params = request.args.to_dict()
+    table_name = "artist"
+    if "page" not in url_params:
+        page = 1
+    else:
+        page = int(url_params["page"])
+
+    if "query" in url_params:
+        # Using dummy list of keywords until we decide on retrieval method
+        keywords = url_params["query"].split()
+        records = model.search_records(table_name, keywords)
+    else:
+        try:
+            records = model.get_table(table_name)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artists from database " + id, 500)
+
+    # ?query&birth_year=value+true&death_year=value+true&sort, etc etc
+    if "birth_year" in url_params:
+        birth_year_value, greater_than_str = url_params["birth_year"].split()
+        records = model.filter_records(records, "birth_year", int(birth_year_value), "numeric", greater_than_str.lower() == "true")
+    if "death_year" in url_params:
+        death_year_value, greater_than_str = url_params["death_year"].split()
+        records = model.filter_records(records, "death_year", int(death_year_value), "numeric", greater_than_str.lower() == "true")
+    if "num_artworks" in url_params:
+        num_artworks_value, greater_than_str = url_params["num_artworks"].split()
+        records = model.filter_records(records, "num_artworks", int(num_artworks_value), "numeric", greater_than_str.lower() == "true")
+
+    if "sort" in url_params:
+        sort_by, reverse = url_params["sort"].split()
+        records = model.sort_records_list(records, sort_by, reverse.lower() == "true")
+    
+    total = len(records)
+
+    records = paginate_records(records, page, PAGE_SIZE)
+    
+    url_params["page"] = page + 1
+    json = {}
+    json["artists"] = []
+    for record in records:
+        json["artists"].append(record)
+    if len(records) < PAGE_SIZE:
+        json["next"] = None
+    else :
+        json["next"] = ("galleryguide.me/api/artists?" + urlencode(url_params))
+    json["total"] = total
+    json["size"] = len(records)
+    
+    #add extra information
     return json
+
 
 @app.route("/api/artists/<int:id>")
 def artist_id_endpoint(id):
@@ -140,27 +245,78 @@ def artist_id_endpoint(id):
 
 @app.route("/api/artworks")
 def artwork_endpoint():
-    page_num = 1
-    if request.args.get("page"):
-        page_num = int(request.args.get("page"))
+    # page_num = 1
+    # if request.args.get("page"):
+    #     page_num = int(request.args.get("page"))
     
-    start_id = ((page_num - 1) * PAGE_SIZE) + 1
-    end_id = start_id + PAGE_SIZE - 1
+    # start_id = ((page_num - 1) * PAGE_SIZE) + 1
+    # end_id = start_id + PAGE_SIZE - 1
     
-    rows = model.get_artwork_page(start_id, end_id)
-    if rows is None:
-        #Database error
-        return
+    # rows = model.get_artwork_page(start_id, end_id)
+    # if rows is None:
+    #     #Database error
+    #     return
 
-    next_url = "galleryguide.me/api/artworks?page=" + str((end_id // PAGE_SIZE) + 1)
-    json = {"size": 0, "next": next_url, "artworks": []}
-    for artist in rows:
-        json["artworks"].append(artist._asdict())
+    # next_url = "galleryguide.me/api/artworks?page=" + str((end_id // PAGE_SIZE) + 1)
+    # json = {"size": 0, "next": next_url, "artworks": []}
+    # for artist in rows:
+    #     json["artworks"].append(artist._asdict())
     
-    json["size"] = len(json["artworks"])
-    if json["size"] == 0:
-        json["next"] = ""
+    # json["size"] = len(json["artworks"])
+    # if json["size"] == 0:
+    #     json["next"] = ""
     
+    # return json
+
+    url_params = request.args.to_dict()
+    table_name = "artwork"
+    if "page" not in url_params:
+        page = 1
+    else:
+        page = int(url_params["page"])
+
+    if "query" in url_params:
+        # Using dummy list of keywords until we decide on retrieval method
+        keywords = url_params["query"].split()
+        records = model.search_records(table_name, keywords)
+    else:
+        try:
+            records = model.get_table(table_name)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artwork from database " + id, 500)
+
+
+    # ?query&birth_year=value+true&death_year=value+true&sort, etc etc
+    if "date" in url_params:
+        date_value, greater_than_str = url_params["date"].split()
+        records = model.filter_records(records, "date", int(date_value), "numeric", greater_than_str.lower() == "true")
+    if "iconicity" in url_params:
+        iconicity_value, greater_than_str = url_params["iconicity"].split()
+        records = model.filter_records(records, "iconicity", float(iconicity_value), "numeric", greater_than_str.lower() == "true")
+    # if "medium" in url_params:
+    #     medium_value = url_params["medium"]
+    #     records = model.filter_records(records, "medium", medium_value, "string")
+
+    if "sort" in url_params:
+        sort_by, reverse = url_params["sort"].split()
+        records = model.sort_records_list(records, sort_by, reverse.lower() == "true")
+    
+    total = len(records)
+
+    records = paginate_records(records, page, PAGE_SIZE)
+    
+    url_params["page"] = page + 1
+    json = {}
+    json["artworks"] = []
+    for record in records:
+        json["artworks"].append(record)
+    if len(records) < PAGE_SIZE:
+        json["next"] = None
+    else :
+        json["next"] = ("galleryguide.me/api/artworks?" + urlencode(url_params))
+    json["total"] = total
+    json["size"] = len(records)
+
     return json
 
 @app.route("/api/artworks/<int:id>")
@@ -190,17 +346,87 @@ def spotlight_endpoint():
 # Currently just used for testing and prototyping
 @app.route("/searchdummy")
 def search():
-    table_name = "artist" # for testing, just using artist table
-    keywords = ["dummy", "keywords", "pablo", "VINCENT"] # Using dummy list of keywords until we decide on retrieval method
-    search = True
-    sort = True
-    if (search):
-        records = model.search_records(table_name, keywords)
-    # else just grab all records? Might be slow
-    if (sort):
-        records = model.sort_records_list(records, "name", True)
+    
+    #http://127.0.0.1:5000/searchdummy?query=VINCENT+Pablo&sort=death_year+true&death_year=1970+true
+    #http://127.0.0.1:5000/searchdummy?sort=death_year+true&death_year=1+true&
+    #http://127.0.0.1:5000/searchdummy?sort=death_year+false&death_year=1970+true   sorting in ascending
+    
+    #http://127.0.0.1:5000/searchdummy?sort=death_year+false&death_year=1940+true&birth_year=1900+false
+    #http://127.0.0.1:5000/searchdummy?sort=death_year+false&death_year=1940+true&birth_year=1900+false&num_artworks=1+true
+    #galleryguide.me/api/artists?min_deathyear=1940&max_deathyear=2000
+    url_params = request.args.to_dict()
 
-    return jsonify(records)
+    print(url_params)
+    
+    table_name = "artist" # for testing, just using artist table
+    #need to split by whatever we decide 
+
+    page = 1 # Get page number from request.args
+    page_size = 9
+    
+    if "query" in url_params:
+        # Using dummy list of keywords until we decide on retrieval method
+        keywords = url_params["query"].split()
+        print(keywords)
+        records = model.search_records(table_name, keywords)
+    else:
+        try:
+            records = model.get_table(table_name)
+        except BaseException as e:
+            return ("Got " + str(e) + " while retrieving artists from database " + id, 500)
+    # else just grab all records? Might be slow
+
+    # ?query&birth_year=value+true&death_year=value+true&sort, etc etc
+    if "birth_year" in url_params:
+        birth_year_value, greater_than_str = url_params["birth_year"].split()
+        records = model.filter_records(records, "birth_year", int(birth_year_value), "numeric", greater_than_str.lower() == "true")
+    if "death_year" in url_params:
+        death_year_value, greater_than_str = url_params["death_year"].split()
+        records = model.filter_records(records, "death_year", int(death_year_value), "numeric", greater_than_str.lower() == "true")
+    if "num_artworks" in url_params:
+        num_artworks_value, greater_than_str = url_params["num_artworks"].split()
+        records = model.filter_records(records, "num_artworks", int(num_artworks_value), "numeric", greater_than_str.lower() == "true")
+    # if "filter" in url_params:
+    #     records = model.filter_records(records, "name", "Pablo Picasso", "string")
+    #     filter_parts = url_params["filter"].split("+")
+    #     if len(filter_parts) == 4:
+    #         filter_column, filter_value, filter_type, greater_than_str = filter_parts
+    #         greater_than = greater_than_str.lower() == "true"
+    #     else:
+    #         filter_column, filter_value, filter_type, 
+    # if (sort):
+    #     records = model.sort_records_list(records, "name", True)
+
+    if "sort" in url_params:
+        sort_by, reverse = url_params["sort"].split()
+        records = model.sort_records_list(records, sort_by, reverse.lower() == "true")
+    
+    total = len(records)
+
+    if "page" in url_params:
+        page = url_params["page"]
+
+    records = paginate_records(records, int(page), page_size)
+    
+    url_params["page"] = int(page) + 1
+    json = {}
+    json["artists"] = []
+    for record in records:
+        json["artists"].append(record)
+    if len(records) < PAGE_SIZE:
+        json["next"] = None
+    else :
+        json["next"] = ("galleryguide.me/api/artworks?" + urlencode(url_params))
+    json["total"] = total
+    json["size"] = len(records)
+    
+    #add extra information
+    return json
+
+def paginate_records(records, page, page_size):
+    start_index = (page - 1) * page_size
+    end_index = start_index + page_size
+    return records[start_index:end_index]
     
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
