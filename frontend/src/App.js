@@ -43,7 +43,8 @@ function App() {
 
           <Route path="/galleries" element={ <Galleries/>} />
           <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>
-          <Route path="/search" element={<SearchPage/>}/>
+          {/* for site-wide search */}
+          <Route path="/search/:query" element={<SearchPage/>}/>
         </Routes>
         
       </BrowserRouter>

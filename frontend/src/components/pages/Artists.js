@@ -9,7 +9,6 @@ import Pagination from 'react-bootstrap/Pagination';
 // Local imports
 import './InstanceModels.css';
 import '../Pagination.css';
-import { ArtistSearch } from '../Search';
 
 // TODO Placeholders for now
 const ARTISTS_NUM_PAGES = 100;
@@ -21,9 +20,12 @@ export default class Artworks extends React.Component {
     this.state = {
       databaseResponse: [],
       data: [],
-      pageIndex: 1
+      pageIndex: 1,
+      query: '',
+      URL: "https://galleryguide.me/api/artists"
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleQueryChange = this.handleQueryChange.bind(this);
   }
 
   handleClick (clickAction) {
@@ -33,22 +35,59 @@ export default class Artworks extends React.Component {
     this.getResponseData(selected)
   }
 
-  getResponseData = (targetIndex) => {
-    axios.get(`https://galleryguide.me/api/artists?page=${ targetIndex }`)
-      .then(response => {
-        console.log(this.url)
-        const responseData = response.data
-        console.log("response data:")
-        console.log(responseData)
-        console.log("artist data:")
-        console.log(responseData.artists)
+  handleQueryChange () {
+    let value = this.state.query;
+    this.setState({ pageIndex: 1 })
+    if (value === '') {
+      this.setState({ query: ''})
+    } else {
+      // Update the request URL by replacing ' ' with +
+      value = value.replaceAll(' ', '+')
+      this.setState({ query: value})
+    }
+    console.log("artist search value: ", value)
 
-        this.setState({ databaseResponse: responseData })
-        this.setState({ data: responseData.artists })
-      })
-      .catch((error) => {
-        console.log("axios error: ", error)
-      })
+    // Make the request to the DB
+    axios.get("https://galleryguide.me/api/artists", { 
+      params: {
+        page: this.state.pageIndex,
+        ...(this.state.query === '' ? {} : { query: this.state.query })
+    }})
+    .then(response => {
+      const responseData = response.data
+      console.log("SEARCH response data:")
+      console.log(responseData)
+      console.log("SEARCH artist data:")
+      console.log(responseData.artists)
+
+      this.setState({ databaseResponse: responseData })
+      this.setState({ data: responseData.artists })
+    })
+    .catch((error) => {
+      console.log("axios error: ", error)
+    })
+  }
+
+  getResponseData = (targetIndex) => {
+    axios.get("https://galleryguide.me/api/artists", { 
+      params: {
+        page: targetIndex,
+        ...(this.state.query === '' ? {} : { query: this.state.query })
+    }})
+    .then(response => {
+      console.log(this.url)
+      const responseData = response.data
+      console.log("response data:")
+      console.log(responseData)
+      console.log("artist data:")
+      console.log(responseData.artists)
+
+      this.setState({ databaseResponse: responseData })
+      this.setState({ data: responseData.artists })
+    })
+    .catch((error) => {
+      console.log("axios error: ", error)
+    })
   }
 
   // Run once the page has loaded
@@ -61,7 +100,16 @@ export default class Artworks extends React.Component {
     return (
       <div>
         <h1>Artists</h1>
-        <ArtistSearch/>
+        <div>
+          <input
+            type="text"
+            placeholder="Search artists"
+            id="artists-query"
+            name="artists-search-query"
+            onChange={(event) => this.setState({query: event.target.value})}
+          />
+          <button style={{marginLeft: "1em"}} type="submit" onClick={ this.handleQueryChange }>Search</button>
+        </div>
         <p>Showing page {this.state.pageIndex}/{ARTISTS_NUM_PAGES}, 9/{ARTISTS_NUM_IDS} artworks.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         {<ReactPaginate
@@ -89,16 +137,17 @@ export default class Artworks extends React.Component {
                 <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                   <Card.Img variant="top" src={ entry.thumbnail } />
                   <Card.Body>
-                    {/* TODO #? add 5 sortable features to card */}
                     <Card.Title>{ entry.name }</Card.Title>
                     <Card.Text>{ entry.medium }</Card.Text>
+                    <Card.Text>{ entry.birth_year } - { entry.death_year ? entry.death_year : "Present" }</Card.Text>
+                    <Card.Text>ID #{ entry.id } | { entry.num_artworks } artworks | { entry.num_galleries } gallery</Card.Text>
                     <Link to={`/artists/${ entry.id }`}>
                       <Button>Explore More</Button>
                     </Link>
                   </Card.Body>
                 </Card>
               </Col>
-            )) }
+            ))}
           </Row>
         }
       </div>

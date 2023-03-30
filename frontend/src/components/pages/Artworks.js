@@ -6,13 +6,10 @@ import Pagination from 'react-bootstrap/Pagination';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import './InstanceModels.css';
 import '../Pagination.css';
-import { ArtworkSearch } from '../Search';
 import {IconicityFilter, DateFilter} from '../Filters';
 
 const ARTWORKS_NUM_PAGES = 888;
 export const ARTWORKS_NUM_IDS = 7986;
-
-
 
 class Artworks extends Component {
   state = {
@@ -94,7 +91,6 @@ class Artworks extends Component {
     return (
       <div>
         <h1>Artworks</h1>
-        <ArtworkSearch/>
         <IconicityFilter onSelect={this.handleIconicity}/>
         <DateFilter onSelect={this.handleDate}/>
         <p>Showing page {pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
@@ -125,6 +121,7 @@ class Artworks extends Component {
                 <Card.Body>
                   <Card.Title>{entry.title}</Card.Title>
                   <Card.Text>{entry.medium}</Card.Text>
+                  <Card.Text>ID #{ entry.id } | made in { entry.date } by artist ID {entry.artist_id}</Card.Text>
                   <Link to={`/artworks/${entry.id}`}>
                     <Button>Explore More</Button>
                   </Link>
