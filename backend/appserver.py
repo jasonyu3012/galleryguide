@@ -8,12 +8,12 @@ from urllib.parse import urlencode
 app = Flask(__name__, static_folder='build', static_url_path='/')
 CORS(app)
 
-# check for environment variable
-# if not os.getenv("DATABASE_URL"):
-#     raise RuntimeError("DATABASE_URL is not set")
+#check for environment variable
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
 
 #Used hardcoded string to deploy on EC2, but I am testing so I am using env variable
-model.db_init("postgresql://postgres:jasonyubc9293@localhost:5432/ggdb", echo=False)
+model.db_init(os.getenv("DATABASE_URL"), echo=False)
 
 # Jason's local postgres "postgresql://postgres:password@localhost:5432/ggdb"
 PAGE_SIZE = 9
