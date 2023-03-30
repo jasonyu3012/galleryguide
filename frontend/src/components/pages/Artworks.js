@@ -28,9 +28,41 @@ class Artworks extends Component {
     this.getResponseData(selected);
   };
 
+  handleQueryChange = () => {
+    let value = this.state.query;
+    this.setState({ pageIndex: 1 })
+    if (value === '') {
+      this.setState({ query: ''})
+    } else {
+      // Update the request URL by replacing ' ' with +
+      value = value.replaceAll(' ', '+')
+      this.setState({ query: value})
+    }
+
+    // Make the request to the DB
+    axios.get("https://galleryguide.me/api/artworks", { 
+      params: {
+        page: this.state.pageIndex,
+        ...(this.state.query === '' ? {} : { query: this.state.query })
+    }})
+    .then(response => {
+      const responseData = response.data
+
+      this.setState({ databaseResponse: responseData })
+      this.setState({ data: responseData.artworks })
+    })
+    .catch((error) => {
+      console.log("axios error: ", error)
+    })
+  }
+
   getResponseData = (targetIndex) => {
     axios
-      .get(`https://galleryguide.me/api/artworks?page=${targetIndex}`)
+      .get("https://galleryguide.me/api/artworks", { 
+        params: {
+          page: targetIndex,
+          ...(this.state.query === '' ? {} : { query: this.state.query })
+      }})
       .then((response) => {
         const responseData = response.data;
         this.setState({ databaseResponse: responseData, data: responseData.artworks });
@@ -91,6 +123,16 @@ class Artworks extends Component {
     return (
       <div>
         <h1>Artworks</h1>
+        <div>
+          <input
+            type="text"
+            placeholder="Search artworks"
+            id="query"
+            name="query"
+            onChange={(event) => this.setState({query: event.target.value})}
+          />
+          <button style={{marginLeft: "1em"}} type="submit" onClick={ this.handleQueryChange }>Search</button>
+        </div>
         <IconicityFilter onSelect={this.handleIconicity}/>
         <DateFilter onSelect={this.handleDate}/>
         <p>Showing page {pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>

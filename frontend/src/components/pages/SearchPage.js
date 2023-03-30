@@ -19,9 +19,10 @@ const SearchPage = () => {
         ...(query === '' ? {} : { query: query.replaceAll(' ', '+') })
     }})
     .then(artworkResponse => {
-      const artworkData = artworkResponse.data.artworks;
-      console.log("artwork data: ", artworkData);
-      setArtworkData(artworkData);
+      const artworkCons = artworkResponse.data.artworks;
+      console.log("artwork data: ", artworkCons);
+      setArtworkData(artworkCons);
+      console.log("stored artwork data: ", artworkData);
     })
     .catch((error) => {
       console.log("axios error while getting artwork info: ", error);
@@ -33,9 +34,10 @@ const SearchPage = () => {
         ...(query === '' ? {} : { query: query.replaceAll(' ', '+') })
     }})
     .then(artistResponse => {
-      const artistData = artistResponse.data.artists;
-      console.log("artist data: ", artistData);
-      setArtistData(artistData);
+      const artistCons = artistResponse.data.artists;
+      console.log("artist data: ", artistCons);
+      setArtistData(artistCons);
+      console.log("stored artist data: ", artistData);
     })
     .catch((error) => {
       console.log("axios error while getting artist info: ", error);
@@ -47,62 +49,15 @@ const SearchPage = () => {
         ...(query === '' ? {} : { query: query.replaceAll(' ', '+') })
     }})
     .then(galleryResponse => {
-      const galleryData = galleryResponse.data.galleries;
-      console.log("gallery data: ", galleryData);
-      setGalleryData(galleryData);
+      const galleryCons = galleryResponse.data.galleries;
+      console.log("gallery data: ", galleryCons);
+      setGalleryData(galleryCons);
+      console.log("stored gallery data: ", galleryData);
     })
     .catch((error) => {
       console.log("axios error while getting gallery info: ", error);
     })
-  }, [])
-
-  // { artworkData.map(entry => (
-  //   <Col>
-  //     <Card style={{ justifyContent: 'center' }} key={ entry.id }>
-  //       <Card.Img variant="top" src={ entry.thumbnail } />
-  //       <Card.Body>
-  //         {/* TODO #? add 5 sortable features to card */}
-  //         <Card.Title>{ entry.name }</Card.Title>
-  //         <Card.Text>{ entry.medium }</Card.Text>
-  //         <Link to={`/artworks/${ entry.id }`}>
-  //           <Button>Explore More</Button>
-  //         </Link>
-  //       </Card.Body>
-  //     </Card>
-  //   </Col>
-  // )) }
-
-  // { artistData.map(entry => (
-  //   <Col>
-  //     <Card style={{ justifyContent: 'center' }} key={ entry.id }>
-  //       <Card.Img variant="top" src={ entry.thumbnail } />
-  //       <Card.Body>
-  //         {/* TODO #? add 5 sortable features to card */}
-  //         <Card.Title>{ entry.name }</Card.Title>
-  //         <Card.Text>{ entry.medium }</Card.Text>
-  //         <Link to={`/artists/${ entry.id }`}>
-  //           <Button>Explore More</Button>
-  //         </Link>
-  //       </Card.Body>
-  //     </Card>
-  //   </Col>
-  // )) }
-
-  // { galleryData.map(entry => (
-  //   <Col>
-  //     <Card style={{ justifyContent: 'center' }} key={ entry.id }>
-  //       <Card.Img variant="top" src={ entry.thumbnail } />
-  //       <Card.Body>
-  //         {/* TODO #? add 5 sortable features to card */}
-  //         <Card.Title>{ entry.name }</Card.Title>
-  //         <Card.Text>{ entry.medium }</Card.Text>
-  //         <Link to={`/galleries/${ entry.id }`}>
-  //           <Button>Explore More</Button>
-  //         </Link>
-  //       </Card.Body>
-  //     </Card>
-  //   </Col>
-  // )) }
+  }, [query])
 
   return (
     <div>
@@ -111,7 +66,9 @@ const SearchPage = () => {
       <Tabs defaultActiveKey="Artworks">
         <Tab eventKey="Artworks" title="Artworks">
           <Row xl={4} lg={3} md={2} sm={1} xs={1}>
-          { artworkData.map(entry => (
+          {console.log("artwork data in row: ", artworkData)}
+          {console.log(artworkData.length === undefined)}
+          { artworkData.length !== undefined ? artworkData.map(entry => (
             <Col>
               <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                 <Card.Img variant="top" src={ entry.image } />
@@ -125,12 +82,12 @@ const SearchPage = () => {
                 </Card.Body>
               </Card>
             </Col>
-          ))}
+          )) : "No artwork found for the search"}
           </Row>
         </Tab>
         <Tab eventKey="Artists" title="Artists">
           <Row xl={4} lg={3} md={2} sm={1} xs={1}>
-          { artistData.map(entry => (
+          { artistData.length !== undefined ? artistData.map(entry => (
             <Col>
               <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                 <Card.Img variant="top" src={ entry.thumbnail } />
@@ -145,12 +102,12 @@ const SearchPage = () => {
                 </Card.Body>
               </Card>
             </Col>
-          ))}
+          )) : "No artists found for the search"}
           </Row>
         </Tab>
         <Tab eventKey="Galleries" title="Galleries">
           <Row xl={4} lg={3} md={2} sm={1} xs={1}>
-          { galleryData.map(entry => (
+          { galleryData.length !== undefined ? galleryData.map(entry => (
             <Col>
               <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                 <Card.Img variant="top" src={ entry.thumbnail } />
@@ -164,7 +121,7 @@ const SearchPage = () => {
                 </Card.Body>
               </Card>
             </Col>
-          ))}
+          )) : "No gallery data found for the search"}
           </Row>
         </Tab>
       </Tabs>

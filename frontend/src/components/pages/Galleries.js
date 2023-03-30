@@ -67,7 +67,11 @@ export default class Artworks extends React.Component {
   }
 
   getResponseData = (targetIndex) => {
-    axios.get(`https://galleryguide.me/api/galleries?page=${ targetIndex }`)
+    axios.get("https://galleryguide.me/api/galleries", { 
+      params: {
+        page: targetIndex,
+        ...(this.state.query === '' ? {} : { query: this.state.query })
+    }})
       .then(response => {
         console.log(this.url)
         const responseData = response.data
