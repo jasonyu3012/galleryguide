@@ -80,7 +80,7 @@ def extract_year(str):
     if str.isdigit() and len(str) == 4:
         return int(str)
     
-    century = re.search(r'(\d{1,2})th century', str)
+    century = re.search(r'(\d{1,2})[(rd)(st)(th)]', str)
     if century:
         century = int(century.group(1))
         return (century - 1) * 100

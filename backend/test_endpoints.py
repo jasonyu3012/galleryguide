@@ -198,6 +198,67 @@ def test_artwork_endpoint_with_bad_page(small_db_init, client):
     assert data["size"] == 0
     assert data["next"] == None
 
+def test_artwork_query_param(medium_db_init, client):
+    response = client.get("/api/artworks?query=iPhone")
+    assert response.status_code == 200
+
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["artworks"][0]["id"] == 9
+    assert data["size"] == 1
+    assert data["next"] == None
+
+def test_artwork_iconicity_param(medium_db_init, client):
+    response = client.get("/api/artworks?iconicity=1.1+true&sort=iconicity+false")
+    assert response.status_code == 200
+
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 9
+    assert data["total"] == 10
+    assert data["next"] == "galleryguide.me/api/artworks?iconicity=1.1+true&sort=iconicity+false&page=2"
+    assert data["artworks"][0]["id"] == 1
+    assert data["artworks"][0]["iconicity"] == 1.5
+    assert data["artworks"][8]["id"] == 10
+    assert data["artworks"][8]["iconicity"] == 79.435
+
+def test_artwork_iconicity_param2(medium_db_init, client):
+    response = client.get("/api/artworks?iconicity=1.6+true&sort=iconicity+false")
+    assert response.status_code == 200
+
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 9
+    assert data["total"] == 9
+    assert data["next"] == "galleryguide.me/api/artworks?iconicity=1.6+true&sort=iconicity+false&page=2"
+    assert data["artworks"][0]["id"] == 3
+    assert data["artworks"][0]["iconicity"] == 4.83
+    assert data["artworks"][8]["id"] == 7
+    assert data["artworks"][8]["iconicity"] == 1000.321592
+
+def test_artwork_date_param(medium_db_init, client):
+    response = client.get("/api/artworks?date=2300+true&sort=date+true")
+    assert response.status_code == 200
+    
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 1
+    assert data["total"] == 1
+    assert data["next"] == None
+    assert data["artworks"][0]["id"] == 6
+
+def test_artwork_date_param2(medium_db_init, client):
+    response = client.get("/api/artworks?date=2023+false&sort=date+true")
+    assert response.status_code == 200
+    
+    data = json.loads(response.data.decode("utf-8"))
+    assert data["size"] == 8
+    assert data["total"] == 8
+    assert data["next"] == None
+    assert data["artworks"][0]["id"] == 10
+    assert data["artworks"][1]["id"] == 9
+    assert data["artworks"][2]["id"] == 1
+    assert data["artworks"][3]["id"] == 2
+    assert data["artworks"][4]["id"] == 3
+    assert data["artworks"][5]["id"] == 8
+    assert data["artworks"][6]["id"] == 7
+    assert data["artworks"][7]["id"] == 5
 
 """
 Artworks/<id> endpoint

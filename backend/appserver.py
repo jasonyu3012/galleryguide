@@ -293,9 +293,9 @@ def artwork_endpoint():
     if "iconicity" in url_params:
         iconicity_value, greater_than_str = url_params["iconicity"].split()
         records = model.filter_records(records, "iconicity", float(iconicity_value), "numeric", greater_than_str.lower() == "true")
-    if "medium" in url_params:
-        medium_value = url_params["medium"]
-        records = model.filter_records(records, "medium", medium_value, "string")
+    # if "medium" in url_params:
+    #     medium_value = url_params["medium"]
+    #     records = model.filter_records(records, "medium", medium_value, "string")
 
     if "sort" in url_params:
         sort_by, reverse = url_params["sort"].split()
