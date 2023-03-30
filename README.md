@@ -73,3 +73,4 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
  - Code for the frontend Dockerfile was adapted from GeoJobs.
  - Code for selenium tests adapted from ArtDB and City Scoop.
  - Code for pagination (CSS) adapted from WorkItOut.
+ - Code for highlighting and global search tabs adapted from GeoJobs.

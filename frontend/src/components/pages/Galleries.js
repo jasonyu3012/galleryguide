@@ -9,6 +9,7 @@ import Pagination from 'react-bootstrap/Pagination';
 // Local imports
 import './InstanceModels.css';
 import '../Pagination.css';
+import { highlightText } from './SearchPage';
 
 // TODO Placeholders for now
 const GALLERIES_NUM_PAGES = 3;
@@ -135,8 +136,8 @@ export default class Artworks extends React.Component {
                 <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                   <Card.Img variant="top" src={ entry.thumbnail } />
                   <Card.Body>
-                    <Card.Title>{ entry.name }</Card.Title>
-                    <Card.Text>{ entry.region }</Card.Text>
+                    <Card.Title>{ highlightText(entry.name, this.state.query) }</Card.Title>
+                    <Card.Text>{ highlightText(entry.medium, this.state.query) }</Card.Text>
                     <Card.Text>ID #{ entry.id } | { entry.num_artworks } artworks | { entry.num_artists } artists</Card.Text>
                     <Link to={`/galleries/${ entry.id }`}>
                       <Button>Explore More</Button>

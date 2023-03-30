@@ -7,6 +7,7 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import './InstanceModels.css';
 import '../Pagination.css';
 import {IconicityFilter, DateFilter} from '../Filters';
+import { highlightText } from './SearchPage';
 
 const ARTWORKS_NUM_PAGES = 888;
 export const ARTWORKS_NUM_IDS = 7986;
@@ -164,8 +165,8 @@ class Artworks extends Component {
               <Card style={{ justifyContent: 'center' }}>
                 <Card.Img variant="top" src={entry.image} />
                 <Card.Body>
-                  <Card.Title>{entry.title}</Card.Title>
-                  <Card.Text>{entry.medium}</Card.Text>
+                  <Card.Title>{ highlightText(entry.title, this.state.query) }</Card.Title>
+                  <Card.Text>{ highlightText(entry.medium, this.state.query) }</Card.Text>
                   <Card.Text>ID #{ entry.id } | made in { entry.date } by artist ID {entry.artist_id}</Card.Text>
                   <Link to={`/artworks/${entry.id}`}>
                     <Button>Explore More</Button>

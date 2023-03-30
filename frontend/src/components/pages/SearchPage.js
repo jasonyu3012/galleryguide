@@ -6,20 +6,20 @@ import { Col, Container, Row, Tab, Tabs, Card, Button } from "react-bootstrap";
 import axios from 'axios';
 import { Highlight } from "react-highlight-regex";
 
+function highlightText (input, raw_regex) {
+  if (raw_regex != null && input != null) {
+    let queryRE = new RegExp(`(?:${raw_regex.replaceAll(" ", "|")})`, "i");
+    return <Highlight match={queryRE} text={input} />
+  }
+  return input;
+}
+
 const SearchPage = () => {
   let query = useParams().query;
-  let queryRE = new RegExp(`(?:${query.replaceAll(" ", "|")})`, "i");
   const [artworkData, setArtworkData] = useState({});
   const [artistData, setArtistData] = useState({});
   const [galleryData, setGalleryData] = useState({});
   console.log("query search: ", query)
-
-  function highlightText (input, regex) {
-    if (regex != null && input != null) {
-      return <Highlight match={regex} text={input} />
-    }
-    return input;
-  }
 
   useEffect(() => {
     // artworks
@@ -75,7 +75,7 @@ const SearchPage = () => {
       <Tabs defaultActiveKey="Artworks">
         <Tab eventKey="Artworks" title="Artworks">
           <Row xl={4} lg={3} md={2} sm={1} xs={1}>
-          {console.log("queryRE: ", queryRE)}
+          {console.log("queryRE: ", query)}
           {console.log(artworkData.length !== undefined)}
           {console.log(artworkData)}
           { artworkData.length !== undefined ? artworkData.map(entry => (
@@ -83,8 +83,8 @@ const SearchPage = () => {
               <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                 <Card.Img variant="top" src={ entry.image } />
                 <Card.Body>
-                  <Card.Title>{ highlightText(entry.title, queryRE) }</Card.Title>
-                  <Card.Text>{ highlightText(entry.medium, queryRE) }</Card.Text>
+                  <Card.Title>{ highlightText(entry.title, query) }</Card.Title>
+                  <Card.Text>{ highlightText(entry.medium, query) }</Card.Text>
                   <Card.Text>ID #{ entry.id } | made in { entry.date } by artist ID {entry.artist_id}</Card.Text>
                   <Link to={`/artworks/${ entry.id }`}>
                     <Button>Explore More</Button>
@@ -102,8 +102,8 @@ const SearchPage = () => {
               <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                 <Card.Img variant="top" src={ entry.thumbnail } />
                 <Card.Body>
-                  <Card.Title>{ highlightText(entry.name, queryRE) }</Card.Title>
-                  <Card.Text>{ highlightText(entry.medium, queryRE) }</Card.Text>
+                  <Card.Title>{ highlightText(entry.name, query) }</Card.Title>
+                  <Card.Text>{ highlightText(entry.medium, query) }</Card.Text>
                   <Card.Text>{ entry.birth_year } - { entry.death_year ? entry.death_year : "Present" }</Card.Text>
                   <Card.Text>ID #{ entry.id } | { entry.num_artworks } artworks | { entry.num_galleries } gallery</Card.Text>
                   <Link to={`/artists/${ entry.id }`}>
@@ -122,8 +122,8 @@ const SearchPage = () => {
               <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                 <Card.Img variant="top" src={ entry.thumbnail } />
                 <Card.Body>
-                  <Card.Title>{ highlightText(entry.name, queryRE) }</Card.Title>
-                  <Card.Text>{ highlightText(entry.region, queryRE) }</Card.Text>
+                  <Card.Title>{ highlightText(entry.name, query) }</Card.Title>
+                  <Card.Text>{ highlightText(entry.region, query) }</Card.Text>
                   <Card.Text>ID #{ entry.id } | { entry.num_artworks } artworks | { entry.num_artists } artists</Card.Text>
                   <Link to={`/galleries/${ entry.id }`}>
                     <Button>Explore More</Button>
@@ -140,4 +140,4 @@ const SearchPage = () => {
   );
 }
 
-export default SearchPage;
+export {SearchPage, highlightText};
