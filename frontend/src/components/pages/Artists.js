@@ -10,6 +10,7 @@ import Pagination from 'react-bootstrap/Pagination';
 import './InstanceModels.css';
 import '../Pagination.css';
 import { highlightText } from './SearchPage';
+import {DeathFilter, BirthFilter, ArtistArtworkNumSort} from '../Filters';
 
 // TODO Placeholders for now
 const ARTISTS_NUM_PAGES = 100;
@@ -89,6 +90,49 @@ export default class Artworks extends React.Component {
     })
   }
 
+  handleDeaths = (option) => {
+    axios
+     .get(`https://galleryguide.me/api/artists`, {
+      
+      })
+      .then((response) => {
+        const responseData = response.data;
+        this.setState({ databaseResponse: responseData, data: responseData.artists });
+      })
+      .catch((error) => {
+        console.log("axios error: " + option.toString(), error);
+      });
+  }
+
+  handleBirths = (option) => {
+    axios
+     .get(`https://galleryguide.me/api/artists`, {
+      
+      })
+      .then((response) => {
+        const responseData = response.data;
+        this.setState({ databaseResponse: responseData, data: responseData.artists });
+      })
+      .catch((error) => {
+        console.log("axios error: " + option.toString(), error);
+      });
+  }
+
+  handleArtworks = (option) => {
+    axios
+     .get(`https://galleryguide.me/api/artists`, {
+      
+      })
+      .then((response) => {
+        const responseData = response.data;
+        this.setState({ databaseResponse: responseData, data: responseData.artists });
+      })
+      .catch((error) => {
+        console.log("axios error: " + option.toString(), error);
+      });
+  }
+
+
   // Run once the page has loaded
   componentDidMount() {
     console.log("page loaded")
@@ -109,7 +153,10 @@ export default class Artworks extends React.Component {
           />
           <button style={{marginLeft: "1em"}} type="submit" onClick={ this.handleQueryChange }>Search</button>
         </div>
-        <p>Showing page {this.state.pageIndex}/{ARTISTS_NUM_PAGES}, 9/{ARTISTS_NUM_IDS} artworks.</p>
+        <DeathFilter onSelect={this.handleDeaths}/>
+        <BirthFilter onSelect={this.handleBirths}/>
+        <ArtistArtworkNumSort onSelect={this.handleArtworks}/>
+        <p>Showing page {this.state.pageIndex}/{ARTISTS_NUM_PAGES}, 9/{ARTISTS_NUM_IDS} artists.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         {<ReactPaginate
           breakLabel={'...'}

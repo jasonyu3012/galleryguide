@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
@@ -12,13 +12,17 @@ import { highlightText } from './SearchPage';
 const ARTWORKS_NUM_PAGES = 888;
 export const ARTWORKS_NUM_IDS = 7986;
 
+
 class Artworks extends Component {
   state = {
     databaseResponse: [],
     data: [],
     pageIndex: 1,
     query: '',
+    sortOption: '',
+    sortState: ''
   };
+  
 
   componentDidMount() {
     this.getResponseData(1);
@@ -60,19 +64,21 @@ class Artworks extends Component {
     })
   }
 
+
   getResponseData = (targetIndex) => {
     axios
       .get("https://galleryguide.me/api/artworks", { 
         params: {
           page: targetIndex,
-          ...(this.state.query === '' ? {} : { query: this.state.query })
+          ...(this.state.query === '' ? {} : { query: this.state.query }),
+          ...(this.state.sortOption === '' ? {} : { sort: this.state.sortOption+"+"+this.state.sortState }),
       }})
       .then((response) => {
         const responseData = response.data;
         console.log("response data:")
         console.log(responseData)
-        console.log("gallery data:")
-        console.log(responseData.galleries)
+        console.log("artwork data:")
+        console.log(responseData.artworks)
         this.setState({ databaseResponse: responseData, data: responseData.artworks });
       })
       .catch((error) => {
@@ -81,12 +87,38 @@ class Artworks extends Component {
   };
 
   handleIconicity = (option) => {
+      this.setState({ pageIndex: 1 })
+      this.setState({sortOption : 'iconicity'})
+      this.setState({sortState : option})
       axios
       .get(`https://galleryguide.me/api/artworks`, {
         params : {
-          sort : option
+          page: this.state.pageIndex,
+          sort: this.state.sortOption+'+'+this.state.sortState
           }
         })
+        .then((response) => {
+          const responseData = response.data;
+          console.log("response data:")
+          console.log(responseData)
+          console.log("artwork data:")
+          console.log(responseData.artworks)
+          this.setState({ databaseResponse: responseData, data: responseData.artworks });
+        })
+        .catch((error) => {
+          console.log("axios error: ", error);
+        });
+  }
+
+  handleDate = (option) => {
+    this.setState({sortOption : 'date'})
+    this.setState({sortState : option})
+     axios
+     .get(`https://galleryguide.me/api/artworks`, {
+       params : {page: this.state.pageIndex,
+       sort: this.state.sortOption+'+'+this.state.sortState
+       }
+       })
         .then((response) => {
           const responseData = response.data;
           this.setState({ databaseResponse: responseData, data: responseData.artworks });
@@ -96,12 +128,13 @@ class Artworks extends Component {
         });
   }
 
-  handleDate = (option) => {
-    if(option === 'ascending'){
+  handleDefault = () => {
+    this.setState({sortOption : ''})
+      this.setState({sortState : ''})
       axios
       .get(`https://galleryguide.me/api/artworks`, {
         params : {
-          sort : 'date+false'
+          page: this.state.pageIndex,
           }
         })
         .then((response) => {
@@ -111,7 +144,6 @@ class Artworks extends Component {
         .catch((error) => {
           console.log("axios error: ", error);
         });
-    }
   }
 
   render() {
@@ -130,8 +162,10 @@ class Artworks extends Component {
           />
           <button style={{marginLeft: "1em"}} type="submit" onClick={ this.handleQueryChange }>Search</button>
         </div>
-        <IconicityFilter onSelect={this.handleIconicity}/>
+        <p><IconicityFilter onSelect={this.handleIconicity}/>
         <DateFilter onSelect={this.handleDate}/>
+        <Button onClick={this.handleDefault}>Clear Sorting Options</Button>
+        </p>
         <p>Showing page {pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         <ReactPaginate

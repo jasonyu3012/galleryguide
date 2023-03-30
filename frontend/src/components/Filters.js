@@ -4,8 +4,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 export function IconicityFilter(props) {
   return (
     <DropdownButton id="filter-iconicity" title="Filter by Iconicity">
-      <Dropdown.Item onClick={() => props.onSelect('iconicity+true')}>Ascending</Dropdown.Item>
-      <Dropdown.Item onClick={() => props.onSelect('iconciity+false')}>Descending</Dropdown.Item>
+      <Dropdown.Item onClick={() => props.onSelect('true')}>Ascending</Dropdown.Item>
+      <Dropdown.Item onClick={() => props.onSelect('false')}>Descending</Dropdown.Item>
     </DropdownButton>
   );
 }
@@ -13,8 +13,8 @@ export function IconicityFilter(props) {
 export function DateFilter(props) {
   return (
     <DropdownButton id="filter-date" title="Sort by Date">
-      <Dropdown.Item onClick={() => props.onSelect('ascending')}>Ascending</Dropdown.Item>
-      <Dropdown.Item onClick={() => props.onSelect('descending')}>Descending</Dropdown.Item>
+      <Dropdown.Item onClick={() => props.onSelect('true')}>Ascending</Dropdown.Item>
+      <Dropdown.Item onClick={() => props.onSelect('false')}>Descending</Dropdown.Item>
     </DropdownButton>
   );
 }
@@ -67,5 +67,12 @@ export function ArtistNumSort(props) {
   );
 }
 
-
+export function ArtistArtworkNumSort(props) {
+  return (
+    <DropdownButton id="sort-num-artworks" title="Sort by Number of Artworks">
+      <Dropdown.Item onClick={() => props.onSelect('artworks+true')}>Ascending</Dropdown.Item>
+      <Dropdown.Item onClick={() => props.onSelect('artworks+false')}>Descending</Dropdown.Item>
+    </DropdownButton>
+  );
+}
 
