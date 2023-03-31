@@ -121,8 +121,10 @@ export default class Artworks extends React.Component {
 
   handleArtistNum = (option) => {
     this.setState({ pageIndex: 1 })
-    this.setState({sortOption : 'artists'})
-    this.setState({sortState : option})
+    this.setState({sortOption : 'artists'},  ()=>
+    this.setState({sortState : option}, () =>
+    console.log('sortoption: '+ this.state.sortOption), 
+    console.log('sortstate: '+ this.state.sortState), 
     axios
      .get(`https://galleryguide.me/api/galleries`, {
       params : {
@@ -140,7 +142,9 @@ export default class Artworks extends React.Component {
       })
       .catch((error) => {
         console.log("axios error: ", error);
-      });
+      })
+    )
+    )
   }
 
   handleArtworkNum = (option) => {
