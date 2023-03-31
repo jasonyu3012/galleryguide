@@ -4,8 +4,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 export function IconicityFilter(props) {
   return (
     <DropdownButton id="filter-iconicity" title="Filter by Iconicity">
-      <Dropdown.Item onClick={() => props.onSelect('true')}>Ascending</Dropdown.Item>
-      <Dropdown.Item onClick={() => props.onSelect('false')}>Descending</Dropdown.Item>
+      <Dropdown.Item onClick={() => props.onSelect('false')}>Ascending</Dropdown.Item>
+      <Dropdown.Item onClick={() => props.onSelect('true')}>Descending</Dropdown.Item>
     </DropdownButton>
   );
 }

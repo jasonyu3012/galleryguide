@@ -71,7 +71,7 @@ class Artworks extends Component {
         params: {
           page: targetIndex,
           ...(this.state.query === '' ? {} : { query: this.state.query }),
-          ...(this.state.sortOption === '' ? {} : { sort: this.state.sortOption+"+"+this.state.sortState }),
+          ...(this.state.sortOption === '' ? {} : { sort: this.state.sortOption+" "+this.state.sortState }),
       }})
       .then((response) => {
         const responseData = response.data;
@@ -117,7 +117,7 @@ class Artworks extends Component {
      axios
      .get(`https://galleryguide.me/api/artworks`, {
        params : {page: this.state.pageIndex,
-       sort: this.state.sortOption+'+'+this.state.sortState
+       sort: this.state.sortOption+' '+this.state.sortState
        }
        })
         .then((response) => {
