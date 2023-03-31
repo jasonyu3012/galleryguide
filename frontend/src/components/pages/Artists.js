@@ -96,12 +96,12 @@ export default class Artworks extends React.Component {
   handleDeaths = (option) => {
     this.setState({ pageIndex: 1 })
     this.setState({sortOption : 'death_year'})
-    this.setState({sortState : option})
+    this.setState({sortState : option}, ()=> 
     axios
      .get(`https://galleryguide.me/api/artists`, {
       params : {
         page: this.state.pageIndex,
-        sort: this.state.sortOption+'+'+this.state.sortState
+        sort: this.state.sortOption+' '+this.state.sortState
         }
       })
       .then((response) => {
@@ -109,23 +109,24 @@ export default class Artworks extends React.Component {
         console.log("response data:")
         console.log(responseData)
         console.log("artist data:")
-        console.log(responseData.galleries)
+        console.log(responseData.artists)
         this.setState({ databaseResponse: responseData, data: responseData.artists });
       })
       .catch((error) => {
         console.log("axios error: ", error);
-      });
+      })
+    )
   }
 
   handleBirths = (option) => {
     this.setState({ pageIndex: 1 })
     this.setState({sortOption : 'birth_year'})
-    this.setState({sortState : option})
+    this.setState({sortState : option}, () =>
     axios
      .get(`https://galleryguide.me/api/artists`, {
       params : {
         page: this.state.pageIndex,
-        sort: this.state.sortOption+'+'+this.state.sortState
+        sort: this.state.sortOption+' '+this.state.sortState
         }
       })
       .then((response) => {
@@ -133,23 +134,24 @@ export default class Artworks extends React.Component {
         console.log("response data:")
         console.log(responseData)
         console.log("artist data:")
-        console.log(responseData.galleries)
+        console.log(responseData.artists)
         this.setState({ databaseResponse: responseData, data: responseData.artists });
       })
       .catch((error) => {
         console.log("axios error: ", error);
-      });
+      })
+    )
   }
 
   handleArtworks = (option) => {
     this.setState({ pageIndex: 1 })
     this.setState({sortOption : 'num_artworks'})
-    this.setState({sortState : option})
+    this.setState({sortState : option}, () =>
     axios
      .get(`https://galleryguide.me/api/artists`, {
       params : {
         page: this.state.pageIndex,
-        sort: this.state.sortOption+'+'+this.state.sortState
+        sort: this.state.sortOption+' '+this.state.sortState
         }
       })
       .then((response) => {
@@ -157,12 +159,13 @@ export default class Artworks extends React.Component {
         console.log("response data:")
         console.log(responseData)
         console.log("artist data:")
-        console.log(responseData.galleries)
+        console.log(responseData.artists)
         this.setState({ databaseResponse: responseData, data: responseData.artists });
       })
       .catch((error) => {
         console.log("axios error: ", error);
-      });
+      })
+    )
   }
 
   handleDefault = () => {

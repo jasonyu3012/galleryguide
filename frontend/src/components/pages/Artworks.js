@@ -89,12 +89,12 @@ class Artworks extends Component {
   handleIconicity = (option) => {
       this.setState({ pageIndex: 1 })
       this.setState({sortOption : 'iconicity'})
-      this.setState({sortState : option})
+      this.setState({sortState : option}, ()=>
       axios
       .get(`https://galleryguide.me/api/artworks`, {
         params : {
           page: this.state.pageIndex,
-          sort: this.state.sortOption+'+'+this.state.sortState
+          sort: this.state.sortOption+' '+this.state.sortState
           }
         })
         .then((response) => {
@@ -107,12 +107,13 @@ class Artworks extends Component {
         })
         .catch((error) => {
           console.log("axios error: ", error);
-        });
+        })
+      )
   }
 
   handleDate = (option) => {
     this.setState({sortOption : 'date'})
-    this.setState({sortState : option})
+    this.setState({sortState : option}, ()=> 
      axios
      .get(`https://galleryguide.me/api/artworks`, {
        params : {page: this.state.pageIndex,
@@ -125,7 +126,8 @@ class Artworks extends Component {
         })
         .catch((error) => {
           console.log("axios error: ", error);
-        });
+        })
+    )
   }
 
   handleDefault = () => {
