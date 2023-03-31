@@ -167,6 +167,24 @@ export default class Artworks extends React.Component {
       });
   }
 
+  handleDefault = () => {
+    this.setState({sortOption : ''})
+    this.setState({sortState : ''})
+    axios
+    .get(`https://galleryguide.me/api/artworks`, {
+      params : {
+        page: this.state.pageIndex,
+        }
+      })
+      .then((response) => {
+       const responseData = response.data;
+       this.setState({ databaseResponse: responseData, data: responseData.artworks });
+      })
+     .catch((error) => {
+        console.log("axios error: ", error);
+      });
+  }
+
   // Run once the page has loaded
   componentDidMount() {
     console.log("page loaded")
@@ -190,6 +208,7 @@ export default class Artworks extends React.Component {
         <RegionFilter onSelect={this.handleRegion}/>
         <ArtistNumSort onSelect={this.handleArtistNum}/>
         <ArtworkNumSort onSelect={this.handleArtworkNum}/>
+        <Button onClick={this.handleDefault}>Clear Sorting Options</Button>
         <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, {this.state.data.length}/{GALLERIES_NUM_IDS} galleries.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         {<ReactPaginate

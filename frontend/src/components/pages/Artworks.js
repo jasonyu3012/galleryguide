@@ -130,20 +130,20 @@ class Artworks extends Component {
 
   handleDefault = () => {
     this.setState({sortOption : ''})
-      this.setState({sortState : ''})
-      axios
-      .get(`https://galleryguide.me/api/artworks`, {
-        params : {
-          page: this.state.pageIndex,
-          }
-        })
-        .then((response) => {
-          const responseData = response.data;
-          this.setState({ databaseResponse: responseData, data: responseData.artworks });
-        })
-        .catch((error) => {
-          console.log("axios error: ", error);
-        });
+    this.setState({sortState : ''})
+    axios
+    .get(`https://galleryguide.me/api/artworks`, {
+      params : {
+        page: this.state.pageIndex,
+        }
+      })
+      .then((response) => {
+       const responseData = response.data;
+       this.setState({ databaseResponse: responseData, data: responseData.artworks });
+      })
+     .catch((error) => {
+        console.log("axios error: ", error);
+      });
   }
 
   render() {

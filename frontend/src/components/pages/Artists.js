@@ -24,6 +24,8 @@ export default class Artworks extends React.Component {
       data: [],
       pageIndex: 1,
       query: '',
+      sortOption: '',
+      sortState: ''
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleQueryChange = this.handleQueryChange.bind(this);
@@ -73,7 +75,8 @@ export default class Artworks extends React.Component {
     axios.get("https://galleryguide.me/api/artists", { 
       params: {
         page: targetIndex,
-        ...(this.state.query === '' ? {} : { query: this.state.query })
+        ...(this.state.query === '' ? {} : { query: this.state.query }),
+        ...(this.state.sortOption === '' ? {} : { sort: this.state.sortOption+"+"+this.state.sortState }),
     }})
     .then(response => {
       const responseData = response.data
@@ -91,47 +94,94 @@ export default class Artworks extends React.Component {
   }
 
   handleDeaths = (option) => {
+    this.setState({ pageIndex: 1 })
+    this.setState({sortOption : 'death_year'})
+    this.setState({sortState : option})
     axios
      .get(`https://galleryguide.me/api/artists`, {
-      
+      params : {
+        page: this.state.pageIndex,
+        sort: this.state.sortOption+'+'+this.state.sortState
+        }
       })
       .then((response) => {
         const responseData = response.data;
+        console.log("response data:")
+        console.log(responseData)
+        console.log("artist data:")
+        console.log(responseData.galleries)
         this.setState({ databaseResponse: responseData, data: responseData.artists });
       })
       .catch((error) => {
-        console.log("axios error: " + option.toString(), error);
+        console.log("axios error: ", error);
       });
   }
 
   handleBirths = (option) => {
+    this.setState({ pageIndex: 1 })
+    this.setState({sortOption : 'birth_year'})
+    this.setState({sortState : option})
     axios
      .get(`https://galleryguide.me/api/artists`, {
-      
+      params : {
+        page: this.state.pageIndex,
+        sort: this.state.sortOption+'+'+this.state.sortState
+        }
       })
       .then((response) => {
         const responseData = response.data;
+        console.log("response data:")
+        console.log(responseData)
+        console.log("artist data:")
+        console.log(responseData.galleries)
         this.setState({ databaseResponse: responseData, data: responseData.artists });
       })
       .catch((error) => {
-        console.log("axios error: " + option.toString(), error);
+        console.log("axios error: ", error);
       });
   }
 
   handleArtworks = (option) => {
+    this.setState({ pageIndex: 1 })
+    this.setState({sortOption : 'num_artworks'})
+    this.setState({sortState : option})
     axios
      .get(`https://galleryguide.me/api/artists`, {
-      
+      params : {
+        page: this.state.pageIndex,
+        sort: this.state.sortOption+'+'+this.state.sortState
+        }
       })
       .then((response) => {
         const responseData = response.data;
+        console.log("response data:")
+        console.log(responseData)
+        console.log("artist data:")
+        console.log(responseData.galleries)
         this.setState({ databaseResponse: responseData, data: responseData.artists });
       })
       .catch((error) => {
-        console.log("axios error: " + option.toString(), error);
+        console.log("axios error: ", error);
       });
   }
 
+  handleDefault = () => {
+    this.setState({sortOption : ''})
+    this.setState({sortState : ''})
+    axios
+    .get(`https://galleryguide.me/api/artworks`, {
+      params : {
+        page: this.state.pageIndex,
+        }
+      })
+      .then((response) => {
+       const responseData = response.data;
+       this.setState({ databaseResponse: responseData, data: responseData.artworks });
+      })
+     .catch((error) => {
+        console.log("axios error: ", error);
+      });
+  }
 
   // Run once the page has loaded
   componentDidMount() {
@@ -153,9 +203,10 @@ export default class Artworks extends React.Component {
           />
           <button style={{marginLeft: "1em"}} type="submit" onClick={ this.handleQueryChange }>Search</button>
         </div>
-        <DeathFilter onSelect={this.handleDeaths}/>
-        <BirthFilter onSelect={this.handleBirths}/>
-        <ArtistArtworkNumSort onSelect={this.handleArtworks}/>
+            <DeathFilter onSelect={this.handleDeaths}/>
+            <BirthFilter onSelect={this.handleBirths}/>
+            <ArtistArtworkNumSort onSelect={this.handleArtworks}/>
+            <Button onClick={this.handleDefault}>Clear Sorting Options</Button>
         <p>Showing page {this.state.pageIndex}/{ARTISTS_NUM_PAGES}, 9/{ARTISTS_NUM_IDS} artists.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         {<ReactPaginate
