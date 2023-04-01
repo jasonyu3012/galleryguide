@@ -124,7 +124,7 @@ export default class Artworks extends React.Component {
     this.setState({sortOption : 'num_artists'})
     this.setState({sortState : option},  ()=>
     axios
-     .get(`http://galleryguide.me/api/galleries`, {
+     .get(`https://galleryguide.me/api/galleries`, {
       params : {
         page: this.state.pageIndex,
         sort: this.state.sortOption+' '+this.state.sortState
