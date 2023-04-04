@@ -5,7 +5,7 @@ import model
 from flask_cors import CORS
 from urllib.parse import urlencode
 
-app = Flask(__name__, static_folder='build', static_url_path='/')
+app = Flask(__name__, static_folder='build')
 CORS(app)
 
 #check for environment variable
@@ -24,7 +24,10 @@ def serve(path):
     """
     Redirects urls with no routes back to the react-router in index.html
     """
-    return app.send_static_file('index.html')
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 @app.route("/api/galleries")
 def gallery_endpoint():
