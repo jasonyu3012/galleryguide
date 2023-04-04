@@ -9,7 +9,8 @@ import Pagination from 'react-bootstrap/Pagination';
 // Local imports
 import './InstanceModels.css';
 import '../Pagination.css';
-import { GallerySearch } from '../Search';
+import { highlightText } from './SearchPage';
+import {RegionFilter, ArtistNumSort, ArtworkNumSort} from '../Filters';
 
 // TODO Placeholders for now
 const GALLERIES_NUM_PAGES = 3;
@@ -21,7 +22,10 @@ export default class Artworks extends React.Component {
     this.state = {
       databaseResponse: [],
       data: [],
-      pageIndex: 1
+      pageIndex: 1,
+      sortOption: '',
+      sortState: '', 
+      filterOption: ''
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleQueryChange = this.handleQueryChange.bind(this);
@@ -71,7 +75,9 @@ export default class Artworks extends React.Component {
     axios.get("https://galleryguide.me/api/galleries", { 
       params: {
         page: targetIndex,
-        ...(this.state.query === '' ? {} : { query: this.state.query })
+        ...(this.state.query === '' ? {} : { query: this.state.query }),
+        ...(this.state.sortOption === '' ? {} : { sort: this.state.sortOption+" "+this.state.sortState }),
+        ...(this.state.filterOption === '' ? {} : { filter: this.state.filterOption}),
     }})
       .then(response => {
         console.log(this.url)
@@ -90,50 +96,96 @@ export default class Artworks extends React.Component {
   }
 
   handleRegion = (option) => {
+    this.setState({ pageIndex: 1 })
+    this.setState({filterOption : option}, () =>
     axios
-     .get(`https://galleryguide.me/api/galleries`, {
-      
-      })
-      .then((response) => {
-        const responseData = response.data;
-        this.setState({ databaseResponse: responseData, data: responseData.galleries });
-      })
-      .catch((error) => {
-        console.log("axios error: " + option.toString(), error);
-      });
-  }
-
-  handleArtistNum = (option) => {
-    axios
-     .get(`https://galleryguide.me/api/galleries`, {
+    .get(`https://galleryguide.me/api/galleries`, {
       params : {
-        sort : option.toString()
-        }
+        page: this.state.pageIndex,
+        region: this.state.filterOption
+      }
       })
       .then((response) => {
-        console.log(option.toString()+"");
         const responseData = response.data;
+        console.log("response data:")
+        console.log(responseData)
+        console.log("gallery data:")
+        console.log(responseData.galleries)
         this.setState({ databaseResponse: responseData, data: responseData.galleries });
       })
       .catch((error) => {
         console.log("axios error: ", error);
-      });
+      })
+    )
+}
+
+  handleArtistNum = (option) => {
+    this.setState({ pageIndex: 1 })
+    this.setState({sortOption : 'num_artists'})
+    this.setState({sortState : option},  ()=>
+    axios
+     .get(`https://galleryguide.me/api/galleries`, {
+      params : {
+        page: this.state.pageIndex,
+        sort: this.state.sortOption+' '+this.state.sortState
+        }
+      })
+      .then((response) => {
+        const responseData = response.data;
+        console.log("response data:")
+        console.log(responseData)
+        console.log("artwork data:")
+        console.log(responseData.galleries)
+        this.setState({ databaseResponse: responseData, data: responseData.galleries });
+      })
+      .catch((error) => {
+        console.log("axios error: ", error);
+      })
+    )
   }
 
   handleArtworkNum = (option) => {
+    this.setState({ pageIndex: 1 })
+    this.setState({sortOption : 'num_artworks'})
+    this.setState({sortState : option}, ()=>
     axios
      .get(`https://galleryguide.me/api/galleries`, {
       params : {
-        sort : option.toString()
+        page: this.state.pageIndex,
+        sort: this.state.sortOption+' '+this.state.sortState
         }
       })
       .then((response) => {
         const responseData = response.data;
+        console.log("response data:")
+        console.log(responseData)
+        console.log("artwork data:")
+        console.log(responseData.galleries)
         this.setState({ databaseResponse: responseData, data: responseData.galleries });
       })
       .catch((error) => {
         console.log("axios error: ", error);
-      });
+      })
+    )
+  }
+
+  handleDefault = () => {
+    this.setState({sortOption : ''})
+    this.setState({sortState : ''}, ()=>
+    axios
+    .get(`https://galleryguide.me/api/galleries`, {
+      params : {
+        page: this.state.pageIndex,
+        }
+      })
+      .then((response) => {
+       const responseData = response.data;
+       this.setState({ databaseResponse: responseData, data: responseData.galleries });
+      })
+     .catch((error) => {
+        console.log("axios error: ", error);
+      })
+    )
   }
 
   // Run once the page has loaded
@@ -146,8 +198,21 @@ export default class Artworks extends React.Component {
     return (
       <div>
         <h1>Galleries</h1>
-        <GallerySearch/>
-        <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, 9/{GALLERIES_NUM_IDS} galleries.</p>
+        <div>
+          <input
+            type="text"
+            placeholder="Search galleries"
+            id="query"
+            name="query"
+            onChange={(event) => this.setState({query: event.target.value})}
+          />
+          <button style={{marginLeft: "1em"}} type="submit" onClick={ this.handleQueryChange }>Search</button>
+        </div>
+        <RegionFilter onSelect={this.handleRegion}/>
+        <ArtistNumSort onSelect={this.handleArtistNum}/>
+        <ArtworkNumSort onSelect={this.handleArtworkNum}/>
+        <Button onClick={this.handleDefault}>Clear Sorting Options</Button>
+        <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, {this.state.data.length}/{GALLERIES_NUM_IDS} galleries.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         {<ReactPaginate
           breakLabel={'...'}
@@ -174,8 +239,8 @@ export default class Artworks extends React.Component {
                 <Card style={{ justifyContent: 'center' }} key={ entry.id }>
                   <Card.Img variant="top" src={ entry.thumbnail } />
                   <Card.Body>
-                    <Card.Title>{ entry.name }</Card.Title>
-                    <Card.Text>{ entry.region }</Card.Text>
+                    <Card.Title>{ highlightText(entry.name, this.state.query) }</Card.Title>
+                    <Card.Text>{ highlightText(entry.medium, this.state.query) }</Card.Text>
                     <Card.Text>ID #{ entry.id } | { entry.num_artworks } artworks | { entry.num_artists } artists</Card.Text>
                     <Link to={`/galleries/${ entry.id }`}>
                       <Button>Explore More</Button>

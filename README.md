@@ -14,7 +14,8 @@ IDB 5:
 | Phase | Git Sha                                  |
 | ----- | ---------------------------------------- |
 | 1     | b0f20c8e44725d099e09d76647af1fe6b5e6b219 |
-| 2     | ***TODO***                               |
+| 2     | 9209992fe44bff68082dbbe66c727f212c367ed2 |
+| 3     | 324bfd37487af804556f0ab2526cd43310c68d51 |
 
 ## Project Leaders
 
@@ -52,20 +53,20 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 | Name             | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | ---------------- | -------------------------- | -------------------------- |
 | Tara Roshan      | 20                         | 60                         |
-| Landon Johnson   |   25                         | 35                          | 
-| Sunad Adhikari   | 12                         | 23                         | 
-| Jerry Ming       | 15                         | ?                          | 
-| Jason Yu         | 40                         | ?                          |
+| Landon Johnson   | 25                         | 35                         | 
+| Sunad Adhikari   | 12                         | 25                         | 
+| Jerry Ming       | 15                         | 25                         | 
+| Jason Yu         | 40                         | 40                         |
 
 ## Phase 3
 
 | Name             | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | ---------------- | -------------------------- | -------------------------- |
-| Tara Roshan      | 20                         | ?                          |
-| Landon Johnson   | 10                         | 10                          | 
-| Sunad Adhikari   | 12                         | 10                          | 
-| Jerry Ming       | x                          | ?                          | 
-| Jason Yu         | x                          | ?                          |
+| Tara Roshan      | 20                         | 20                         |
+| Landon Johnson   | 10                         | 10                         | 
+| Sunad Adhikari   | 12                         | 10                         | 
+| Jerry Ming       | 30                         | ?                          | 
+| Jason Yu         | 40                         | 40                         |
 
 ## Comments
  - The code for `About.js` was adapted using code from IDB Group 3 (Spring 2023), WorkItOut (Fall 2022), and GeoJobs (Fall 2022).
@@ -73,3 +74,4 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
  - Code for the frontend Dockerfile was adapted from GeoJobs.
  - Code for selenium tests adapted from ArtDB and City Scoop.
  - Code for pagination (CSS) adapted from WorkItOut.
+ - Code for highlighting and global search tabs adapted from GeoJobs.
