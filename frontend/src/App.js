@@ -24,6 +24,8 @@ import GalleryInstance from './components/pages/GalleryInstance';
 import {SearchPage} from './components/pages/SearchPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 
+import ProviderVisualizations from './components/pages/ProviderVisualizations';
+
 function App() {
   return (
     <div className="app-wrapper">
@@ -45,6 +47,8 @@ function App() {
           <Route path="/galleries/:galleryId" element={ <GalleryInstance/> }/>
           {/* for site-wide search */}
           <Route path="/search/:query" element={<SearchPage/>}/>
+
+          <Route path="/providerVisualizations" element={<ProviderVisualizations/>}/>
         </Routes>
         
       </BrowserRouter>

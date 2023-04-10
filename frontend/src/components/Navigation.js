@@ -24,6 +24,7 @@ const Navigation = () => {
             <Nav.Link as={Link} to="/artworks">Artworks</Nav.Link>
             <Nav.Link as={Link} to="/artists">Artists</Nav.Link>
             <Nav.Link as={Link} to="/galleries">Galleries</Nav.Link>
+            <Nav.Link as={Link} to="/providerVisualizations">Provider Visualizations</Nav.Link>
           </Nav>
           <form onSubmit={ handleQueryChange }>
             <input
