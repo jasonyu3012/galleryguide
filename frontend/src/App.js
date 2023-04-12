@@ -25,6 +25,7 @@ import {SearchPage} from './components/pages/SearchPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 
 import ProviderVisualizations from './components/pages/ProviderVisualizations';
+import SiteVisualizations from './components/pages/SiteVisualizations';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="/search/:query" element={<SearchPage/>}/>
 
           <Route path="/providerVisualizations" element={<ProviderVisualizations/>}/>
+          <Route path="/siteVisualizations" element={<SiteVisualizations/>}/>
         </Routes>
         
       </BrowserRouter>

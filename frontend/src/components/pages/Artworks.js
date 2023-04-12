@@ -72,6 +72,7 @@ class Artworks extends Component {
           page: targetIndex,
           ...(this.state.query === '' ? {} : { query: this.state.query }),
           ...(this.state.sortOption === '' ? {} : { sort: this.state.sortOption+" "+this.state.sortState }),
+          ...(this.state.filterOption === '' ? {} : { filter: this.state.filterOption})
       }})
       .then((response) => {
         const responseData = response.data;
