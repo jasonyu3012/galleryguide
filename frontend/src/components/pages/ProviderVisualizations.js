@@ -130,33 +130,26 @@ const data = [
 ]
 
 const ProviderVisualizations = () => {
-    // const [artworkData, setArtworkData] = useState({});
+    const [markers, setMarkers] = useState(undefined);
 
-    // useEffect(() => {
-    //     // artworks
-    //     axios.get("https://galleryguide.me/api/artworks", { 
-    //     params: {
-    //         ...(query === '' ? {} : { query: query.replaceAll(' ', '+') })
-    //     }})
-    //     .then(artworkResponse => {
-    //     const artworkCons = artworkResponse.data.artworks;
-    //     console.log("artwork data: ", artworkCons);
-    //     setArtworkData(artworkCons);
-    //     console.log("stored artwork data: ", artworkData);
-    //     })
-    //     .catch((error) => {
-    //     console.log("axios error while getting artwork info: ", error);
-    //     })
-    // }, [])
+    useEffect (() => {
+      axios.get('https://api.nbadb.me/v1/json/arenas')
+      .then(response => {
+        console.log("response data", response.data.data)
+        setMarkers(response.data.data)
+      })
+      .catch((error) => {
+        console.log("axios error while getting arena info: ", error);
+      })
+    }, [])
 
-    return (
+    return (markers && markers.length > 0 ?
       <div>
         <h1>Provider Visualizations</h1>
         <div>
           <h2>Arena Locations Visualization</h2>
-          <p>Shows a marker for each arena in the location with the city labeled above it.</p>
-          {/* longitude, latitude */}
-          <ArenaChart/>
+          <p>Shows a marker for each arena in the location with the arena name labeled above it.</p>
+          <ArenaChart markers={markers}/>
         </div>
         <div>
           <h2>VISUALIZATION 2 TODO</h2>
@@ -167,7 +160,7 @@ const ProviderVisualizations = () => {
           <BarChart data={data}/>
         </div>
       </div>
-    );
+    : <></>);
 }
 
 export default ProviderVisualizations;
