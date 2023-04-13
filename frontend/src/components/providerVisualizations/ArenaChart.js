@@ -9,54 +9,71 @@ import {
   Marker
 } from "react-simple-maps";
 
+
+// export const getArenas = async () => {
+//   var config = {
+//     method: 'get',
+//     maxBodyLength: Infinity,
+//     url: 'https://api.nbadb.me/v1/json/arenas',
+//     headers: { }
+//   };
+
+//   var response = await axios(config);
+//   // .then(function (response) {
+//   //   console.log(JSON.stringify(response.data));
+//   // })
+//   // .catch(function (error) {
+//   //   console.log(error);
+//   // });
+
+//   console.log(response);
+// }
+
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/united-states/us-albers.json";
 
-class ArenaChart extends React.Component  {
-  constructor(props) {
-    super(props);
-    this.state = {
-      markers: []
-    };
-    this.getArenaData = this.getArenaData.bind(this);
-  }
+// const markers = [
+//   {markerOffset: -25, name: "Dallas", coordinates: [-96.810278, 32.790556]}
+// ];
 
-  getArenaData () {
-    var config = {
-      method: 'get',
-      maxBodyLength: Infinity,
-      url: 'https://api.nbadb.me/v1/json/arenas',
-      headers: { }
-    };
+const ArenaChart = () => {
+  const [loading, setLoading] = useState(true);
+  const [markers, setMarkers] = useState([]);
   
-    var markersTemp = [];
-    axios(config)
-    .then(function (response) {
-      response.data.data.map(arenaEntry => {
-        markersTemp.push({markerOffset: -25, 
-          name: arenaEntry.arenaname, 
-          coordinates: [arenaEntry.long, arenaEntry.lat]})
-        });
-      console.log("markerstemp:", markersTemp);
-      this.setState({ markers: markersTemp })
-      console.log("markers:", this.state.markers);})
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+  useEffect(() => {
+    const apiResponse = async () => {
+      var config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'https://api.nbadb.me/v1/json/arenas',
+        headers: { }
+      };
 
-  componentDidMount () {
-    this.getArenaData();
-    console.log("getting arena data");
-    console.log(this.state.markers)
-  };
+      const response = await axios(config);
+      console.log("response data data:", response.data.data)
+      var temp = [
+        {markerOffset: -25, name: "Dallas", coordinates: [-96.810278, 32.790556]}
+      ];
+      await response.data.data.forEach(arena => {
+        temp.push({markerOffset: -25, name: arena.arenaname, coordinates: [arena.long, arena.lat]})
+      })
+      await setMarkers(temp);
+      console.log("markers data:", markers)
+      console.log(markers.length)
+      setLoading(false);
+    }
 
-  render () {
-    return (
+    apiResponse();
+  }, []);
+
+
+  return (
     <ComposableMap
       projection="geoAlbersUsa"
       projectionConfig={{
-        scale: 1000}}>
+        scale: 1000
+      }}
+    >
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies.map((geo) => (
@@ -69,98 +86,29 @@ class ArenaChart extends React.Component  {
           ))
         }
       </Geographies>
-      {console.log(this.state.markers)}
-      {console.log(this.state.markers.length === undefined)}
-      {this.state.markers.length !== undefined ? this.state.markers.map(({ markerOffset, name, coordinates }) => (
-        <Marker key={name} coordinates={coordinates}>
+      {loading || markers.length === undefined || markers.length === 0 ? (<h4>Loading...</h4>) : markers.map(marker => (
+        <Marker key={marker.name} coordinates={marker.coordinates}>
           <g
             fill="none"
             stroke="#FF5533"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            transform="translate(-12, -24)">
+            transform="translate(-12, -24)"
+          >
             <circle cx="12" cy="10" r="3" />
             <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
           </g>
           <text
             textAnchor="middle"
-            y={markerOffset}
+            y={marker.markerOffset}
             style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}>
-            {name}
+            {marker.name}
           </text>
         </Marker>
-      )): <></>}
+      ))}
     </ComposableMap>
-  )};
-}
-
-
-
-
-
-
-// const ArenaChart = () => {
-//   // Get arena locations from the NBADB All Arenas API
-//   var config = {
-//     method: 'get',
-//     maxBodyLength: Infinity,
-//     url: 'https://api.nbadb.me/v1/json/arenas',
-//     headers: { }
-//   };
-
-//   let markers = [];
-//   axios(config)
-//   .then(function (response) {
-//     response.data.data.map(arenaEntry => {
-//       markers.push({markerOffset: -25, 
-//         name: arenaEntry.arenaname, 
-//         coordinates: [arenaEntry.long, arenaEntry.lat]})
-//       });
-//     console.log(markers);
-//     return (
-//       <ComposableMap
-//         projection="geoAlbersUsa"
-//         projectionConfig={{
-//           scale: 1000}}>
-//         <Geographies geography={geoUrl}>
-//           {({ geographies }) =>
-//             geographies.map((geo) => (
-//               <Geography
-//                 key={geo.rsmKey}
-//                 geography={geo}
-//                 fill="#EAEAEC"
-//                 stroke="#D6D6DA"
-//               />
-//             ))
-//           }
-//         </Geographies>
-//         {markers.map(({ markerOffset, name, coordinates }) => (
-//           <Marker key={name} coordinates={coordinates}>
-//             <g
-//               fill="none"
-//               stroke="#FF5533"
-//               strokeWidth="2"
-//               strokeLinecap="round"
-//               strokeLinejoin="round"
-//               transform="translate(-12, -24)">
-//               <circle cx="12" cy="10" r="3" />
-//               <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
-//             </g>
-//             <text
-//               textAnchor="middle"
-//               y={markerOffset}
-//               style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}>
-//               {name}
-//             </text>
-//           </Marker>
-//         ))}
-//       </ComposableMap>
-//     );
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
-// }
+  );
+};
 
 export default ArenaChart;
