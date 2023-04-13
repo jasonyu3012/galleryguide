@@ -1,4 +1,7 @@
+// ArenaChart.js, based on examples from https://www.react-simple-maps.io
 import React from "react";
+// Library imports
+import axios from "axios";
 import {
   ComposableMap,
   Geographies,
@@ -9,23 +12,27 @@ import {
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/united-states/us-albers.json";
 
+// Get arena locations from the NBADB All Arenas API
+var config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: 'https://api.nbadb.me/v1/json/arenas',
+  headers: { }
+};
+
+axios(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+  console.log(response.data);
+  // Set up the markers by mapping each arena's longitude, latitude, and city name
+})
+.catch((error) => {
+  console.log(error);
+});
+
+
 const markers = [
-  {
-    markerOffset: -25,
-    name: "Dallas",
-    coordinates: [-96.810278, 32.790556]
-  }
-  // { markerOffset: 15, name: "La Paz", coordinates: [-68.1193, -16.4897] },
-  // { markerOffset: 15, name: "Brasilia", coordinates: [-47.8825, -15.7942] },
-  // { markerOffset: 15, name: "Santiago", coordinates: [-70.6693, -33.4489] },
-  // { markerOffset: 15, name: "Bogota", coordinates: [-74.0721, 4.711] },
-  // { markerOffset: 15, name: "Quito", coordinates: [-78.4678, -0.1807] },
-  // { markerOffset: -30, name: "Georgetown", coordinates: [-58.1551, 6.8013] },
-  // { markerOffset: -30, name: "Asuncion", coordinates: [-57.5759, -25.2637] },
-  // { markerOffset: 15, name: "Paramaribo", coordinates: [-55.2038, 5.852] },
-  // { markerOffset: 15, name: "Montevideo", coordinates: [-56.1645, -34.9011] },
-  // { markerOffset: 15, name: "Caracas", coordinates: [-66.9036, 10.4806] },
-  // { markerOffset: 15, name: "Lima", coordinates: [-77.0428, -12.0464] }
+  { markerOffset: -25, name: "Dallas", coordinates: [-96.810278, 32.790556]}
 ];
 
 const ArenaChart = () => {
@@ -34,8 +41,7 @@ const ArenaChart = () => {
       projection="geoAlbersUsa"
       projectionConfig={{
         scale: 1000
-      }}
-    >
+      }}>
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies.map((geo) => (
@@ -56,16 +62,14 @@ const ArenaChart = () => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            transform="translate(-12, -24)"
-          >
+            transform="translate(-12, -24)">
             <circle cx="12" cy="10" r="3" />
             <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
           </g>
           <text
             textAnchor="middle"
             y={markerOffset}
-            style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}
-          >
+            style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}>
             {name}
           </text>
         </Marker>
