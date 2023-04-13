@@ -147,8 +147,8 @@ const ProviderVisualizations = () => {
       <div>
         <h1>Provider Visualizations</h1>
         <div>
-          <h2>Arena Locations Visualization</h2>
-          <p>Shows a marker for each arena in the location with the arena name labeled above it.</p>
+          <h2>USA Arena Locations</h2>
+          <p>Shows a marker for each arena in the location with the arena name labeled above it. Note that only the arenas in the US are shown!</p>
           <ArenaChart markers={markers}/>
         </div>
         <div>
