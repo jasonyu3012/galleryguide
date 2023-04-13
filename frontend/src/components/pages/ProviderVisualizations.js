@@ -3,7 +3,8 @@ import React, { useRef, useState, useEffect } from "react";
 // Library imports
 import axios from "axios";
 import * as d3 from 'd3';
-import { ThumbnailZoom } from "../OcclusionVisualization";
+
+import ArenaChart from "../providerVisualizations/ArenaChart";
 
 export const useD3 = (renderChartFn, dependencies) => {
   const ref = React.useRef();
@@ -128,7 +129,6 @@ const data = [
   {year: 2017, efficiency: 39.4, sales: 6081000},
 ]
 
-
 const ProviderVisualizations = () => {
     // const [artworkData, setArtworkData] = useState({});
 
@@ -153,8 +153,10 @@ const ProviderVisualizations = () => {
       <div>
         <h1>Provider Visualizations</h1>
         <div>
-          <h2>Thumbnail Visualization</h2>
-          <ThumbnailZoom/>
+          <h2>Arena Locations Visualization</h2>
+          <p>Shows a marker for each arena in the location with the city labeled above it.</p>
+          {/* longitude, latitude */}
+          <ArenaChart/>
         </div>
         <div>
           <h2>VISUALIZATION 2 TODO</h2>
