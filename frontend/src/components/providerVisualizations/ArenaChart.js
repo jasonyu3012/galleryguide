@@ -12,36 +12,38 @@ import {
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/united-states/us-albers.json";
 
-// Get arena locations from the NBADB All Arenas API
-var config = {
-  method: 'get',
-  maxBodyLength: Infinity,
-  url: 'https://api.nbadb.me/v1/json/arenas',
-  headers: { }
-};
-
-axios(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-  console.log(response.data);
-  // Set up the markers by mapping each arena's longitude, latitude, and city name
-})
-.catch((error) => {
-  console.log(error);
-});
-
-
-const markers = [
-  { markerOffset: -25, name: "Dallas", coordinates: [-96.810278, 32.790556]}
-];
-
 const ArenaChart = () => {
+  // Get arena locations from the NBADB All Arenas API
+  var config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: 'https://api.nbadb.me/v1/json/arenas',
+    headers: { }
+  };
+
+  let markers = [];
+  axios(config)
+  .then(function (response) {
+    response.data.data.map(arenaEntry => {
+      markers.push({markerOffset: -25, 
+        name: arenaEntry.arenaname, 
+        coordinates: [arenaEntry.long, arenaEntry.lat]})
+      });
+      console.log(markers);
+      return buildArenaChart(markers);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+const buildArenaChart = (markers) => {
+  console.log("building chart")
   return (
     <ComposableMap
       projection="geoAlbersUsa"
       projectionConfig={{
-        scale: 1000
-      }}>
+        scale: 1000}}>
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies.map((geo) => (

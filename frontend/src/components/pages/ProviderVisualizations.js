@@ -1,6 +1,7 @@
 // React imports
 import React, { useRef, useState, useEffect } from "react";
 // Library imports
+import axios from "axios";
 import * as d3 from 'd3';
 
 import ArenaChart from "../providerVisualizations/ArenaChart";
