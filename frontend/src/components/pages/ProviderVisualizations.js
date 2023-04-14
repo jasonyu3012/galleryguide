@@ -15,7 +15,6 @@ const ProviderVisualizations = () => {
       // Get arena data
       axios.get('https://api.nbadb.me/v1/json/arenas')
       .then(response => {
-        console.log("response data", response.data.data)
         setMarkers(response.data.data)
       })
       .catch((error) => {
@@ -25,7 +24,6 @@ const ProviderVisualizations = () => {
       // Get player data
       axios.get('https://api.nbadb.me/v1/json/players')
       .then(response => {
-        console.log("response data", response.data.data)
         setPlayers(response.data.data)
       })
       .catch((error) => {
