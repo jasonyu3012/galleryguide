@@ -5,6 +5,7 @@ import axios from "axios";
 
 import ArenaChart from "../providerVisualizations/ArenaChart";
 import JerseyHistogram from "../providerVisualizations/JerseyHistogram";
+import AgeSalaryScatterplot from "../providerVisualizations/AgeSalaryScatterplot";
 
 const ProviderVisualizations = () => {
     const [markers, setMarkers] = useState(undefined);
@@ -43,7 +44,7 @@ const ProviderVisualizations = () => {
         <div>
           <h2>Player Salaries v. Age</h2>
           <p>We were curious if there was any clear correlation between age and salary. See for yourself.</p>
-          <JerseyHistogram data={players}/>
+          <AgeSalaryScatterplot data={players}/>
         </div>
         <div>
           <h2>Player Jersey Numbers</h2>

@@ -35,7 +35,7 @@ function ArenaChart (props) {
           ))
         }
       </Geographies>
-      {markers.map(marker => (marker.country == "USA" && marker.long && marker.lat ?
+      {markers.map(marker => (marker.country === "USA" && marker.long && marker.lat ?
         <Marker key={marker.arenaname} coordinates={[marker.long, marker.lat]}>
           <g
             fill="none"
