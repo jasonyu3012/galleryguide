@@ -1,3 +1,4 @@
+// Use rechart for Scatterplot
 import React from "react";
 import {
   ScatterChart,

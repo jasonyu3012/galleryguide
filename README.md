@@ -23,8 +23,8 @@ IDB 5:
 | ----- | ---------------- |
 | 1     | Tara Roshan      |
 | 2     | Jason Yu         |
-| 3     | Jerry Ming       |
-| 4     | Landon Johnson   |
+| 3     | Landon Johnson   |
+| 4     | Tara Roshan      |
 
 ### Responsibilities
 
@@ -68,7 +68,18 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 | Jerry Ming       | 30                         | ?                          | 
 | Jason Yu         | 40                         | 40                         |
 
+## Phase 4
+
+| Name             | Est. Completion Time (hrs) | Real Completion Time (hrs) |
+| ---------------- | -------------------------- | -------------------------- |
+| Tara Roshan      | 20                         | 10                         |
+| Landon Johnson   | ?                          | ?                          | 
+| Sunad Adhikari   | ?                          | ?                          | 
+| Jerry Ming       | ?                          | ?                          | 
+| Jason Yu         | ?                          | ?                          |
+
 ## Comments
+ - [Presentation slides link](https://docs.google.com/presentation/d/1wW7xsBkKVH_ge6TBaZ7wvqTehBqAmyK75IrqZQxmy1s/edit?usp=sharing)
  - The code for `About.js` was adapted using code from IDB Group 3 (Spring 2023), WorkItOut (Fall 2022), and GeoJobs (Fall 2022).
  - The code for the yml file was adapted using code from [WorkItOut](https://gitlab.com/sriyab/workitout/-/blob/main/.gitlab-ci.yml) and [ArtDB](https://gitlab.com/krent22/idb/-/blob/main/.gitlab-ci.yml) and GeoJobs (Fall 2022).
  - Code for the frontend Dockerfile was adapted from GeoJobs.
