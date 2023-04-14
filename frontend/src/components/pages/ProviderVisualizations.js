@@ -151,7 +151,7 @@ const ProviderVisualizations = () => {
         setPlayers(response.data.data)
       })
       .catch((error) => {
-        console.log("axios error while getting arena info: ", error);
+        console.log("axios error while getting player info: ", error);
       })
     }, [])
 
@@ -165,11 +165,13 @@ const ProviderVisualizations = () => {
         </div>
         <div>
           <h2>Player Salaries v. Age</h2>
-          <BarChart data={data}/>
+          <p>We were curious if there was any clear correlation between age and salary. See for yourself.</p>
+          <BarChart data={players}/>
         </div>
         <div>
           <h2>Player Jersey Numbers</h2>
-          <BarChart data={data}/>
+          <p>Is an interesting distribution in the jersey numbers chosen (eg. for lucky numbers, etc)?</p>
+          <BarChart data={players}/>
         </div>
       </div>
     : <></>);
