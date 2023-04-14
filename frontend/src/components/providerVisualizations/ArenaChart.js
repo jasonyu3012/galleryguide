@@ -1,4 +1,5 @@
 // ArenaChart.js, based on examples from https://www.react-simple-maps.io
+// Use React Simple Maps
 import React, { useState, useEffect } from 'react';
 // Library imports
 import {
@@ -13,7 +14,6 @@ const geoUrl =
 
 function ArenaChart (props) {
   const markers = props.markers;
-  console.log("markers in arena:", markers)
   if (!markers || !Array.isArray(markers)) return null;
 
   return (
