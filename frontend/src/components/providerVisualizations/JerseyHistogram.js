@@ -5,12 +5,13 @@ import { AgChartsReact } from 'ag-charts-react';
 
 const JerseyHistogram = (props) => {
   console.log("jersey hist props:", props);
+  console.log("less than 0?:", props.data.filter(entry => entry.jersey <= 0));
   const [options, setOptions] = useState({
     theme: 'ag-vivid',
     title: {
       text: 'Frequency of Jersey Numbers in NBAdb',
     },
-    data: pars,
+    data: props.data.filter(entry => entry.jersey >= 0),
     series: [
       {
         type: 'histogram',
@@ -26,7 +27,7 @@ const JerseyHistogram = (props) => {
         type: 'number',
         position: 'bottom',
         title: { text: 'Jersey band' },
-        tick: { interval: 2 },
+        tick: { interval: 10 },
       },
       {
         type: 'number',

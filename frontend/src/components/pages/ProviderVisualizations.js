@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import ArenaChart from "../providerVisualizations/ArenaChart";
-import BarChart from "../providerVisualizations/BarChart";
+import JerseyHistogram from "../providerVisualizations/JerseyHistogram";
 
 const ProviderVisualizations = () => {
     const [markers, setMarkers] = useState(undefined);
@@ -43,12 +43,12 @@ const ProviderVisualizations = () => {
         <div>
           <h2>Player Salaries v. Age</h2>
           <p>We were curious if there was any clear correlation between age and salary. See for yourself.</p>
-          <BarChart data={players}/>
+          <JerseyHistogram data={players}/>
         </div>
         <div>
           <h2>Player Jersey Numbers</h2>
           <p>Is an interesting distribution in the jersey numbers chosen (eg. for lucky numbers, etc)?</p>
-          <BarChart data={players}/>
+          <JerseyHistogram data={players}/>
         </div>
       </div>
     : <></>);
