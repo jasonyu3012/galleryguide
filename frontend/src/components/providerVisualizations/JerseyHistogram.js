@@ -3,9 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { AgChartsReact } from 'ag-charts-react';
 
+// Note that some jerseys may have a value of 0 and appear negative in the chart
 const JerseyHistogram = (props) => {
-  console.log("jersey hist props:", props);
-  console.log("less than 0?:", props.data.filter(entry => entry.jersey <= 0));
   const [options, setOptions] = useState({
     theme: 'ag-vivid',
     title: {

@@ -3,7 +3,9 @@ import React, { useRef, useState, useEffect } from "react";
 // Library imports
 import axios from "axios";
 import * as d3 from 'd3';
-import { ThumbnailZoom } from "../OcclusionVisualization";
+// Jerry, I commented out the line below as the file no longer exists or was not added to git to track.
+// Please check with Kaveri that we can reuse visualizations across the provider and site visualizations. -Tara
+// import { ThumbnailZoom } from "../OcclusionVisualization";
 
 export const useD3 = (renderChartFn, dependencies) => {
   const ref = React.useRef();
