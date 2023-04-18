@@ -14,6 +14,6 @@ backend_venv:
 	python3.10 -m pip install -r backend/requirements.txt
 
 scraping_venv:
-	python3.10 -m venv scraping/venv
+	python3.10 -m venv --copies scraping/venv
 	bash scraping/venv/bin/activate
 	python3.10 -m pip install -r scraping/requirements.txt

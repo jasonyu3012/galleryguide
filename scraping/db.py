@@ -11,7 +11,7 @@ def db_init():
     metadata = MetaData()
 
     global engine
-    engine = create_engine("postgresql://postgres:VelKoz42@localhost:5432/postgres", echo=True, future=True)
+    engine = create_engine("sqlite+pysqlite:///:memory:", echo=True, future=True)
 
     """
     TODO: Add all necessary elements, just testing these for now.

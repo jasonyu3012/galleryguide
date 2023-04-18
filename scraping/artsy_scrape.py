@@ -5,18 +5,21 @@ import json
 import wiki_scrape
 import db
 ARTSY_BASE_URL = "https://api.artsy.net/api"
-PARTNER_PAGE_LIMIT = 10
+PARTNER_PAGE_LIMIT = 40
 LOG_LEVEL = logging.INFO
 
 
 def brute_force_scrape(session):
     partners = get_artsy_partners(session)
-
+    i = 0
     partner_page = partners
     for partner in iterate_over_partners(session, partner_page):
         #for every good partner
-        profile = get_partner_profile(partner)
+        if(i > PARTNER_PAGE_LIMIT):
+            break
+        profile = get_partner_profile(session, partner)
         partner_scrape(session, partner, profile)
+        i += 1
 
 def specific_partner_scrape(session, partner_id):
     """
@@ -273,7 +276,8 @@ if __name__ == "__main__":
     with requests.Session() as session:
         session.headers = {"X-Xapp-Token": ARTSY_TOKEN}
         #specific_partner_scrape(session, PARTNER_IDS[6])
-        for partner in PARTNER_IDS:
-            specific_partner_scrape(session, partner)
+        #for partner in PARTNER_IDS:
+        #    specific_partner_scrape(session, partner)
+        brute_force_scrape(session)
         db.commit()
         db.test()
