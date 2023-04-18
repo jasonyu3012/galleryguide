@@ -322,6 +322,15 @@ def artwork_endpoint():
 
     return json
 
+@app.route("/api/all_artworks")
+def all_artworks():
+    try:
+        artworks = model.get_table("artwork")
+        res = {"artworks": artworks, "total": len(artworks)}
+        return res
+    except BaseException as e:
+        return ("Got " + str(e) + " while trying to get all artworks", 500)
+
 @app.route("/api/artworks/<int:id>")
 def artwork_id_endpoint(id):
     rows = model.get_artwork(id)

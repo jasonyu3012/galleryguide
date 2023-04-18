@@ -362,6 +362,18 @@ def test_artowrk_id_with_bad_id(small_db_init, client):
 
 
 """
+All_artworks
+"""
+def test_all_artworks(medium_db_init, client):
+    response = client.get("/api/all_artworks")
+    assert response.status_code == 200
+
+    data = json.loads(response.data.decode("utf-8"))
+    assert "artworks" in data
+    assert len(data["artworks"]) == 10
+
+
+"""
 Spotlight endpoint
 """
 def test_spotlight(small_db_init, client):
