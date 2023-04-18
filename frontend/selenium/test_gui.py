@@ -138,6 +138,30 @@ class TestNavbar(unittest.TestCase):
         print("starting ", inspect.stack()[0][3])
         WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.CLASS_NAME, "card")))
         self.driver.find_element(by=By.CLASS_NAME, value="card")
+    
+    '''
+    Searching & Filtering Tests
+    '''
+    def test_13_artworks_page_search(self):
+        self.driver.find_element(by=By.XPATH, value="//*[@id=\"root\"]/div/nav/div/div/a[3]").click()
+        assert self.driver.current_url == URL + "artworks"
+        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.ID, "query")))
+        # do a search and check that a card shows up
+        searchBox = self.driver.find_element(by=By.ID, value="query")
+        searchBox.send_keys("test")
+        self.driver.find_element(by=By.ID, value="artworks-search").click()
+        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.CLASS_NAME, "card")))
+        self.driver.find_element(by=By.CLASS_NAME, value="card")
+
+    def test_14_galleries_page_filter(self):
+        self.driver.find_element(by=By.XPATH, value="//*[@id=\"root\"]/div/nav/div/div/a[5]").click()
+        assert self.driver.current_url == URL + "galleries"
+        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.ID, "filter-region-gallery")))
+        # filter by region and check that a card shows up, selects the first matching object
+        self.driver.find_element(By.ID, "filter-region-gallery").click()
+        self.driver.find_element(By.CLASS_NAME, "dropdown-item").click()
+        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.CLASS_NAME, "card")))
+        self.driver.find_element(by=By.CLASS_NAME, value="card")
 
 if __name__ == "__main__":
     unittest.main()

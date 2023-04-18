@@ -72,6 +72,7 @@ class Artworks extends Component {
           page: targetIndex,
           ...(this.state.query === '' ? {} : { query: this.state.query }),
           ...(this.state.sortOption === '' ? {} : { sort: this.state.sortOption+" "+this.state.sortState }),
+          ...(this.state.filterOption === '' ? {} : { filter: this.state.filterOption})
       }})
       .then((response) => {
         const responseData = response.data;
@@ -162,7 +163,7 @@ class Artworks extends Component {
             name="query"
             onChange={(event) => this.setState({query: event.target.value})}
           />
-          <button style={{marginLeft: "1em"}} type="submit" onClick={ this.handleQueryChange }>Search</button>
+          <button id="artworks-search" style={{marginLeft: "1em"}} type="submit" onClick={ this.handleQueryChange }>Search</button>
         </div>
         <p><IconicityFilter onSelect={this.handleIconicity}/>
         <DateFilter onSelect={this.handleDate}/>

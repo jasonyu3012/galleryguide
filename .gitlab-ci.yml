@@ -64,7 +64,6 @@ test-selenium:
         - cd frontend/selenium
         - python3 -m pytest
 
-# TODO 
 test-jest:
      stage: test
      image: node:latest
