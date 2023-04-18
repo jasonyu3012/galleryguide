@@ -18,7 +18,7 @@ const SimplePieChart = ({data}) => {
         cy="50%"
         outerRadius={160}
         fill="#8884d8"
-        label={(entry) => entry.name}
+        label={(entry) => entry.value}
       >
         {filteredData.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

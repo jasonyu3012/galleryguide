@@ -4,6 +4,8 @@ import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import * as d3 from 'd3';
 import ArtworkPieChart from "../siteVisualizations/ArtworkPieChart";
+import ArtworkHistogram from "../siteVisualizations/ArtworkHistogram";
+import ArtistDotPlot from "../siteVisualizations/ArtistDotPlot";
 // Jerry, I commented out the line below as the file no longer exists or was not added to git to track.
 // Please check with Kaveri that we can reuse visualizations across the provider and site visualizations. -Tara
 // import { ThumbnailZoom } from "../OcclusionVisualization";
@@ -11,6 +13,8 @@ import ArtworkPieChart from "../siteVisualizations/ArtworkPieChart";
 
 const SiteVisualizations = () => {
   const [galleryData, setGalleryData] = useState(undefined);
+  const [artworkData, setArtworkData] = useState(undefined);
+  const [artistData, setArtistData] = useState(undefined);
 
   useEffect (() => {
     // Get gallery data
@@ -22,14 +26,43 @@ const SiteVisualizations = () => {
     .catch((error) => {
       console.log("axios error while getting gallery info: ", error);
     })
+  
+    // Get artist data
+    axios.get('https://galleryguide.me/api/artists')
+    .then(response => {
+      console.log(response.data.artists)
+      setGalleryData(response.data.artists)
+    })
+    .catch((error) => {
+      console.log("axios error while getting artist info: ", error);
+    })
+
+
+    // Get artwork data
+    axios.get('https://galleryguide.me/api/artworks')
+    .then(response => {
+      console.log(response.data.artworks)
+      setArtworkData(response.data.artworks)
+    })
+    .catch((error) => {
+      console.log("axios error while getting artwork info: ", error);
+    })
   }, [])
 
-  return (typeof galleryData !== 'undefined') ? (
+  return (typeof galleryData !== 'undefined' && typeof artworkData !== 'undefined') ? (
     <div>
       <h1>Site Visualizations</h1>
       <div>
         <h2>Artwork Distribution by Gallery</h2>
         <ArtworkPieChart data={galleryData}/>
+      </div>
+      <div>
+        <h3>Artwork Distribution by Gallery</h3>
+        <ArtworkHistogram data={artworkData}/>
+      </div>
+      <div>
+        <h4>Artwork Distribution by Gallery</h4>
+        <ArtistDotPlot data={artistData}/>
       </div>
     </div>
   ) : <></>;
