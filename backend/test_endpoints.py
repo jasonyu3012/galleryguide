@@ -371,7 +371,34 @@ def test_all_artworks(medium_db_init, client):
     data = json.loads(response.data.decode("utf-8"))
     assert "artworks" in data
     assert len(data["artworks"]) == 10
+    assert data["artworks"][6]["id"] == 7
+    assert data["artworks"][6]["iconicity"] == 1000.321592
 
+"""
+All_artists
+"""
+def test_all_artists(medium_db_init, client):
+    response = client.get("/api/all_artists")
+    assert response.status_code == 200
+
+    data = json.loads(response.data.decode("utf-8"))
+    assert "artists" in data
+    assert len(data["artists"]) == 7
+    assert data["artists"][6]["id"] == 7
+    assert data["artists"][6]["name"] == "Joe"
+
+"""
+All_galleries
+"""
+def test_all_galleries(medium_db_init, client):
+    response = client.get("/api/all_galleries")
+    assert response.status_code == 200
+
+    data = json.loads(response.data.decode("utf-8"))
+    assert "galleries" in data
+    assert len(data["galleries"]) == 2
+    assert data["galleries"][1]["id"] == 2
+    assert data["galleries"][1]["name"] == "GreatGallery"
 
 """
 Spotlight endpoint
