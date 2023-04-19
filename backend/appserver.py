@@ -110,6 +110,15 @@ def gallery_endpoint():
     #add extra information
     return json
 
+@app.route("/api/all_galleries")
+def all_galleries():
+    try:
+        galleries = model.get_table("gallery")
+        res = {"galleries": galleries, "total": len(galleries)}
+        return res
+    except BaseException as e:
+        return ("Got " + str(e) + " while trying to get all galleries", 500)
+
 @app.route("/api/galleries/<int:id>")
 def gallery_id_endpoint(id):
     rows = model.get_gallery(id)
@@ -214,6 +223,15 @@ def artist_endpoint():
     
     #add extra information
     return json
+
+@app.route("/api/all_artists")
+def all_artists():
+    try:
+        artist = model.get_table("artist")
+        res = {"artists": artist, "total": len(artist)}
+        return res
+    except BaseException as e:
+        return ("Got " + str(e) + " while trying to get all artists", 500)
 
 
 @app.route("/api/artists/<int:id>")
