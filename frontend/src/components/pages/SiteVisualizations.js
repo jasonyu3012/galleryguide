@@ -18,7 +18,7 @@ const SiteVisualizations = () => {
 
   useEffect (() => {
     // Get gallery data
-    axios.get('https://galleryguide.me/api/galleries')
+    axios.get('https://galleryguide.me/api/all_galleries')
     .then(response => {
       console.log(response.data.galleries)
       setGalleryData(response.data.galleries)
@@ -28,7 +28,7 @@ const SiteVisualizations = () => {
     })
   
     // Get artist data
-    axios.get('https://galleryguide.me/api/artists')
+    axios.get('https://galleryguide.me/api/all_artists')
     .then(response => {
       console.log(response.data.artists)
       setArtistData(response.data.artists)
@@ -39,7 +39,7 @@ const SiteVisualizations = () => {
 
 
     // Get artwork data
-    axios.get('https://galleryguide.me/api/artworks')
+    axios.get('https://galleryguide.me/api/all_artworks')
     .then(response => {
       console.log(response.data.artworks)
       setArtworkData(response.data.artworks)
@@ -52,16 +52,16 @@ const SiteVisualizations = () => {
   return (typeof galleryData !== 'undefined' && typeof artworkData !== 'undefined' && typeof artistData !== 'undefined') ? (
     <div>
       <h1>Site Visualizations</h1>
-      <div>
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <h2>Artwork Distribution by Gallery</h2>
         <ArtworkPieChart data={galleryData}/>
       </div>
-      <div>
-        <h3>Artwork Distribution by Gallery</h3>
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <h3>Iconicity Distribution</h3>
         <ArtworkHistogram data={artworkData}/>
       </div>
-      <div>
-        <h4>Artwork Distribution by Gallery</h4>
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <h4>Artist Death Year Distribution</h4>
         <ArtistDotPlot data={artistData}/>
       </div>
     </div>

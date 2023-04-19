@@ -6,12 +6,13 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'rec
 const Histogram = ( {data}) => {
 
   function getIconicityBins(data) {
-    const minIconicity = Math.min(...data.map(d => d.iconicity));
-    const maxIconicity = Math.max(...data.map(d => d.iconicity));
+    const filteredData = data.filter((entry) => entry.iconicity <= 100);
+    const minIconicity = Math.min(...filteredData.map(d => d.iconicity));
+    const maxIconicity = Math.max(...filteredData.map(d => d.iconicity));
     const binSize = (maxIconicity - minIconicity) / 10;
 
     const bins = Array(10).fill(0);
-    data.forEach(d => {
+    filteredData.forEach(d => {
       const binIndex = Math.floor((d.iconicity - minIconicity) / binSize);
       bins[binIndex]++;
     });

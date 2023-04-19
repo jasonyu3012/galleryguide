@@ -37,7 +37,7 @@ const App = ({data}) => {
   }, []);
 
   return (
-    <BarChart width={600} height={300} data={chartData}>
+    <BarChart width={1000} height={700} data={chartData}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
