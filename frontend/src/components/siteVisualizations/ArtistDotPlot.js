@@ -9,20 +9,12 @@ const data = [
   { name: 'D', value: 4 },
 ];
 
-const App = () => {
+const App = ({data}) => {
   const [chartData, setChartData] = useState([]);
-  const [rawData, setRawData] = useState([]);
-
+  
   useEffect(() => {
     // This is where you would fetch your data from your API or database
-    axios.get('https://galleryguide.me/api/artists')
-    .then(response => {
-      console.log(response.data.artists)
-      setRawData(response.data.artists)
-    })
-    .catch((error) => {
-      console.log("axios error while getting artist info: ", error);
-    })
+    const rawData = data
     
     // This is where you would count the number of times the attribute occurs in your dataset
     const countData = rawData.reduce((acc, curr) => {

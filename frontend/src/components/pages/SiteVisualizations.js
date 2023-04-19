@@ -28,7 +28,7 @@ const SiteVisualizations = () => {
     })
   
     // Get artist data
-    axios.get('https://galleryguide.me/api/all_artists')
+    axios.get('https://galleryguide.me/api/artists')
     .then(response => {
       console.log(response.data.artists)
       setArtistData(response.data.artists)
@@ -39,7 +39,7 @@ const SiteVisualizations = () => {
 
 
     // Get artwork data
-    axios.get('https://galleryguide.me/api/all_artworks')
+    axios.get('https://galleryguide.me/api/artworks')
     .then(response => {
       console.log(response.data.artworks)
       setArtworkData(response.data.artworks)
