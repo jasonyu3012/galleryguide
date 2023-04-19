@@ -28,10 +28,10 @@ const SiteVisualizations = () => {
     })
   
     // Get artist data
-    axios.get('https://galleryguide.me/api/artists')
+    axios.get('https://galleryguide.me/api/all_artists')
     .then(response => {
       console.log(response.data.artists)
-      setGalleryData(response.data.artists)
+      setArtistData(response.data.artists)
     })
     .catch((error) => {
       console.log("axios error while getting artist info: ", error);
@@ -39,7 +39,7 @@ const SiteVisualizations = () => {
 
 
     // Get artwork data
-    axios.get('https://galleryguide.me/api/artworks')
+    axios.get('https://galleryguide.me/api/all_artworks')
     .then(response => {
       console.log(response.data.artworks)
       setArtworkData(response.data.artworks)
@@ -49,7 +49,7 @@ const SiteVisualizations = () => {
     })
   }, [])
 
-  return (typeof galleryData !== 'undefined' && typeof artworkData !== 'undefined') ? (
+  return (typeof galleryData !== 'undefined' && typeof artworkData !== 'undefined' && typeof artistData !== 'undefined') ? (
     <div>
       <h1>Site Visualizations</h1>
       <div>
