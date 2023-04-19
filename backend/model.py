@@ -79,12 +79,12 @@ def filter_records(sorted_records, filter_column, filter_value, filter_type = 'n
 def extract_year(str):
     if str.isdigit() and len(str) == 4:
         return int(str)
-    
+    #regex for a century, ex: 20th century 21st century
     century = re.search(r'(\d{1,2})[(rd)(st)(th)]', str)
     if century:
         century = int(century.group(1))
         return (century - 1) * 100
-
+    #regex for any 4 digit number, looking for a year
     probably = re.search(r'\d{4}', str)
     if probably:
         return(int(probably.group(0)))
@@ -487,7 +487,7 @@ def db_init(db_string, echo):
     global conn
     conn = engine.connect()
 
-
+#Smaller database used by few tests in test_endpoints.py
 def setup_test_db():
     db_init("sqlite+pysqlite:///:memory:", False)
     metadata.create_all(engine)
@@ -536,6 +536,7 @@ def setup_test_db():
     conn.execute(i)
     conn.commit()
 
+#Larger database used by most of the tests in test_endpoints.py
 def setup_test_medium_db():
     db_init("sqlite+pysqlite:///:memory:", False)
     metadata.create_all(engine)
