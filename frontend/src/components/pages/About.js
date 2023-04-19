@@ -87,6 +87,18 @@ const tools = [
         image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmma.prnewswire.com%2Fmedia%2F484507%2Fnamecheap_Logo.jpg%3Fp%3Dpublish%26w%3D800&f=1&nofb=1&ipt=cb95508bc623a96ee56cb36f309a6ced5e219d4c1930b5d3496ada653e178ba1&ipo=images",
         link: "https://www.namecheap.com/"
     },
+    {
+        name: "Discord",
+        description: "Team Communication Tool",
+        image: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png",
+        link: "https://www.https://discord.com/"
+    },
+    {
+        name: "Jest",
+        description: "GUI Testing Tool",
+        image: "https://jestjs.io/img/opengraph.png",
+        link: "https://jestjs.io/"
+    },
 ]
 
 const sources = [

@@ -19,7 +19,8 @@ const ArtistInstance = () => {
   const [galleryId, setGalleryId] = useState(0);
   const [videoSrc, setVideoSrc] = useState("");
   const [mapSrc, setMapSrc] = useState("");
-
+  const [artworkData, setArtworkData] = useState({});
+  const [galleryData, setGalleryData] = useState({});
   // Run only once due to second arg
   useEffect(() => {
     console.log("page loaded")
@@ -58,6 +59,13 @@ const ArtistInstance = () => {
       // Get artwork and gallery IDs
       if (artistData.artwork_ids) {
         setArtworkId(artistData.artwork_ids[Math.floor(Math.random() * artistData.artwork_ids.length)])
+          axios.get(`https://galleryguide.me/api/artworks/${ artistId }`, { 
+          params: {
+        }})
+        .then(response => {
+          const responseData = response.data
+          setArtworkData({responseData})
+        })
       }
       if (artistData.gallery_ids) {
         setGalleryId(artistData.gallery_ids[Math.floor(Math.random() * artistData.gallery_ids.length)])
@@ -101,11 +109,11 @@ const ArtistInstance = () => {
       <p>This artist is stored as ID #{ artistData.id } in GalleryGuide.</p>
       {/* INSTANCE CONNECTIONS  */}
       <Link to={`/artworks/${ artworkId }`}>
-        <Button>Explore Artwork</Button>
+        <Button>Explore Random Artwork: {artworkData.name}</Button>
       </Link>
       <p></p>
       <Link to={`/galleries/${ galleryId }`}>
-        <Button>Explore Gallery</Button>
+        <Button>Explore Related Gallery</Button>
       </Link>
 
       {/* More media */}
