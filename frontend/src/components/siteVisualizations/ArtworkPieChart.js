@@ -3,8 +3,23 @@ import { PieChart, Pie, Cell, Legend } from 'recharts';
 
 
 
-const COLORS = ['#FF5733', '#C70039', '#900C3F', '#FFC300', '#2ECC71', '#16A085', '#3498DB', '#2980B9', '#8E44AD'];
-
+const COLORS = [
+'#FF6B6B',
+'#FFE66D',
+'#56CCF2',
+'#F8C471',
+'#00BFFF',
+'#FF7F50',
+'#2ECC71',
+'#E74C3C',
+'#8E44AD',
+'#F1C40F',
+'#3498DB',
+'#E74C3C',
+'#FFA07A',
+'#00CED1',
+'#1ABC9C',
+'#FF5733', ];
 const SimplePieChart = ({data}) => {
   const filteredData = data.filter((entry) => entry.num_artworks >= 10);
   return (
