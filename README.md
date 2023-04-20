@@ -73,7 +73,7 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 | Name             | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | ---------------- | -------------------------- | -------------------------- |
 | Tara Roshan      | 20                         | 10                         |
-| Landon Johnson   | ?                          | ?                          | 
+| Landon Johnson   | 10                         | 10                         | 
 | Sunad Adhikari   | 6                          | ?                          | 
 | Jerry Ming       | ?                          | ?                          | 
 | Jason Yu         | ?                          | ?                          |
