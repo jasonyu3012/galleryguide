@@ -255,6 +255,7 @@ PARTNER_IDS = [
     "the-national-museum-of-modern-art-tokyo",
     #medium
     "musee-dorsay",
+    "smithsonian-american-art-museum",
     "san-francisco-museum-of-modern-art-sfmoma",
     #big
     "getty-research-institute",
@@ -275,9 +276,9 @@ if __name__ == "__main__":
 
     with requests.Session() as session:
         session.headers = {"X-Xapp-Token": ARTSY_TOKEN}
-        #specific_partner_scrape(session, PARTNER_IDS[6])
+        specific_partner_scrape(session, "smithsonian-american-art-museum")
         #for partner in PARTNER_IDS:
         #    specific_partner_scrape(session, partner)
-        brute_force_scrape(session)
+        #brute_force_scrape(session)
         db.commit()
         db.test()
