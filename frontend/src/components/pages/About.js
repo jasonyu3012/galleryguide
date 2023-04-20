@@ -32,7 +32,7 @@ const team = [
         gitlab_username: "jerryming2002",
         role: "Frontend",
         bio: "I'm a second year CS major at the university of texas at austin. Outside of school, I pursue cooking, baking, and other culinary arts. I also enjoy building computers and playing video games. My favorite cookie is lemon sugar.",
-        tests: 0,
+        tests: 5,
         email: "jerryming2002@gmail.com",
         image: jerry_img
     },

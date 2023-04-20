@@ -7,12 +7,12 @@ import { Link } from 'react-router-dom';
 import StarryNight from '../images/StarryNight.jpg'
 import VanGogh from '../images/VanGogh.jpg'
 import METMuseum from '../images/METMuseum.jpg'
+import splash from '../images/splash.png'
 
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
-      <p>Welcome to Gallery Guide!</p>
+      <img src={splash} style={{maxWidth:"100%", height: 'auto', borderRadius: '1rem'}}/>
       <CardGroup>
         <Card style={{ width: '15rem', justifyContent: 'center' }}>
           <Card.Img variant="top" src={StarryNight}/>
