@@ -50,6 +50,8 @@ export default class Artworks extends React.Component {
     }
     console.log("artist search value: ", value)
 
+    console.log("QUERY: ", this.state.query);
+    console.log("QUERY IS NULL?: ", this.state.query === '');
     // Make the request to the DB
     axios.get("https://galleryguide.me/api/artists", { 
       params: {

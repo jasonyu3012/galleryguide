@@ -7,7 +7,9 @@ import axios from 'axios';
 import { Highlight } from "react-highlight-regex";
 
 function highlightText (input, raw_regex) {
-  if (raw_regex != null && input != null) {
+  // console.log("INPUT: ", input)
+  // console.log("REGEX: ", raw_regex)
+  if (raw_regex != undefined && raw_regex.length != 0 && input != undefined && input.length != 0) {
     let queryRE = new RegExp(`(?:${raw_regex.replaceAll(" ", "|")})`, "i");
     return <Highlight match={queryRE} text={input} />
   }

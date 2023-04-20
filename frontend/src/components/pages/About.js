@@ -14,7 +14,7 @@ const team = [
         gitlab_username: "troshan",
         role: "Frontend",
         bio: "I'm a junior CS major (I transferred internally from Math after freshman year)! I still really love math; I'm part of the Association for Women in Math at UT (look us up!). I like to go on cafe crawls and read books in my free time.",
-        tests: 0,
+        tests: 12,
         email: "troshan@utexas.edu",
         image: tara_img
     },
@@ -41,7 +41,7 @@ const team = [
         gitlab_username: "LandonDude",
         role: "Backend",
         bio: "I am a senior CS student at the University of Texas at Austin graduating in Fall '23. When I am not doing class work, I participate in the Longhorn Band (I accept) where I play tuba. If the stakes are high enough, I have been known to solve Leetcode mediums.",
-        tests: 0,
+        tests: 22,
         email: "landon@cs.utexas.edu",
         image: landon_img
     },
@@ -50,7 +50,7 @@ const team = [
         gitlab_username: "sunadadhikari",
         role: "Backend",
         bio: "I am a 2nd year CS student at the University of Texas at Austin from Dallas, Texas. I enjoy watching diffrent Dallas based sports teams like the Cowboys, Mavericks and Rangers along with Forumla 1. Which one I like most depends which is on TV at the time. The rest of my free time is spent watching TV shows, I am all for any thing sci-fi and mystery.",
-        tests: 0,
+        tests: 30,
         email: "sunadadhikari@gmail.com",
         image: sunad_img
     },

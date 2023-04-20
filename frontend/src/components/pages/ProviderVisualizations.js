@@ -41,7 +41,7 @@ const ProviderVisualizations = () => {
         </div>
         <div>
           <h2>Player Salaries v. Age</h2>
-          <p>We were curious if there was any clear correlation between age and salary. See for yourself.</p>
+          <p>We were curious if there was any clear correlation between age and salary.</p>
           <AgeSalaryScatterplot data={players}/>
         </div>
         <div>
