@@ -169,7 +169,7 @@ class Artworks extends Component {
         <DateFilter onSelect={this.handleDate}/>
         <Button onClick={this.handleDefault}>Clear Sorting Options</Button>
         </p>
-        <p>Showing page {pageIndex}/{ARTWORKS_NUM_PAGES}, 9/{ARTWORKS_NUM_IDS} artworks.</p>
+        <p>Showing {this.state.databaseResponse.size}/{this.state.databaseResponse.total} artworks.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         <ReactPaginate
           breakLabel={'...'}

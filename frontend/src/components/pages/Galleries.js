@@ -212,7 +212,7 @@ export default class Artworks extends React.Component {
         <ArtistNumSort onSelect={this.handleArtistNum}/>
         <ArtworkNumSort onSelect={this.handleArtworkNum}/>
         <Button onClick={this.handleDefault}>Clear Sorting Options</Button>
-        <p>Showing page {this.state.pageIndex}/{GALLERIES_NUM_PAGES}, {this.state.data.length}/{GALLERIES_NUM_IDS} galleries.</p>
+        <p>Showing {this.state.databaseResponse.size}/{this.state.databaseResponse.total} galleries.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         {<ReactPaginate
           breakLabel={'...'}

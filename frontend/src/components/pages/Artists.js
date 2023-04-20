@@ -48,10 +48,10 @@ export default class Artworks extends React.Component {
       value = value.replaceAll(' ', '+')
       this.setState({ query: value})
     }
-    console.log("artist search value: ", value)
+    // console.log("artist search value: ", value)
 
-    console.log("QUERY: ", this.state.query);
-    console.log("QUERY IS NULL?: ", this.state.query === '');
+    // console.log("QUERY: ", this.state.query);
+    // console.log("QUERY IS NULL?: ", this.state.query === '');
     // Make the request to the DB
     axios.get("https://galleryguide.me/api/artists", { 
       params: {
@@ -213,7 +213,7 @@ export default class Artworks extends React.Component {
             <BirthFilter onSelect={this.handleBirths}/>
             <ArtistArtworkNumSort onSelect={this.handleArtworks}/>
             <Button onClick={this.handleDefault}>Clear Sorting Options</Button>
-        <p>Showing page {this.state.pageIndex}/{ARTISTS_NUM_PAGES}, 9/{ARTISTS_NUM_IDS} artists.</p>
+        <p>Showing {this.state.databaseResponse.size}/{this.state.databaseResponse.total} artists.</p>
         <div style={{ display: "flex", justifyContent: "center" }}>
         {<ReactPaginate
           breakLabel={'...'}
