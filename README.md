@@ -74,7 +74,7 @@ https://gitlab.com/swe-spring-2023/art-project/-/pipelines
 | ---------------- | -------------------------- | -------------------------- |
 | Tara Roshan      | 20                         | 10                         |
 | Landon Johnson   | 10                         | 10                         | 
-| Sunad Adhikari   | 6                          | ?                          | 
+| Sunad Adhikari   | 6                          | 10                          | 
 | Jerry Ming       | ?                          | ?                          | 
 | Jason Yu         | ?                          | ?                          |
 
